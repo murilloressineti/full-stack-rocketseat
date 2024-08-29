@@ -22,7 +22,7 @@ body {
   background-color: #F0E8C2;
   width: 80rem;
   padding: 2.4rem;
-  margin: 4.8rem auto;
+  margin: 4.8rem auto 2.8rem;
   border-radius: 2.4rem;
 }
 
@@ -58,4 +58,14 @@ h2 {
 
 ul {
   padding-left: 2.4rem;
+}
+
+footer {
+  color: #F0E8C2;
+  text-align: center;
+  padding-bottom: 4.8rem;
+}
+
+footer img {
+  vertical-align: middle;
 }
