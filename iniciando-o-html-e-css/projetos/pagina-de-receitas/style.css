@@ -14,7 +14,7 @@
 body {
   font-size: 1.6rem;
 
-  background-image: url(/assets/bg-image.jpg);
+  background-image: url(assets/bg-image.jpg);
   background-size: cover;
 }
 
