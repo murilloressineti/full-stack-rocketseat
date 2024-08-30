@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  font-family: "Open Sans", sans-serif;
+
+  --bgcolor: #F5F4F0;
+  --border: #D9D9D9;
+
+  --text-primary: #1B1B1B;
+  --text-secondary: #333333;
+  --text-tertiary: #696969;
+  --text-headline: #E1624F;
+
+  --accent-blue: #0C51A7;
+  --accent-orange: #E95E10;
+  --accent-pink: #E5245E;
+  --accent-purple: #591B98;
+}
+
+body {
+  background-color: var(--bgcolor);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+img {
+  border-radius: 2.6rem;
+}
+
+#container {
+  width: 112rem;
+  margin: 8.8rem auto 4.8rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.subtitle {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--text-headline);
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+main>section:first-of-type {
+  padding: 4rem 0;
+  border-bottom: .1rem solid var(--border);
+}
+
+figcaption {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+}
+
+article>section:first-of-type {
+  margin: 6.4rem auto;
+}
+
+h2 {
+  font-size: 3.2rem;
+  margin-bottom: .8rem;
+}
+
+article>section+section {
+  margin-bottom: 4.8rem;
+}
+
+article>section>figure {
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2.8rem;
+  margin-bottom: .4rem;
+  padding-left: 1rem;
+}
+
+ul {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding-left: 2.4rem;
+  color: red;
+}
+
+.history {
+  color: var(--accent-blue);
+}
+
+.couples {
+  color: var(--accent-purple);
+}
+
+.family {
+  color: var(--accent-pink);
+}
+
+.budget {
+  color: #E95E10;
+}
+
+main>article section:last-of-type {
+  padding-bottom: 4rem;
+  border-bottom: .1rem solid var(--border);
+  margin-bottom: 4rem;
+}
+
+main>p:last-child {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+footer {
+  font-weight: 100;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+footer>p {
+  font-family: "Alice", serif;
+  font-weight: 400;
+}
