@@ -23,6 +23,27 @@
 }
 
 body {
+  font: var(--text);
   background-color: var(--background-color);
   color: var(--text-color-secondary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--brand-color);
+  text-decoration: underline;
+}
+
+.container {
+  padding-inline: 3.2rem;
+  margin-inline: auto;
+  max-width: 128rem;
+}
+
+.bg-surface-color {
+  background-color: var(--surface-color);
 }
