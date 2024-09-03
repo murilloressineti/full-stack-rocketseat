@@ -18,8 +18,8 @@
   --font-family: "Poppins", sans-serif;
   --text-lg: bold 3.2rem/1.25 var(--font-family);
   --text: 1.6rem/1.5 var(--font-family);
-  --text-md: 1.4rem/1.75 var(--font-family);
-  --text-sm: 1.2rem/1.75 var(--font-family);
+  --text-md: 1.4rem/1.7 var(--font-family);
+  --text-sm: 1.2rem/1.7 var(--font-family);
 }
 
 body {
