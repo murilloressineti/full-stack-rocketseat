@@ -42,16 +42,16 @@ h1, h2, h3 {
   font: inherit;
 }
 
+img {
+  max-width: 100%;
+}
+
 .container {
   max-width: 128rem;
   padding-inline: 3.2rem;
   margin-inline: auto;
 }
 
-.grid {
-  display: grid;
-}
-
-.grid-flow-col {
-  grid-auto-flow: column;
+main {
+  margin-top: 4rem;
 }
