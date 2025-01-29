@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  font-family: "Asap", serif;
+
+  --gray-100: #0D0E11;
+  --gray-200: #16181D;
+  --gray-300: #292C34;
+  --gray-400: #878EA1;
+  --gray-500: #C0C4CE;
+  --gray-600: #E2E4E9;
+
+  --blue: ##3996DB;
+  --green: #82BC4F;
+  --purple: #BB72E9;
+  --red: #E3646E;
+  --yellow: #EABD5F;
+}
+
+body {
+  background-color: var(--gray-200);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--gray-600);
+}
+
+p {
+  color: var(--gray-500);
+  font-size: 1.6rem;
+}
+
+span {
+  color: var(--red);
+}
+
+#container {
+  width: 100vw;
+  margin: auto;
+}
+
+header {
+  background-image: url(assets/background/background-intro.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 75rem;
+}
+
+h1 {
+  font-size: 5.6rem;
+}
+
+.header-content {
+  padding: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
