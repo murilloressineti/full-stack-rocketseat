@@ -7,22 +7,228 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfólio Dev</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/index.css">
   <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Inconsolata:wght@200..900&family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet">
 
 </head>
 <body>
-   <div id="container">
+  <div id="container">
     <header>
-      <div class="header-content">
-        <div>
-          <img src="assets/avatar.png" alt="Foto de perfil de Martina Santos, uma desenvolvedora Fullstack.">
-        </div>
-        <p>Hello World! Meu nome é <span>Martina Santos</span> e sou</p>
-        <h1>Desenvolvedora Fullstack</h1>
-        <p>Transformo necessidades em aplicações reais, evolventes e funcionais. Desenvolvo sistemas através da minha paixão pela tecnologia, contribuindo com soluções inovadoras e eficazes para desafios complexos.</p>
+      <div class="avatar">
+        <img src="assets/avatar.png" alt="Foto de perfil de Martina Santos, uma desenvolvedora Fullstack.">
       </div>
+
+      <h4>Hello World! Meu nome é <span>Martina Santos</span> e sou</h4>
+      <h1>Desenvolvedora Fullstack</h1>
+      <p>Transformo necessidades em aplicações reais, evolventes e funcionais. Desenvolvo sistemas através da minha paixão pela tecnologia, contribuindo com soluções inovadoras e eficazes para desafios complexos.</p>
     </header> 
-   </div>
+
+    <nav>
+      <ul>
+        <li>
+          <img src="assets/icons/nav-icons/github.svg" alt="Ícone do GitHub">
+          GitHub
+        </li>
+    
+        <li>
+          <img src="assets/icons/nav-icons/html.svg" alt="Ícone da linguagem HTML">
+          HTML
+        </li>
+    
+        <li>
+          <img src="assets/icons/nav-icons/css.svg" alt="Ícone da linguagem CSS">
+          CSS
+        </li>
+    
+        <li>
+          <img src="assets/icons/nav-icons/javascript.svg" alt="Ícone da linguagem JavaScript">
+          Javascript
+        </li>
+    
+        <li>
+          <img src="assets/icons/nav-icons/react.svg" alt="Ícone do framework React">
+          React
+        </li>
+    
+        <li>
+          <img src="assets/icons/nav-icons/node.svg" alt="Ícone do ambiente de execução Node.js">
+          Node.js
+        </li>
+      </ul>
+    </nav>
+    
+    <button>
+      <img src="assets/icons/caret-double-down.svg" alt="Ícone de seta dupla para baixo">
+    </button>
+
+    <main>
+      <section id="jobs">
+        <header>
+          <h4><span>Meu trabalho</span></h4>
+          <h2>Veja os projetos em destaque</h2>
+        </header>
+
+        <div class="projects">
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-01.png" alt="Miniatura do projeto Travelgram, uma rede social para compartilhar viagens">
+
+            <div class="description flex-col-8">
+              <h3>Travelgram</h3>
+
+              <p>Rede social onde as pessoas mostram os registros de suas viagens pelo mundo</p>
+            </div>
+
+          </div>
+
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-02.png" alt="iniatura do projeto Tech News, um portal de notícias sobre tecnologia">
+
+            <div class="description flex-col-8">
+              <h3>Tech News</h3>
+
+              <p>Homepage de um portal de notícias sobre a área de tecnologia</p>
+            </div>
+
+          </div>
+
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-03.png" alt="Miniatura do projeto Página de Receita, mostrando uma receita de cupcakes">
+
+            <div class="description flex-col-8">
+              <h3>Página de receita</h3>
+
+              <p>Página com o passo a passo de uma receita para cupcakes</p>
+            </div>
+
+          </div>
+
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-04.png" alt="Miniatura do projeto Zingen, uma Landing Page para um aplicativo de Karaokê">
+
+            <div class="description flex-col-8">
+              <h3>Zingen</h3>
+
+              <p>Landing Page completa e responsiva de um aplicativo de Karaokê</p>
+            </div>
+
+          </div>
+
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-05.png" alt="Miniatura do projeto Refund, um sistema de solicitação e acompanhamento de reembolsos">
+
+            <div class="description flex-col-8">
+              <h3>Refund</h3>
+
+              <p>Um sistema para pedido e acompanhamento de reembolso </p>
+            </div>
+
+          </div>
+
+          <div class="cards">
+            <img src="assets/thumbs/thumbnail-project-06.png" alt="Miniatura do projeto Página de Turismo sobre Busan, com informações para viajantes">
+
+            <div class="description flex-col-8">
+              <h3>Página de turismo</h3>
+
+              <p>Página com as principais informações para quem quer viajar para Busan</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <header>
+          <h4><span>Meus serviços</span></h4>
+          <h2>Como posso ajudar o seu negócio</h2>
+        </header>
+
+        <div class="cards flex gap-24">
+          <div class="card flex-col-20">
+            <div>
+              <img src="assets/icons/devices.svg" alt="Ícone de dispositivos representando websites e aplicativos">
+            </div>
+
+            <div class="description flex-col-8">
+              <h3>Websites e aplicativos</h3>
+              <p class="tx-sm">Desenvolvimento de interfaces</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards flex gap-24">
+          <div class="card flex-col-20">
+            <div>
+              <img src="assets/icons/hard-drives.svg" alt="Ícone de hard drives representando API e banco de dados">
+            </div>
+
+            <div class="description flex-col-8">
+              <h3>API e banco de dados</h3>
+              <p class="tx-sm">Criação de serviços do sistema</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards flex gap-24">
+          <div class="card flex-col-20">
+            <div>
+              <img src="assets/icons/infinity.svg" alt="Ícone de infinito representando DevOps e gestão de infraestrutura">
+            </div>
+
+            <div class="description flex-col-8">
+              <h3>DevOpss</h3>
+              <p class="tx-sm">Gestão e infraestrutura da aplicação</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <header>
+          <h4><span>Contato</span></h4>
+          <h2>Gostou do meu trabalho?</h2>
+          <p class="tx-md">Entre em contato ou acompanhe as minhas redes sociais!</p>
+        </header>
+
+        <div class="links gap-16">
+          <a href="">
+            <div class="social-links">
+              <img src="assets/icons/linkedin-logo.svg" alt="Ícone do LinkedIn">
+              <p class="tx-md">LinkedIn</p>
+
+              <img src="assets/icons/arrow-up-right.svg" alt="Ícone de seta apontando para a direita, indicando link externo">
+            </div>
+          </a>
+
+          <a href="">
+            <div class="social-links">
+              <img src="assets/icons/instagram-logo.svg" alt="Ícone do Instagram">
+              <p class="tx-md">Instagram</p>
+
+              <img src="assets/icons/arrow-up-right.svg" alt="Ícone de seta apontando para a direita, indicando link externo">
+            </div>
+          </a>
+
+          <a href="">
+            <div class="social-links">
+              <img src="assets/icons/github-logo.svg" alt="Ícone do GitHub">
+              <p class="tx-md">GitHub</p>
+
+              <img src="assets/icons/arrow-up-right.svg" alt="Ícone de seta apontando para a direita, indicando link externo">
+            </div>
+          </a>
+
+          <a href="">
+            <div class="social-links">
+              <img src="assets/icons/envelope-simple.svg" alt="Ícone de E-mail">
+              <p class="tx-md">E-mail</p>
+
+              <img src="assets/icons/arrow-up-right.svg" alt="Ícone de seta apontando para a direita, indicando link externo">
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
