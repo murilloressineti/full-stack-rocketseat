@@ -5,13 +5,11 @@ header {
   background-size: 100%;
   max-width: 100%;
 
-  padding: 12rem 18.3rem 6rem;
+  padding: 12rem 12rem 6rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  border: 2px solid red;
 }
 
 .intro {
@@ -84,7 +82,7 @@ header {
   }
 
   ul li:hover {
-    background-color: rgba(0, 0, 0, 0.100);;
+    background-color: var(--gray-200);
     color: var(--gray-600)
   }
 
