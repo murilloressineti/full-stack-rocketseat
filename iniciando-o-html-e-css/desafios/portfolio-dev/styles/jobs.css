@@ -1,9 +1,6 @@
 .jobs {
   max-width: 100%;
-
   padding: 7.2rem 12rem 14.4rem;
-
-  border: 2px solid blue;
 }
 
 .projects {  
@@ -15,7 +12,7 @@
   width: fit-content;
 }
 
-.card {
+.card-projects {
   background-color: var(--gray-300);
   border-radius: 1.2rem;
   padding: 1rem;
@@ -48,12 +45,12 @@
   }
 }
 
-.card:hover {
+.card-projects:hover {
   cursor: pointer;
   transform: translateY(-.5rem);
   background-color: var(--gray-200);
 }
 
-.card:hover img {
+.card-projects:hover img {
   filter: brightness(1.1);
 }

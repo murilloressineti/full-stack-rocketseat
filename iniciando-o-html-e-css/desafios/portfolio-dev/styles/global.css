@@ -70,51 +70,6 @@ span {
   color: var(--red);
 }
 
-.grid {
-  display: grid;
-}
-
-.grid-flow-col {
-  display: grid;
-  grid-auto-flow: column;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-col-8 {
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
-}
-
-.flex-col-20 {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.gap-16 {
-  gap: 1.6rem;
-}
-
-.gap-24 {
-  gap: 2.4rem;
-}
-
-.gap-56 {
-  gap: 5.6rem;
-}
-
-.tx-sm {
-  font: var(--text-sm);
-}
-
-.tx-md {
-  font: var(--text-md);
-}
-
 .inherit {
   display: inherit;
   gap: inherit;
