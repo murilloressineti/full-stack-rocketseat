@@ -55,3 +55,37 @@
 .card-projects:hover img {
   filter: brightness(1.1);
 }
+
+@media (max-width: 1024px) {
+  .jobs {
+    padding: 5rem 4rem;
+  }
+
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+
+  .card-projects {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .jobs {
+    padding: 3rem 2rem;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  .card-projects {
+    width: 100%;
+    height: auto;
+    padding: 1.2rem;
+  }
+}

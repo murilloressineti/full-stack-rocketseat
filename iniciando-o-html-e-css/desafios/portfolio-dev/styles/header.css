@@ -30,6 +30,7 @@ header {
 
     position: absolute;
     background-image: url(../assets/avatar/code-green.svg);
+    background-size: contain;
     background-repeat: no-repeat;
     right: 11.25%;
     bottom: 13.24%;
@@ -109,4 +110,34 @@ button:hover {
 
 .icon-button img {
   filter: invert(26%) sepia(61%) saturate(197%) hue-rotate(181deg);
+}
+
+@media (max-width: 1024px) {
+  .tags ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  .tags ul li {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tags {
+    margin: 4rem auto 6rem;
+  }
+
+  .tags ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .tags ul li {
+    width: 80%;
+    justify-content: center;
+  }
 }
