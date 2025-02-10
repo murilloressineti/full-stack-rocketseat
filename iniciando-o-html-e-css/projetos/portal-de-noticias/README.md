@@ -16,7 +16,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-<img src="assets/thumbnail.jpg/>
+<img src="assets/thumbnail.jpg/">
 
 ## 📝 Licença
 
