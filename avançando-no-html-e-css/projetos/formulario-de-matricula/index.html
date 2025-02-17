@@ -84,6 +84,87 @@
 
               </div>
             </fieldset>
+
+            <fieldset class="address">
+              <legend>Endereço residencial</legend>
+
+              <div class="input-wrapper">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep">
+              </div>
+
+              <div class="flex">
+                <div class="input-wrapper flex-2">
+                  <label for="street">Rua</label>
+                  <input type="text" id="street" name="street" value="Rua das Flores" disabled>
+                </div>
+
+                <div class="input-wrapper flex-1">
+                  <label for="number">Número</label>
+                  <input type="number" id="number" name="number">
+                </div>
+              </div>
+
+              <div class="flex">
+                <div class="input-wrapper flex-2">
+                  <label for="city">Cidade</label>
+                  <input type="text" id="city" name="city" value="São Paulo" disabled>
+                </div>
+
+                <div class="input-wrapper flex-1">
+                  <label for="state">Estado</label>
+                  <input type="text" id="state" name="state" value="SP" disabled>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="gardian">
+              <legend>Informações do responsável</legend>
+
+              <div class="input-wrapper">
+                <label for="gardian">Nome do responsável</label>
+                <input type="text" id="gardian" name="gardian">
+                <small>Principal responsável legal e contato de emergência</small>
+              </div>
+
+              <div class="input-wrapper">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(10) 9 8765-4321">
+              </div>
+
+              <div class="input-wrapper">
+                <label for="mail">Email</label>
+                <input type="email" id="mail" name="mail" required>
+                <div class="error">
+                  <img src="assets/interface-icons/alert-circle.svg" alt="ícone de alerta vermelho">
+                  <span>Insira um e-mail válido</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="enroll-options">
+              <legend>Opções de matrícula</legend>
+
+              <div class="input-wrapper">
+                <label for="">Selecione o truno de estudo</label>
+                
+                <div class="radio-wrapper">
+                  <div class="radio-inner">
+                    <div class="radio-image"></div>
+                    <input type="radio" name="study-shifgt" value="morning" id="morning">
+                    <img src="assets/illustration-icons/sun-cloud.svg" alt="ícone de sol com nuvem">
+                    <label for="morning">Manhã</label>
+                  </div>
+
+                  <div class="radio-inner">
+                    <div class="radio-image"></div>
+                    <input type="radio" name="study-shifgt" value="evening" id="evening">
+                    <img src="assets/illustration-icons/sun.svg" alt="ícone de sol">
+                    <label for="evening">Tarde</label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
           </form>
         </div>
       </main>
