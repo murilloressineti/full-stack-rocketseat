@@ -1,0 +1,15 @@
+#app {
+  display: grid;
+  grid-template-columns: 31.25% 64.05%;
+  gap: 4.7%;
+
+  height: 100vh;
+  overflow: hidden;
+
+  background-color: var(--shape-background);
+}
+
+main {
+  overflow: auto;
+  padding: 4rem;
+}
