@@ -7,12 +7,12 @@
 :root {
   font-size: 62.5%;
   --font-family: "Open Sans", serif;
-  --logo: "Leckerli One", serif;
-  --heading: "Baloo 2", serif;
+  --font-family-logo: "Leckerli One", serif;
+  --font-family-heading: "Baloo 2", serif;
 
-  --logo: 400 4rem/1.5 var(--logo);
-  --heading-md: 400 2.8rem/1.5 var(--heading);
-  --heading-sm: 400 1.8rem/1.5 var(--heading);
+  --logo: 400 4rem/1.5 var(--font-family-logo);
+  --heading-md: 400 2.8rem/1.5 var(--font-family-heading);
+  --heading-sm: 400 1.8rem/1.5 var(--font-family-heading);
 
   --text-md: 400 1.6rem/1.5 var(--font-family);
   --text-sm: 400 1.4rem/1.5 var(--font-family);
@@ -46,4 +46,18 @@
   --text-body: #C8CDD0;
   --text-heading: #F9F9F9; 
 
+}
+
+body {
+  font: var(--text-md);
+  color: var(--text-body);
+}  
+
+h1 {
+  font: var(--logo);
+  color: var(--pink);
+}
+
+.text-heading {
+  color: var(--text-heading);
 }
