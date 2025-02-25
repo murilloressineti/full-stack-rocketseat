@@ -1,34 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Convite</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Convite</title>
 
-  <link rel="stylesheet" href="styles/index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Leckerli+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div id="app">
-    <aside>
-      <div class="aside-container">
-        <header>
-          <img src="assets/images/logo.svg" alt="Emoji de festa representando o logo do Festivite">
-          <div class="header-content">
-            <h1>Festivite</h1>
-            <p class="text-heading">Crie um convite digital para o seu evento</p>
-          </div>
-        </header>
+    <link rel="stylesheet" href="styles/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Leckerli+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <aside>
+        <div class="aside-container">
+          <header>
+            <img
+              src="assets/images/logo.svg"
+              alt="Emoji de festa representando o logo do Festivite"
+            />
+            <div class="header-content">
+              <h1>Festivite</h1>
+              <p class="text-heading">
+                Crie um convite digital para o seu evento
+              </p>
+            </div>
+          </header>
 
-        <img src="" alt="">
-      </div>
-    </aside>
-    <main>
-      content
-    </main>
-  </div>
-</body>
+          <img src="" alt="" />
+        </div>
+      </aside>
+      <main>
+        <div class="main-container">
+          <h2>Crie seu convite</h2>
+
+          <form action="" method="post">
+            <fieldset class="about-the-event">
+              <legend>
+                <img src="assets/icons/calendar.svg" alt="" />Sobre o evento
+              </legend>
+
+              <div class="input-wrapper">
+                <label for="title">Título</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Nome do evento"
+                />
+              </div>
+
+              <div class="input-wrapper">
+                <label for="start">Início</label>
+                <input
+                  type="datetime"
+                  id="start"
+                  name="start"
+                  placeholder="DD/MM/AAAA, --:--"
+                />
+              </div>
+
+              <div class="input-wrapper">
+                <label for="end">Fim</label>
+                <input
+                  type="datetime"
+                  id="end"
+                  name="end"
+                  placeholder="DD/MM/AAAA, --:--"
+                />
+              </div>
+
+              <div class="input-wrapper modality">
+                <label for="modality">Tipo</label>
+
+                <div class="segmented-control">
+                  <div class="option-container">
+                    <img src="assets/icons/building.svg" alt="Ícone de prédio" />
+                    <label for="presencial">Presencial</label>
+                    <input
+                      type="radio"
+                      name="modality"
+                      id="presencial"
+                      value="presencial"
+                      checked
+                    />
+                  </div>
+
+                  <div class="option-container">
+                    <img src="assets/icons/video.svg" alt="Ícone de vídeo" />
+                    <label for="online">Online</label>
+                    <input
+                      type="radio"
+                      name="modality"
+                      id="online"
+                      value="online"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-wrapper">
+                <label for="location">Local</label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Link ou endereço"
+                />
+              </div>
+
+              <div class="textarea-wrapper">
+                <label for="description">Descrição</label>
+                <textarea
+                  name="description"
+                  id="description"
+                  cols="30"
+                  rows="5"
+                  placeholder="Escreva sobre os detalhes do evento"
+                >
+                </textarea>
+              </div>
+            </fieldset>
+
+            <fieldset class="customization"></fieldset>
+
+            <fieldset class="contact"></fieldset>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
