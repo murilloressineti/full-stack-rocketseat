@@ -1,0 +1,79 @@
+.color-options {
+  input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 0;
+    height: 0;
+  }
+  
+  .color-options {
+    display: flex;
+    gap: 10px;
+  }
+
+  .color-option {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .color-circle {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    display: inline-block;
+    border: .4rem solid var(--shape-button);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  input[type="radio"]:checked + .color-circle {
+    transform: scale(1.1);
+    border-color: var(--brand-light);
+  }
+  
+  #color-1 + .color-circle {
+    background-color: var(--brand-light);
+  }
+  
+  #color-2 + .color-circle {
+    background-color: var(--navy);
+  }
+  
+  #color-3 + .color-circle {
+    background-color: var(--purple);
+  }
+
+  #color-4 + .color-circle {
+    background-color: var(--fuschia);
+  }
+  
+  #color-5 + .color-circle {
+    background-color: var(--pink);
+  }
+  
+  #color-6 + .color-circle {
+    background-color: var(--danger);
+  }
+
+  #color-7 + .color-circle {
+    background-color: var(--orange);
+  }
+  
+  #color-8 + .color-circle {
+    background-color: var(--yellow);
+  }
+  
+  #color-9 + .color-circle {
+    background-color: var(--lime);
+  }
+
+  #color-10 + .color-circle {
+    background-color: var(--green);
+  }
+  
+  #color-11 + .color-circle {
+    background-color: var(--cyan);
+  }
+  
+}
