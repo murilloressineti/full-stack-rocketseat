@@ -1,1 +1,17 @@
 @import url(fields/index.css);
+
+form {
+  width: 100%;
+}
+
+fieldset {
+  border: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
