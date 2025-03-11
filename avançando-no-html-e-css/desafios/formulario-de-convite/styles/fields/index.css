@@ -1,1 +1,7 @@
 @import url(input-radio.css);
+
+/*estilos específicos de campos de formulário 
+input-radio.css: Estilos para os botões de rádio, independente de qual formulário ele esteja.
+input-text.css: Estilos para campos de texto.
+checkbox.css: Estilos para checkboxes.
+*/

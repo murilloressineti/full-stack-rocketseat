@@ -11,8 +11,8 @@
   --font-family-heading: "Baloo 2", serif;
 
   --logo: 400 4rem/1.5 var(--font-family-logo);
-  --heading-md: 400 2.8rem/1.5 var(--font-family-heading);
-  --heading-sm: 400 1.8rem/1.5 var(--font-family-heading);
+  --heading-md: 700 2.8rem/1.5 var(--font-family-heading);
+  --heading-sm: 700 1.8rem/1.5 var(--font-family-heading);
 
   --text-md: 400 1.6rem/1.5 var(--font-family);
   --text-sm: 400 1.4rem/1.5 var(--font-family);
@@ -56,6 +56,11 @@ body {
 h1 {
   font: var(--logo);
   color: var(--pink);
+}
+
+h2 {
+  font: var(--heading-md);
+  color: var(--text-heading);
 }
 
 .text-heading {
