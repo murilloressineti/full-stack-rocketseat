@@ -1,0 +1,56 @@
+.segmented-control {
+  display: flex;
+  border-radius: .8rem;
+  border: .2rem solid var(--input-stroke);
+  background-color: var(--input-base);
+  padding: .4rem;
+}
+
+.option-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: .4rem;
+  flex: 1;
+  text-align: center;
+  position: relative;
+
+  img {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  & input,
+  & input:focus,
+  & input:hover {
+    all: unset;
+    position: absolute;
+    inset: 0;
+  }
+
+  &:hover, &:focus-within {
+    cursor: pointer;
+  }
+
+  &:has(:checked) {
+    background-color: var(--shape-button);
+
+    & img {
+      background-image: url(../../assets/icons/building-checked.svg);
+    }
+
+    & label {
+      color: var(--text-heading);
+    }
+  }
+
+  label {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+}

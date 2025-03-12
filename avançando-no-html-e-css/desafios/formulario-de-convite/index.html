@@ -57,66 +57,64 @@
                 />
               </div>
 
-              <div class="input-wrapper">
-                <label for="start">Início</label>
-                <input
-                  type="datetime"
-                  id="start"
-                  name="start"
-                  placeholder="DD/MM/AAAA, --:--"
-                />
-              </div>
+              <div class="input-grid">
+                <div class="input-wrapper">
+                  <label for="start">Início</label>
+                  <input
+                    type="datetime"
+                    id="start"
+                    name="start"
+                    placeholder="DD/MM/AAAA, --:--"
+                  />
+                </div>
 
-              <div class="input-wrapper">
-                <label for="end">Fim</label>
-                <input
-                  type="datetime"
-                  id="end"
-                  name="end"
-                  placeholder="DD/MM/AAAA, --:--"
-                />
-              </div>
+                <div class="input-wrapper">
+                  <label for="end">Fim</label>
+                  <input
+                    type="datetime"
+                    id="end"
+                    name="end"
+                    placeholder="DD/MM/AAAA, --:--"
+                  />
+                </div>
 
-              <div class="input-wrapper modality">
-                <label for="modality">Tipo</label>
+                <div class="input-wrapper">
+                  <label for="modality">Tipo</label>
+                  <div class="segmented-control">
+                    <div class="option-container">
+                      <img src="assets/icons/building.svg" alt="Ícone de prédio"/>
+                      <label for="presencial">Presencial</label>
+                      <input
+                        type="radio"
+                        name="modality"
+                        id="presencial"
+                        value="presencial"
+                        checked
+                      />
+                    </div>
 
-                <div class="segmented-control">
-                  <div class="option-container">
-                    <img
-                      src="assets/icons/building.svg"
-                      alt="Ícone de prédio"
-                    />
-                    <label for="presencial">Presencial</label>
-                    <input
-                      type="radio"
-                      name="modality"
-                      id="presencial"
-                      value="presencial"
-                      checked
-                    />
-                  </div>
-
-                  <div class="option-container">
-                    <img src="assets/icons/video.svg" alt="Ícone de vídeo" />
-                    <label for="online">Online</label>
-                    <input
-                      type="radio"
-                      name="modality"
-                      id="online"
-                      value="online"
-                    />
+                    <div class="option-container">
+                      <img src="assets/icons/video.svg" alt="Ícone de vídeo"/>
+                      <label for="online">Online</label>
+                      <input
+                        type="radio"
+                        name="modality"
+                        id="online"
+                        value="online"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="input-wrapper">
-                <label for="location">Local</label>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  placeholder="Link ou endereço"
-                />
+                <div class="input-wrapper">
+                  <label for="location">Local</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Link ou endereço"
+                  />
+                </div>
               </div>
 
               <div class="textarea-wrapper">
@@ -124,11 +122,8 @@
                 <textarea
                   name="description"
                   id="description"
-                  cols="30"
-                  rows="5"
                   placeholder="Escreva sobre os detalhes do evento"
-                >
-                </textarea>
+                ></textarea>
               </div>
             </fieldset>
 
