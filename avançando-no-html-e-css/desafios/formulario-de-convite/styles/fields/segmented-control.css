@@ -11,38 +11,56 @@
   align-items: center;
   justify-content: center;
   gap: .8rem;
-  padding: 1.4rem 1.6rem;
+  padding: 1.2rem 1.6rem;
   border-radius: .4rem;
   flex: 1;
   text-align: center;
   position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
 
-  img {
+  &:focus-visible {
+    outline: 0.2rem solid var(--input-stroke);
+  }
+
+  & input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .icon {
     width: 1.6rem;
     height: 1.6rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transition: background-image 0.3s ease-in-out;
   }
 
-  & input,
-  & input:focus,
-  & input:hover {
-    all: unset;
-    position: absolute;
-    inset: 0;
+  .icon-building {
+    background-image: url(../../assets/icons/segmented-control/building.svg);
   }
 
-  &:hover, &:focus-within {
-    cursor: pointer;
+  .icon-video {
+    background-image: url(../../assets/icons/segmented-control/video.svg);
   }
 
   &:has(:checked) {
     background-color: var(--shape-button);
 
-    & img {
-      background-image: url(../../assets/icons/building-checked.svg);
+    & .icon-building {
+      background-image: url(../../assets/icons/segmented-control/building-checked.svg);
+    }
+
+    & .icon-video {
+      background-image: url(../../assets/icons/segmented-control/video-checked.svg);
     }
 
     & label {
       color: var(--text-heading);
+      transition: color 0.3s ease-in-out;
     }
   }
 
@@ -50,7 +68,5 @@
     margin: 0;
     position: relative;
     z-index: 1;
-    cursor: pointer;
   }
-
 }

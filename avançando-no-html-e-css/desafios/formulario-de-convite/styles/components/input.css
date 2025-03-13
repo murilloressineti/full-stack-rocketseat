@@ -6,7 +6,7 @@ input, textarea, select {
   background-color: var(--input-base);
   outline: none;
 
-  padding: 1.6rem;
+  padding: 1.4rem 1.6rem;
 
   font: var(--text);
   color: var(--text-heading)
