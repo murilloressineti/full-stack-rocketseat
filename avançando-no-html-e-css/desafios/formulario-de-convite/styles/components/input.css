@@ -16,7 +16,7 @@ input::placeholder, textarea::placeholder {
   color: var(--input-placeholder);
 }
 
-input:focus {
+input:focus, textarea:focus {
   border: .2rem solid var(--brand-light);
 }
 

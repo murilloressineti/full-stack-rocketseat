@@ -20,9 +20,8 @@
     cursor: pointer;
     background-color: var(--shape-button);
     border-radius: 50%;
-    max-width: 4rem;
+    width: 4rem;
     height: 4rem;
-    flex-grow: 1;
   }
   
   .color-circle {
@@ -81,4 +80,14 @@
     background-color: var(--cyan);
   }
   
+  & label {
+    margin-bottom: 0;
+  }
+
+  & input {
+    padding: 0;
+    border-radius: 0;
+    border: none;
+  }
+
 }
