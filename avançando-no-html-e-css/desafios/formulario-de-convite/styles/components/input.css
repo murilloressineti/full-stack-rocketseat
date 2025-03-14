@@ -9,7 +9,7 @@ input, textarea, select {
   padding: 1.4rem 1.6rem;
 
   font: var(--text);
-  color: var(--text-heading)
+  color: var(--text-heading);
 }
 
 input::placeholder, textarea::placeholder {
@@ -30,6 +30,15 @@ label {
 .input-wrapper {
   display: flex;
   flex-direction: column;
+}
+
+input[type="datetime-local"] {
+  font: var(--text);
+  position: relative;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  display: none;
 }
 
 textarea {
