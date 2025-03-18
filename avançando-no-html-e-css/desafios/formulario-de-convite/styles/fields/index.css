@@ -1,6 +1,8 @@
 @import url(input-radio.css);
 @import url(segmented-control.css);
 @import url(theme.css);
+@import url(input-toggle.css);
+@import url(input-file.css);
 
 /*estilos específicos de campos de formulário 
 input-radio.css: Estilos para os botões de rádio, independente de qual formulário ele esteja.

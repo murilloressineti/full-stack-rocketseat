@@ -1,0 +1,60 @@
+.input-wrapper-toggle {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.toggle input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  width: 6.4rem;
+  height: 3.2rem;
+  background-color: var(--input-base);
+  border: 0.1rem solid var(--input-stroke);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-bottom: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 50%;
+  left: 0.3rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: var(--input-stroke);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: left 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.toggle input[type="checkbox"]:checked + .toggle-label {
+  background-color: var(--brand-light);
+}
+
+.toggle input[type="checkbox"]:checked + .toggle-label .toggle-slider {
+  left: calc(100% - 2.7rem);
+  background-color: var(--text-heading);
+}
+
+.toggle-text {
+  font: var(--text-sm);
+  color: var(--text-heading);
+}
+
+.toggle-text::after {
+  content: "Escuro";
+}
+
+.toggle input[type="checkbox"]:checked ~ .toggle-text::after {
+  content: "Claro";
+}
