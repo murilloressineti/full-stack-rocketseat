@@ -65,3 +65,12 @@ h2 {
 .text-heading {
   color: var(--text-heading);
 }
+
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transition: background-image 0.3s ease-in-out;
+}

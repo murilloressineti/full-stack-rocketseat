@@ -411,12 +411,14 @@
 
                 <div class="file-input-wrapper">
                   <label for="file-upload">Foto de capa</label>
-                  <img
-                    src="assets/icons/buttons/upload-secondary.svg"
-                    alt="Ícone de upload"
-                  />
-                  Selecionar
-                  <input type="file" id="file-upload" class="file-input" placeholder="Nenhum arquivo selecionado" />
+                  <div class="file-upload-wrapper">
+                    <div class="custom-file-upload" id="custom-file-upload">
+                      <div class="icon icon-upload"></div>
+                      <span>Selecionar</span>
+                    </div>
+                    <span id="file-name">Nenhum arquivo selecionado</span>
+                    <input type="file" id="file-upload" class="file-input" />
+                  </div>
                 </div>
               </div>
             </fieldset>
@@ -436,29 +438,37 @@
                   placeholder="Nome completo"
                   required
                 />
+                <div class="error-message">
+                  <img src="assets/icons/error-input/circle-alert.svg" alt="">
+                  <span >Campo obrigatório</span>
+                </div>
               </div>
 
-              <div class="input-wrapper">
-                <label for="mail">E-mail</label>
-                <input
-                  type="email"
-                  id="mail"
-                  name="mail"
-                  placeholder="exemplo@email.com"
-                  required
-                />
-              </div>
-
-              <div class="input-wrapper">
-                <label for="phone">Telefone</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="(99) 99999-9999 "
-                  pattern="\(\d{2}\) \d{4,5}-\d{4}"
-                  required
-                />
+              <div class="input-grid">
+                <div class="input-wrapper">
+                  <label for="mail">E-mail</label>
+                  <input
+                    type="email"
+                    id="mail"
+                    name="mail"
+                    placeholder="exemplo@email.com"
+                    required
+                  />
+                  <div class="error-message">
+                    <img src="assets/icons/error-input/circle-alert.svg" alt="">
+                    <span >Campo obrigatório</span>
+                  </div>
+                </div>
+                <div class="input-wrapper">
+                  <label for="phone">Telefone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="(99) 99999-9999 "
+                    pattern="\(\d{2}\) \d{4,5}-\d{4}"
+                  />
+                </div>
               </div>
             </fieldset>
 
@@ -504,5 +514,11 @@
         </div>
       </main>
     </div>
+
+    <script>
+      document.getElementById("custom-file-upload").addEventListener("click", function () {
+          document.getElementById("file-upload").click();
+        });
+    </script>
   </body>
 </html>
