@@ -3,9 +3,4 @@
 @import url(theme.css);
 @import url(input-toggle.css);
 @import url(input-file.css);
-
-/*estilos específicos de campos de formulário 
-input-radio.css: Estilos para os botões de rádio, independente de qual formulário ele esteja.
-input-text.css: Estilos para campos de texto.
-checkbox.css: Estilos para checkboxes.
-*/
+@import url(checkbox.css);

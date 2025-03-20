@@ -1,0 +1,53 @@
+.terms-and-conditions {
+  label {
+    margin-bottom: 0;
+  }
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 0.1rem solid var(--input-stroke);
+  border-radius: 0.4rem;
+  background-color: var(--input-base);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  padding: 0;
+}
+
+input[type="checkbox"]:focus {
+  border-color: var(--brand-light);
+}
+
+input[type="checkbox"]:checked {
+  border-color: var(--brand-light);
+  background-color: var(--input-base);
+  background-image: url(../../assets/icons/check.svg);
+  background-size: 1.4rem;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.checkbox-wrapper label {
+  font: var(--text-sm);
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.checkbox-wrapper a {
+  color: var(--brand-light);
+  font-weight: 600;
+}
+
+.checkbox-wrapper a:focus {
+  outline: 0.2rem solid var(--brand-light);
+}

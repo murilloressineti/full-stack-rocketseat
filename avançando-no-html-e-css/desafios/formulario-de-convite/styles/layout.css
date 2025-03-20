@@ -64,3 +64,8 @@ main {
   grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
 }
+
+.terms-and-conditions {
+  border-top: 0.1rem solid var(--input-stroke);
+  padding-top: 4rem;
+}

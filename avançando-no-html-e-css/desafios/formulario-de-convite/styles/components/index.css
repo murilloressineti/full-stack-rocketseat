@@ -1,9 +1,2 @@
-@import url(buttons.css);
+@import url(button.css);
 @import url(input.css);
-
-/*componentes reutilizáveis
-buttons.css: Estilos para botões, independentemente de onde eles são usados.
-card.css: Estilos para um componente de card reutilizável.
-modal.css: Estilos para um modal.
-form.css (se o formulário for considerado um "componente"): Se o seu formulário é um componente reutilizável em várias páginas, você pode colocá-lo aqui.
-*/
