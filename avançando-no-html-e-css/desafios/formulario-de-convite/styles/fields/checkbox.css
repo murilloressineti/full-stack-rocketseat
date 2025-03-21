@@ -25,7 +25,7 @@ input[type="checkbox"]:focus {
 input[type="checkbox"]:checked {
   border-color: var(--brand-light);
   background-color: var(--input-base);
-  background-image: url(../../assets/icons/check.svg);
+  background-image: url(../../assets/icons/checkbox/check.svg);
   background-size: 1.4rem;
   background-position: center;
   background-repeat: no-repeat;
