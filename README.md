@@ -37,7 +37,7 @@ Este repositório e os projetos nele contidos estão sob a licença **MIT**. Par
 
 Feito por **Murillo Ressineti Silva**, aluno da Rocketseat e desenvolvedor Full-Stack. Conecte-se comigo no LinkedIn para mais informações:
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
 
 ---
 
