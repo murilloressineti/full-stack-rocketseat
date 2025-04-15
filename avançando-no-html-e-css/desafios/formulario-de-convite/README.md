@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como parte dos meus estudos em **desenvolvimento w
 
 ---
 
-## 🛠 **Tecnologias Utilizadas**
+## 🛠 **Tecnologias e Ferramentas**
 
 Este projeto foi construído com as seguintes ferramentas:
 
