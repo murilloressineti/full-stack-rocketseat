@@ -1,30 +1,39 @@
-<h1 align="center">Portfólio Dev</h1>
+# Portfólio Dev - Rocketseat Full-Stack
 
-<p align="center">
-  Este projeto foi desenvolvido como parte dos estudos no bootcamp da Rocketseat. O objetivo do exercício é criar uma página de portfólio para apresentar informações sobre uma desenvolvedora, utilizando HTML para a estrutura do projeto e CSS para a estilização. Além disso, o projeto explora conceitos de responsividade e boas práticas de desenvolvimento web.
-</p>
+Este repositório contém o projeto de um **portfólio** desenvolvido como parte dos meus estudos no bootcamp da **Rocketseat**. O objetivo do exercício foi criar uma página de portfólio para apresentar informações sobre uma desenvolvedora, utilizando **HTML** para a estrutura do projeto e **CSS** para a estilização. Além disso, o projeto explora conceitos de **responsividade** e **boas práticas de desenvolvimento web**.
 
-<br>
+---
 
-## 🛠 Tecnologias
+## 🛠 **Tecnologias e Ferramentas**
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+As principais tecnologias utilizadas neste projeto foram:
 
-- HTML, CSS
-- JavaScript
-- Figma
-- Git, GitHub
+- **Frontend**: HTML, CSS, JavaScript
+- **Design**: Figma
+- **Versionamento**: Git e GitHub
 
-## 💻 Projeto
+## 💻 **Visual do Projeto**
 
-<img src="assets/thumbnail.png">
+Confira uma prévia do projeto:
 
-## 📝 Licença
+<img src="assets/thumbnail.png" alt="Imagem do Projeto Portfólio Dev" />
 
-Esse projeto está sob a licença MIT.
+---
 
-## 🙋🏻‍♂️ Autor
+## 📝 **Licença**
 
-Feito com 💙 por Murillo Ressineti.
+Este projeto está licenciado sob a **MIT License**. Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+---
+
+## 👨🏻‍💻 **Autor**
+
+Feito por **Murillo Ressineti**, aluno da Rocketseat e desenvolvedor front-end. Conecte-se comigo no LinkedIn para mais informações:
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
+
+---
+
+## 📬 **Contato**
+
+Se você tiver dúvidas, sugestões ou gostaria de discutir sobre o projeto, sinta-se à vontade para entrar em contato!

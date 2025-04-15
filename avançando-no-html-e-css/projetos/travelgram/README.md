@@ -1,29 +1,41 @@
-<h1 align="center">Travelgram | Perfil de Viagens</h1>
+# Travelgram | Perfil de Viagens - Rocketseat Full-Stack
 
-<p align="center">
-  Este projeto é parte dos estudos realizados no bootcamp do curso Full Stack da Rocketseat. O foco deste projeto foi a organização do CSS, utilizando a estruturação por meio de importações e o arquivo index para centralizar os estilos. Além disso, foi aplicado o uso do <code>display: flex</code>. As tecnologias HTML e CSS foram utilizadas para o desenvolvimento front-end, junto com o Figma para o design e Git/GitHub para controle de versão.
-</p>
+Este repositório faz parte dos projetos desenvolvidos no curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi a criação de um perfil de viagens com foco na **organização do CSS**, utilizando importações e um arquivo `index.css` central para os estilos. Também foi aplicado o uso de **`display: flex`** para alinhar e distribuir os elementos. As tecnologias principais foram **HTML** e **CSS**, com o suporte do **Figma** para o design visual e **Git/GitHub** para o versionamento de código.
 
-<br>
+---
 
-## 🛠 Tecnologias
+## 🛠 **Tecnologias e Ferramentas**
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- HTML, CSS
-- Figma
-- Git, GitHub
+- **HTML e CSS**: Estrutura e estilização da página
+- **Figma**: Protótipo e design visual
+- **Git e GitHub**: Controle de versão e repositório de código
 
-## 💻 Projeto
+---
 
-<img src="assets/thumbnail.jpg"/>
+## 💻 **Projeto**
 
-## 📝 Licença
+Abaixo, uma prévia visual do projeto desenvolvido:
 
-Esse projeto está sob a licença MIT.
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto Travelgram | Perfil de Viagens" />
 
-## 🙋🏻‍♂️ Autor
+---
 
-Feito com 💙 por Murillo Ressineti.
+## 📝 **Licença**
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+Este projeto está sob a licença **MIT**. Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
+
+---
+
+## 👨🏻‍💻 **Autor**
+
+Feito por **Murillo Ressineti Silva**, aluno da Rocketseat e desenvolvedor Full-Stack. Conecte-se comigo no LinkedIn para mais informações:
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
+
+---
+
+## 📬 **Contato**
+
+Se você tiver dúvidas, sugestões ou gostaria de discutir sobre o projeto, sinta-se à vontade para entrar em contato!

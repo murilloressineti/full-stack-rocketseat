@@ -1,29 +1,41 @@
-<h1 align="center">Formulário de Matrícula</h1>
+# Formulário de Matrícula - Rocketseat Full-Stack
 
-<p align="center">
-  Este projeto foi desenvolvido como parte do bootcamp Full Stack da Rocketseat. O objetivo principal foi a criação de um formulário de matrícula responsivo, utilizando `display: grid` para organização dos elementos. Além disso, a estrutura segue boas práticas de HTML5 semântico, com estilização em CSS3 e controle de versão via Git/GitHub.
-</p>
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi construir um **formulário de matrícula responsivo**, utilizando **HTML5 semântico** e **CSS3**, com foco no uso de `display: grid` para organização dos elementos. O layout foi baseado em um design feito no **Figma**, e o versionamento foi realizado com **Git** e **GitHub**.
 
-<br>
+---
 
-## 🛠 Tecnologias
+## 🛠 **Tecnologias e Ferramentas**
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- HTML, CSS
-- Figma
-- Git, GitHub
+- **HTML e CSS**: Estruturação semântica e estilização da página
+- **Figma**: Ferramenta de design para guiar o layout
+- **Git e GitHub**: Controle de versão e hospedagem do código
 
-## 💻 Projeto
+---
 
-<img src="assets/thumbnail.png/">
+## 💻 **Projeto**
 
-## 📝 Licença
+Abaixo, uma prévia visual do projeto desenvolvido:
 
-Esse projeto está sob a licença MIT.
+<img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
 
-## 🙋🏻‍♂️ Autor
+---
 
-Feito com 💙 por Murillo Ressineti.
+## 📝 **Licença**
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+Este projeto está sob a licença **MIT**. Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
+
+---
+
+## 👨🏻‍💻 **Autor**
+
+Feito por **Murillo Ressineti Silva**, aluno da Rocketseat e desenvolvedor Full-Stack. Conecte-se comigo no LinkedIn para mais informações:
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
+
+---
+
+## 📬 **Contato**
+
+Se você tiver dúvidas, sugestões ou gostaria de discutir sobre o projeto, sinta-se à vontade para entrar em contato!

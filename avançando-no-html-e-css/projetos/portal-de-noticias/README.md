@@ -1,29 +1,41 @@
-<h1 align="center">Portal de Notícias</h1>
+# Portal de Notícias - Rocketseat Full-Stack
 
-<p align="center">
-  Este projeto faz parte do bootcamp do curso Full Stack da Rocketseat. O foco desta atividade foi a organização e disposição dos elementos utilizando <code>display: grid</code>. A estrutura do projeto também fez uso do HTML5 semântico, estilização com CSS3, e controle de versão com Git/GitHub.
-</p>
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O foco desta atividade foi a criação de um **portal de notícias**, com organização e disposição dos elementos por meio de **`display: grid`**. A estrutura do projeto segue boas práticas de **HTML5 semântico**, com estilização feita em **CSS3**. O layout foi baseado em um protótipo no **Figma**, e o controle de versão foi feito utilizando **Git** e **GitHub**.
 
-<br>
+---
 
-## 🛠 Tecnologias
+## 🛠 **Tecnologias e Ferramentas**
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- HTML, CSS
-- Figma
-- Git, GitHub
+- **HTML e CSS**: Estruturação semântica e estilização da página
+- **Figma**: Ferramenta de design para guiar o layout
+- **Git e GitHub**: Controle de versão e hospedagem do código
 
-## 💻 Projeto
+---
 
-<img src="assets/thumbnail.jpg/">
+## 💻 **Projeto**
 
-## 📝 Licença
+Abaixo, uma prévia visual do projeto desenvolvido:
 
-Esse projeto está sob a licença MIT.
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto Portal de Notícias" />
 
-## 🙋🏻‍♂️ Autor
+---
 
-Feito com 💙 por Murillo Ressineti.
+## 📝 **Licença**
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+Este projeto está sob a licença **MIT**. Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
+
+---
+
+## 👨🏻‍💻 **Autor**
+
+Feito por **Murillo Ressineti Silva**, aluno da Rocketseat e desenvolvedor Full-Stack. Conecte-se comigo no LinkedIn para mais informações:
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
+
+---
+
+## 📬 **Contato**
+
+Se você tiver dúvidas, sugestões ou gostaria de discutir sobre o projeto, sinta-se à vontade para entrar em contato!
