@@ -1,29 +1,41 @@
-<h1 align="center">Página de Receitas</h1>
+# Página de Receitas - Rocketseat Full-Stack
 
-<p align="center">
-  Este projeto é parte dos estudos realizados no bootcamp do curso Full Stack da Rocketseat. O foco deste projeto foi o uso de listas HTML, utilizando a tag <code>&lt;ul&gt;</code> para estruturar de forma clara e organizada as receitas apresentadas na página. Foram aplicadas também as tecnologias HTML e CSS para o desenvolvimento front-end, com o uso do Figma para o design e Git/GitHub para controle de versão.
-</p>
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. A proposta deste projeto foi construir uma página de receitas utilizando **HTML** e **CSS**, com foco na prática de **listas ordenadas e não ordenadas**. A estrutura do conteúdo foi planejada de forma semântica e organizada, com base em um layout criado no **Figma**. O controle de versão foi realizado com **Git** e **GitHub**.
 
-<br>
+---
 
-## 🛠 Tecnologias
+## 🛠 **Tecnologias e Ferramentas**
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- HTML, CSS
-- Figma
-- Git, GitHub
+- **HTML e CSS**: Estruturação e estilização da página
+- **Figma**: Ferramenta de design para guiar o layout
+- **Git e GitHub**: Controle de versão e hospedagem do código
 
-## 💻 Projeto
+---
 
-<img src="assets/thumbnail.jpg"/>
+## 💻 **Projeto**
 
-## 📝 Licença
+Abaixo, uma prévia visual do projeto desenvolvido:
 
-Esse projeto está sob a licença MIT.
+<img src="assets/thumbnail.jpg" alt="Imagem da Página de Receitas" />
 
-## 🙋🏻‍♂️ Autor
+---
 
-Feito com 💙 por Murillo Ressineti.
+## 📝 **Licença**
 
-[![Linkedin Badge](https://img.shields.io/badge/-Murillo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/murilloressineti/)](https://www.linkedin.com/in/murilloressineti/)
+Este projeto está sob a licença **MIT**. Para mais detalhes, consulte o arquivo [LICENSE](./LICENSE).
+
+---
+
+## 👨🏻‍💻 **Autor**
+
+Feito por **Murillo Ressineti**, aluno da Rocketseat e desenvolvedor Full-Stack. Conecte-se comigo no LinkedIn para mais informações:
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilloressineti/)
+
+---
+
+## 📬 **Contato**
+
+Se você tiver dúvidas, sugestões ou gostaria de discutir sobre o projeto, sinta-se à vontade para entrar em contato!
