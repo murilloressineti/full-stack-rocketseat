@@ -14,7 +14,7 @@
 }
 
 :root {
-  --background-color: #09090b;
+  --bg-color: #09090b;
   --surface-color: #18181b;
   --stroke-color: #27272a;
   --text-color-primary: #f4f4f5;
@@ -48,7 +48,7 @@ html {
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--bg-color);
 }
 
 h1,
