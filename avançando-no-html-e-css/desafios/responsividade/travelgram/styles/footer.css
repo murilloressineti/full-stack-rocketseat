@@ -9,3 +9,25 @@ footer {
 footer span:nth-child(1){
   margin-right: auto;
 }
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    padding-block: 1.6em;
+  }
+
+  footer span:nth-child(1){
+    margin: auto;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer span:last-child {
+    margin-left: 1.6rem;
+  }
+}
