@@ -1,0 +1,68 @@
+@import url(fields/index.css);
+
+form {
+  margin-top: 3rem;
+}
+
+fieldset {
+  border: none;
+
+  display: grid;
+  gap: 1.5rem;
+}
+
+legend {
+  font: 600 1rem/1.25 var(--font-family);
+  margin-bottom: 1.5rem;
+}
+
+fieldset + fieldset {
+  margin-top: 3rem;
+}
+
+.input-wrapper:has([disabled]) {
+  opacity: .5;
+}
+
+input {
+  &[disabled] {
+    background-color: var(--surface-disabled);
+
+    border: 1px solid var(--stroke-default);
+
+    color: var(--text-primary);
+  }
+
+  &:invalid {
+    border: 0.125rem solid var(--semantic-error);
+  }
+
+  & + small {
+    font: var(--text-sm);
+    color: #78716C;
+
+    display: inline-block;
+    margin-top: .25rem;
+  }
+
+  &[required] + .error {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+
+    font: var(--text-sm);
+    color: var(--semantic-error);
+
+    margin-top: .25rem;
+  }
+
+  &:not(:focus):valid + .error {
+    display: none;
+  }
+}
+
+.actions-wrapper {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1rem;
+}
