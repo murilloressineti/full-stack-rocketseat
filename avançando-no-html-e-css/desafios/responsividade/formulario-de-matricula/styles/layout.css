@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+.aside-mobile {
+  display: none;
+}
+
 main {
   overflow: auto;
   padding: 4rem;
@@ -47,5 +51,41 @@ aside {
     & span {
       color: var(--text-highlight);
     }
+  }
+}
+
+@media (max-width: 768px){
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .aside-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+
+    & .aside-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: auto;
+
+      & > img {
+      margin-top: 0.5rem;
+    }
+    }
+  }
+
+  main {
+    padding: 1.5rem;
+    overflow: visible
+  }
+
+  .aside-desktop {
+    display: none;
   }
 }

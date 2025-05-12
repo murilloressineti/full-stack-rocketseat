@@ -16,6 +16,12 @@ legend {
   margin-bottom: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  legend {
+    color: var(--text-primary);
+  }
+}
+
 fieldset + fieldset {
   margin-top: 3rem;
 }
@@ -65,4 +71,18 @@ input {
   margin-top: 3rem;
   display: flex;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  fieldset.address .flex {
+    display: block;
+  }
+
+  fieldset.address .flex > *:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+
+  .actions-wrapper {
+    flex-direction: column;
+  }
 }
