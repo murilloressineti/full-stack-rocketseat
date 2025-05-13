@@ -22,3 +22,29 @@
   border-inline: none;
   justify-content: space-between;
 }
+
+@media (max-width: 768px) {
+  #primary {
+    padding-block: 1.6rem;
+
+    & strong {
+      display: none;
+    }
+  }
+
+  #secondary {
+    display: flex;
+    flex-direction: row;
+    gap: 3.2rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #secondary::-webkit-scrollbar {
+    display: none;
+  }
+}

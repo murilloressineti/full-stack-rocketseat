@@ -33,3 +33,13 @@
 .text-sm {
   font: var(--text-sm);
 }
+
+@media (max-width: 768px) {
+  .grid-flow-col-responsive {
+    grid-auto-flow: row;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
