@@ -1,6 +1,10 @@
 # Portal de Notícias - Rocketseat Full-Stack
 
-Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O foco desta atividade foi a criação de um **portal de notícias**, com organização e disposição dos elementos por meio de **`display: grid`**. A estrutura do projeto segue boas práticas de **HTML5 semântico**, com estilização feita em **CSS3**. O layout foi baseado em um protótipo no **Figma**, e o controle de versão foi feito utilizando **Git** e **GitHub**.
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O foco desta atividade foi a criação de um **portal de notícias**, com organização e disposição dos elementos por meio de **`display: grid`**. 
+
+A **responsividade** foi implementada para garantir que o portal se adapte corretamente a diferentes tamanhos de tela, proporcionando uma boa experiência tanto em dispositivos móveis e desktops.
+
+A estrutura do projeto segue boas práticas de **HTML5 semântico**, com estilização feita em **CSS3**. O layout foi baseado em um protótipo no **Figma**, e o controle de versão foi feito utilizando **Git** e **GitHub**.
 
 ---
 
@@ -18,7 +22,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 Abaixo, uma prévia visual do projeto desenvolvido:
 
-<img src="assets/thumbnail.jpg" alt="Imagem do Projeto Portal de Notícias" />
+<img src="assets/thumbnail.png" alt="Imagem do Projeto Portal de Notícias" />
 
 ---
 
