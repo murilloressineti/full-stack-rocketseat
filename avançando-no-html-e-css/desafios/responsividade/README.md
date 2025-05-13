@@ -8,15 +8,9 @@ Todos os projetos utilizam **HTML semântico**, **CSS moderno** e seguem boas pr
 
 ## 📁 Projetos
 
-### 🔗 [Formulário de Matrícula](./formulario-de-matricula)
-
----
-
-### 🔗 [Portal de Notícias](./portal-de-noticias)
-
----
-
-### 🔗 [Travelgram | Perfil de Viagens](./travelgram)
+- 📄 [Formulário de Matrícula](./formulario-de-matricula)
+- 📰 [Portal de Notícias](./portal-de-noticias)
+- 📸 [Travelgram | Perfil de Viagens](./travelgram)
 
 ---
 
