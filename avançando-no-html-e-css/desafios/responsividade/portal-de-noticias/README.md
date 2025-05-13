@@ -22,7 +22,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 Abaixo, uma prévia visual do projeto desenvolvido:
 
-<img src="assets/thumbnail.png" alt="Imagem do Projeto Portal de Notícias" />
+<img src="assets/thumbnail.png" alt="Imagem do Projeto Portal de Notícias"/>
 
 ---
 
