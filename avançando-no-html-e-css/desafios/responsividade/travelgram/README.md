@@ -1,10 +1,6 @@
 # Travelgram | Perfil de Viagens - Rocketseat Full-Stack
 
-Este repositório faz parte dos projetos desenvolvidos no curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi a criação de um perfil de viagens com foco na **organização do CSS**, utilizando importações e um arquivo `index.css` central para os estilos. Também foi aplicado o uso de **`display: flex`** para alinhar e distribuir os elementos.
-
-A **responsividade** foi adicionada para garantir que o perfil de viagens se adapte bem a diferentes tamanhos de tela, oferecendo uma navegação fluida e agradável em dispositivos móveis e desktops.
-
-As tecnologias principais foram **HTML** e **CSS**, com o suporte do **Figma** para o design visual e **Git/GitHub** para o versionamento de código.
+Este repositório faz parte dos projetos desenvolvidos no curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi a criação de um perfil de viagens com foco na **organização do CSS**, utilizando importações e um arquivo `index.css` central para os estilos. Também foi aplicado o uso de **`display: flex`** para alinhar e distribuir os elementos. As tecnologias principais foram **HTML** e **CSS**, com o suporte do **Figma** para o design visual e **Git/GitHub** para o versionamento de código.
 
 ---
 
@@ -20,9 +16,9 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Abaixo, uma prévia visual do projeto desenvolvido:
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://triptravelgram.netlify.app/):
 
-<img src="assets/thumbnail.png" alt="Imagem do Projeto Travelgram | Perfil de Viagens" />
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto Travelgram | Perfil de Viagens" />
 
 ---
 

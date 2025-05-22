@@ -14,7 +14,7 @@ As principais tecnologias utilizadas neste projeto foram:
 
 ## 💻 **Visual do Projeto**
 
-Confira uma prévia do projeto:
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://martinadev.netlify.app/):
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Portfólio Dev" />
 

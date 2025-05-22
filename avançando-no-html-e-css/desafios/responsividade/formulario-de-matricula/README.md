@@ -1,8 +1,6 @@
 # Formulário de Matrícula - Rocketseat Full-Stack
 
-Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi construir um **formulário de matrícula responsivo**, utilizando **HTML5 semântico** e **CSS3**, com foco no uso de `display: grid` para organização dos elementos. 
-
-A **responsividade** foi implementada para garantir uma boa experiência em diferentes tamanhos de tela, como dispositivos móveis e desktops. O layout foi baseado em um design feito no **Figma**, e o versionamento foi realizado com **Git** e **GitHub**.
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi construir um **formulário de matrícula responsivo**, utilizando **HTML5 semântico** e **CSS3**, com foco no uso de `display: grid` para organização dos elementos. O layout foi baseado em um design feito no **Figma**, e o versionamento foi realizado com **Git** e **GitHub**.
 
 ---
 
@@ -18,7 +16,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Abaixo, uma prévia visual do projeto desenvolvido:
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://escolaestrelas.netlify.app/):
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
 
