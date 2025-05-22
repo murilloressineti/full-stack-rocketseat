@@ -20,6 +20,8 @@ Abaixo, uma prévia visual do projeto desenvolvido:
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
 
+Você pode acessar o projeto completo [aqui](https://snitappatins.netlify.app/).
+
 ---
 
 ## 📝 **Licença**
