@@ -16,11 +16,9 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Veja abaixo uma prévia visual do projeto e clique no link para acessá-lo em funcionamento:
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://snitappatins.netlify.app/):
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
-
-Você pode acessar o projeto completo [aqui](https://snitappatins.netlify.app/).
 
 ---
 
