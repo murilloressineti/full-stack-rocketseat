@@ -16,7 +16,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Abaixo, uma prévia visual do projeto desenvolvido:
+Veja abaixo uma prévia visual do projeto e clique no link para acessá-lo em funcionamento:
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
 
