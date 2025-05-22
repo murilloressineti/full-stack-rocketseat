@@ -1,0 +1,26 @@
+header.top {
+  max-width: 112rem;
+  width: 100%;
+  padding-top: 5.6rem;
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 2px solid red;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .logo-desktop {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+  }
+}
