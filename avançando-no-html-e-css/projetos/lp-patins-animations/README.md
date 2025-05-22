@@ -20,7 +20,7 @@ Veja abaixo uma prévia visual do projeto e clique no link para acessá-lo em fu
 
 <img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Matrícula" />
 
-Você pode acessar o projeto completo [aqui](https://snitappatins.netlify.app/).
+Você pode acessar o projeto completo <a href="https://snitappatins.netlify.app/" target="_blank">clicando aqui</a>.
 
 ---
 
