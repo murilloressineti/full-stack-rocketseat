@@ -1,0 +1,118 @@
+  & .hero-description {
+    border: 2px solid red;
+    width: 100%;
+    max-width: 120rem;
+
+    margin: 9.6rem auto 8rem;
+
+    padding: 3rem 0 8.5rem;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & p {
+      font: var(--subtitle);
+    }
+
+    & strong {
+      color: var(--blue-light);
+    }
+
+    & .hero-book {
+      width: 8.8rem;
+      height: 8.8rem;
+      transform: rotate(20deg);
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: rotate(30deg) scale(1.1);
+      }
+    }
+
+    & .hero-icons {
+      position: relative;
+      width: 100%;
+      height: 8rem;
+
+      & .icon-planchette {
+        position: absolute;
+        top: 0;
+        left: 5%;
+        width: 8rem;
+        height: 8rem;
+        transform: rotate(100deg);
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: rotate(110deg) scale(1.1);
+        }
+      }
+
+      & .icon-crystal {
+        position: absolute;
+        right: 0%;
+        width: 7.2rem;
+        height: 7.2rem;
+        transform: rotate(-15deg);
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: rotate(-5deg) scale(1.1);
+        }
+      }
+    }
+  }
+
+@media (max-width: 768px) {
+  & .hero-description {
+    width: 33.5rem;
+
+    margin: 3.2rem auto 3.2rem;
+
+    position: relative;
+
+    & p {
+      font-size: 1.6rem;
+      line-height: 1.4;
+    }
+
+    & strong {
+      font-weight: 500;
+      color: var(--text-body);
+    }
+
+    & .hero-book {
+      position: absolute;
+      top: -10%;
+      right: 10%;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    & .hero-icons {
+      height: 0;
+
+      & .icon-planchette {
+        width: 3.2rem;
+        height: 3.2rem;
+        transform: rotate(-30deg);
+
+        &:hover {
+          transform: rotate(-40deg) scale(1.1);
+        }
+      }
+
+      & .icon-crystal {
+        width: 4rem;
+        height: 4rem;
+        transform: rotate(15deg);
+
+        &:hover {
+          transform: rotate(5deg) scale(1.1);
+        }
+      }
+    }
+  }
+}

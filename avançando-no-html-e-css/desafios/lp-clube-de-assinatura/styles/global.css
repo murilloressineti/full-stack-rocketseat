@@ -53,6 +53,11 @@ html, button {
 
 body {
   background-color: var(--shape-background);
+  color: var(--text-body);
+}
+
+h1, h2 {
+  color: var(--text-title);
 }
 
 a {
