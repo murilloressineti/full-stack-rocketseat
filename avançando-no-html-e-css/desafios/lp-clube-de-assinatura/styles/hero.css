@@ -1,5 +1,5 @@
 .hero-wrapper {
-  background-image: url('../assets/hero-background.png');
+  background-image: url("../assets/hero-background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,8 +18,6 @@ section.hero {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  border: 2px solid green;
 
   & .hero-text {
     max-width: 65.6rem;
