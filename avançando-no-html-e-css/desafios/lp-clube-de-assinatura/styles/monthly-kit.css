@@ -1,0 +1,106 @@
+& .monthly-kit {
+  border: 2px solid blue;
+  width: 100%;
+  max-width: 120rem;
+  padding-top: 23.5rem;
+  padding-bottom: 27.8rem;
+  margin: auto;
+  text-align: center;
+
+  & .kit-header {
+    div:first-child {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+    }
+
+    & h2 {
+      font: var(--title-sm);
+      margin-bottom: 0.5rem;
+    }
+
+    & p {
+      font: var(--body-md);
+    }
+
+    & .icon-star {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+  }
+
+  & .kit-content {
+    border: 2px solid yellow;
+
+    margin-top: 8.8rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    & .book-area {
+      position: relative;
+      padding: 13.4rem 0 16.9rem;
+      border: 2px solid green;
+
+      & img {
+        max-width: 100%;
+        height: auto;
+        position: absolute;
+      }
+
+      & .book {
+        max-width: 46.7rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      & .bookmark.yellow {
+        max-width: 17.2rem;
+        top: 70px;
+        right: -110px;
+        rotate: 12deg;
+        z-index: 1;
+      }
+
+      & .bookmark.purple {
+        max-width: 17.2rem;
+        top: 150px;
+        right: -215px;
+        rotate: 22deg;
+        z-index: 0;
+      }
+
+      & .pin {
+        max-width: 22.2rem;
+        bottom: 0;
+        top: 580px;
+        left: -140px;
+        rotate: -8deg;
+        z-index: 0;
+      }
+
+      & .label {
+        position: absolute;
+        font: var(--body-md);
+        color: var(--text-labe);
+
+        &.label-top {
+          top: -40px;
+          left: 0;
+        }
+
+        &.label-bottom-left {
+          bottom: -40px;
+          left: -80px;
+        }
+
+        &.label-bottom-right {
+          bottom: -40px;
+          right: -80px;
+        }
+      }
+    }
+  }
+}
