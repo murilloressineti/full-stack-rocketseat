@@ -14,20 +14,34 @@
 
   & p {
     font: var(--subtitle);
+
+    animation: pop-in 0.6s ease-out both;
+    animation-timeline: view();
+    animation-range: 150px 250px;
   }
 
   & strong {
     color: var(--blue-light);
   }
 
-  & .hero-book {
+  & .icon-book {
     width: 8.8rem;
     height: 8.8rem;
-    transform: rotate(20deg);
+
+    --scale-book: 1;
+    --rotate-book: 20deg;
+
+    transform: scale(var(--scale-book)) rotate(var(--rotate-book));
     transition: transform 0.4s ease;
+    will-change: transform;
+
+    animation: pop-in-book 0.6s ease-out both;
+    animation-timeline: view();
+    animation-range: 150px 250px;
 
     &:hover {
-      transform: rotate(30deg) scale(1.1);
+      --scale-book: 1.1;
+      --rotate-book: 30deg;
     }
   }
 
@@ -39,13 +53,24 @@
       position: absolute;
       top: 0;
       left: 5%;
+
       width: 8rem;
       height: 8rem;
-      transform: rotate(100deg);
+
+      --scale-planchette: 1;
+      --rotate-planchette: 100deg;
+
+      transform: scale(var(--scale-planchette)) rotate(var(--rotate-planchette));
       transition: transform 0.4s ease;
+      will-change: transform;
+
+      animation: pop-in-planchette 0.6s ease-out both;
+      animation-timeline: view();
+      animation-range: 150px 250px;
 
       &:hover {
-        transform: rotate(110deg) scale(1.1);
+        --scale-planchette: 1.1;
+        --rotate-planchette: 120deg;
       }
     }
 
@@ -54,13 +79,73 @@
       right: 0;
       width: 7.2rem;
       height: 7.2rem;
-      transform: rotate(-15deg);
+
+      --scale-crystal: 1;
+      --rotate-crystal: -15deg;
+
+      transform: scale(var(--scale-crystal)) rotate(var(--rotate-crystal));
       transition: transform 0.4s ease;
+      will-change: transform;
+
+      animation: pop-in-crystal 0.6s ease-out both;
+      animation-timeline: view();
+      animation-range: 250px 350px;
 
       &:hover {
-        transform: rotate(-5deg) scale(1.1);
+        --scale-crystal: 1.1;
+        --rotate-crystal: 5deg;
       }
     }
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    --scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    --scale: 1;
+  }
+}
+
+@keyframes pop-in-book {
+  from {
+    opacity: 0;
+    --scale: 0.5;
+    --rotate: 20deg;
+  }
+  to {
+    opacity: 1;
+    --scale: 1;
+    --rotate: 20deg;
+  }
+}
+
+@keyframes pop-in-planchette {
+  from {
+    opacity: 0;
+    --scale: 0.5;
+    --rotate: 100deg;
+  }
+  to {
+    opacity: 1;
+    --scale: 1;
+    --rotate: 100deg;
+  }
+}
+
+@keyframes pop-in-crystal {
+  from {
+    opacity: 0;
+    --scale: 0.5;
+    --rotate: -15deg;
+  }
+  to {
+    opacity: 1;
+    --scale: 1;
+    --rotate: -15deg;
   }
 }
 
@@ -83,12 +168,14 @@
       color: var(--text-body);
     }
 
-    & .hero-book {
+    & .icon-book {
       position: absolute;
       top: 12%;
       right: 15%;
       width: 4rem;
       height: 4rem;
+
+      animation-range: 170px 250px;
     }
 
     & .hero-icons {
