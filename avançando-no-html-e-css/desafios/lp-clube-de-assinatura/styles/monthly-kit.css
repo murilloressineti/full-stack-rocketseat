@@ -2,6 +2,7 @@
   border: 2px solid blue;
   width: 100%;
   max-width: 120rem;
+  height: 158.6rem;
   padding-top: 23.5rem;
   padding-bottom: 27.8rem;
   margin: auto;
@@ -50,7 +51,7 @@
       & .book {
         max-width: 46.7rem;
         position: relative;
-        z-index: 2;
+        z-index: 10;
       }
 
       & .bookmark.yellow {
@@ -117,14 +118,38 @@
           right: -160px;
         }
       }
+
+      .bookmark.yellow,
+      .bookmark.purple,
+      .pin,
+      .label,
+      .arrow {
+        z-index: 5;
+        opacity: 0;
+        transform: scale(0.6);
+        filter: blur(4px);
+        animation: emerge 1s ease-out both;
+        animation-timeline: view();
+        animation-range: 150px 250px;
+      }
     }
   }
 }
+
+@keyframes emerge {
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
 
 @media (max-width: 768px) {
   & .monthly-kit {
     padding-top: 10.4rem;
     padding-bottom: 8.8rem;
+    height: 63.1rem;
 
     & .kit-header {
       div:first-child {
@@ -135,7 +160,7 @@
 
       & h2 {
         font-size: 2.4rem;
-        margin-bottom: .8rem;
+        margin-bottom: 0.8rem;
       }
 
       & p {
