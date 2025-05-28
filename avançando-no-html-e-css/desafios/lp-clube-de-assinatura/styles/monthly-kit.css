@@ -32,8 +32,6 @@
   }
 
   & .kit-content {
-    border: 2px solid yellow;
-
     margin-top: 8.8rem;
     display: flex;
     justify-content: center;
@@ -42,7 +40,6 @@
     & .book-area {
       position: relative;
       padding: 13.4rem 0 16.9rem;
-      border: 2px solid green;
 
       & img {
         max-width: 100%;
@@ -87,18 +84,139 @@
         color: var(--text-labe);
 
         &.label-top {
-          top: -40px;
-          left: 0;
+          top: 70px;
+          left: -200px;
         }
 
         &.label-bottom-left {
-          bottom: -40px;
-          left: -80px;
+          bottom: 450px;
+          left: -210px;
         }
 
         &.label-bottom-right {
-          bottom: -40px;
-          right: -80px;
+          bottom: 140px;
+          right: -100px;
+        }
+      }
+
+      & .arrow {
+        position: absolute;
+
+        &.arrow-top {
+          top: 11rem;
+          left: -140px;
+        }
+
+        &.arrow-bottom-left {
+          bottom: 30rem;
+          left: -190px;
+        }
+
+        &.arrow-bottom-right {
+          bottom: 18rem;
+          right: -160px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  & .monthly-kit {
+    padding-top: 10.4rem;
+    padding-bottom: 8.8rem;
+
+    & .kit-header {
+      div:first-child {
+        display: flex;
+        align-items: baseline;
+        gap: 1.6rem;
+      }
+
+      & h2 {
+        font-size: 2.4rem;
+        margin-bottom: .8rem;
+      }
+
+      & p {
+        font-size: 1.4rem;
+      }
+
+      & .icon-star {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    & .kit-content {
+      margin-top: 6.4rem;
+
+      & .book-area {
+        padding: 5.3rem 0 5.7rem;
+
+        & .book {
+          max-width: 15.7rem;
+          z-index: 2;
+        }
+
+        & .bookmark.yellow {
+          max-width: 5.84rem;
+          top: 30px;
+          right: -40px;
+          z-index: 1;
+        }
+
+        & .bookmark.purple {
+          max-width: 5.84rem;
+          top: 60px;
+          right: -72px;
+          z-index: 0;
+        }
+
+        & .pin {
+          max-width: 7.5rem;
+          top: 200px;
+          left: -46px;
+          z-index: 0;
+        }
+
+        & .label {
+          font-size: 1rem;
+
+          &.label-top {
+            top: 25px;
+            left: -80px;
+          }
+
+          &.label-bottom-left {
+            bottom: 160px;
+            left: -80px;
+          }
+
+          &.label-bottom-right {
+            bottom: 40px;
+            right: -70px;
+          }
+        }
+
+        & .arrow {
+          &.arrow-top {
+            max-width: 5.87rem;
+            top: 45px;
+            left: -50px;
+          }
+
+          &.arrow-bottom-left {
+            max-width: 3.52rem;
+            bottom: 10.8rem;
+            left: -65px;
+          }
+
+          &.arrow-bottom-right {
+            max-width: 4.89rem;
+            bottom: 6rem;
+            right: -60px;
+          }
         }
       }
     }
