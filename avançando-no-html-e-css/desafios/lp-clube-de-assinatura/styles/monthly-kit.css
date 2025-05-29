@@ -42,6 +42,20 @@
       position: relative;
       padding: 13.4rem 0 16.9rem;
 
+      & .blur-bg {
+        position: absolute;
+        width: 90rem;
+        height: 90rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateY(38px);
+        background: var(--pink-low);
+        opacity: 0.5;
+        filter: blur(300px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
       & img {
         max-width: 100%;
         height: auto;
@@ -130,7 +144,7 @@
         filter: blur(4px);
         animation: emerge 1s ease-out both;
         animation-timeline: view();
-        animation-range: 150px 250px;
+        animation-range: 150px 180px;
       }
     }
   }
@@ -143,7 +157,6 @@
     filter: blur(0);
   }
 }
-
 
 @media (max-width: 768px) {
   & .monthly-kit {
