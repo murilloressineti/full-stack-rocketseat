@@ -113,13 +113,15 @@
       & .btn {
         display: block;
         width: 100%;
+        height: 4rem;
         padding: 0 2rem;
+        cursor: pointer;
+
         border: none;
         border-radius: 0.8rem;
-        font: var(--text-button);
-        cursor: pointer;
-        color: var(--text-title);
         background-color: var(--blue-dark);
+        font: var(--text-button);
+        color: var(--text-title);
 
         &.semi {
           background-color: var(--pink-dark);
