@@ -43,12 +43,6 @@
   --text-label: #bac6c9;
 }
 
-.tag {
-  font: bold 1rem / auto;
-  letter-spacing: 5%;
-  text-transform: uppercase;
-}
-
 html,
 button {
   font: var(--body-md);
