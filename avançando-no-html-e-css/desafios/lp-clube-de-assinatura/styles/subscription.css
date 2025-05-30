@@ -11,7 +11,7 @@
   & h2 {
     font: var(--title-sm);
     text-align: center;
-    margin-bottom: 13.8rem;
+    margin-bottom: 20rem;
   }
 
   & .plans {
@@ -19,6 +19,20 @@
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
+
+    & .blur-bg-blue {
+      position: absolute;
+      width: 90rem;
+      height: 90rem;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) translateY(38px);
+      background: var(--shape-base);
+      opacity: 0.5;
+      filter: blur(300px);
+      z-index: -5;
+      pointer-events: none;
+    }
 
     & .plan {
       background: var(--shape-base);
@@ -32,7 +46,6 @@
 
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
 
       & h3 {
         font: var(--title-xs);
@@ -78,15 +91,17 @@
 
         list-style: none;
         padding: 0;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         margin-bottom: 2.4rem;
-
-        border: 2px solid red;
 
         & li {
           font: var(--body-xs);
           display: flex;
           align-items: center;
-          gap: .8rem;
+          gap: 0.8rem;
 
           & img {
             width: 1.4rem;
@@ -124,11 +139,11 @@
 
       .decor {
         position: absolute;
-        background: url("../assets/icons/stars-sub.svg") no-repeat center;
-        background-size: contain;
       }
 
       .decor-left {
+        background: url("../assets/icons/stars-sub01.svg") no-repeat center;
+        background-size: contain;
         width: 3.2rem;
         height: 5.4rem;
         top: -3rem;
@@ -136,11 +151,20 @@
       }
 
       .decor-right {
-        width: 6rem;
-        height: 2.8rem;
-        bottom: -2rem;
-        right: -4rem;
-        rotate: 60deg;
+        background: url("../assets/icons/stars-sub02.svg") no-repeat center;
+        background-size: contain;
+        width: 5.7rem;
+        height: 2.6rem;
+        bottom: -3rem;
+        right: -3rem;
+      }
+
+      &:nth-child(2) {
+        transform: rotate(-8deg);
+      }
+
+      &:nth-child(4) {
+        transform: rotate(8deg);
       }
     }
 
@@ -152,6 +176,8 @@
       background-color: var(--shape-hover);
       border: 0.2rem solid var(--shape-hover);
       position: relative;
+      transform: translateY(-5.8rem);
+      z-index: 1;
 
       & h3 {
         color: var(--pink-light);

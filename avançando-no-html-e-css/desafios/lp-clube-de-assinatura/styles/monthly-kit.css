@@ -42,7 +42,7 @@
       position: relative;
       padding: 13.4rem 0 16.9rem;
 
-      & .blur-bg {
+      & .blur-bg-purple {
         position: absolute;
         width: 90rem;
         height: 90rem;
@@ -52,7 +52,7 @@
         background: var(--pink-low);
         opacity: 0.5;
         filter: blur(300px);
-        z-index: 0;
+        z-index: -5;
         pointer-events: none;
       }
 
