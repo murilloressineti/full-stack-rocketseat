@@ -46,6 +46,7 @@
 html,
 button {
   font: var(--body-md);
+  overflow-x: hidden;
 }
 
 body {

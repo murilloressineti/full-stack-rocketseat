@@ -163,11 +163,15 @@
         height: 2.6rem;
         bottom: -3rem;
         right: -3rem;
-        transition: transform 0.3s ease
+        transition: transform 0.3s ease;
       }
 
       &:nth-child(2) {
-        transform: rotate(-8deg);
+        animation-name: slideInRight;
+        animation-timeline: view();
+        animation-range: entry 0% cover 50%;
+        animation-fill-mode: both;
+        animation-duration: 1ms;
 
         &:nth-child(2):hover {
           transform: rotate(-9deg);
@@ -179,7 +183,11 @@
       }
 
       &:nth-child(4) {
-        transform: rotate(8deg);
+        animation-name: slideInLeft;
+        animation-timeline: view();
+        animation-range: entry 0% cover 50%;
+        animation-fill-mode: both;
+        animation-duration: 1ms;
 
         &:nth-child(4):hover {
           transform: rotate(9deg);
@@ -220,6 +228,97 @@
       background-color: var(--shape-hover);
       border-color: var(--shape-hover);
       z-index: 2;
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30%) scale(0.95);
+  }
+  to {
+    transform: rotate(8deg) translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(30%) scale(0.95);
+  }
+  to {
+    transform: rotate(-8deg) translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    transform: translateY(3rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  & .subscription {
+    height: auto;
+    padding-top: 10.4rem;
+    padding-bottom: 10.4rem;
+    display: flex;
+    flex-direction: column;
+
+    & h2 {
+      margin-bottom: 4.8rem;
+      font-size: 2.4rem;
+      text-align: center;
+    }
+
+    & .plans {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 1.6rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-inline: 5.2rem;
+
+      overflow-y: hidden;
+
+      opacity: 0;
+      transform: translateY(3rem);
+
+      animation-name: fadeSlideUp;
+      animation-duration: 0.6s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+
+      animation-timeline: view();
+      animation-range: entry 100px 180px;
+
+      & .plan {
+        flex: 0 0 auto;
+        transform: none !important;
+        animation-name: none !important;
+
+        & ul {
+          margin-bottom: 2.4rem;
+        }
+
+        .bunny,
+        .decor-left,
+        .decor-right {
+          display: none;
+        }
+      }
+    }
+
+    & .plans::-webkit-scrollbar {
+      display: none;
     }
   }
 }
