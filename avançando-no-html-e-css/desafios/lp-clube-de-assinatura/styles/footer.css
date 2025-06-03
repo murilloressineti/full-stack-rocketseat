@@ -1,0 +1,129 @@
+& .main-footer {
+  position: relative;
+  padding-top: 17rem;
+  padding-bottom: 10.2rem;
+  overflow: hidden;
+
+  & .footer-wave-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/footer/book-trace-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    z-index: 1;
+  }
+
+  & .footer-content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 112rem;
+    margin: auto;
+
+    & .footer-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 26.4rem;
+
+      & .footer-logo {
+        padding-bottom: 1.2rem;
+        margin-bottom: 1.2rem;
+        border-bottom: 1px solid var(--shape-stroke);
+        width: 100%;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .social-icons img {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+
+    & .footer-right {
+      display: flex;
+      gap: 5.6rem;
+
+      & .footer-column {
+        h3 {
+          font: var(--title-xs);
+          margin-bottom: 2rem;
+          color: var(--text-body);
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            margin-bottom: 2rem;
+            color: var(--blue-light);
+            text-decoration: none;
+            font: var(--link);
+            transition: color 0.3s ease;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  & .main-footer {
+    padding-top: 9.8rem;
+    padding-bottom: 3.8rem;
+
+    & .footer-wave-bg {
+      background-image: url("../assets/footer/book-trace-background-mobile.png");
+    }
+
+    & .footer-content-wrapper {
+      flex-direction: column;
+      align-items: center;
+
+      & .footer-left {
+        width: 100%;
+        align-items: center;
+        margin-bottom: 4rem;
+
+        & .footer-logo {
+          width: 100%;
+          max-width: 15.8rem;
+        }
+
+        & .social-icons {
+          justify-content: space-around;
+          max-width: 31.1rem;
+        }
+      }
+
+      & .footer-right {
+        flex-direction: row;
+        gap: 2.4rem;
+        width: 100%;
+        padding-inline: 3.2rem;
+
+        & .footer-column {
+          text-align: left;
+          width: 100%;
+
+          & ul li {
+            margin-bottom: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
