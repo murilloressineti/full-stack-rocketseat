@@ -134,26 +134,49 @@
 
       .bookmark.yellow,
       .bookmark.purple,
-      .pin,
-      .label,
-      .arrow {
-        z-index: 5;
-        opacity: 0;
-        transform: scale(0.6);
-        filter: blur(4px);
-        animation: emerge 1s ease-out both;
+      .label-bottom-right,
+      .arrow-bottom-right {
+        animation-name: slideInLeftBook;
         animation-timeline: view();
-        animation-range: 150px 180px;
+        animation-range: entry 0% cover 50%;
+        animation-fill-mode: both;
+        animation-duration: 1ms;
+      }
+
+      .label-top,
+      .label-bottom-left,
+      .pin,
+      .arrow-top,
+      .arrow-bottom-left {
+        animation-name: slideInRightBook;
+        animation-timeline: view();
+        animation-range: entry 0% cover 50%;
+        animation-fill-mode: both;
+        animation-duration: 1ms;
       }
     }
   }
 }
 
-@keyframes emerge {
+@keyframes slideInLeftBook {
+  from {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.95);
+  }
   to {
     opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInRightBook {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 
