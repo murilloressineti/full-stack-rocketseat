@@ -15,7 +15,7 @@ Este projeto foi construído com as seguintes ferramentas:
 
 ---
 
-## 💻 **Visual do Projeto**
+## 💻 **Projeto**
 
 Confira abaixo uma prévia e acesse o projeto completo [aqui](https://festivite.netlify.app/):
 

@@ -12,7 +12,7 @@ As principais tecnologias utilizadas neste projeto foram:
 - **Design**: Figma
 - **Versionamento**: Git e GitHub
 
-## 💻 **Visual do Projeto**
+## 💻 **Projeto**
 
 Confira abaixo uma prévia e acesse o projeto completo [aqui](https://martinadev.netlify.app/):
 
