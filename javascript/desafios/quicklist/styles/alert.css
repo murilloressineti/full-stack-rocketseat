@@ -1,0 +1,37 @@
+& .alert {
+  font: var(--label);
+  background-color: var(--color-danger);
+  color: var(--always-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1.2rem;
+  margin-top: 3.6rem;
+
+  & span {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  & img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+& .alert button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+& .alert.hidden {
+  display: none;
+}

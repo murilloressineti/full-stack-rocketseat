@@ -1,0 +1,26 @@
+& main {
+  & .back {
+    font: var(--link);
+    color: var(--color-brand);
+    margin-bottom: 1.6rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+    opacity: 1;
+
+    &:hover {
+      transform: translateX(-4px);
+      color: var(--color-brand-hover);
+    }
+  }
+
+  & h1 {
+    margin-bottom: 4.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  & main {
+    margin-top: 3.4rem;
+  }
+}

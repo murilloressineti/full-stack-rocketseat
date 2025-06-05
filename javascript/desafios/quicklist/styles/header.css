@@ -1,0 +1,10 @@
+header {
+  margin-top: 2.5rem;
+  margin-bottom: 6.2rem;
+}
+
+@media (max-width: 768px) {
+  header {
+    display: none;
+  }
+}
