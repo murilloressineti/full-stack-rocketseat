@@ -22,11 +22,12 @@
         <a href="#" class="back"><- Voltar </a>
         <h1>Compras da semana</h1>
 
-        <form id="form">
+        <form id="add-item-form">
           <input
             type="text"
             id="item-input"
             placeholder="Adicione um novo item"
+            required
           />
           <button type="submit">Adicionar item</button>
         </form>
@@ -45,7 +46,27 @@
           <li>
             <label class="item-wrapper">
               <input type="checkbox" class="custom-checkbox" />
-              <span class="item-text">Pão de forma</span>
+              <span class="item-text">Café preto</span>
+            </label>
+            <button class="delete-btn">
+              <img src="assets/icons/bin.svg" alt="ícone de lixeira" />
+            </button>
+          </li>
+
+          <li>
+            <label class="item-wrapper">
+              <input type="checkbox" class="custom-checkbox" />
+              <span class="item-text">Suco de laranja</span>
+            </label>
+            <button class="delete-btn">
+              <img src="assets/icons/bin.svg" alt="ícone de lixeira" />
+            </button>
+          </li>
+
+          <li>
+            <label class="item-wrapper">
+              <input type="checkbox" class="custom-checkbox" />
+              <span class="item-text">Bolacha</span>
             </label>
             <button class="delete-btn">
               <img src="assets/icons/bin.svg" alt="ícone de lixeira" />
@@ -64,5 +85,7 @@
         </div>
       </main>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
