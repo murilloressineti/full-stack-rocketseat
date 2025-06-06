@@ -74,10 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkboxId = `checkbox-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
     li.innerHTML = `
-      <div class="item-wrapper">
+      <label class="item-wrapper">
         <input type="checkbox" class="custom-checkbox" id="${checkboxId}" />
-        <label for="${checkboxId}" class="item-text">${text}</label>
-      </div>
+        <span for="${checkboxId}" class="item-text">${text}</span>
+      </label>
       <button class="delete-btn">
         <img src="assets/icons/bin.svg" alt="Ícone de lixeira" />
       </button>
