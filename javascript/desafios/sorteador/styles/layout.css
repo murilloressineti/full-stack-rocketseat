@@ -1,0 +1,60 @@
+.app {
+  display: flex;
+  max-width: 120rem;
+  width: 100%;
+  gap: 10.8rem;
+  border: 2px solid red;
+}
+
+.info {
+  flex: 1;
+}
+
+.logo {
+  margin-bottom: 9rem;
+}
+
+.badge {  
+  background: linear-gradient(
+    90deg,
+    #C7C9CC 0%,
+    #3D3D3D 100%
+  );
+
+  --webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  font: var(--overline);
+  display: block;
+  margin-bottom: 1.2r em;
+}
+
+h1 {
+  font: var(--display-large);
+  text-transform: uppercase;
+  margin-bottom: 3.8rem;
+}
+
+.faq-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  width: 38.6rem;
+}
+
+.faq-item:first-child {
+  margin-bottom: 3.6rem;
+}
+
+.faq-item strong {
+  font: var(--paragraph-medium);
+  color: var(--content-brand);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  font: var(--paragraph-small);
+  color: var(--content-secondary);
+}
