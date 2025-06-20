@@ -116,7 +116,53 @@
 }
 
 .result {
+  text-align: center;
+  padding-block: 5.9rem;
+  width: 48.2rem;
+
+  & h2 {
+    font: var(--label-medium);
+    color: var(--content-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  & .result-order {
+    display: block;
+    font: var(--overline);
+    color: var(--content-secondary);
+    margin-bottom: 4rem;
+  }
+
+  & .numbers {
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+    margin-bottom: 4rem;
+
+    & .number {
+      font: var(--number-result);
+      color: var(--content-brand);
+    }
+  }
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+
+    background-color: var(--background-tertiary);
+    color: var(--content-primary);
+    font: var(--label-small);
+    padding-block: 1.6rem;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+  }
+}
+
+.hidden {
   display: none;
-  border: 2px solid blue;
-  padding-block: 3.4rem;
 }
