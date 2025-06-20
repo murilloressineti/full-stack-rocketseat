@@ -43,6 +43,7 @@
         width: 10rem;
         transition: background-color 0.2s ease, border-color 0.2s ease;
 
+        outline: none;
         --webkit-appearance: none;
         --moz-appearance: textfield;
       }
@@ -60,9 +61,25 @@
       cursor: pointer;
     }
 
-    & .input-group:hover input,
-    & .input-group:focus-within input {
-      background: var(--background-tertiary);
+    & .input-group input:hover,
+    & .input-group input:focus {
+      background: linear-gradient(
+            var(--background-tertiary),
+            var(--background-tertiary)
+          )
+          padding-box,
+        linear-gradient(
+            90deg,
+            #77c0af 0%,
+            #d1dc97 14.84%,
+            #e9a9b3 32.15%,
+            #d586e0 65.79%,
+            #91a1fa 84.58%,
+            #77c0af 100%
+          )
+          border-box;
+      border: 2px solid transparent;
+      background-clip: padding-box, border-box;
       cursor: pointer;
     }
   }
