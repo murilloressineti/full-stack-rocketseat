@@ -10,6 +10,7 @@
   --font-sora: "Sora", sans-serif;
   --font-roboto-mono: "Roboto Mono", monospace;
   --font-roboto-flex: "Roboto Flex", sans-serif;
+  --font-inter: "Inter", sans-serif;
 
   --display-large: 900 7.2rem/1.3 var(--font-sora);
   --display-medium: 900 4rem/1.3 var(--font-sora);
@@ -22,6 +23,8 @@
   --paragraph-small: 500 1.2rem/1.5 var(--font-roboto-flex);
   --label-medium: 700 2rem/1.5 var(--font-roboto-flex);
   --label-small: 700 1.6rem/1.5 var(--font-roboto-flex);
+
+  --checkbox: 400 1.2rem/1.5 var(--font-inter);
 
   /* Content */
   --content-primary: #ffffff;
@@ -56,16 +59,14 @@ body {
   font: var(--paragraph-medium);
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  display: flex;
-  flex-direction: column;
 }
 
 header {
   width: 100%;
-  max-width: 120rem;
+  max-width: 110rem;
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;

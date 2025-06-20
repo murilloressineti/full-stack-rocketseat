@@ -8,7 +8,7 @@
     <title>Sorteador de Números</title>
     <link rel="stylesheet" href="styles/index.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -16,10 +16,10 @@
     <header>
       <img src="assets/logo.svg" alt="Logo Numbers" class="logo" />
     </header>
-    
+
     <main class="app">
       <section class="info">
-        <span class="badge">ONLINE - GRATUITO</span>
+        <span class="badge">ONLINE – GRATUITO</span>
         <h1>Sorteador<br />de Números</h1>
 
         <div class="faq">
@@ -49,14 +49,14 @@
       <section class="form">
         <h2>Quero sortear:</h2>
         <p>
-          Defina o intervalo e a quantidade de números, clique em "Sortear" e
+          defina o intervalo e a quantidade de números, clique em "Sortear" e
           veja os resultados na tela. É rápido e fácil!
         </p>
 
         <div class="inputs">
           <div class="input-group">
             <label>NÚMEROS</label>
-            <input type="number" id="quantidade" value="2" min="1" />
+            <input type="number" id="amount" value="2" min="1" />
           </div>
           <div class="input-group">
             <label>DE</label>
@@ -69,16 +69,17 @@
         </div>
 
         <div class="checkbox-wrapper">
-          <input type="checkbox" id="naoRepetir" />
-          <label for="naoRepetir">Não repetir número</label>
+          <input type="checkbox" id="noRepeat" />
+          <label class="custom-toggle" for="noRepeat"></label>
+          <span>Não repetir número</span>
         </div>
 
-        <button id="btn-sortear">
-          SORTERAR <img src="assets/icons/arrow.svg" alt="" />
+        <button id="btn-draw">
+          SORTEAR <img src="assets/icons/arrow.svg" alt="" />
         </button>
-
-        <div id="resultado" class="resultado"></div>
       </section>
+
+      <div id="result" class="result"></div>
     </main>
 
     <script src="script.js"></script>
