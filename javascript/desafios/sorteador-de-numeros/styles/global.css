@@ -72,3 +72,7 @@ header {
   display: flex;
   justify-content: flex-start;
 }
+
+.hidden {
+  display: none;
+}
