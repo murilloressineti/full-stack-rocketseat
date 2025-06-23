@@ -1,0 +1,107 @@
+.result {
+  text-align: center;
+  padding-block: 6rem;
+  width: 48.2rem;
+
+  & h2 {
+    font: var(--label-medium);
+    color: var(--content-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  & .result-order {
+    display: block;
+    font: var(--overline);
+    color: var(--content-secondary);
+    margin-bottom: 4rem;
+  }
+
+  & .numbers {
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+    margin-bottom: 4rem;
+
+    & .number {
+      font: var(--number-result);
+      color: var(--content-brand);
+    }
+  }
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+
+    background-color: var(--background-tertiary);
+    color: var(--content-primary);
+    font: var(--label-small);
+    padding-block: 1.6rem;
+    border: 2px solid transparent;
+    border-radius: 0.8rem;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    & img {
+      transition: transform 0.5s ease;
+    }
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(
+            var(--background-secondary),
+            var(--background-secondary)
+          )
+          padding-box,
+        linear-gradient(
+            90deg,
+            #77c0af 0%,
+            #d1dc97 14.84%,
+            #e9a9b3 32.15%,
+            #d586e0 65.79%,
+            #91a1fa 84.58%,
+            #77c0af 100%
+          )
+          border-box;
+      border: 2px solid transparent;
+      background-clip: padding-box, border-box;
+      animation: borderFlow 3s linear infinite;
+      background-size: 300% 100%;
+      background-position: 0% 50%;
+    }
+
+    &:hover img,
+    &:focus img {
+      animation: spin 0.8s ease-in-out;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .result {
+    width: auto;
+    padding: 3.2rem 0 0;
+  }
+}

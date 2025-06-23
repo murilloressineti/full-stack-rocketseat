@@ -7,7 +7,6 @@
   max-width: 110rem;
   width: 100%;
   gap: 10.8rem;
-  border: 2px solid red;
 
   & .info {
     min-width: 51rem;
@@ -53,6 +52,59 @@
 
     & .faq-item:first-child {
       margin-bottom: 3.6rem;
+    }
+  }
+
+  .faq-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 0 3.5rem;
+    flex-direction: column;
+    gap: 0;
+
+    & .info {
+      min-width: 31.9rem;
+
+      & h1 {
+        font: var(--display-medium);
+      }
+
+      & .faq-item {
+        display: none;
+      }
+    }
+
+    .faq-mobile {
+      margin-top: 8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      & .faq-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+
+        & strong {
+          font: var(--paragraph-medium);
+          color: var(--content-brand);
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        & p {
+          font: var(--paragraph-small);
+          color: var(--content-secondary);
+        }
+      }
+
+      & .faq-item:first-child {
+        margin-bottom: 3.6rem;
+      }
     }
   }
 }

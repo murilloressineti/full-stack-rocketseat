@@ -76,3 +76,15 @@ header {
 .hidden {
   display: none;
 }
+
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start;
+    height: 100%;
+    padding-block: 4.6rem;
+  }
+
+  header {
+    justify-content: center;
+  }
+}
