@@ -1,0 +1,60 @@
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+
+  background-color: var(--background-tertiary);
+  color: var(--content-primary);
+  font: var(--label-small);
+  padding-block: 1.6rem;
+  border: 2px solid transparent;
+  border-radius: 0.8rem;
+  cursor: pointer;
+
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+  background-size: 300% 100%;
+  background-position: 0% 0%;
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    background-position 3s linear;
+
+  & img {
+    transition: transform 0.5s ease;
+  }
+
+  &:hover,
+  &:focus {
+    background-image:
+      linear-gradient(var(--background-secondary), var(--background-secondary)),
+      linear-gradient(
+        90deg,
+        #77c0af,
+        #d1dc97,
+        #e9a9b3,
+        #d586e0,
+        #91a1fa,
+        #77c0af
+      );
+    background-position: 150% 0%;
+    border: 2px solid transparent;
+  }
+
+  &:hover img,
+  &:focus img {
+    animation: spin 0.8s ease-in-out;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
