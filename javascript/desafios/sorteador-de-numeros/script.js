@@ -47,6 +47,11 @@ drawButton.addEventListener("click", () => {
 drawAgainButton.addEventListener("click", () => {
   resultSection.classList.add("hidden");
   formSection.classList.remove("hidden");
+
+  amountInput.value = "2";
+  minInput.value = "1";
+  maxInput.value = "100";
+  noRepeatCheckbox.checked = false;
 });
 
 function validateInputs(amount, min, max, noRepeat) {
