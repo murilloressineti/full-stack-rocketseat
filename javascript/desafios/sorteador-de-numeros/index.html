@@ -24,7 +24,7 @@
 
         <div class="faq">
           <div class="faq-item">
-            <img src="assets/icons/person.svg" alt="" />
+            <img src="assets/icons/person.svg" alt="Ícone de uma pessoa" />
             <div class="faq-text">
               <strong>Como funciona o sorteador de números?</strong>
               <p>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="faq-item">
-            <img src="assets/icons/person.svg" alt="" />
+            <img src="assets/icons/person.svg" alt="Ícone de uma pessoa" />
             <div class="faq-text">
               <strong>Posso escolher o intervalo dos números?</strong>
               <p>
@@ -46,7 +46,7 @@
         </div>
       </section>
 
-      <section class="form hidden">
+      <section id="form" class="form">
         <h2>Quero sortear:</h2>
         <p>
           Defina o intervalo e a quantidade de números, clique em "Sortear" e
@@ -56,15 +56,15 @@
         <div class="inputs">
           <div class="input-group">
             <label>NÚMEROS</label>
-            <input type="number" id="amount" value="2" min="1" />
+            <input type="number" id="amount" value="2" min="1" max="10" />
           </div>
           <div class="input-group">
             <label>DE</label>
-            <input type="number" id="min" value="1" />
+            <input type="number" id="min" value="1" min="1" max="99" />
           </div>
           <div class="input-group">
-            <label>DE</label>
-            <input type="number" id="max" value="100" />
+            <label>ATÉ</label>
+            <input type="number" id="max" value="100" min="1" max="100" />
           </div>
         </div>
 
@@ -75,24 +75,24 @@
         </div>
 
         <button id="btn-draw">
-          SORTEAR <img src="assets/icons/arrow.svg" alt="" />
+          SORTEAR <img src="assets/icons/arrow.svg" alt="Ícone de seta" />
         </button>
       </section>
 
-      <section id="result" class="result active">
+      <section id="result" class="result hidden">
         <h2>RESULTADO DO SORTEIO</h2>
         <span class="result-order">1º RESULTADO</span>
 
         <div class="numbers">
-          <span class="number">23</span>
-          <span class="number">12</span>
+          <span class="number"></span>
+          <span class="number"></span>
         </div>
 
-        <button id="btn-draw">
+        <button id="btn-again">
           SORTEAR NOVAMENTE
           <img
             src="assets/icons/reload.svg"
-            alt="Recarregar"
+            alt="Ícone de recarregar"
             class="btn-icon"
           />
         </button>
