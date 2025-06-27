@@ -18,7 +18,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 Confira abaixo uma prévia e acesse o projeto completo [aqui](https://receitacupcakecafe.netlify.app/):
 
-<img src="assets/thumbnail.jpg" alt="Imagem da Página de Receitas" />
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto" />
 
 ---
 

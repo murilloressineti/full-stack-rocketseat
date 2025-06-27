@@ -19,7 +19,7 @@ Este projeto foi construído com as seguintes ferramentas:
 
 Confira abaixo uma prévia e acesse o projeto completo [aqui](https://festivite.netlify.app/):
 
-<img src="assets/thumbnail.png" alt="Imagem do Projeto Formulário de Convite" />
+<img src="assets/thumbnail.png" alt="Imagem do Projeto" />
 
 ---
 

@@ -19,7 +19,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 Confira abaixo uma prévia e acesse o projeto completo [aqui](https://quicklistapp.netlify.app/):
 
-<img src="assets/thumbnail.jpg" alt="Imagem do Projeto Formulário de Matrícula" />
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto" />
 
 ---
 
