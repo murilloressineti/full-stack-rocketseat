@@ -38,19 +38,19 @@ Siga os passos abaixo para clonar o projeto e executá-lo localmente em sua máq
 
 ### 📥 1. Clone o repositório
 
-git clone https://github.com/murilloressineti/full-stack-rocketseat.git
+```git clone https://github.com/murilloressineti/full-stack-rocketseat.git```
 
 ### 📂 2. Acesse a pasta do projeto
-cd full-stack-rocketseat/javascript/projetos/hair-day
+```cd full-stack-rocketseat/javascript/projetos/hair-day```
 
 ### 📦 3. Instale as dependências
-npm install
+```npm install```
 
 ### 🔌 4. Inicie o servidor da API (JSON Server)
-npm run server
+```npm run server```
 
 ### 🚀 5. Execute o projeto
-npm run dev
+```npm run dev```
 
 ---
 
