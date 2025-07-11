@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --font-inter: "Inter", sans-serif;
+  --font-inter-tight: "Inter Tight", sans-serif;
+
+  --title: 700 2.4rem var(--font-inter-tight);
+
+  --paragraph-medium: 500 1.4rem/1.6 var(--font-inter);
+  --paragraph-small: 500 1.2rem var(--font-inter);
+  --label-large: 700 1.6rem var(--font-inter);
+  --label-medium: 700 1.4rem var(--font-inter);
+  --label-small: 700 1.2rem var(--font-inter);
+  --link: 500 1.2rem var(--font-inter);
+  --input: 500 1.6rem var(--font-inter);
+
+  /* Content */
+  --content-primary: #ffffff;
+  --content-secondary: #98959d;
+  --content-tertiary: #666666;
+  --content-brand: #9282fa;
+
+  /* Background */
+  --background-primary: #14151d;
+  --background-secondary: #2e2c30;
+  --background-tertiary: #23242c;
+  --background-brand: #9282fa;
+  --background-highlights: #bdb4fa;
+
+  /* Border */
+  --border-primary: #3e3c41;
+  --border-secondary: #86818c;
+  --border-brand: #9282fa;
+  --border-divisor: #2e2c30;
+
+  /* Border */
+  --color-button: #050505;
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--content-brand);
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  background: url("../assets/arrow-down.svg") no-repeat;
+}
+
+body {
+  background-color: var(--background-primary);
+  color: var(--content-primary);
+  font: var(--paragraph-medium);
+}
+
+.container {
+  margin: auto;
+  height: 100vh;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: var(--background-secondary);
+  padding: 1.2rem 2rem;
+  border-bottom-right-radius: 1rem;
+
+  height: 4.8rem;
+  width: 15.3rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 100%;
+
+    margin: 5.6rem auto 4.4rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

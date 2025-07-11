@@ -1,0 +1,219 @@
+.schedule {
+  padding: 8rem 8rem;
+  max-width: 88rem;
+  margin: auto;
+
+  & header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3.2rem;
+
+    & .header-content {
+      width: 100%;
+
+      & h1 {
+        font: var(--title);
+        margin-bottom: 0.8rem;
+      }
+
+      & p {
+        color: var(--content-secondary);
+      }
+    }
+
+    & .input-wrapper {
+      max-width: 18rem;
+      height: 4.8rem;
+
+      border: 0.1rem solid var(--border-primary);
+      padding: 1.2rem;
+      border-radius: 0.8rem;
+
+      display: flex;
+      align-items: center;
+      margin-top: 0.6rem;
+      margin-bottom: 1.6rem;
+
+      & i {
+        margin-right: 0.8rem;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      & input {
+        flex: 1;
+        min-width: 0;
+        font: var(--input);
+        color: var(--content-secondary);
+        background-color: transparent;
+        outline: none;
+        border: none;
+      }
+    }
+
+    & .input-wrapper:hover {
+      border: 0.1rem solid var(--border-secondary);
+    }
+
+    & .input-wrapper:focus-within {
+      border: 0.2rem solid var(--border-brand);
+    }
+  }
+
+  & .schedule-period {
+    background-color: var(--background-tertiary);
+    border-radius: 1rem;
+    margin-bottom: 1.2rem;
+
+    & header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 0.1rem solid var(--border-divisor);
+      margin-bottom: 0;
+
+      & img {
+        margin-right: 1.2rem;
+      }
+
+      & strong {
+        flex: 1;
+        font: var(--label-large);
+      }
+
+      & span {
+        font: var(--label-large);
+        color: var(--content-secondary);
+      }
+    }
+
+    & ul {
+      list-style: none;
+      padding: 2rem;
+
+      & li {
+        padding: 2.4rem 1.2rem 1.2rem;
+        display: flex;
+        align-items: center;
+        border-top: 0.1rem solid var(--border-divisor);
+
+        & strong {
+          font: var(--label-medium);
+          margin-right: 1.6rem;
+        }
+
+        & b {
+          font: var(--label-small);
+          color: var(--content-primary);
+        }
+
+        & span {
+          flex: 1;
+          font: var(--paragraph-small);
+          color: var(--content-secondary);
+        }
+
+        & p {
+          font: var(--paragraph-small);
+          color: var(--content-tertiary);
+          cursor: pointer;
+          transition: opacity 0.2s;
+        }
+
+        & p:hover {
+          opacity: 0.7;
+        }
+      }
+
+      & li:nth-child(1) {
+        border: none;
+      }
+    }
+  }
+}
+
+.button-schedule {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+
+  height: 4.8rem;
+  border-radius: 0.8rem;
+  border: none;
+  font: var(--label-large);
+  background-color: var(--content-brand);
+  color: var(--color-button);
+  box-shadow: 0 0px 50px #9282fa5e;
+  text-transform: uppercase;
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+.button-schedule:hover {
+  background-color: var(--background-highlights);
+}
+
+@media (max-width: 768px) {
+  .schedule {
+    padding: 1.2rem 2rem;
+
+    & > header {
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    & .schedule-period {
+      & li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        & strong {
+          order: 1;
+          margin-right: 1.2rem;
+          white-space: nowrap;
+        }
+
+        & span:nth-of-type(1) {
+          order: 2;
+          flex: 1;
+          font: var(--paragraph-medium);
+
+          & b {
+            font: var(--paragraph-medium);
+          }
+        }
+
+        & span:nth-of-type(2) {
+          order: 3;
+          flex-basis: 100%;
+          margin-top: 0.6rem;
+          margin-left: 0;
+          font: var(--paragraph-medium);
+        }
+
+        & p {
+          order: 4;
+          margin-left: auto;
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+
+  footer {
+    padding-block: 1.8rem;
+    background-color: var(--background-tertiary);
+
+    & .button-schedule {
+      position: static;
+      margin: auto;
+      display: block;
+    }
+  }
+}
