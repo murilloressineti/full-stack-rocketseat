@@ -79,11 +79,27 @@
     display: flex;
     justify-content: space-between;
     gap: 1.6rem;
-    border: 2px solid red;
 
     & .date-wrapper,
     .time-wrapper {
       flex: 1;
+    }
+
+    & .time-picker-container {
+      position: relative;
+
+      & .custom-time-input {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+
+        & span {
+          flex: 1;
+          min-width: 0;
+          font: var(--input);
+          color: var(--content-secondary);
+        }
+      }
     }
   }
 
@@ -119,11 +135,32 @@
     gap: 0.8rem;
     flex-wrap: wrap;
 
-    border: 2px solid blue;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 10;
+    width: 30rem;
+
+    background-color: var(--background-tertiary);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    display: none;
+
+    border: none;
+
+    &.visible {
+      display: flex;
+    }
 
     & .hour-period {
       width: 100%;
       color: var(--content-secondary);
+      margin-top: 1.6rem;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
 
     & .hour {
