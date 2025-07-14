@@ -21,206 +21,209 @@
     <div class="container">
       <img src="./src/assets/logo.svg" alt="Logo" class="logo" />
 
-      <form class="form">
-        <header>
-          <h1>Agende um atendimento</h1>
-          <p>Preencha os dados do cliente para realizar o agendamento:</p>
-        </header>
+      <div class="modal-overlay">
+        <form class="form">
+          <button class="close-button" aria-label="Fechar agendamento">
+            <img src="./src/assets/close.svg" alt="Fechar" />
+          </button>
 
-        <label for="client" class="label">Nome do tutor</label>
-        <div class="input-wrapper">
-          <i><img src="./src/assets/person.svg" alt="Calendário" /></i>
-          <input
-            type="text"
-            id="client"
-            name="client"
-            placeholder="Nome do cliente"
-            required
-          />
-        </div>
+          <header>
+            <h1>Agende um atendimento</h1>
+            <p>Preencha os dados do cliente para realizar o agendamento:</p>
+          </header>
 
-        <label for="client" class="label">Nome do pet</label>
-        <div class="input-wrapper">
-          <i><img src="./src/assets/pet.svg" alt="Calendário" /></i>
-          <input
-            type="text"
-            id="pet"
-            name="pet"
-            placeholder="Cheddar"
-            required
-          />
-        </div>
-
-        <label for="client" class="label">Telefone</label>
-        <div class="input-wrapper">
-          <i><img src="./src/assets/phone.svg" alt="Calendário" /></i>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="(00) 0 0000-0000"
-            required
-          />
-        </div>
-
-        <label for="client" class="label">Descrição do serviço</label>
-        <div class="input-wrapper textarea">
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Banho e tosa"
-            required
-          ></textarea>
-        </div>
-
-        <div class="date-time-section">
-          <div class="date-wrapper">
-            <label for="date" class="label">Data</label>
-            <div class="input-wrapper">
-              <i><img src="./src/assets/calendar.svg" alt="Calendário" /></i>
-              <input type="date" id="date" name="date" required />
-            </div>
+          <label for="client" class="label">Nome do tutor</label>
+          <div class="input-wrapper">
+            <i><img src="./src/assets/person.svg" alt="Calendário" /></i>
+            <input
+              type="text"
+              id="client"
+              name="client"
+              placeholder="Nome do cliente"
+              required
+            />
           </div>
 
-          <div class="time-wrapper">
-            <span class="label">Hora</span>
-            <div class="time-picker-container">
-              <div
-                class="input-wrapper custom-time-input"
-                tabindex="0"
-                role="combobox"
-                aria-expanded="false"
-                aria-controls="hours"
-              >
-                <i><img src="./src/assets/time.svg" alt="Hora" /></i>
-                <span id="display-time">--:--</span>
-                <i><img src="src/assets/arrow-down.svg" alt=""></i>
+          <label for="client" class="label">Nome do pet</label>
+          <div class="input-wrapper">
+            <i><img src="./src/assets/pet.svg" alt="Calendário" /></i>
+            <input
+              type="text"
+              id="pet"
+              name="pet"
+              placeholder="Cheddar"
+              required
+            />
+          </div>
+
+          <label for="client" class="label">Telefone</label>
+          <div class="input-wrapper">
+            <i><img src="./src/assets/phone.svg" alt="Calendário" /></i>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(00) 0 0000-0000"
+              required
+            />
+          </div>
+
+          <label for="client" class="label">Descrição do serviço</label>
+          <div class="input-wrapper textarea">
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Banho e tosa"
+              required
+            ></textarea>
+          </div>
+
+          <div class="date-time-section">
+            <div class="date-wrapper">
+              <label for="date" class="label">Data</label>
+              <div class="input-wrapper">
+                <i><img src="./src/assets/calendar.svg" alt="Calendário" /></i>
+                <input type="date" id="date" name="date" required />
               </div>
+            </div>
 
-              <ul
-                id="hours"
-                class="hours"
-                aria-label="Horários disponíveis"
-                role="listbox"
-              >
-                <li data-period="morning" class="hour-period">Manhã</li>
-                <li
-                  data-period="morning"
-                  value="09:00"
-                  class="hour hour-available"
-                  role="option"
+            <div class="time-wrapper">
+              <span class="label">Hora</span>
+              <div class="time-picker-container">
+                <div
+                  class="input-wrapper custom-time-input"
+                  tabindex="0"
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-controls="hours"
                 >
-                  09:00
-                </li>
-                <li
-                  data-period="morning"
-                  value="10:00"
-                  class="hour hour-available"
-                  role="option"
+                  <i><img src="./src/assets/time.svg" alt="Hora" /></i>
+                  <span id="display-time">--:--</span>
+                  <i class="arrow-down"><img src="src/assets/arrow-down.svg" alt="" /></i>
+                </div>
+                <ul
+                  id="hours"
+                  class="hours"
+                  aria-label="Horários disponíveis"
+                  role="listbox"
                 >
-                  10:00
-                </li>
-                <li
-                  data-period="morning"
-                  value="11:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  11:00
-                </li>
-                <li
-                  data-period="morning"
-                  value="12:00"
-                  class="hour hour-available"
-                  role="option"
-                >
-                  12:00
-                </li>
-
-                <li data-period="afternoon" class="hour-period">Tarde</li>
-                <li
-                  data-period="afternoon"
-                  value="13:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  13:00
-                </li>
-                <li
-                  data-period="afternoon"
-                  value="14:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  14:00
-                </li>
-                <li
-                  data-period="afternoon"
-                  value="15:00"
-                  class="hour hour-available"
-                  role="option"
-                >
-                  15:00
-                </li>
-                <li
-                  data-period="afternoon"
-                  value="16:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  16:00
-                </li>
-                <li
-                  data-period="afternoon"
-                  value="17:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  17:00
-                </li>
-                <li
-                  data-period="afternoon"
-                  value="18:00"
-                  class="hour hour-available"
-                  role="option"
-                >
-                  18:00
-                </li>
-
-                <li data-period="night" class="hour-period">Noite</li>
-                <li
-                  data-period="night"
-                  value="19:00"
-                  class="hour hour-available"
-                  role="option"
-                >
-                  19:00
-                </li>
-                <li
-                  data-period="night"
-                  value="20:00"
-                  class="hour hour-available"
-                  role="option"
-                >
-                  20:00
-                </li>
-                <li
-                  data-period="night"
-                  value="21:00"
-                  class="hour hour-unavailable"
-                  role="option"
-                >
-                  21:00
-                </li>
-              </ul>
+                  <li data-period="morning" class="hour-period">Manhã</li>
+                  <li
+                    data-period="morning"
+                    value="09:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    09:00
+                  </li>
+                  <li
+                    data-period="morning"
+                    value="10:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    10:00
+                  </li>
+                  <li
+                    data-period="morning"
+                    value="11:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    11:00
+                  </li>
+                  <li
+                    data-period="morning"
+                    value="12:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    12:00
+                  </li>
+                  <li data-period="afternoon" class="hour-period">Tarde</li>
+                  <li
+                    data-period="afternoon"
+                    value="13:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    13:00
+                  </li>
+                  <li
+                    data-period="afternoon"
+                    value="14:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    14:00
+                  </li>
+                  <li
+                    data-period="afternoon"
+                    value="15:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    15:00
+                  </li>
+                  <li
+                    data-period="afternoon"
+                    value="16:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    16:00
+                  </li>
+                  <li
+                    data-period="afternoon"
+                    value="17:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    17:00
+                  </li>
+                  <li
+                    data-period="afternoon"
+                    value="18:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    18:00
+                  </li>
+                  <li data-period="night" class="hour-period">Noite</li>
+                  <li
+                    data-period="night"
+                    value="19:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    19:00
+                  </li>
+                  <li
+                    data-period="night"
+                    value="20:00"
+                    class="hour hour-available"
+                    role="option"
+                  >
+                    20:00
+                  </li>
+                  <li
+                    data-period="night"
+                    value="21:00"
+                    class="hour hour-unavailable"
+                    role="option"
+                  >
+                    21:00
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="button-wrapper">
-          <button type="submit" class="button">Agendar</button>
-        </div>
-      </form>
+          <div class="button-wrapper">
+            <button type="submit" class="button">Agendar</button>
+          </div>
+        </form>
+      </div>
 
       <aside class="schedule">
         <header>
@@ -308,51 +311,66 @@
     </footer>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const timePickerContainer = document.querySelector('.time-picker-container');
-          const customTimeInput = document.querySelector('.custom-time-input');
-          const hoursList = document.getElementById('hours');
-          const displayTime = document.getElementById('display-time');
+      document.addEventListener("DOMContentLoaded", () => {
+        const timePickerContainer = document.querySelector(
+          ".time-picker-container"
+        );
+        const customTimeInput = document.querySelector(".custom-time-input");
+        const hoursList = document.getElementById("hours");
+        const displayTime = document.getElementById("display-time");
 
-          if (!timePickerContainer || !customTimeInput || !hoursList || !displayTime) {
-              return;
+        if (
+          !timePickerContainer ||
+          !customTimeInput ||
+          !hoursList ||
+          !displayTime
+        ) {
+          return;
+        }
+
+        customTimeInput.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isExpanded =
+            customTimeInput.getAttribute("aria-expanded") === "true";
+
+          hoursList.classList.toggle("visible");
+
+          customTimeInput.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        hoursList.addEventListener("click", (event) => {
+          const targetHour = event.target.closest(".hour");
+
+          if (
+            targetHour &&
+            !targetHour.classList.contains("hour-unavailable")
+          ) {
+            const currentlySelected = hoursList.querySelector(".hour-selected");
+            if (currentlySelected) {
+              currentlySelected.classList.remove("hour-selected");
+            }
+
+            targetHour.classList.add("hour-selected");
+
+            const selectedTime =
+              targetHour.getAttribute("value") || targetHour.textContent.trim();
+
+            displayTime.textContent = selectedTime;
+
+            hoursList.classList.remove("visible");
+            customTimeInput.setAttribute("aria-expanded", "false");
           }
+        });
 
-          customTimeInput.addEventListener('click', (event) => {
-              event.stopPropagation();
-              const isExpanded = customTimeInput.getAttribute('aria-expanded') === 'true';
-              
-              hoursList.classList.toggle('visible');
-              
-              customTimeInput.setAttribute('aria-expanded', !isExpanded);
-          });
-
-          hoursList.addEventListener('click', (event) => {
-              const targetHour = event.target.closest('.hour');
-
-              if (targetHour && !targetHour.classList.contains('hour-unavailable')) {
-                  const currentlySelected = hoursList.querySelector('.hour-selected');
-                  if (currentlySelected) {
-                      currentlySelected.classList.remove('hour-selected');
-                  }
-
-                  targetHour.classList.add('hour-selected');
-
-                  const selectedTime = targetHour.getAttribute('value') || targetHour.textContent.trim();
-                  
-                  displayTime.textContent = selectedTime;
-
-                  hoursList.classList.remove('visible');
-                  customTimeInput.setAttribute('aria-expanded', 'false');
-              }
-          });
-
-          document.addEventListener('click', (event) => {
-              if (!timePickerContainer.contains(event.target) && hoursList.classList.contains('visible')) {
-                  hoursList.classList.remove('visible');
-                  customTimeInput.setAttribute('aria-expanded', 'false');
-              }
-          });
+        document.addEventListener("click", (event) => {
+          if (
+            !timePickerContainer.contains(event.target) &&
+            hoursList.classList.contains("visible")
+          ) {
+            hoursList.classList.remove("visible");
+            customTimeInput.setAttribute("aria-expanded", "false");
+          }
+        });
       });
     </script>
   </body>

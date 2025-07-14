@@ -1,209 +1,248 @@
-.form {
-  margin: auto;
-  max-width: 48rem;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 
-  background-color: var(--background-tertiary);
-  border-radius: 1.2rem;
-
-  padding: 4rem;
-
-  & header {
-    margin-bottom: 2.8rem;
-
-    h1 {
-      font: var(--title);
-      margin-bottom: 0.4rem;
-    }
-
-    p {
-      color: var(--content-secondary);
-    }
-  }
-
-  & .label {
-    font: var(--label-medium);
-  }
-
-  & .input-wrapper,
-  .textarea {
-    width: 100%;
-    height: 4.8rem;
-
-    border: 0.1rem solid var(--border-primary);
-    padding: 1.2rem;
-    border-radius: 0.8rem;
-
-    display: flex;
-    align-items: center;
-    margin-top: 0.6rem;
-    margin-bottom: 1.6rem;
-
-    & i {
-      margin-right: 0.8rem;
-      width: 2rem;
-      height: 2rem;
-    }
-
-    & input,
-    textarea {
-      flex: 1;
-      min-width: 0;
-      font: var(--input);
-      color: var(--content-secondary);
-      background-color: transparent;
-      outline: none;
-      border: none;
-    }
-  }
-
-  & .input-wrapper:hover,
-  .textarea:hover {
-    border: 0.1rem solid var(--border-secondary);
-  }
-
-  & .input-wrapper:focus-within,
-  .textarea:focus-within {
-    border: 0.2rem solid var(--border-brand);
-  }
-
-  & .textarea {
-    height: 8.3rem;
-    align-items: start;
-
-    & textarea {
-      resize: none;
-    }
-  }
-
-  & .date-time-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.6rem;
-
-    & .date-wrapper,
-    .time-wrapper {
-      flex: 1;
-    }
-
-    & .time-picker-container {
-      position: relative;
-
-      & .custom-time-input {
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-
-        & span {
-          flex: 1;
-          min-width: 0;
-          font: var(--input);
-          color: var(--content-secondary);
-        }
-      }
-    }
-  }
-
-  & .button-wrapper {
-    display: flex;
-    justify-content: flex-end;
-
-    & .button {
-      margin-top: 1rem;
-
-      height: 4.8rem;
-      border-radius: 0.8rem;
-      border: none;
-      font: var(--label-large);
-      background-color: var(--content-brand);
-      color: var(--color-button);
-      text-transform: uppercase;
-      padding: 1.2rem 2.4rem;
-      cursor: pointer;
-
-      transition: background-color 0.3s;
-    }
-
-    & .button:hover {
-      background-color: var(--background-highlights);
-    }
-  }
-
-  & .hours {
-    list-style: none;
-
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    z-index: 10;
-    width: 30rem;
+  & .form {
+    margin: auto;
+    max-width: 48rem;
 
     background-color: var(--background-tertiary);
     border-radius: 1.2rem;
-    padding: 2rem;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-    display: none;
 
-    border: none;
+    padding: 4rem;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    position: relative;
 
-    &.visible {
-      display: flex;
+    & .close-button {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+
+      background: transparent;
+      border: none;
+      cursor: pointer;
+
+      padding: 0;
+
+      z-index: 10;
     }
 
-    & .hour-period {
-      width: 100%;
-      color: var(--content-secondary);
-      margin-top: 1.6rem;
+    & header {
+      margin-bottom: 2.8rem;
 
-      &:first-child {
-        margin-top: 0;
+      h1 {
+        font: var(--title);
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        color: var(--content-secondary);
       }
     }
 
-    & .hour {
-      width: 7.85rem;
-      height: 4rem;
+    & .label {
+      font: var(--label-medium);
+    }
 
+    & .input-wrapper,
+    .textarea {
+      width: 100%;
+      height: 4.8rem;
+
+      border: 0.1rem solid var(--border-primary);
+      padding: 1.2rem;
       border-radius: 0.8rem;
 
-      font: var(--paragraph-medium);
-      border: 1px solid var(--border-primary);
+      display: flex;
+      align-items: center;
+      margin-top: 0.6rem;
+      margin-bottom: 1.6rem;
 
-      cursor: pointer;
+      & i {
+        margin-right: 0.8rem;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      & input,
+      textarea {
+        flex: 1;
+        min-width: 0;
+        font: var(--input);
+        color: var(--content-secondary);
+        background-color: transparent;
+        outline: none;
+        border: none;
+      }
+    }
+
+    & .input-wrapper:hover,
+    .textarea:hover {
+      border: 0.1rem solid var(--border-secondary);
+    }
+
+    & .input-wrapper:focus-within,
+    .textarea:focus-within {
+      border: 0.2rem solid var(--border-brand);
+    }
+
+    & .textarea {
+      height: 8.3rem;
+      align-items: start;
+
+      & textarea {
+        resize: none;
+      }
+    }
+
+    & .date-time-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.6rem;
+
+      & .date-wrapper,
+      .time-wrapper {
+        flex: 1;
+      }
+
+      & .time-picker-container {
+        position: relative;
+
+        & .custom-time-input {
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+
+          & span {
+            flex: 1;
+            min-width: 0;
+            font: var(--input);
+            color: var(--content-secondary);
+          }
+        }
+      }
+    }
+
+    & .button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+
+      & .button {
+        margin-top: 1rem;
+
+        height: 4.8rem;
+        border-radius: 0.8rem;
+        border: none;
+        font: var(--label-large);
+        background-color: var(--content-brand);
+        color: var(--color-button);
+        text-transform: uppercase;
+        padding: 1.2rem 2.4rem;
+        cursor: pointer;
+
+        transition: background-color 0.3s;
+      }
+
+      & .button:hover {
+        background-color: var(--background-highlights);
+      }
+    }
+
+    & .hours {
+      list-style: none;
 
       display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      gap: 0.8rem;
+      flex-wrap: wrap;
 
-    & .hour-available {
-      background-color: var(--background-secondary);
-    }
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      left: 0;
+      z-index: 10;
+      width: 30rem;
 
-    & .hour-unavailable {
-      opacity: 0.5;
+      background-color: var(--background-tertiary);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+      display: none;
 
-      cursor: not-allowed;
-    }
+      border: none;
 
-    & .hour:not(.hour-unavailable):hover {
-      border: 0.2rem solid var(--border-brand);
-      color: var(--border-brand);
-    }
+      &.visible {
+        display: flex;
+      }
 
-    & .hour-selected {
-      border: 0.2rem solid var(--border-brand);
-      color: var(--border-brand);
+      & .hour-period {
+        width: 100%;
+        color: var(--content-secondary);
+        margin-top: 1.6rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      & .hour {
+        width: 7.85rem;
+        height: 4rem;
+
+        border-radius: 0.8rem;
+
+        font: var(--paragraph-medium);
+        border: 1px solid var(--border-primary);
+
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      & .hour-available {
+        background-color: var(--background-secondary);
+      }
+
+      & .hour-unavailable {
+        opacity: 0.5;
+
+        cursor: not-allowed;
+      }
+
+      & .hour:not(.hour-unavailable):hover {
+        border: 0.2rem solid var(--border-brand);
+        color: var(--border-brand);
+      }
+
+      & .hour-selected {
+        border: 0.2rem solid var(--border-brand);
+        color: var(--border-brand);
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
-  .form {
-    overflow-y: auto;
-    max-width: 100%;
+  .modal-overlay {
+    padding: 2rem;
+
+    & .form {
+      overflow-y: auto;
+      max-width: 100%;
+      height: 100%;
+
+      & .date-time-section {
+        flex-direction: column;
+      }
+    }
   }
 }
