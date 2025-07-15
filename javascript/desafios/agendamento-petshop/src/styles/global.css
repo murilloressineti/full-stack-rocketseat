@@ -84,6 +84,10 @@ body {
   width: 15.3rem;
 }
 
+.hidden {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   .container {
     height: 100%;
