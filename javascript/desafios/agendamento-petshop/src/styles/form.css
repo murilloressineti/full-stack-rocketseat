@@ -78,7 +78,7 @@
         flex: 1;
         min-width: 0;
         font: var(--input);
-        color: var(--content-secondary);
+        color: var(--content-primary);
         background-color: transparent;
         outline: none;
         border: none;
@@ -126,7 +126,7 @@
             flex: 1;
             min-width: 0;
             font: var(--input);
-            color: var(--content-secondary);
+            color: var(--content-primary);
           }
         }
       }
