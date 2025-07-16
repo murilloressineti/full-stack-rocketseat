@@ -1,4 +1,4 @@
-import { schedulesDay } from "../schedule/load"
+import { schedulesDay } from "../schedules/load"
 
 // Seleciona o input de data.
 const selectedDate = document.getElementById("date")

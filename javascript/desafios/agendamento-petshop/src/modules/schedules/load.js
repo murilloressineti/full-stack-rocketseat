@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import { scheduleFetchByDay } from "../../services/schedule-fetch-by-day.js";
+import { schedulesShow } from "../schedules/show.js"
 import { hoursLoad } from "../form/hours-load.js";
 
 const selectedDateSchedule = document.getElementById("date-schedule");
@@ -12,13 +14,18 @@ selectedDateSchedule.value = inputToday;
 // Seleciona o input de data.
 const selectedDate = document.getElementById("date");
 
-export function schedulesDay() {
-  // Obtém a data do input
+export async function schedulesDay() {
+  // Obtém a data do input.
   const date = selectedDate.value;
 
-  // Renderiza as horas disponíveis.
+  // Busca na API os agendamentos.
+  const dailySchedules = await scheduleFetchByDay({ date });
+  
+  // Exibe os agendamentos.
+  schedulesShow( { dailySchedules })
 
-  hoursLoad({ date });
+  // Renderiza as horas disponíveis.
+  hoursLoad({ date, dailySchedules });
 }
 
 // Exporta a data atual para ser usada no formulário

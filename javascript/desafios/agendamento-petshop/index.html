@@ -19,7 +19,7 @@
     <div class="container">
       <img src="./src/assets/logo.svg" alt="Logo" class="logo" />
 
-      <div class="modal-overlay">
+      <div class="modal-overlay hidden">
         <form class="form">
           <button class="close-button" aria-label="Fechar agendamento">
             <img src="./src/assets/close.svg" alt="Fechar" />
@@ -65,6 +65,7 @@
               pattern="[0-9]{10,11}"
               inputmode="numeric"
               title="Digite um número de telefone com DDD. Ex: 11912345678. Apenas números são necessários."
+              maxlength="11"
               required
             />
           </div>
@@ -180,12 +181,14 @@
             <span>09h-12h</span>
           </header>
           <ul id="period-morning" class="period">
+            <!--
             <li>
               <strong>11:00</strong>
               <span><b>Thor</b> / Fernanda Costa</span>
               <span>Vacinação</span>
               <p>Remover agendamento</p>
             </li>
+            -->
           </ul>
         </section>
 
@@ -196,26 +199,15 @@
             <span>13h-18h</span>
           </header>
           <ul id="period-afternoon" class="period">
+            <!--
             <li>
               <strong>13:00</strong>
               <span><b>Mel</b> / João Souza</span>
               <span>Corte de Unhas</span>
               <p>Remover agendamento</p>
             </li>
+            -->
 
-            <li>
-              <strong>14:00</strong>
-              <span><b>Bella</b> / Pedro Martins</span>
-              <span>Aplicação de Anti-pulgas</span>
-              <p>Remover agendamento</p>
-            </li>
-
-            <li>
-              <strong>14:00</strong>
-              <span><b>Simba</b> / Juliana Rocha</span>
-              <span>Tosa Higiênica</span>
-              <p>Remover agendamento</p>
-            </li>
           </ul>
         </section>
 
@@ -226,12 +218,14 @@
             <span>19h-21h</span>
           </header>
           <ul id="period-night" class="period">
+            <!--
             <li>
               <strong>19:00</strong>
               <span><b>Max</b> / Camila Santos</span>
               <span>Limpeza de Dentes</span>
               <p>Remover agendamento</p>
             </li>
+            -->
           </ul>
         </section>
       </aside>
