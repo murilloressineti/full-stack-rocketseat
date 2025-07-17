@@ -1,20 +1,12 @@
 {
   "schedules": [
     {
-      "id": "1752694191714",
-      "name": "Gabriela",
-      "pet": "Jasmine",
-      "phone": "11949987831",
-      "description": "Banho",
-      "when": "2025-07-16T22:00:00.000Z"
-    },
-    {
-      "id": 1752699098688,
+      "id": 1752759426093,
       "name": "Murillo",
       "pet": "Jasmine",
       "phone": "11949987831",
-      "description": "Tosa",
-      "when": "2025-07-16T23:00:00.000Z"
+      "description": "Banho",
+      "when": "2025-07-17T16:00:00.000Z"
     }
   ]
 }

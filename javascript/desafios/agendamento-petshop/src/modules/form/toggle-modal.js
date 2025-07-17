@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalOverlay = document.querySelector(".modal-overlay");
 
   openButton.addEventListener("click", () => {
-    modalOverlay.classList.remove("hidden");
+    modalOverlay.classList.add("show");
   });
 
-  closeButton.addEventListener("click", (event) => {
-    modalOverlay.classList.add("hidden");
+  closeButton.addEventListener("click", () => {
+    modalOverlay.classList.remove("show");
   });
 });

@@ -10,6 +10,17 @@
   justify-content: center;
   z-index: 1000;
 
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(2rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
   & .form {
     margin: auto;
     max-width: 48rem;
@@ -21,6 +32,8 @@
     box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
     z-index: 1001;
     position: relative;
+
+    animation: fadeInScale 0.3s ease;
 
     & .close-button {
       position: absolute;
@@ -235,6 +248,17 @@
         color: var(--border-brand);
       }
     }
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
