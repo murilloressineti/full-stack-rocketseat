@@ -87,6 +87,16 @@ form.onsubmit = async (event) => {
     clientPhone.value = "";
     clientDescription.value = "";
 
+    // Remove seleção de horário
+    hourSelected.classList.remove("hour-selected");
+
+    // Fecha o modal
+    const modalOverlay = document.querySelector(".modal-overlay");
+    modalOverlay.classList.remove("show");
+
+    // Volta para o topo suavemente
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    
   } catch (error) {
     alert("Não foi possível realizar o agendamento.");
     console.log(error);
