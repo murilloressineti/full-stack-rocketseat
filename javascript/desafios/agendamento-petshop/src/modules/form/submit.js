@@ -15,6 +15,14 @@ const selectedDate = document.getElementById("date");
 selectedDate.value = inputToday;
 selectedDate.min = inputToday;
 
+selectedDate.addEventListener("change", () => {
+  const day = dayjs(selectedDate.value).day();
+  if (day === 0) {
+    alert("Domingo não é permitido para agendamento.");
+    selectedDate.value = ""; // limpa a seleção
+  }
+});
+
 form.onsubmit = async (event) => {
   // Previne o comportamento padrão de carregar a página.
   event.preventDefault();
