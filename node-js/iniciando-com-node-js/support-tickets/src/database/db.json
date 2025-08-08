@@ -1,0 +1,33 @@
+{
+  "tickets": [
+    {
+      "id": "dd7656bc-8bb7-4c89-8906-281f1ca64543",
+      "equipment": "Computador",
+      "description": "Computador não liga.",
+      "user_name": "Murillo Ressineti",
+      "status": "closed",
+      "create_at": "2025-08-08T15:09:25.973Z",
+      "updated_at": "2025-08-08T15:09:25.973Z",
+      "solution": "Equipamento trocado."
+    },
+    {
+      "id": "ff2ca8b6-46ae-4aeb-938b-901888e00c80",
+      "equipment": "Monitor",
+      "description": "Monitor desliga de repente.",
+      "user_name": "Maria",
+      "status": "closed",
+      "create_at": "2025-08-08T18:50:07.923Z",
+      "updated_at": "2025-08-08T18:50:07.923Z"
+    },
+    {
+      "id": "9c3a3d31-1650-47ee-8096-413cb166593d",
+      "equipment": "Computador",
+      "description": "Computador fica reiniciando",
+      "user_name": "José",
+      "status": "closed",
+      "create_at": "2025-08-08T19:01:14.468Z",
+      "updated_at": "2025-08-08T19:01:14.468Z",
+      "solution": "Trocamos a memória do computador que estava causando o problema."
+    }
+  ]
+}
