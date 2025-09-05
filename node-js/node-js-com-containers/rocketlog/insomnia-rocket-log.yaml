@@ -1,0 +1,116 @@
+type: collection.insomnia.rest/5.0
+name: Rocket Log
+meta:
+  id: wrk_5519c3379a5f42f1bc77650332e754ad
+  created: 1757093477462
+  modified: 1757093477462
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_919e9e2ba89f4cdfa5a1493f559ad62a
+      created: 1757093488594
+      modified: 1757093674133
+      sortKey: -1757093488594
+      description: ""
+    children:
+      - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
+        name: Create
+        meta:
+          id: req_490f38d91e7d4651b1e512c80718c313
+          created: 1757093692685
+          modified: 1757096866609
+          isPrivate: false
+          description: ""
+          sortKey: -1757093692685
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Murillo Ressineti",
+            	"email": "murillo@email.com",
+            	"password": "123456"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      "":
+        RESOURCE: users
+  - name: Sessions
+    meta:
+      id: fld_30ddaa4ce77f40599bddcde19d6d5d10
+      created: 1757098077295
+      modified: 1757098100740
+      sortKey: -1757098077295
+      description: ""
+    children:
+      - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
+        name: New Request
+        meta:
+          id: req_0703e4f69adc45cca0a3f44e035ce6b0
+          created: 1757098108016
+          modified: 1757098772517
+          isPrivate: false
+          description: ""
+          sortKey: -1757098108016
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "murillo@email.com",
+            	"password": "123456"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      "":
+        RESOURCE: sessions
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a7fe934af40c8cf9e8e8213cc518db7e6c1f0897
+    created: 1757093477481
+    modified: 1757093477481
+environments:
+  name: Base Environment
+  meta:
+    id: env_a7fe934af40c8cf9e8e8213cc518db7e6c1f0897
+    created: 1757093477478
+    modified: 1757093577823
+    isPrivate: false
+  subEnvironments:
+    - name: dev
+      meta:
+        id: env_3eff4c8ee2d24afda5b2f911bb573d8d
+        created: 1757093583377
+        modified: 1757093620744
+        isPrivate: false
+        sortKey: 1757093583377
+      data:
+        "":
+          BASE_URL: http://localhost:3333
+      color: "#00ff00"
