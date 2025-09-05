@@ -1,0 +1,218 @@
+type: collection.insomnia.rest/5.0
+name: ORM
+meta:
+  id: wrk_ba931357f1a2453ca9f8b74dfc707202
+  created: 1756922024656
+  modified: 1756922024656
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_d7c0acb793b649fc8ca1dd30847e6485
+      created: 1756922092588
+      modified: 1756922092588
+      sortKey: -1756922092588
+      description: ""
+    children:
+      - url: http://localhost:3333/users
+        name: Create
+        meta:
+          id: req_1f431fa1177041d08891b48d6d44f75d
+          created: 1756922102028
+          modified: 1756925403343
+          isPrivate: false
+          description: ""
+          sortKey: -1756922102028
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "João",
+            	"email": "joao@email.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/users
+        name: Index
+        meta:
+          id: req_70eee70c01d541e0bf6adb01c57b79ab
+          created: 1756925546963
+          modified: 1756925557237
+          isPrivate: false
+          description: ""
+          sortKey: -1756922102128
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/users/ade48ed6-d398-4a96-8b6f-6292cc09b9c8
+        name: Show
+        meta:
+          id: req_31389041b4f74c80bd8c51d5076f1c82
+          created: 1756925651463
+          modified: 1756925673132
+          isPrivate: false
+          description: ""
+          sortKey: -1756922102078
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Questions
+    meta:
+      id: fld_3419098942d6407b8b3f7d84cdd435b0
+      created: 1756927349858
+      modified: 1756927349858
+      sortKey: -1756927349858
+      description: ""
+    children:
+      - url: http://localhost:3333/questions
+        name: Create
+        meta:
+          id: req_665e1a89c3d2472a9b0a9d8bd1b71f03
+          created: 1756927354462
+          modified: 1756928548050
+          isPrivate: false
+          description: ""
+          sortKey: -1756927972905
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Prisma ORM",
+            	"content": "Como criar uma API",
+            	"user_id": "1150d1f0-61a8-4155-85d9-b12eb13e1b48"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/questions
+        name: Index
+        meta:
+          id: req_f06fe16ca9b640ff895890738b06621a
+          created: 1756928660174
+          modified: 1756929044493
+          isPrivate: false
+          description: ""
+          sortKey: -1756928660174
+        method: GET
+        parameters:
+          - id: pair_5382af46bc6e43849522e8f46cfa5a74
+            name: title
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/questions/9d5e5386-a80b-4bcf-883e-9b5e976ed5c4
+        name: Update
+        meta:
+          id: req_1e42626b77e04094887487a0c30b988e
+          created: 1756929028898
+          modified: 1756929277040
+          isPrivate: false
+          description: ""
+          sortKey: -1756925037516.5
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Prisma",
+            	"content": "Como fazer um insert com o Prisma?"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3333/questions/9d5e5386-a80b-4bcf-883e-9b5e976ed5c4
+        name: Remove
+        meta:
+          id: req_544b42eb5a5f42329bcc9bf1f251b556
+          created: 1756929346896
+          modified: 1756929354203
+          isPrivate: false
+          description: ""
+          sortKey: -1756923569822.25
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_60342d05759615088001acdca30fcb4067ac1232
+    created: 1756922024661
+    modified: 1756922024661
+environments:
+  name: Base Environment
+  meta:
+    id: env_60342d05759615088001acdca30fcb4067ac1232
+    created: 1756922024659
+    modified: 1756922024659
+    isPrivate: false

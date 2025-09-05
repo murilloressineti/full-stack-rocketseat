@@ -1,0 +1,110 @@
+type: collection.insomnia.rest/5.0
+name: API
+meta:
+  id: wrk_d0f7c24a143d4c718332c2491a4ccc2d
+  created: 1753106584510
+  modified: 1753106584510
+  description: ""
+collection:
+  - url: http://localhost:3333/products
+    name: Create
+    meta:
+      id: req_17e72c88f2084a1f93454429366a3d1d
+      created: 1753106646383
+      modified: 1753969829080
+      isPrivate: false
+      description: ""
+      sortKey: -1753106646383
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Mouse",
+        	"price": 20
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/products
+    name: List
+    meta:
+      id: req_c828b492f1254ed1b262eb29546f1f94
+      created: 1753904526757
+      modified: 1753907932022
+      isPrivate: false
+      description: ""
+      sortKey: -1753904526757
+    method: GET
+    parameters:
+      - id: pair_3beae4c62feb4bcdbcc6eb1dfe981503
+        name: category
+        value: computer
+        description: ""
+        disabled: false
+      - id: pair_9bdf40d49d9e4fbd8d43b8e418eee06e
+        name: price
+        value: "5000"
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/products
+    name: Remove
+    meta:
+      id: req_ceb456d5d30249fe94a5cc7d6a0978a3
+      created: 1753904665212
+      modified: 1753907152537
+      isPrivate: false
+      description: ""
+      sortKey: -1753904665212
+    method: DELETE
+    parameters:
+      - id: pair_9971530b1f6a4aed97fe1369f70d4199
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d16745dfa426e5f126af8c2c8b2a3cb6f4ca76b5
+    created: 1753106584519
+    modified: 1753106584519
+environments:
+  name: Base Environment
+  meta:
+    id: env_d16745dfa426e5f126af8c2c8b2a3cb6f4ca76b5
+    created: 1753106584515
+    modified: 1753106584515
+    isPrivate: false

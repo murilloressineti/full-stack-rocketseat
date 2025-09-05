@@ -1,0 +1,202 @@
+type: collection.insomnia.rest/5.0
+name: Support Tickets
+meta:
+  id: wrk_87726cc913b24d2080a1592c994754a3
+  created: 1753994652918
+  modified: 1753994652918
+  description: ""
+collection:
+  - url: http://localhost:3333/tickets
+    name: Create
+    meta:
+      id: req_c1e7c76c27c84ac5b939dbab81dd8fad
+      created: 1753994746028
+      modified: 1753994791137
+      isPrivate: false
+      description: ""
+      sortKey: -1753994746028
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Murillo"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/tickets
+    name: Create
+    meta:
+      id: req_2a7cf2dc4a9541a591c5214be0c3fad7
+      created: 1754658073319
+      modified: 1754679672952
+      isPrivate: false
+      description: ""
+      sortKey: -1754658073319
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"equipment": "Computador",
+        	"description": "Computador fica reiniciando",
+        	"user_name": "José"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.4.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/tickets
+    name: Index
+    meta:
+      id: req_d5c5451684de42b8b529058a91f31453
+      created: 1754666296099
+      modified: 1754679769226
+      isPrivate: false
+      description: ""
+      sortKey: -1754666296099
+    method: GET
+    parameters:
+      - name: status
+        value: open
+        disabled: true
+        id: pair_30d61fae5a65494d96af429d51e1f668
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/tickets/32b03e7a-83f5-43a7-9dc2-693d76572307
+    name: Update
+    meta:
+      id: req_b7e7f8b0c4ff402ab1397e549906e68d
+      created: 1754677236380
+      modified: 1754679722342
+      isPrivate: false
+      description: ""
+      sortKey: -1754677236380
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"equipment": "Mouse",
+        		"description": "A tecla de espaço não funciona"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.4.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/tickets/9c3a3d31-1650-47ee-8096-413cb166593d/close
+    name: Close
+    meta:
+      id: req_5ea0e968bb4f4484bd442a899f7efaa1
+      created: 1754678591344
+      modified: 1754679761067
+      isPrivate: false
+      description: ""
+      sortKey: -1754678591344
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"solution": "Trocamos a memória do computador que estava causando o problema."
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.4.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/tickets/32b03e7a-83f5-43a7-9dc2-693d76572307
+    name: Remove
+    meta:
+      id: req_10e3c1b57edd497081c74c85de3c1807
+      created: 1754679858933
+      modified: 1754939748851
+      isPrivate: false
+      description: ""
+      sortKey: -1754679858933
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    scripts:
+      preRequest: ""
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d2caf690a0bfa3b0dd503af313f9893f115a44dd
+    created: 1753994652929
+    modified: 1753994652929
+environments:
+  name: Base Environment
+  meta:
+    id: env_d2caf690a0bfa3b0dd503af313f9893f115a44dd
+    created: 1753994652922
+    modified: 1753994652922
+    isPrivate: false
