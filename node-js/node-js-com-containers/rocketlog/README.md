@@ -1,4 +1,4 @@
-# API - Restaurant
+# API - RocketLog
 
 A **API RocketLog** é um projeto que simula a gestão de entregas de encomendas, permitindo o controle de **usuários, autenticação, entregas, status e logs de entregas**.  
 O objetivo principal é praticar o desenvolvimento de uma aplicação **Node.js com TypeScript**, utilizando **Prisma ORM** para comunicação com o banco de dados, além de boas práticas de arquitetura, autenticação JWT e containers com Docker.
