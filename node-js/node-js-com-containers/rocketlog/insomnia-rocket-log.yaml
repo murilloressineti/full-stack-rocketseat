@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_490f38d91e7d4651b1e512c80718c313
           created: 1757093692685
-          modified: 1757359738488
+          modified: 1757445771920
           isPrivate: false
           description: ""
           sortKey: -1757093692685
@@ -28,8 +28,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name": "Ana",
-            	"email": "ana@email.com",
+            	"name": "João",
+            	"email": "joao@email.com",
             	"password": "123456"
             }
         headers:
@@ -61,7 +61,7 @@ collection:
         meta:
           id: req_0703e4f69adc45cca0a3f44e035ce6b0
           created: 1757098108016
-          modified: 1757360077434
+          modified: 1757445867303
           isPrivate: false
           description: ""
           sortKey: -1757098108016
@@ -70,7 +70,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"email": "murillo@email.com",
+            	"email": "joao@email.com",
             	"password": "123456"
             }
         headers:
@@ -102,7 +102,7 @@ collection:
         meta:
           id: req_92f9585546634d73aa31aaefeaae3aa5
           created: 1757351855900
-          modified: 1757360335935
+          modified: 1757445895259
           isPrivate: false
           description: ""
           sortKey: -1757351857650
@@ -111,7 +111,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"user_id": "e31bb8a1-9996-4ac8-bd70-9088693ab71e",
+            	"user_id": "a94e95b3-4666-4177-9a63-c9ab6e670f1e",
             	"description": "Monitor"
             }
         headers:
@@ -136,7 +136,7 @@ collection:
         meta:
           id: req_48b6ae3ef48746fd96ec9e4f1b13251c
           created: 1757354623267
-          modified: 1757360344686
+          modified: 1757445522794
           isPrivate: false
           description: ""
           sortKey: -1757354623267
@@ -157,12 +157,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/17af2169-0245-4ec1-bf3c-df275df28090/status"
+          }}/f1e87961-5ebd-4383-88f5-63ea0e1da859/status"
         name: Status Update
         meta:
           id: req_a41a80b6bbab4cab9c675c956ade07b2
           created: 1757355285528
-          modified: 1757360503730
+          modified: 1757445960108
           isPrivate: false
           description: ""
           sortKey: -1757355285528
@@ -171,7 +171,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"status": "delivered"
+            	"status": "shipped"
             }
         headers:
           - name: Content-Type
@@ -206,7 +206,7 @@ collection:
         meta:
           id: req_4ec391f9bebc4b5eb85c88ac646fb8e6
           created: 1757356409325
-          modified: 1757360415056
+          modified: 1757446032208
           isPrivate: false
           description: ""
           sortKey: -1757356409325
@@ -215,7 +215,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"delivery_id": "17af2169-0245-4ec1-bf3c-df275df28090",
+            	"delivery_id": "f1e87961-5ebd-4383-88f5-63ea0e1da859",
             	"description": "o pedido foi coletado"
             }
         headers:
@@ -236,12 +236,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/17af2169-0245-4ec1-bf3c-df275df28090/show"
+          }}/f1e87961-5ebd-4383-88f5-63ea0e1da859/show"
         name: Index
         meta:
           id: req_cbd35919b987483d8d876b163f6fe1a4
           created: 1757358411994
-          modified: 1757360387192
+          modified: 1757445981194
           isPrivate: false
           description: ""
           sortKey: -1757358411994
@@ -289,3 +289,14 @@ environments:
         "":
           BASE_URL: http://localhost:3333
       color: "#00ff00"
+    - name: prod
+      meta:
+        id: env_62cec777856d41e8a3450888776bd038
+        created: 1757445355066
+        modified: 1757445421869
+        isPrivate: false
+        sortKey: 1757445355066
+      data:
+        "":
+          BASE_URL: https://rocketlog-api-4k3g.onrender.com
+      color: "#ff0000"
