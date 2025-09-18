@@ -8,15 +8,16 @@
 2. Gerenciamento de Usuários (Admin)
  - Listar usuários (GET /users) — apenas admin.✅
  - Visualizar usuário (GET /users/:id) — admin ou o próprio usuário.✅
- - Deletar usuário (DELETE /users/:id) — apenas admin.✅
  - Editar usuário (GET /users/:id) — admin ou o próprio usuário.✅
+ - Deletar usuário (DELETE /users/:id) — apenas admin.✅
 
 3. Gerenciamento de Times
- - Criar time (POST /teams) — admin.
- - Editar time (PUT /teams/:id) — admin.
- - Listar times (GET /teams) — admin ou membro.
- - Adicionar membro ao time (POST /teams/:id/members) — admin.
- - Remover membro do time (DELETE /teams/:id/members/:userId) — admin.
+ - Criar time (POST /teams) — admin.✅
+ - Listar times (GET /teams) — admin ou membro.✅
+ - Editar time (PUT /teams/:id) — admin.✅
+ - Deletar times (DELETE /users/:id) — admin✅
+ - Adicionar membro ao time (POST /teams/:id/members) — admin.✅
+ - Remover membro do time (DELETE /teams/:id/members/:userId) — admin.✅
 
 4. Gerenciamento de Tarefas
  - Criar tarefa (POST /tasks) — admin pode criar para qualquer membro, member só pode criar para si dentro de um time.
