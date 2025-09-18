@@ -20,15 +20,15 @@
  - Remover membro do time (DELETE /teams/:id/members/:userId) — admin.✅
 
 4. Gerenciamento de Tarefas
- - Criar tarefa (POST /tasks) — admin pode criar para qualquer membro, member só pode criar para si dentro de um time.
- - Listar tarefas (GET /tasks) —
+ - Criar tarefa (POST /tasks) — admin pode criar para qualquer membro, member só pode criar para si dentro de um time.✅
+ - Listar tarefas (GET /tasks) — ✅
     - admin: vê todas.
     - member: só as do time dele.
- - Visualizar tarefa (GET /tasks/:id) — admin ou membro que pertence ao time.
- - Editar tarefa (PUT /tasks/:id) —
+ - Visualizar tarefa (GET /tasks/:id) — admin ou membro que pertence ao time.✅
+ - Editar tarefa (PUT /tasks/:id) —✅
     - admin: pode editar qualquer.
     - member: só pode editar se for atribuída a ele.
- - Deletar tarefa (DELETE /tasks/:id) — admin.
+ - Deletar tarefa (DELETE /tasks/:id) — admin.✅
 
 5. Task History
  - Registro automático: ao mudar status de uma task, criar registro no TasksHistory.
