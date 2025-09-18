@@ -4,7 +4,7 @@
 
 3. Autenticação básica — signup/login com hashing (bcrypt) e JWT, rotas auth.✅
 
-4. CRUD Users / Teams / Tasks — endpoints REST, autorizações (roles).
+4. CRUD Users / Teams / Tasks — endpoints REST, autorizações (roles).✅
 
 5. Validação & Zod — validações de payload das rotas.✅
 
@@ -14,4 +14,4 @@
 
 8. Deploy — ajustar variáveis de ambiente e deploy no Render.
 
-9. Extras — task_history, busca/pagination, documentação (README, Postman/Insomnia).
+9. Extras — task_history, documentação (README, Postman/Insomnia).

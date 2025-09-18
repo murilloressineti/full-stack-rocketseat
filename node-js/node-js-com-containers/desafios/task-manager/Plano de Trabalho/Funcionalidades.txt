@@ -31,7 +31,7 @@
  - Deletar tarefa (DELETE /tasks/:id) — admin.✅
 
 5. Task History
- - Registro automático: ao mudar status de uma task, criar registro no TasksHistory.
- - Listar histórico da tarefa (GET /tasks/:id/history).
+ - Registro automático: ao mudar status de uma task, criar registro no TasksHistory.✅
+ - Listar histórico da tarefa (GET /tasks/:id/history).✅
 
 Users → Teams → TeamMembers → Tasks → TasksHistory

@@ -200,6 +200,8 @@ class TasksController {
       }
     }
 
+    const oldStatus = task.status;
+
     const updatedTask = await prisma.task.update({
       where: { id },
       data: {
@@ -210,6 +212,17 @@ class TasksController {
         assignedTo: assignedTo ?? task.assignedTo,
       },
     });
+
+    if (oldStatus !== updatedTask.status) {
+      await prisma.taskHistory.create({
+        data: {
+          taskId: updatedTask.id,
+          oldStatus: oldStatus,
+          newStatus: updatedTask.status,
+          changedBy: user.id,
+        },
+      });
+    }
 
     return response.status(200).json(updatedTask);
   }
@@ -230,6 +243,52 @@ class TasksController {
     });
 
     return response.status(204).send();
+  }
+
+  async showHistory(request: Request, response: Response) {
+    const { id } = request.params;
+    const { user } = request;
+
+    const task = await prisma.task.findUnique({
+      where: { id },
+      select: {
+        teamId: true,
+      },
+    });
+
+    if (!task) {
+      throw new AppError("Task not found", 404);
+    }
+
+    if (user.role === "admin") {
+      const history = await prisma.taskHistory.findMany({
+        where: { taskId: id },
+        orderBy: { changedAt: "desc" },
+      });
+      return response.status(200).json(history);
+    }
+
+    if (!task.teamId) {
+      throw new AppError("Access denied", 403);
+    }
+
+    const teamMember = await prisma.teamMember.findFirst({
+      where: {
+        userId: user.id,
+        teamId: task.teamId,
+      },
+    });
+
+    if (!teamMember) {
+      throw new AppError("Access denied", 403);
+    }
+
+    const history = await prisma.taskHistory.findMany({
+      where: { taskId: id },
+      orderBy: { changedAt: "desc" },
+    });
+
+    return response.status(200).json(history);
   }
 }
 

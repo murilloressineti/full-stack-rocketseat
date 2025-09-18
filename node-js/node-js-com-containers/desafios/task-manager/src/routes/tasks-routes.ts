@@ -17,5 +17,7 @@ tasksRoutes.delete(
   verifyUserAuthorization(["admin"]),
   tasksController.delete
 );
+tasksRoutes.get("/:id/history", tasksController.showHistory);
+
 
 export { tasksRoutes };
