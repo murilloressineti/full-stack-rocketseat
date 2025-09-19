@@ -8,7 +8,7 @@
 
 5. Validação & Zod — validações de payload das rotas.✅
 
-6. Testes unitários — Jest para rotas críticas (auth e tasks).
+6. Testes unitários — Jest para rotas críticas (auth e tasks).✅
 
 7. Dockerizar — Dockerfile + docker-compose (app + postgres).✅
 
