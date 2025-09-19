@@ -12,6 +12,6 @@
 
 7. Dockerizar — Dockerfile + docker-compose (app + postgres).✅
 
-8. Deploy — ajustar variáveis de ambiente e deploy no Render.
+8. Deploy — ajustar variáveis de ambiente e deploy no Render.✅
 
-9. Extras — task_history, documentação (README, Postman/Insomnia).
+9. Extras — task_history, documentação (README, Postman/Insomnia).✅
