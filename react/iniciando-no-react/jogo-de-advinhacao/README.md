@@ -11,11 +11,12 @@ O objetivo é descobrir a palavra antes de atingir o limite de tentativas!
 
 Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- **HTML e CSS**: Estruturação semântica e estilização da página
-- **JavaScript**: Manipulação dinâmica do DOM e lógica de agendamento  
-- **Node.js + npm** — Gerenciamento de pacotes  
-- **Figma**: Ferramenta de design para guiar o layout
-- **Git e GitHub**: Controle de versão e hospedagem do código
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário  
+- **Vite**: Ferramenta de build e servidor de desenvolvimento rápido  
+- **TypeScript**: Tipagem estática para maior segurança e organização do código  
+- **CSS Modules**: Estilização modular e organizada dos componentes  
+- **JavaScript**: Manipulação de estado, lógica do jogo e interatividade  
+- **Git e GitHub**: Controle de versão e hospedagem do código  
 
 ---
 
@@ -52,7 +53,7 @@ Siga os passos abaixo para clonar o projeto e executá-lo localmente em sua máq
 ```git clone https://github.com/murilloressineti/full-stack-rocketseat.git```
 
 ### 📂 2. Acesse a pasta do projeto
-```cd full-stack-rocketseat/```
+```cd full-stack-rocketseat/tree/main/react/iniciando-no-react/jogo-de-advinhacao```
 
 ### 📦 3. Instale as dependências
 ```npm install```
