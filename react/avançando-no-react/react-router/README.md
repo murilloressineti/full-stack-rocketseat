@@ -1,7 +1,6 @@
-# Contador em React - Rocketseat Full-Stack
+# Navegação com React Router - Rocketseat Full-Stack
 
-O **Contador** é uma aplicação simples desenvolvida em **React**, onde o usuário pode **adicionar** ou **remover** valores de um contador.
-O projeto foi criado como exercício prático para estudar conceitos fundamentais do React, como **useState** e **useEffect**.
+Este projeto foi desenvolvido com o objetivo de **praticar e entender o React Router**, criando páginas, navegação entre rotas, parâmetros dinâmicos e query strings.  
 
 ---
 
@@ -10,10 +9,11 @@ O projeto foi criado como exercício prático para estudar conceitos fundamentai
 Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 - **React**: Biblioteca JavaScript para construção de interfaces de usuário
-- **Vite**: Ferramenta de build e servidor de desenvolvimento rápido
-- **CSS Modules**: Estilização modular e organizada dos componentes
-- **JavaScript**: Manipulação de estado e interatividade
-- **Git e GitHub**: Controle de versão e hospedagem do código
+- **React Router**: Biblioteca para navegação entre páginas e gerenciamento de rotas   
+- **Vite**: Ferramenta de build e servidor de desenvolvimento rápido  
+- **CSS Modules**: Estilização modular e organizada dos componentes  
+- **JavaScript**: Manipulação de estado e lógica de navegação   
+- **Git e GitHub**: Controle de versão e hospedagem do código  
 
 ---
 
@@ -27,8 +27,11 @@ Confira abaixo uma prévia e acesse o projeto completo [aqui]():
 
 ## 🎮 **Funcionalidades**
 
-- Aumentar o valor do contador clicando em **Adicionar**
-- Diminuir o valor do contador clicando em **Remover**
+- Acessar a página inicial (**Home**)  
+- Navegar para a listagem de **Produtos**  
+- Filtrar produtos via **query string** (exemplo: `?category=tvs&price=2000`)  
+- Acessar a página de **Detalhes** de um produto pelo **ID dinâmico**  
+- Visualizar a página de **Erro 404 (NotFound)** quando acessar uma rota inexistente  
 
 ---
 
@@ -46,7 +49,7 @@ Siga os passos abaixo para clonar o projeto e executá-lo localmente em sua máq
 ```git clone https://github.com/murilloressineti/full-stack-rocketseat.git```
 
 ### 📂 2. Acesse a pasta do projeto
-```cd full-stack-rocketseat/tree/main/react/iniciando-no-react/classroom```
+```cd full-stack-rocketseat/tree/main/react/avançando-no-react/react-router```
 
 ### 📦 3. Instale as dependências
 ```npm install```
