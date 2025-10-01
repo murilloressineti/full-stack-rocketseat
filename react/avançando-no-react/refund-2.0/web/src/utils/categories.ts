@@ -9,9 +9,9 @@ export const CATEGORIES = {
     name: "Alimentação",
     icon: foodSvg,
   },
-  others: {
-    name: "Outros",
-    icon: othersSvg,
+  accomodation: {
+    name: "Hospedagem",
+    icon: accommodationSvg,
   },
   services: {
     name: "Serviços",
@@ -21,9 +21,9 @@ export const CATEGORIES = {
     name: "Transporte",
     icon: transportSvg,
   },
-  accomodation: {
-    name: "Hospedagem",
-    icon: accommodationSvg,
+  others: {
+    name: "Outros",
+    icon: othersSvg,
   },
 };
 
