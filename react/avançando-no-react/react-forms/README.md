@@ -20,7 +20,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Confira abaixo uma prévia e acesse o projeto completo [aqui]():
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://formulariodeevento.vercel.app/):
 
 <img src="src/assets/thumbnail.png" alt="Imagem do Projeto" />
 
