@@ -29,7 +29,7 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Confira abaixo uma prévia e acesse o projeto completo [aqui](https://formrefund.netlify.app/):
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://formrefund.vercel.app/):
 
 <img src="web/src/assets/thumbnail.png" alt="Imagem do Projeto" />
 
@@ -90,6 +90,15 @@ Siga os passos abaixo para clonar o projeto e executá-lo localmente em sua máq
 
 ### 🚀 4. Execute o projeto
 ```npm run dev```
+
+---
+
+## ⚠️ **Aviso Importante**
+
+Para acessar o sistema como **administrador**, utilize as seguintes credenciais:  
+
+- **Email:** `murillo@email.com`  
+- **Senha:** `123456`  
 
 ---
 
