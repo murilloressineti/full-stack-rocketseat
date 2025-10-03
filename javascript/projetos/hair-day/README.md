@@ -1,4 +1,4 @@
-# Hair Day - Agendamentos de Atendimento - Rocketseat Full-Stack
+# Hair Day - Plataforma de Agendamento - Rocketseat Full-Stack
 
 O **Hair Day** é um projeto de agendamento para salões de beleza ou barbearias, permitindo que o usuário selecione **data**, **horário** e **nome do cliente** para registrar um atendimento.  
 Além disso, o sistema organiza os agendamentos automaticamente por **períodos do dia** (manhã, tarde e noite).

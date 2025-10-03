@@ -1,4 +1,4 @@
-# Agenda Petshop - Agendamentos de Atendimento - Rocketseat Full-Stack
+# Agenda Petshop - Plataforma de Agendamento - Rocketseat Full-Stack
 
 O **Agenda Petshop** é um sistema de agendamento para petshops, permitindo o registro de **nome do tutor**, **nome do pet**, **telefone**, **descrição do serviço**, **data** e **horário do atendimento**.  
 Os agendamentos são organizados automaticamente por **períodos do dia**: manhã, tarde e noite.

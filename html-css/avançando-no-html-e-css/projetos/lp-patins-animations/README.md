@@ -1,4 +1,4 @@
-# Landing Page - Rocketseat Full-Stack
+# Landing Page Animada - Rocketseat Full-Stack
 
 Projeto desenvolvido com foco na criação de uma **landing page responsiva** com **animações em CSS3**, proporcionando uma experiência visual dinâmica e moderna. Utiliza **HTML5 semântico**, **CSS Modules** para organização do estilo e tem como base um layout criado no **Figma**. O versionamento foi feito com **Git** e **GitHub**.
 

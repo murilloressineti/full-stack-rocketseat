@@ -1,4 +1,4 @@
-# Refund - Solicitação de Reembolso - Rocketseat Full-Stack
+# Refund - Sistema de Reembolso - Rocketseat Full-Stack
 
 Projeto desenvolvido para gerenciar solicitações de reembolso de despesas, permitindo aos usuários **inserir detalhes da despesa** e **acompanhar o status do reembolso**. A interface é simples e intuitiva, utilizando **HTML5 semântico**, **CSS3 para estilização responsiva** e **JavaScript para manipulação dinâmica dos dados e cálculos automáticos**.
 

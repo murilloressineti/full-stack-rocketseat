@@ -1,4 +1,4 @@
-# Convert - Conversor de Moedas - Rocketseat Full-Stack
+# Conversor de Moedas - Rocketseat Full-Stack
 
 Projeto desenvolvido com foco na criação de um **conversor de moedas responsivo**, que permite ao usuário inserir um valor e convertê-lo para reais (BRL), com base em moedas estrangeiras como **Dólar Americano (USD)**, **Euro (EUR)** e **Libra Esterlina (GBP)**. A interface é simples, limpa e moderna, utilizando **HTML5 semântico**, **CSS3**, e **JavaScript** para manipulação dos dados e renderização dinâmica dos resultados.
 

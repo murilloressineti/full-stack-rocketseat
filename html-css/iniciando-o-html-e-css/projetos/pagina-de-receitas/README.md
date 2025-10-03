@@ -1,6 +1,6 @@
-# Landing Page - Rocketseat Full-Stack
+# Página de Receita - Rocketseat Full-Stack
 
-Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. O objetivo deste projeto foi criar uma **landing page responsiva**, utilizando **HTML5 semântico** e **CSS3**. O foco principal foi a **organização e modularização do CSS** por meio da abordagem de **CSS Modules**, proporcionando um estilo mais escalável e manutenível. O layout foi baseado em um design desenvolvido no **Figma**, e o versionamento foi realizado com **Git** e **GitHub**.
+Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **Full-Stack** da **Rocketseat**. A proposta deste projeto foi construir uma página de receitas utilizando **HTML** e **CSS**, com foco na prática de **listas ordenadas e não ordenadas**. A estrutura do conteúdo foi planejada de forma semântica e organizada, com base em um layout criado no **Figma**. O controle de versão foi realizado com **Git** e **GitHub**.
 
 ---
 
@@ -8,7 +8,7 @@ Este repositório é dedicado a um dos projetos desenvolvidos durante o curso **
 
 Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
-- **HTML e CSS**: Estruturação semântica e estilização da página
+- **HTML e CSS**: Estruturação e estilização da página
 - **Figma**: Ferramenta de design para guiar o layout
 - **Git e GitHub**: Controle de versão e hospedagem do código
 
@@ -16,9 +16,9 @@ Aqui estão as tecnologias utilizadas no desenvolvimento deste projeto:
 
 ## 💻 **Projeto**
 
-Confira abaixo uma prévia e acesse o projeto completo [aqui](https://zingenkaraoke.netlify.app/):
+Confira abaixo uma prévia e acesse o projeto completo [aqui](https://receitacupcakecafe.netlify.app/):
 
-<img src="assets/thumbnail.png" alt="Imagem do Projeto" />
+<img src="assets/thumbnail.jpg" alt="Imagem do Projeto" />
 
 ---
 
