@@ -6,6 +6,7 @@ import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
 
 class UsersController {
+  // Cria um novo usuário no sistema (aplicando regras específicas para técnicos e clientes)
   async create(request: Request, response: Response) {
     // Define o formato esperado do corpo da requisição e valida com Zod
     const bodySchema = z.object({
@@ -82,6 +83,7 @@ class UsersController {
     return response.status(201).json(userWithoutPassword);
   }
 
+  // Lista todos os usuários do sistema (apenas admin pode acessar)
   async index(request: Request, response: Response) {
     // 1. Verifica se o usuário logado é admin
     const loggedUser = request.user;
@@ -102,6 +104,7 @@ class UsersController {
     return response.json(usersWithoutPassword);
   }
 
+  // Atualiza os dados de um usuário existente (respeitando permissões de admin e proprietário)
   async update(request: Request, response: Response) {
     // Pegamos o ID do usuário a ser atualizado via params e o usuário logado (autenticado)
     const { id } = request.params;
@@ -182,6 +185,7 @@ class UsersController {
     return response.status(200).json(userWithoutPassword);
   }
 
+  // Deleta um usuário do sistema (apenas admin pode executar)
   async delete(request: Request, response: Response) {
     const { id } = request.params;
     const loggedUser = request.user;
