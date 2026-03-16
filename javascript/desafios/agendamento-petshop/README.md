@@ -27,6 +27,14 @@ Confira abaixo uma prévia e acesse o projeto completo [aqui](https://agendapet.
 
 ---
 
+## ⚠️ Observação sobre a hospedagem
+
+Este projeto está hospedado em um serviço de **hospedagem gratuita**. Por esse motivo, alguns recursos — especialmente a inicialização da API simulada — podem levar alguns segundos para responder ou parecer temporariamente indisponíveis na primeira requisição.
+
+Se isso acontecer, aguarde alguns instantes e tente novamente.
+
+---
+
 ## ⚙️ Instalação e Execução
 
 Siga os passos abaixo para clonar o projeto e executá-lo localmente em sua máquina:
