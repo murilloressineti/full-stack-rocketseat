@@ -1,12 +1,9 @@
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
 export const textVariants = cva("font-sans leading-snug", {
   variants: {
-    intent: {
-      text: "",
-      heading: "",
-    },
     size: {
       xxs: "text-[10px] uppercase font-bold",
       xs: "text-xs",
@@ -15,39 +12,47 @@ export const textVariants = cva("font-sans leading-snug", {
       lg: "text-xl font-bold",
       xl: "text-2xl font-bold",
     },
+    textColor: {
+      primary: "text-text-primary",
+      secondary: "text-text-secondary",
+      tertiary: "text-text-tertiary",
+      inverted: "text-text-inverted",
+      blueBase: "text-blue-base",
+      blueDark: "text-blue-dark",
+      blueLight: "text-blue-light",
+    },
     weight: {
       regular: "font-normal",
       bold: "font-bold",
     },
   },
   defaultVariants: {
-    intent: "text",
+    textColor: "primary",
     size: "sm",
     weight: "regular",
   },
 });
 
-interface TextProps extends VariantProps<typeof textVariants> {
-  as?: keyof React.JSX.IntrinsicElements;
-  className?: string;
-  children?: React.ReactNode;
+interface TextProps
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof textVariants> {
+  as?: React.ElementType;
 }
 
 export default function Text({
-  as = "span",
-  intent,
+  as: Component = "p",
   size,
+  textColor,
   weight,
   className,
   children,
   ...props
 }: TextProps) {
-  return React.createElement(
-    as,
-    {
-      className: textVariants({ intent, size, weight, className }),
-      ...props,
-    },
-    children
+  return (
+    <Component
+      className={cn(textVariants({ size, textColor, weight }), className)}
+      {...props}
+    >
+      {children}
+    </Component>
   );
 }
