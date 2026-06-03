@@ -1,7 +1,7 @@
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-export const textVariants = cva("font-sans text-gray-200 leading-[140%]", {
+export const textVariants = cva("font-sans leading-snug", {
   variants: {
     intent: {
       text: "",
