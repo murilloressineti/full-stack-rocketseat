@@ -35,7 +35,7 @@ export const textVariants = cva("font-sans leading-snug", {
 
 interface TextProps
   extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof textVariants> {
-  as?: React.ElementType;
+  as?: React.ElementType; // Torna o componente flexível para renderizar como qualquer elemento HTML ou componente React (ex: as={Link}, as="h1", etc.)
 }
 
 export default function Text({
