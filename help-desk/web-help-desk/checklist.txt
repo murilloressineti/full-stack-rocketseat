@@ -6,8 +6,10 @@
 
 🎨 Fase 2: Componentes Base (UI Kit)
 - Componente <Text /> ✅
-- Componente <Button />
-- Componente <Input /> 
+- Componente <Icon /> ✅
+- Componente <Button /> ✅
+- Componente <Input /> ✅
+- Componente <Select /> 
 - Componente <Badge /> 
 - Componente <Avatar /> 
 - Componente <Sidebar /> e <Header />

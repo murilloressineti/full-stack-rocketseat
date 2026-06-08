@@ -13,6 +13,7 @@ export const textVariants = cva("font-sans leading-snug", {
       xl: "text-2xl font-bold",
     },
     textColor: {
+      default: "",
       primary: "text-text-primary",
       secondary: "text-text-secondary",
       tertiary: "text-text-tertiary",
@@ -27,7 +28,7 @@ export const textVariants = cva("font-sans leading-snug", {
     },
   },
   defaultVariants: {
-    textColor: "primary",
+    textColor: "default",
     size: "sm",
     weight: "regular",
   },
