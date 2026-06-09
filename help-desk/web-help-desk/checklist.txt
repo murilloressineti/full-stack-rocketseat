@@ -9,12 +9,10 @@
 - Componente <Icon /> ✅
 - Componente <Button /> ✅
 - Componente <Input /> ✅
-- Componente <Select /> 
-- Componente <Badge /> 
-- Componente <Avatar /> 
+- Componente <Select /> ✅
+- Componente <BadgeStatus /> ✅
+- Componente <BadgeTime /> ✅
 - Componente <Sidebar /> e <Header />
-- Componente <Modal /> (para formulários de criação/edição)
-- Componente <Skeleton /> (para carregamento de dados)
 
 🔑 Fase 3: Autenticação e Rotas
 - Criar AuthContext e AuthProvider

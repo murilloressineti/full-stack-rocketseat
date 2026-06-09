@@ -54,7 +54,7 @@ export default function Button({
     >
       {React.Children.map(children, (child) => {
         if (typeof child === "string") {
-          return <Text className="font-bold">{child}</Text>;
+          return <Text weight={"bold"}>{child}</Text>;
         }
         return child;
       })}

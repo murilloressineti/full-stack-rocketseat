@@ -1,4 +1,13 @@
-import { Button, Icon, Input, Text } from "@components/ui";
+import {
+  BadgeStatus,
+  BadgeTime,
+  Button,
+  Icon,
+  Input,
+  Select,
+  Text,
+} from "@components/ui";
+import { AvailabilitySelector, TimeSlot } from "@components/features/schedule";
 import { ArrowLeft, PenLine } from "@assets/icons";
 
 export default function App() {
@@ -84,11 +93,58 @@ export default function App() {
       <div className="flex flex-col gap-4 p-10 max-w-sm">
         <Input label="E-mail" type="email" placeholder="exemplo@mail.com" />
 
-        <Input
-          label="Senha"
-          type="password"
-          placeholder="Digite sua senha"
-        />
+        <Input label="Senha" type="password" placeholder="Digite sua senha" />
+      </div>
+
+      {/* Select */}
+      <div className="flex flex-col gap-4 p-10 max-w-sm">
+        <Select label="Categoria" defaultValue="">
+          <option value="" disabled>
+            Escolha uma opção
+          </option>
+          <option value="1">Item 1</option>
+          <option value="2">Item 2</option>
+        </Select>
+
+        <Select label="Categoria" defaultValue="" error="Campo obrigatório">
+          <option value="" disabled>
+            Escolha uma opção
+          </option>
+          <option value="1">Item 1</option>
+          <option value="2">Item 2</option>
+        </Select>
+      </div>
+
+      {/* BadgeStatus */}
+      <div className="flex flex-col gap-4 p-10 max-w-sm">
+        <div>
+          <BadgeStatus variant={"open"}>Label</BadgeStatus>
+          <BadgeStatus variant={"progress"}>Label</BadgeStatus>
+          <BadgeStatus variant={"done"}>Label</BadgeStatus>
+          <BadgeStatus variant={"danger"}>Label</BadgeStatus>
+        </div>
+
+        <div>
+          <BadgeStatus variant={"open"}></BadgeStatus>
+          <BadgeStatus variant={"progress"}></BadgeStatus>
+          <BadgeStatus variant={"done"}></BadgeStatus>
+          <BadgeStatus variant={"danger"}></BadgeStatus>
+        </div>
+      </div>
+
+      {/* BadgeTime */}
+      <div className="flex flex-row gap-2 p-10 max-w-sm">
+        <BadgeTime>07:00</BadgeTime>
+        <BadgeTime>08:00</BadgeTime>
+        <BadgeTime>09:00</BadgeTime>
+        <BadgeTime>10:00</BadgeTime>
+        <BadgeTime>11:00</BadgeTime>
+        <BadgeTime>12:00</BadgeTime>
+        <BadgeTime variant={"disabled"}>13:00</BadgeTime>
+      </div>
+
+      <div className="flex flex-row p-10 max-w-sm">
+        <AvailabilitySelector />
       </div>
     </div>
   );
