@@ -6,11 +6,7 @@ interface TimeSlotProps {
   onToggle: (time: string) => void;
 }
 
-export default function TimeSlot({
-  time,
-  selected,
-  onToggle,
-}: TimeSlotProps) {
+export default function TimeSlot({ time, selected, onToggle }: TimeSlotProps) {
   return (
     <BadgeTime
       variant={selected ? "selected" : "available"}

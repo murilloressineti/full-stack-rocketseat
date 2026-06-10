@@ -4,11 +4,21 @@ import {
   Button,
   Icon,
   Input,
+  Logo,
+  NavItem,
   Select,
   Text,
+  UserMenu,
 } from "@components/ui";
-import { AvailabilitySelector, TimeSlot } from "@components/features/schedule";
-import { ArrowLeft, PenLine } from "@assets/icons";
+import { AvailabilitySelector } from "@components/features/schedule";
+import {
+  ArrowLeft,
+  BriefcaseBusiness,
+  PenLine,
+  ClipboardList,
+  Users,
+  Wrench,
+} from "@assets/icons";
 
 export default function App() {
   return (
@@ -145,6 +155,29 @@ export default function App() {
 
       <div className="flex flex-row p-10 max-w-sm">
         <AvailabilitySelector />
+      </div>
+
+      {/* Logo */}
+      <div className="flex flex-col gap-1 max-w-50 p-4 bg-bg-default">
+        <Logo role="admin" />
+      </div>
+
+      {/* NavItem */}
+      <div className="flex flex-col gap-1 max-w-50 p-4 my-2 bg-bg-default">
+        <NavItem label="Chamados" icon={ClipboardList} active />
+        <NavItem label="Técnicos" icon={Users} />
+        <NavItem label="Clientes" icon={BriefcaseBusiness} />
+        <NavItem label="Serviços" icon={Wrench} />
+      </div>
+
+      {/* UserMenu */}
+      <div className="flex flex-col gap-1 max-w-50 bg-bg-default">
+        <UserMenu
+          name="Murillo Silva"
+          email="murillo@email.com"
+          onProfile={() => console.log("Perfil")}
+          onLogout={() => console.log("Logout")}
+        />
       </div>
     </div>
   );

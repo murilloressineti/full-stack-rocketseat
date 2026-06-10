@@ -12,16 +12,23 @@
 - Componente <Select /> ✅
 - Componente <BadgeStatus /> ✅
 - Componente <BadgeTime /> ✅
-- Componente <Sidebar /> e <Header />
+- Componente <NavItem /> ✅
+- Componente <UserMenu /> ✅
+- Componente <Logo /> ✅
 
-🔑 Fase 3: Autenticação e Rotas
+📐 Fase 3: Componentes de Layout
+- Componente <Sidebar />
+- Componente <MobileHeader />
+- Componente <AppLayout /> (Decide entre Sidebar e MobileHeader)
+
+🔑 Fase 4: Autenticação e Rotas
 - Criar AuthContext e AuthProvider
 - Página de Login
 - Validação com react-hook-form e zod
 - Implementar PrivateRoutes (bloqueio por role)
 - Persistência de sessão (localStorage/cookies)
 
-📊 Fase 4: Dashboards e Funcionalidades (Core)
+📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin:
   - CRUD de Técnicos (criação, listagem)
   - CRUD de Serviços (criação, edição, soft delete)
@@ -35,13 +42,13 @@
   - Histórico de chamados (Minha lista)
   - Abertura de chamado (Select de técnico e serviço)
 
-📱 Fase 5: Refinamento e Interatividade
+📱 Fase 6: Refinamento e Interatividade
 - Implementar Toast notifications (feedback de sucesso/erro)
 - Ajustar estados de loading (Skeletons) em todas as listagens
 - Garantir responsividade (Mobile First - menu hambúrguer no mobile)
 - Revisar integração com todos os endpoints da API
 
-🚀 Fase 6: Deploy e Entrega
+🚀 Fase 7: Deploy e Entrega
 - Testar fluxo completo
 - Rodar npm run build e corrigir erros de tipagem/build
 - Deploy do Back-end no Render
