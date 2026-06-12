@@ -11,7 +11,7 @@ import {
   UserMenu,
 } from "@components/ui";
 import { AvailabilitySelector } from "@components/features/schedule";
-import { Sidebar } from "./components/layout";
+import { AppLayout, MobileHeader, Sidebar } from "./components/layout";
 import {
   ArrowLeft,
   BriefcaseBusiness,
@@ -211,10 +211,84 @@ export default function App() {
             href: "/services",
           },
         ]}
-        onNavigate={(path) => console.log(path)}
+        onNavigate={(path: string) => console.log(path)}
         onProfile={() => console.log("Perfil")}
         onLogout={() => console.log("Logout")}
       />
+
+      {/* MobileHeader */}
+      <MobileHeader
+        role="admin"
+        activePath="/tickets"
+        user={{
+          name: "Murillo Silva",
+          email: "murillo@email.com",
+        }}
+        items={[
+          {
+            label: "Chamados",
+            icon: ClipboardList,
+            href: "/tickets",
+          },
+          {
+            label: "Técnicos",
+            icon: Users,
+            href: "/technicians",
+          },
+          {
+            label: "Clientes",
+            icon: BriefcaseBusiness,
+            href: "/technicians",
+          },
+          {
+            label: "Serviços",
+            icon: Wrench,
+            href: "/services",
+          },
+        ]}
+        onNavigate={(path: string) => console.log("Navegar:", path)}
+        onProfile={() => console.log("Perfil")}
+        onLogout={() => console.log("Logout")}
+      />
+
+      {/* AppLayout */}
+      <AppLayout
+        role="admin"
+        activePath="/tickets"
+        user={{
+          name: "Murillo Silva",
+          email: "murillo@email.com",
+        }}
+        items={[
+          {
+            label: "Chamados",
+            icon: ClipboardList,
+            href: "/tickets",
+          },
+          {
+            label: "Técnicos",
+            icon: Users,
+            href: "/technicians",
+          },
+          {
+            label: "Clientes",
+            icon: BriefcaseBusiness,
+            href: "/technicians",
+          },
+          {
+            label: "Serviços",
+            icon: Wrench,
+            href: "/services",
+          },
+        ]}
+        onNavigate={(path: string) => console.log(path)}
+        onLogout={() => console.log("logout")}
+      >
+        <div className="bg-bg-light h-full p-12 rounded-tl-3xl">
+          <h1 className="text-blue-base">Dashboard</h1>
+          <p>Conteúdo da página aqui</p>
+        </div>
+      </AppLayout>
     </div>
   );
 }

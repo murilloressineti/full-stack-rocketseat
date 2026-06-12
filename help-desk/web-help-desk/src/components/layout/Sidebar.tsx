@@ -1,22 +1,10 @@
-import React from "react";
 import { Logo, NavItem, UserMenu } from "../ui";
-
-interface SidebarItem {
-  label: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  href: string;
-}
-
-interface SidebarUser {
-  name: string;
-  email: string;
-  avatar?: string;
-}
+import type { AppUser, UserRole, NavigationItem } from "@/types";
 
 interface SidebarProps {
-  role: "admin" | "client" | "technician";
-  user: SidebarUser;
-  items: SidebarItem[];
+  role: UserRole;
+  user: AppUser;
+  items: NavigationItem[];
 
   activePath: string;
 
@@ -57,6 +45,7 @@ export default function Sidebar({
         avatar={user.avatar}
         onProfile={onProfile}
         onLogout={onLogout}
+        placement="top-left"
         className="mt-auto py-5 px-4"
       />
     </div>

@@ -18,8 +18,8 @@
 
 📐 Fase 3: Componentes de Layout
 - Componente <Sidebar /> ✅
-- Componente <MobileHeader />
-- Componente <AppLayout /> (Decide entre Sidebar e MobileHeader)
+- Componente <MobileHeader /> ✅
+- Componente <AppLayout /> (Decide entre Sidebar e MobileHeader) ✅
 
 🔑 Fase 4: Autenticação e Rotas
 - Criar AuthContext e AuthProvider

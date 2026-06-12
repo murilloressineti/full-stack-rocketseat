@@ -26,6 +26,8 @@ interface UserMenuProps
 
   onProfile?: () => void;
   onLogout?: () => void;
+
+  placement?: "top-left" | "top-right";
 }
 
 export default function UserMenu({
@@ -34,10 +36,16 @@ export default function UserMenu({
   avatar,
   onProfile,
   onLogout,
+  placement = "top-left",
   className,
   ...props
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const dropdownPosition = {
+    "top-left": "bottom-full left-4",
+    "top-right": "top-full right-0 mt-2",
+  };
 
   function getInitials(name: string) {
     return name
@@ -50,10 +58,15 @@ export default function UserMenu({
   return (
     <div className={cn("relative", className)} {...props}>
       <button
-        className={cn(userMenuTriggerVariants({ open: isOpen }))}
+        className={cn(
+          userMenuTriggerVariants({ open: isOpen }),
+          "group rounded-full transition-colors duration-300 hover:bg-gray-500 md:py-1 md:pr-3",
+        )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-base">
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-base group-hover:bg-blue-light group-hover:scale-105 transition-all duration-300"
+        >
           <Text as="span" size="sm" textColor={"inverted"}>
             {getInitials(name)}
           </Text>
@@ -72,8 +85,10 @@ export default function UserMenu({
 
       {isOpen && (
         <div
-          className="
-            absolute md:bottom-full left-4 rounded-lg bg-gray-500 py-5 px-4 shadow-lg"
+          className={cn(
+            "absolute rounded-lg bg-gray-500 py-5 px-4 shadow-lg",
+            dropdownPosition[placement],
+          )}
         >
           <Text
             size="xs"
