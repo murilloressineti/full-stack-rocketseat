@@ -5,7 +5,7 @@ import { Icon, Text } from "../ui";
 import { CircleUser, LogOut } from "@assets/icons";
 
 export const userMenuTriggerVariants = cva(
-  "bg-bg-default flex items-center gap-3 py-3 px-3 md:py-5 md:px-4transition-all duration-300 cursor-pointer",
+  "bg-bg-default flex items-center gap-3 transition-all duration-300 cursor-pointer",
   {
     variants: {
       open: {
@@ -16,7 +16,10 @@ export const userMenuTriggerVariants = cva(
   },
 );
 
-interface UserMenuProps extends VariantProps<typeof userMenuTriggerVariants> {
+interface UserMenuProps
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof userMenuTriggerVariants> {
   name: string;
   email: string;
   avatar?: string;
@@ -31,6 +34,8 @@ export default function UserMenu({
   avatar,
   onProfile,
   onLogout,
+  className,
+  ...props
 }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +48,7 @@ export default function UserMenu({
       .toUpperCase();
   }
   return (
-    <div className="relative">
+    <div className={cn("relative", className)} {...props}>
       <button
         className={cn(userMenuTriggerVariants({ open: isOpen }))}
         onClick={() => setIsOpen((prev) => !prev)}

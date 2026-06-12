@@ -17,7 +17,7 @@
 - Componente <Logo /> ✅
 
 📐 Fase 3: Componentes de Layout
-- Componente <Sidebar />
+- Componente <Sidebar /> ✅
 - Componente <MobileHeader />
 - Componente <AppLayout /> (Decide entre Sidebar e MobileHeader)
 

@@ -11,6 +11,7 @@ import {
   UserMenu,
 } from "@components/ui";
 import { AvailabilitySelector } from "@components/features/schedule";
+import { Sidebar } from "./components/layout";
 import {
   ArrowLeft,
   BriefcaseBusiness,
@@ -179,6 +180,41 @@ export default function App() {
           onLogout={() => console.log("Logout")}
         />
       </div>
+
+      {/* Sidebar */}
+      <Sidebar
+        role="admin"
+        activePath="/tickets"
+        user={{
+          name: "Murillo Silva",
+          email: "murillo@email.com",
+        }}
+        items={[
+          {
+            label: "Chamados",
+            icon: ClipboardList,
+            href: "/tickets",
+          },
+          {
+            label: "Técnicos",
+            icon: Users,
+            href: "/technicians",
+          },
+          {
+            label: "Clientes",
+            icon: BriefcaseBusiness,
+            href: "/technicians",
+          },
+          {
+            label: "Serviços",
+            icon: Wrench,
+            href: "/services",
+          },
+        ]}
+        onNavigate={(path) => console.log(path)}
+        onProfile={() => console.log("Perfil")}
+        onLogout={() => console.log("Logout")}
+      />
     </div>
   );
 }

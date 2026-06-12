@@ -1,10 +1,10 @@
-import React from "react";
+import { cn } from "@/lib/utils";
 import { Icon, Text } from "../ui";
 import { LogoLight } from "@assets/images";
 
 type UserRole = "admin" | "client" | "technician";
 
-interface LogoProps {
+interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   role?: UserRole;
 }
 
@@ -14,9 +14,9 @@ const roleLabels: Record<UserRole, string> = {
   technician: "Técnico",
 };
 
-export default function Logo({ role }: LogoProps) {
+export default function Logo({ role, className, ...props }: LogoProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div className={cn("flex items-center gap-3", className)} {...props}>
       <Icon svg={LogoLight} className="h-12 w-12" />
 
       <div className="flex flex-col gap-1">
@@ -39,3 +39,5 @@ export default function Logo({ role }: LogoProps) {
     </div>
   );
 }
+
+//<div className={cn("relative", className)} {...props}>
