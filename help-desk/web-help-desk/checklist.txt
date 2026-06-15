@@ -24,7 +24,7 @@
 🔑 Fase 4: Autenticação e Rotas
 - React Router ✅
 - Estrutura de Rotas ✅
-- Página de Login
+- Página de Login ✅
 - React Hook Form + Zod
 - AuthContext
 - Persistência de Sessão
