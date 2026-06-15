@@ -22,11 +22,14 @@
 - Componente <AppLayout /> (Decide entre Sidebar e MobileHeader) ✅
 
 🔑 Fase 4: Autenticação e Rotas
-- Criar AuthContext e AuthProvider
+- React Router
+- Estrutura de Rotas
 - Página de Login
-- Validação com react-hook-form e zod
-- Implementar PrivateRoutes (bloqueio por role)
-- Persistência de sessão (localStorage/cookies)
+- React Hook Form + Zod
+- AuthContext
+- Persistência de Sessão
+- PrivateRoutes
+- Integração com API
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin:

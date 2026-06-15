@@ -25,7 +25,7 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <div className="bg-bg-default flex h-screen flex-col w-50 ">
-      <Logo role={role} className="my-6 px-4" />
+      <Logo role={role} className="pt-9 pb-6 px-4" />
 
       <nav className="pt-5 flex flex-col gap-2 h-full border-t border-b border-gray-500 px-4">
         {items.map((item) => (

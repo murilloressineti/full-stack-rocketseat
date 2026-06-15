@@ -4,14 +4,11 @@ import {
   Button,
   Icon,
   Input,
-  Logo,
-  NavItem,
   Select,
   Text,
-  UserMenu,
 } from "@components/ui";
 import { AvailabilitySelector } from "@components/features/schedule";
-import { AppLayout, MobileHeader, Sidebar } from "./components/layout";
+import { AppLayout, MobileHeader } from "./components/layout";
 import {
   ArrowLeft,
   BriefcaseBusiness,
@@ -158,64 +155,6 @@ export default function App() {
         <AvailabilitySelector />
       </div>
 
-      {/* Logo */}
-      <div className="flex flex-col gap-1 max-w-50 p-4 bg-bg-default">
-        <Logo role="admin" />
-      </div>
-
-      {/* NavItem */}
-      <div className="flex flex-col gap-1 max-w-50 p-4 my-2 bg-bg-default">
-        <NavItem label="Chamados" icon={ClipboardList} active />
-        <NavItem label="Técnicos" icon={Users} />
-        <NavItem label="Clientes" icon={BriefcaseBusiness} />
-        <NavItem label="Serviços" icon={Wrench} />
-      </div>
-
-      {/* UserMenu */}
-      <div className="flex flex-col gap-1 max-w-50 bg-bg-default">
-        <UserMenu
-          name="Murillo Silva"
-          email="murillo@email.com"
-          onProfile={() => console.log("Perfil")}
-          onLogout={() => console.log("Logout")}
-        />
-      </div>
-
-      {/* Sidebar */}
-      <Sidebar
-        role="admin"
-        activePath="/tickets"
-        user={{
-          name: "Murillo Silva",
-          email: "murillo@email.com",
-        }}
-        items={[
-          {
-            label: "Chamados",
-            icon: ClipboardList,
-            href: "/tickets",
-          },
-          {
-            label: "Técnicos",
-            icon: Users,
-            href: "/technicians",
-          },
-          {
-            label: "Clientes",
-            icon: BriefcaseBusiness,
-            href: "/technicians",
-          },
-          {
-            label: "Serviços",
-            icon: Wrench,
-            href: "/services",
-          },
-        ]}
-        onNavigate={(path: string) => console.log(path)}
-        onProfile={() => console.log("Perfil")}
-        onLogout={() => console.log("Logout")}
-      />
-
       {/* MobileHeader */}
       <MobileHeader
         role="admin"
@@ -281,8 +220,9 @@ export default function App() {
             href: "/services",
           },
         ]}
-        onNavigate={(path: string) => console.log(path)}
-        onLogout={() => console.log("logout")}
+        onNavigate={(path: string) => console.log("Navegar:", path)}
+        onProfile={() => console.log("Perfil")}
+        onLogout={() => console.log("Logout")}
       >
         <div className="bg-bg-light h-full p-12 rounded-tl-3xl">
           <h1 className="text-blue-base">Dashboard</h1>

@@ -39,5 +39,3 @@ export default function Logo({ role, className, ...props }: LogoProps) {
     </div>
   );
 }
-
-//<div className={cn("relative", className)} {...props}>

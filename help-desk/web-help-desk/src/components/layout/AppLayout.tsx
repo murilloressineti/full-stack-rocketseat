@@ -95,7 +95,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           onLogout={() => console.log("Logout")}
         />
 
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1 pt-3">{children}</main>
       </div>
     </div>
   );
