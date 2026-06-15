@@ -22,8 +22,8 @@
 - Componente <AppLayout /> (Decide entre Sidebar e MobileHeader) ✅
 
 🔑 Fase 4: Autenticação e Rotas
-- React Router
-- Estrutura de Rotas
+- React Router ✅
+- Estrutura de Rotas ✅
 - Página de Login
 - React Hook Form + Zod
 - AuthContext
