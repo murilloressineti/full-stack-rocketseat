@@ -27,8 +27,8 @@
 - Página de Login ✅
 - React Hook Form + Zod ✅
 - AuthService ✅
-- AuthContext
-- Persistência de Sessão
+- AuthContext ✅
+- Persistência de Sessão ✅
 - PrivateRoutes
 - Botão Criar conta (page Register)
 

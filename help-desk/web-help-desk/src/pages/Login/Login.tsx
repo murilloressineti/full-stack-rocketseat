@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { loginSchema, type LoginFormData } from "@/schemas/auth/loginSchema";
-import { login } from "@/services/authService";
+
+import { useAuth } from "@/contexts/AuthContext";
 
 import { Background } from "@/assets/images";
 import { Button, Input, Logo, Text } from "@/components/ui";
@@ -13,11 +15,13 @@ export default function Login() {
     formState: { errors, isSubmitting }, // formState é usado para acessar o estado do formulário, incluindo erros de validação
   } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) }); // useForm é usado para criar um formulário, e zodResolver é usado para integrar a validação do Zod com o React Hook Form
 
+  const { signIn } = useAuth();
+
   async function onSubmit(data: LoginFormData) {
     try {
-      const response = await login(data);
+      await signIn(data.email, data.password);
 
-      console.log("Login realizado:", response);
+      console.log("Login realizado");
     } catch (error) {
       console.error(error);
     }
@@ -65,8 +69,8 @@ export default function Login() {
             />
           </div>
 
-          <Button variant={"primary"} type="submit">
-            Entrar
+          <Button variant={"primary"} type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Entrando..." : "Entrar"}
           </Button>
         </form>
 
