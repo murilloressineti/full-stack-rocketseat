@@ -25,11 +25,12 @@
 - React Router ✅
 - Estrutura de Rotas ✅
 - Página de Login ✅
-- React Hook Form + Zod
+- React Hook Form + Zod ✅
+- AuthService ✅
 - AuthContext
 - Persistência de Sessão
 - PrivateRoutes
-- Integração com API
+- Botão Criar conta (page Register)
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin:

@@ -21,6 +21,10 @@ export const textVariants = cva("font-sans leading-snug", {
       blueBase: "text-blue-base",
       blueDark: "text-blue-dark",
       blueLight: "text-blue-light",
+      danger: "text-feedback-danger",
+      open: "text-feedback-open",
+      progress: "text-feedback-progress",
+      done: "text-feedback-done",
     },
     weight: {
       regular: "font-normal",

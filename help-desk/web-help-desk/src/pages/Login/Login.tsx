@@ -1,7 +1,28 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, type LoginFormData } from "@/schemas/auth/loginSchema";
+import { login } from "@/services/authService";
+
 import { Background } from "@/assets/images";
 import { Button, Input, Logo, Text } from "@/components/ui";
 
 export default function Login() {
+  const {
+    register, // register é usado para registrar os campos do formulário
+    handleSubmit, // handleSubmit é usado para lidar com o envio do formulário
+    formState: { errors, isSubmitting }, // formState é usado para acessar o estado do formulário, incluindo erros de validação
+  } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) }); // useForm é usado para criar um formulário, e zodResolver é usado para integrar a validação do Zod com o React Hook Form
+
+  async function onSubmit(data: LoginFormData) {
+    try {
+      const response = await login(data);
+
+      console.log("Login realizado:", response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <main
       className="h-screen bg-bg-default bg-cover bg-no-repeat pt-8 md:pt-3"
@@ -10,10 +31,13 @@ export default function Login() {
       {/* Login */}
       <section className="bg-bg-light h-full ml-auto md:rounded-tl-3xl flex flex-col w-full items-center justify-center lg:w-1/2 px-6 md:px-35 py-8 md:py-12">
         <div className="mb-8">
-          <Logo variant="full"/>
+          <Logo variant="full" />
         </div>
 
-        <div className="flex flex-col p-7 w-full max-w-md border border-gray-200 rounded-xl">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col p-7 w-full max-w-md border border-gray-200 rounded-xl"
+        >
           <div className="flex flex-col gap-0.5">
             <Text as={"h1"} size={"lg"} weight={"bold"}>
               Acesse o portal
@@ -24,16 +48,27 @@ export default function Login() {
           </div>
 
           <div className="my-10 flex flex-col gap-4">
-            <Input label="E-mail" type="email" placeholder="exemplo@mail.com" />
+            <Input
+              label="E-mail"
+              type="email"
+              placeholder="exemplo@mail.com"
+              {...register("email")}
+              error={errors.email?.message}
+            />
+
             <Input
               label="Senha"
               type="password"
               placeholder="Digite sua senha"
+              {...register("password")}
+              error={errors.password?.message}
             />
           </div>
 
-          <Button variant={"primary"}>Entrar</Button>
-        </div>
+          <Button variant={"primary"} type="submit">
+            Entrar
+          </Button>
+        </form>
 
         <div className="mt-3 flex flex-col gap-6 p-7 w-full max-w-md border border-gray-200 rounded-xl">
           <div className="flex flex-col gap-0.5">

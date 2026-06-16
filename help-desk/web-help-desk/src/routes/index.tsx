@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import {
   Login,
+  Register,
   AdminDashboard,
   ClientDashboard,
   TechnicianDashboard,
@@ -12,6 +13,8 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        
+        <Route path="/register" element={<Register />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
 

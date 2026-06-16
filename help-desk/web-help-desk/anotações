@@ -1,0 +1,38 @@
+🔑 Fase 4: Autenticação e Rotas
+- React Hook Form + Zod: Reat Hook Form serve como um gerente do formulário, sele ele teriamos que ficar criando estados para capturar email, senha e etc. Ele facilita a captura desses campos com o register.
+O zod valida os dados, ele valida para ver se existe um email valido, uma senha valida conforme definirmos no loginSchema e na API.
+
+O fluxo até aqui:
+  Usuário clica
+        ↓
+  React Hook Form coleta dados
+        ↓
+  Zod valida
+        ↓
+  Se válido → onSubmit
+  Se inválido → errors
+
+Criamos o loginSchema para centralizar as regras de validação
+
+Comunicação com a API com base no authService e APi
+
+A API sabe fazer requisição, o authService faz autenticação
+
+O fluxo até aqui:
+  Login Page
+      ↓
+  React Hook Form
+      ↓
+  Zod
+      ↓
+  onSubmit()
+      ↓
+  authService.login()
+      ↓
+  api.post("/sessions")
+      ↓
+  Backend
+      ↓
+  Token + User
+
+Resumo: React Hook Form + Zod servem para coletar e validar os dados do usuário. O api.ts é a infraestrutura de comunicação com o backend. O authService.ts encapsula a lógica de autenticação.
