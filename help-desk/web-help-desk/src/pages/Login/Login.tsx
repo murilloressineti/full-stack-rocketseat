@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { loginSchema, type LoginFormData } from "@/schemas/auth/loginSchema";
 
@@ -24,6 +27,8 @@ export default function Login() {
     try {
       const response = await signIn(data.email, data.password);
 
+      toast.success("Login realizado com sucesso!");
+
       switch (response.user.role) {
         case "admin":
           navigate("/admin");
@@ -37,9 +42,18 @@ export default function Login() {
           navigate("/technician");
           break;
       }
-      
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message;
+
+        if (message === "Invalid email or password") {
+          toast.error("E-mail ou senha inválidos");
+          return;
+        }
+
+        return;
+      }
+      toast.error("Erro inesperado");
     }
   }
 
