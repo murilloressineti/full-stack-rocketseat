@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 import { loginSchema, type LoginFormData } from "@/schemas/auth/loginSchema";
 
@@ -17,11 +18,26 @@ export default function Login() {
 
   const { signIn } = useAuth();
 
+  const navigate = useNavigate();
+
   async function onSubmit(data: LoginFormData) {
     try {
-      await signIn(data.email, data.password);
+      const response = await signIn(data.email, data.password);
 
-      console.log("Login realizado");
+      switch (response.user.role) {
+        case "admin":
+          navigate("/admin");
+          break;
+
+        case "client":
+          navigate("/client");
+          break;
+
+        case "technician":
+          navigate("/technician");
+          break;
+      }
+      
     } catch (error) {
       console.error(error);
     }

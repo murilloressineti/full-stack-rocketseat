@@ -17,6 +17,7 @@ const AuthContext = createContext({} as AuthContextData);
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AppUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -26,6 +27,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
+
+    setLoading(false);
   }, []);
 
   async function signIn(email: string, password: string) {
@@ -36,6 +39,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     localStorage.setItem("token", response.token);
     localStorage.setItem("user", JSON.stringify(response.user));
+
+    return response
   }
 
   function signOut() {
@@ -54,6 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signIn,
         signOut,
         isAuthenticated: !!user,
+        loading,
       }}
     >
       {children}
