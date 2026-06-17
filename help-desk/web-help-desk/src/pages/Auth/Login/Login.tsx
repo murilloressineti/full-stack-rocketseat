@@ -5,7 +5,7 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
-import { loginSchema, type LoginFormData } from "@/schemas/auth/loginSchema";
+import { loginSchema, type LoginFormData } from "@/schemas/auth";
 
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -64,13 +64,13 @@ export default function Login() {
     >
       {/* Login */}
       <section className="bg-bg-light h-full ml-auto md:rounded-tl-3xl flex flex-col w-full items-center justify-center lg:w-1/2 px-6 md:px-35 py-8 md:py-12">
-        <div className="mb-8">
+        <div className="mb-6">
           <Logo variant="full" />
         </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col p-7 w-full max-w-md border border-gray-200 rounded-xl"
+          className="flex flex-col p-6 w-full max-w-md border border-gray-200 rounded-xl"
         >
           <div className="flex flex-col gap-0.5">
             <Text as={"h1"} size={"lg"} weight={"bold"}>
@@ -81,7 +81,7 @@ export default function Login() {
             </Text>
           </div>
 
-          <div className="my-10 flex flex-col gap-4">
+          <div className="my-8 flex flex-col gap-4">
             <Input
               label="E-mail"
               type="email"
@@ -104,7 +104,7 @@ export default function Login() {
           </Button>
         </form>
 
-        <div className="mt-3 flex flex-col gap-6 p-7 w-full max-w-md border border-gray-200 rounded-xl">
+        <div className="mt-3 flex flex-col gap-6 p-6 w-full max-w-md border border-gray-200 rounded-xl">
           <div className="flex flex-col gap-0.5">
             <Text as={"h2"} size={"md"} weight={"bold"}>
               Ainda não tem uma conta?
@@ -114,7 +114,9 @@ export default function Login() {
             </Text>
           </div>
 
-          <Button variant={"secondary"}>Criar conta</Button>
+          <Button type="button" variant={"secondary"} onClick={() => navigate("/register")}>
+            Criar conta
+          </Button>
         </div>
       </section>
     </main>
