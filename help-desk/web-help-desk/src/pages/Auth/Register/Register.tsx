@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { registerSchema, type RegisterFormData } from "@/schemas/auth/";
+import { registerUser } from "@/services/authService";
 
 import { Background } from "@/assets/images";
 import { Button, Input, Logo, Text } from "@/components/ui";
@@ -17,8 +20,29 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  async function onSubmit() {
-    console.log();
+  async function onSubmit(data: RegisterFormData) {
+    try {
+      await registerUser(data);
+
+      toast.success("Conta criada com sucesso!");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message;
+
+        if (message === "User with same email already exists") {
+          toast.error("E-mail já cadastrado");
+          return;
+        }
+
+        return;
+      }
+
+      toast.error("Não foi possível criar a conta.");
+    }
   }
 
   return (

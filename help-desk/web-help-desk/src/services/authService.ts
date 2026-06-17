@@ -1,5 +1,6 @@
 import { api } from "./api";
 import type { UserRole } from "@/types";
+import type { RegisterData, RegisterResponse } from "@/types";
 
 export interface LoginRequest {
   email: string;
@@ -21,6 +22,14 @@ export interface LoginResponse {
 
 export async function login(data: LoginRequest): Promise<LoginResponse> {
   const response = await api.post("/sessions", data);
+
+  return response.data;
+}
+
+export async function registerUser(
+  data: RegisterData,
+): Promise<RegisterResponse> {
+  const response = await api.post("/users/public", data);
 
   return response.data;
 }

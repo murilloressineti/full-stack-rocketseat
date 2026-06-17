@@ -30,7 +30,7 @@
 - AuthContext ✅
 - Persistência de Sessão ✅
 - PrivateRoutes ✅
-- Botão Criar conta (page Register)
+- Page Register ✅
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin:
