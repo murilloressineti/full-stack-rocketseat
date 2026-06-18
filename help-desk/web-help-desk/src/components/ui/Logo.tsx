@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types";
-import { Icon, Text } from "../ui";
+import { Text } from "../ui";
 import { LogoLight, LogoDark } from "@assets/images";
 
 interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,13 +20,11 @@ export default function Logo({
   className,
   ...props
 }: LogoProps) {
+  const logoSrc = variant === "default" ? LogoLight : LogoDark;
+
   return (
     <div className={cn("flex items-center gap-3", className)} {...props}>
-      {variant === "default" ? (
-        <Icon svg={LogoLight} className="h-12 w-12" />
-      ) : (
-        <Icon svg={LogoDark} className="h-12 w-12" />
-      )}
+      <img src={logoSrc} alt="HelpDesk" className="h-10 w-10" />
 
       <div className="flex flex-col gap-1">
         <Text

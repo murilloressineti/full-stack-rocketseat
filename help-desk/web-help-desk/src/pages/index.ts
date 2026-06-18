@@ -1,5 +1,6 @@
-export { AdminDashboard } from "./AdminDashboard";
-export { ClientDashboard } from "./ClientDashboard";
+export { AdminDashboard } from "./Admin";
+export { AdminTechnicians } from "./Admin";
+export { ClientDashboard } from "./Client";
 export { Login } from "./Auth";
 export { Register } from "./Auth";
-export { TechnicianDashboard } from "./TechnicianDashboard";
+export { TechnicianDashboard } from "./Technician";

@@ -1,101 +1,122 @@
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { MobileHeader, Sidebar } from "../layout";
-import type { AppUser, UserRole, NavigationItem } from "@/types";
-import { BriefcaseBusiness, ClipboardList, Users, Wrench } from "@assets/icons";
+import {
+  BriefcaseBusiness,
+  ClipboardList,
+  Plus,
+  Users,
+  Wrench,
+} from "@assets/icons";
 
-interface AppLayoutProps {
-  role: UserRole;
-  user: AppUser;
-  items: NavigationItem[];
+export default function AppLayout() {
+  const { user, signOut } = useAuth();
 
-  activePath: string;
+  const navigate = useNavigate();
 
-  children: React.ReactNode;
+  const location = useLocation();
 
-  onNavigate?: (path: string) => void;
+  if (!user) {
+    return null;
+  }
 
-  onProfile?: () => void;
-  onLogout: () => void;
-}
+  const adminItems = [
+    {
+      label: "Chamados",
+      icon: ClipboardList,
+      href: "/admin/tickets",
+    },
+    {
+      label: "Técnicos",
+      icon: Users,
+      href: "/admin/technicians",
+    },
+    {
+      label: "Clientes",
+      icon: BriefcaseBusiness,
+      href: "/admin/clients",
+    },
+    {
+      label: "Serviços",
+      icon: Wrench,
+      href: "/admin/services",
+    },
+  ];
 
-export default function AppLayout({ children }: AppLayoutProps) {
+  const technicianItems = [
+    {
+      label: "Meus chamados",
+      icon: ClipboardList,
+      href: "/technician/tickets",
+    },
+  ];
+
+  const clientItems = [
+    {
+      label: "Meus chamados",
+      icon: ClipboardList,
+      href: "/client/tickets",
+    },
+    {
+      label: "Criar chamado",
+      icon: Plus,
+      href: "/client/new-tickets",
+    },
+  ];
+
+  const navigationItems = {
+    admin: adminItems,
+    technician: technicianItems,
+    client: clientItems,
+  };
+
+  const currentItems = navigationItems[user?.role];
+
+  function handleNavigate(path: string) {
+    navigate(path);
+  }
+
+  function handleLogout() {
+    signOut();
+    navigate("/");
+  }
+
   return (
     <div className="min-h-screen bg-bg-default">
       {/* Mobile */}
-      <div className="md:hidden">
+      <div className="md:hidden flex flex-col min-h-screen">
         <MobileHeader
-          role="admin"
-          activePath="/tickets"
-          user={{
-            name: "Murillo Silva",
-            email: "murillo@email.com",
-          }}
-          items={[
-            {
-              label: "Chamados",
-              icon: ClipboardList,
-              href: "/tickets",
-            },
-            {
-              label: "Técnicos",
-              icon: Users,
-              href: "/technicians",
-            },
-            {
-              label: "Clientes",
-              icon: BriefcaseBusiness,
-              href: "/technicians",
-            },
-            {
-              label: "Serviços",
-              icon: Wrench,
-              href: "/services",
-            },
-          ]}
-          onNavigate={(path: string) => console.log("Navegar:", path)}
+          role={user?.role}
+          activePath={location.pathname}
+          user={user}
+          items={currentItems}
+          onNavigate={handleNavigate}
           onProfile={() => console.log("Perfil")}
-          onLogout={() => console.log("Logout")}
+          onLogout={handleLogout}
         />
 
-        <main className="p-6">{children}</main>
+        <main className="flex-1 bg-bg-light px-6 pb-6 pt-7 rounded-t-3xl h-full">
+          <Outlet />
+        </main>
       </div>
 
       {/* Desktop */}
       <div className="hidden md:flex">
         <Sidebar
-          role="admin"
-          activePath="/tickets"
-          user={{
-            name: "Murillo Silva",
-            email: "murillo@email.com",
-          }}
-          items={[
-            {
-              label: "Chamados",
-              icon: ClipboardList,
-              href: "/tickets",
-            },
-            {
-              label: "Técnicos",
-              icon: Users,
-              href: "/technicians",
-            },
-            {
-              label: "Clientes",
-              icon: BriefcaseBusiness,
-              href: "/technicians",
-            },
-            {
-              label: "Serviços",
-              icon: Wrench,
-              href: "/services",
-            },
-          ]}
-          onNavigate={(path: string) => console.log(path)}
+          role={user?.role}
+          activePath={location.pathname}
+          user={user}
+          items={currentItems}
+          onNavigate={handleNavigate}
           onProfile={() => console.log("Perfil")}
-          onLogout={() => console.log("Logout")}
+          onLogout={handleLogout}
         />
 
-        <main className="flex-1 pt-3">{children}</main>
+        <main className="flex-1 pt-3">
+          <div className="bg-bg-light px-12 pb-12 pt-13 rounded-tl-3xl h-full">
+            <Outlet />
+          </div>
+        </main>
       </div>
     </div>
   );

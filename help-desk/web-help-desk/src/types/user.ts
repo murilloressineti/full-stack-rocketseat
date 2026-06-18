@@ -7,6 +7,9 @@ export interface AppUser {
   avatar?: string | null;
   role: UserRole;
 
+  availability?: string[];
+  mustChangePassword?: boolean;
+  
   createdAt?: string;
   updatedAt?: string;
 }

@@ -50,6 +50,9 @@
     - Listagem geral de chamados
     - Visualizar detalhes do chamado
     - Filtrar chamados por status
+  - Gestão de Clientes
+    - Listagem geral de clientes
+    - Visualizar detalhes do cliente
 
 - Dashboard Cliente
   - Abertura de chamado
@@ -75,10 +78,10 @@
     - Trocar senha
 
 - Regras de negócio
-  - Redirecionamento por role após login
-  - Bloqueio de acesso por role
-  - Logout
-  - Persistência de sessão
+  - Redirecionamento por role após login ✅
+  - Bloqueio de acesso por role ✅
+  - Logout ✅
+  - Persistência de sessão ✅
   - Alteração obrigatória de senha para técnicos recém-criados
 
 
