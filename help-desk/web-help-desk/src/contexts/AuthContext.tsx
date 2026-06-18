@@ -14,6 +14,7 @@ interface AuthProviderProps {
 
 const AuthContext = createContext({} as AuthContextData);
 
+// Com o contexto, podemos acessar o usuário e o token em qualquer componente da aplicação, sem precisar passar props manualmente. O contexto também fornece funções para fazer login e logout, além de um estado de carregamento para indicar quando a autenticação está sendo verificada.
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AppUser | null>(null);
   const [token, setToken] = useState<string | null>(null);

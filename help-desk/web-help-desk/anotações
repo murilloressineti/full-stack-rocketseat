@@ -1,5 +1,5 @@
 🔑 Fase 4: Autenticação e Rotas
-- React Hook Form + Zod: Reat Hook Form serve como um gerente do formulário, sele ele teriamos que ficar criando estados para capturar email, senha e etc. Ele facilita a captura desses campos com o register.
+- React Hook Form + Zod: Reat Hook Form serve como um gerente do formulário, sem ele teriamos que ficar criando estados para capturar email, senha e etc. Ele facilita a captura desses campos com o register.
 O zod valida os dados, ele valida para ver se existe um email valido, uma senha valida conforme definirmos no loginSchema e na API.
 
 O fluxo até aqui:

@@ -30,21 +30,57 @@
 - AuthContext ✅
 - Persistência de Sessão ✅
 - PrivateRoutes ✅
-- Page Register ✅
+- Controle de Roles ✅
+- Página de Cadastro ✅
+- Toasts de autenticação ✅
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
-- Dashboard Admin:
-  - CRUD de Técnicos (criação, listagem)
-  - CRUD de Serviços (criação, edição, soft delete)
-  - Listagem Geral de Chamados
+- Dashboard Admin
+  - CRUD de Técnicos
+    - Criar técnico
+    - Listar técnicos
+    - Editar técnico
+    - Excluir técnico
+  - CRUD de Serviços
+    - Criar serviço
+    - Listar serviços
+    - Editar serviço
+    - Soft delete de serviço
+  - Gestão de Chamados
+    - Listagem geral de chamados
+    - Visualizar detalhes do chamado
+    - Filtrar chamados por status
+
+- Dashboard Cliente
+  - Abertura de chamado
+    - Buscar serviços disponíveis
+    - Buscar técnicos disponíveis
+    - Criar chamado
+  - Meus chamados
+    - Listagem dos chamados do cliente
+    - Visualizar detalhes do chamado
+
 - Dashboard Técnico:
-  - Listagem de chamados atribuídos
-  - Edição de Perfil (upload de imagem)
-  - Ação: Iniciar Atendimento (status -> Em atendimento)
-  - Ação: Adicionar Serviços Extras e Encerrar (status -> Encerrado)
-- Dashboard Cliente:
-  - Histórico de chamados (Minha lista)
-  - Abertura de chamado (Select de técnico e serviço)
+  - Chamados atribuídos
+    - Listagem dos chamados recebidos
+    - Visualizar detalhes do chamado
+  - Atendimento
+    - Iniciar atendimento
+    - Alterar status para "Em atendimento"
+    - Adicionar serviços extras
+    - Encerrar chamado
+  - Perfil
+    - Editar perfil
+    - Upload de avatar
+    - Trocar senha
+
+- Regras de negócio
+  - Redirecionamento por role após login
+  - Bloqueio de acesso por role
+  - Logout
+  - Persistência de sessão
+  - Alteração obrigatória de senha para técnicos recém-criados
+
 
 📱 Fase 6: Refinamento e Interatividade
 - Implementar Toast notifications (feedback de sucesso/erro)
