@@ -1,3 +1,4 @@
+export { default as AvatarCircle } from "./AvatarCircle";
 export { default as BadgeStatus } from "./BadgeStatus";
 export { default as BadgeTime } from "./BadgeTime";
 export { default as Button } from "./Button";

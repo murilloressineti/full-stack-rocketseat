@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
+import { AvatarCircle, Icon, Text } from "../ui";
 import { CircleUser, LogOut } from "@assets/icons";
 
 export const userMenuTriggerVariants = cva(
@@ -22,7 +22,7 @@ interface UserMenuProps
     VariantProps<typeof userMenuTriggerVariants> {
   name: string;
   email: string;
-  avatar?: string;
+  avatar?: string | null;
 
   onProfile?: () => void;
   onLogout?: () => void;
@@ -47,14 +47,6 @@ export default function UserMenu({
     "top-right": "top-full right-0 mt-2",
   };
 
-  function getInitials(name: string) {
-    return name
-      .split(" ")
-      .slice(0, 2)
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase();
-  }
   return (
     <div className={cn("relative", className)} {...props}>
       <button
@@ -64,13 +56,7 @@ export default function UserMenu({
         )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <div
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-base group-hover:bg-blue-light group-hover:scale-105 transition-all duration-300"
-        >
-          <Text as="span" size="sm" textColor={"inverted"}>
-            {getInitials(name)}
-          </Text>
-        </div>
+        <AvatarCircle name={name} avatar={avatar}/>
 
         <div className="hidden md:flex flex-col gap-1 items-start">
           <Text as="span" size="sm" textColor={"inverted"}>
@@ -114,7 +100,7 @@ export default function UserMenu({
 
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 rounded-md p-2 transition-allduration-300 text-feedback-danger fill-feedback-danger hover:bg-gray-600 cursor-pointer"
+              className="flex items-center gap-2 rounded-md p-2 transition-all duration-300 text-feedback-danger fill-feedback-danger hover:bg-gray-600 cursor-pointer"
             >
               <Icon svg={LogOut} size={"md"} />
 
@@ -128,3 +114,5 @@ export default function UserMenu({
     </div>
   );
 }
+
+// Implementar saida do UserMenu clicando fora do menu. 

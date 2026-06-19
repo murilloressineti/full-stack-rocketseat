@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 export const textVariants = cva("font-sans leading-snug", {
   variants: {
     size: {
-      xxs: "text-[10px] uppercase font-bold",
+      xxs: "text-[10px] uppercase",
       xs: "text-xs",
       sm: "text-sm",
       md: "text-base",
-      lg: "text-xl font-bold",
-      xl: "text-2xl font-bold",
+      lg: "text-xl",
+      xl: "text-2xl",
     },
     textColor: {
       default: "",
