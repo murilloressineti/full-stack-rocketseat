@@ -2,6 +2,7 @@ import { AvatarCircle, BadgeTime, Button, Icon, Text } from "@/components/ui";
 import { PenLine } from "@/assets/icons";
 
 interface TechnicianRowProps {
+  id: string;
   name: string;
   email: string;
   avatar?: string | null;
@@ -10,6 +11,7 @@ interface TechnicianRowProps {
 }
 
 export default function TechnicianRow({
+  id,
   name,
   email,
   avatar,

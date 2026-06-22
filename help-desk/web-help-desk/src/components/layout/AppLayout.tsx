@@ -24,22 +24,22 @@ export default function AppLayout() {
     {
       label: "Chamados",
       icon: ClipboardList,
-      href: "/admin/tickets",
+      href: "/admin/chamados",
     },
     {
       label: "Técnicos",
       icon: Users,
-      href: "/admin/technicians",
+      href: "/admin/tecnicos",
     },
     {
       label: "Clientes",
       icon: BriefcaseBusiness,
-      href: "/admin/clients",
+      href: "/admin/clientes",
     },
     {
       label: "Serviços",
       icon: Wrench,
-      href: "/admin/services",
+      href: "/admin/servicos",
     },
   ];
 
@@ -47,7 +47,7 @@ export default function AppLayout() {
     {
       label: "Meus chamados",
       icon: ClipboardList,
-      href: "/technician/tickets",
+      href: "/tecnico/chamados",
     },
   ];
 
@@ -55,12 +55,12 @@ export default function AppLayout() {
     {
       label: "Meus chamados",
       icon: ClipboardList,
-      href: "/client/tickets",
+      href: "/cliente/chamados",
     },
     {
       label: "Criar chamado",
       icon: Plus,
-      href: "/client/new-tickets",
+      href: "/cliente/novo-chamado",
     },
   ];
 

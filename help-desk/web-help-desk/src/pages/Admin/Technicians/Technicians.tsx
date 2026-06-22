@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { getTechnicians } from "@/services";
 import type { Technician } from "@/types";
 
@@ -17,6 +19,8 @@ type TechnicianListItem = {
 export default function AdminTechnicians() {
   const [technicians, setTechnicians] = useState<TechnicianListItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadTechnicians() {
@@ -55,7 +59,11 @@ export default function AdminTechnicians() {
           Técnicos
         </Text>
 
-        <Button size={"xs"} className="md:py-2.5 md:px-4">
+        <Button
+          size={"xs"}
+          className="md:py-2.5 md:px-4"
+          onClick={() => navigate(`/admin/tecnicos/criar-tecnico`)}
+        >
           <Icon svg={Plus}></Icon>
           <Text weight={"bold"} className="hidden md:flex">
             Novo
@@ -82,11 +90,16 @@ export default function AdminTechnicians() {
           technicians.map((technician) => (
             <TechnicianRow
               key={technician.id}
+              id={technician.id}
               name={technician.name}
               email={technician.email}
               avatar={technician.avatar}
               availability={technician.availability}
-              onEdit={() => console.log("Editar técnico:", technician.id)}
+              onEdit={() =>
+                navigate(`/admin/tecnicos/${technician.id}/editar`, {
+                  state: { technician },
+                })
+              }
             />
           ))
         ) : (

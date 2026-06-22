@@ -1,14 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoutes";
 
+import { Login, Register } from "@/pages/Auth";
 import {
-  Login,
-  Register,
   AdminDashboard,
   AdminTechnicians,
-  ClientDashboard,
-  TechnicianDashboard,
-} from "@/pages";
+  TechnicianEdit,
+  TechnicianNew,
+} from "@/pages/Admin";
+import { ClientDashboard } from "@/pages/Client";
+import { TechnicianDashboard } from "@/pages/Technician";
 
 import { AppLayout } from "@/components/layout";
 
@@ -18,7 +19,7 @@ export default function AppRoutes() {
       <Routes>
         {/* Públicas */}
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/cadastro" element={<Register />} />
 
         <Route
           path="/admin"
@@ -30,11 +31,13 @@ export default function AppRoutes() {
         >
           <Route index element={<AdminDashboard />} />
 
-          <Route path="technicians" element={<AdminTechnicians />} />
+          <Route path="tecnicos" element={<AdminTechnicians />} />
+          <Route path="tecnicos/:id/editar" element={<TechnicianEdit />} />
+          <Route path="tecnicos/criar-tecnico" element={<TechnicianNew />} />
         </Route>
 
         <Route
-          path="/client"
+          path="/cliente"
           element={
             <PrivateRoute allowedRoles={["client"]}>
               <AppLayout />
@@ -45,7 +48,7 @@ export default function AppRoutes() {
         </Route>
 
         <Route
-          path="/technician"
+          path="/tecnico"
           element={
             <PrivateRoute allowedRoles={["technician"]}>
               <AppLayout />

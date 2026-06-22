@@ -35,11 +35,11 @@ export default function Login() {
           break;
 
         case "client":
-          navigate("/client");
+          navigate("/cliente");
           break;
 
         case "technician":
-          navigate("/technician");
+          navigate("/tecnico");
           break;
       }
     } catch (error) {
@@ -114,7 +114,7 @@ export default function Login() {
             </Text>
           </div>
 
-          <Button type="button" variant={"secondary"} onClick={() => navigate("/register")}>
+          <Button type="button" variant={"secondary"} onClick={() => navigate("/cadastro")}>
             Criar conta
           </Button>
         </div>
