@@ -1,5 +1,5 @@
 import { api } from "./api";
-import type { AppUser } from "@/types";
+import type { Technician } from "@/types";
 
 interface CreateTechnicianData {
   name: string;
@@ -7,8 +7,8 @@ interface CreateTechnicianData {
 }
 
 // Listar técnicos
-export async function getTechnicians(): Promise<AppUser[]> {
-  const response = await api.get<AppUser[]>("/users");
+export async function getTechnicians(): Promise<Technician[]> {
+  const response = await api.get<Technician[]>("/users");
 
   return response.data.filter((user) => user.role === "technician");
 }

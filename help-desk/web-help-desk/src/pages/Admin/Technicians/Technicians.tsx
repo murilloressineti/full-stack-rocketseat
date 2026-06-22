@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { getTechnicians } from "@/services";
-import type { AppUser } from "@/types";
+import type { Technician } from "@/types";
 
-import { AvatarCircle, Button, BadgeTime, Icon, Text } from "@/components/ui";
-import { PenLine, Plus } from "@/assets/icons";
+import { Button, Icon, Text } from "@/components/ui";
+import TechnicianRow from "./components/TechniciansRow";
+import { Plus } from "@/assets/icons";
 
-interface TechnicianProps {
+type TechnicianListItem = {
+  id: string;
   name: string;
+  email: string;
   avatar?: string | null;
-}
+  availability: string[];
+};
 
-export default function AdminTechnicians({ name, avatar }: TechnicianProps) {
-  const [technicians, setTechnicians] = useState<AppUser[]>([]);
+export default function AdminTechnicians() {
+  const [technicians, setTechnicians] = useState<TechnicianListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,9 +23,19 @@ export default function AdminTechnicians({ name, avatar }: TechnicianProps) {
       try {
         const data = await getTechnicians();
 
-        setTechnicians(data);
+        const formattedTechnicians: TechnicianListItem[] = data.map(
+          (technician: Technician) => ({
+            id: technician.id,
+            name: technician.name,
+            email: technician.email,
+            avatar: technician.avatar ?? null,
+            availability: technician.availability ?? [],
+          }),
+        );
+
+        setTechnicians(formattedTechnicians);
       } catch (error) {
-        console.error(error);
+        console.error("Erro ao carregar técnicos:", error);
       } finally {
         setLoading(false);
       }
@@ -63,40 +77,24 @@ export default function AdminTechnicians({ name, avatar }: TechnicianProps) {
           <div />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-[2fr_1.5fr_1.75fr_0.15fr] border-b border-gray-200 px-4 py-4 items-center">
-          <div className="flex items-center gap-3">
-            <AvatarCircle name={name} avatar={avatar} />
-            <Text weight="bold">Carlos Silva</Text>
+        {/* Lista */}
+        {technicians.length > 0 ? (
+          technicians.map((technician) => (
+            <TechnicianRow
+              key={technician.id}
+              name={technician.name}
+              email={technician.email}
+              avatar={technician.avatar}
+              availability={technician.availability}
+              onEdit={() => console.log("Editar técnico:", technician.id)}
+            />
+          ))
+        ) : (
+          <div className="px-4 py-6">
+            <Text textColor="secondary">Nenhum técnico cadastrado.</Text>
           </div>
-
-          <Text className="hidden md:flex">carlos.silva@test.com</Text>
-
-          <div className="flex gap-1">
-            <BadgeTime variant={"disabled"}>08:00</BadgeTime>
-            <BadgeTime variant={"disabled"}>09:00</BadgeTime>
-            <BadgeTime variant={"disabled"}>10:00</BadgeTime>
-            <BadgeTime variant={"disabled"}>11:00</BadgeTime>
-            <BadgeTime variant={"disabled"}>+4</BadgeTime>
-          </div>
-
-          <Button variant={"secondary"} size={"xs"}>
-            <Icon svg={PenLine} size={"xs"}></Icon>
-          </Button>
-        </div>
+        )}
       </div>
-
-      {technicians.map((technician) => (
-        <div key={technician.id}>
-          <p>{technician.name}</p>
-          <p>{technician.email}</p>
-        </div>
-      ))}
     </div>
   );
 }
-
-// 1.Criar TechnicianRow
-// 2.Criar AvatarCircle ✅
-// 3.Fazer o row receber um objeto mockado
-// 4.Fazer desktop e mobile ficarem visualmente idênticos ao Figma
-// 5.Só depois trocar os mocks por: .map(...)
