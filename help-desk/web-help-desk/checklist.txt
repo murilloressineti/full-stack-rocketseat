@@ -38,9 +38,9 @@
 - Dashboard Admin
   - CRUD de Técnicos
     - Criar técnico
-    - Listar técnicos
-    - Editar técnico
-    - Excluir técnico
+    - Listar técnicos ✅
+    - Editar técnico ✅
+    - Excluir técnico ✅
   - CRUD de Serviços
     - Criar serviço
     - Listar serviços

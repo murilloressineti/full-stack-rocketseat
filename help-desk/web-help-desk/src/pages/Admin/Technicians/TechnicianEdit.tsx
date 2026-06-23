@@ -131,6 +131,7 @@ export default function TechnicianEdit() {
           <Button
             variant="secondary"
             size="xs"
+            className="md:py-2.5 md:px-4"
             onClick={() => toast.dismiss(t)}
           >
             Continuar editando
@@ -138,6 +139,7 @@ export default function TechnicianEdit() {
 
           <Button
             size="xs"
+            className="md:py-2.5 md:px-4"
             onClick={() => {
               toast.dismiss(t);
               goBackToTechnicians();

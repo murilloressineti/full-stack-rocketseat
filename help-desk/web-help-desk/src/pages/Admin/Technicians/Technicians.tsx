@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
-import { getTechnicians } from "@/services";
+import { getTechnicians, deleteTechnician } from "@/services";
 import type { Technician } from "@/types";
 
 import { Button, Icon, Text } from "@/components/ui";
@@ -48,6 +49,59 @@ export default function AdminTechnicians() {
     loadTechnicians();
   }, []);
 
+  async function handleDeleteTechnician(id: string) {
+    try {
+      await deleteTechnician(id);
+
+      setTechnicians((prev) =>
+        prev.filter((technician) => technician.id !== id),
+      );
+
+      toast.success("Técnico excluído com sucesso!");
+    } catch (error) {
+      console.log("Erro ao excluir técnico", error);
+      toast.error("Não foi possível excluir o técnico.");
+    }
+  }
+
+  function handleConfirmDelete(technician: TechnicianListItem) {
+    toast.custom((t) => (
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <Text weight="bold">Excluir técnico</Text>
+            <Text size="sm" textColor="secondary">
+              Tem certeza que deseja excluir <strong>{technician.name}</strong>?
+              Essa ação não poderá ser desfeita.
+            </Text>
+          </div>
+
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="secondary"
+              size="xs"
+              className="md:py-2.5 md:px-4"
+              onClick={() => toast.dismiss(t)}
+            >
+              Cancelar
+            </Button>
+
+            <Button
+              size="xs"
+              className="md:py-2.5 md:px-4"
+              onClick={async () => {
+                toast.dismiss(t);
+                await handleDeleteTechnician(technician.id);
+              }}
+            >
+              Excluir
+            </Button>
+          </div>
+        </div>
+      </div>
+    ));
+  }
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -72,7 +126,7 @@ export default function AdminTechnicians() {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200">
-        <div className="grid grid-cols-2 md:grid-cols-[2fr_1.5fr_1.90fr] border-b border-gray-200 px-4 py-4">
+        <div className="grid grid-cols-[2fr_3fr] md:grid-cols-[1.8fr_1.4fr_2fr_0.5fr] border-b border-gray-200 px-4 py-4">
           <Text weight="bold" textColor={"tertiary"}>
             Nome
           </Text>
@@ -101,6 +155,7 @@ export default function AdminTechnicians() {
                   state: { technician },
                 })
               }
+              onDelete={() => handleConfirmDelete(technician)}
             />
           ))
         ) : (

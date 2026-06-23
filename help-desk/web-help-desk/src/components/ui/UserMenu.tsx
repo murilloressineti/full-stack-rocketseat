@@ -63,7 +63,7 @@ export default function UserMenu({
             {name}
           </Text>
 
-          <Text as="span" size="xs" textColor={"tertiary"} className="truncate w-30">
+          <Text as="span" size="xs" textColor={"tertiary"} className="text-start truncate w-30">
             {email}
           </Text>
         </div>

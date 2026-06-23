@@ -13,6 +13,16 @@ interface UpdateTechnicianData {
   avatar?: string | null;
 }
 
+// Criar técnico
+export async function createTechnician(data: CreateTechnicianData) {
+  const response = await api.post("/users", {
+    ...data,
+    role: "technician",
+  });
+
+  return response.data;
+}
+
 // Listar técnicos
 export async function getTechnicians(): Promise<Technician[]> {
   const response = await api.get<Technician[]>("/users");
@@ -29,12 +39,7 @@ export async function updateTechnician(
   return response.data;
 }
 
-// Criar técnico
-export async function createTechnician(data: CreateTechnicianData) {
-  const response = await api.post("/users", {
-    ...data,
-    role: "technician",
-  });
-
-  return response.data;
+// Excluir técnico
+export async function deleteTechnician(id: string): Promise<void> {
+  await api.delete(`/users/${id}`);
 }
