@@ -36,8 +36,8 @@
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin
-  - CRUD de Técnicos
-    - Criar técnico
+  - CRUD de Técnicos ✅
+    - Criar técnico ✅
     - Listar técnicos ✅
     - Editar técnico ✅
     - Excluir técnico ✅

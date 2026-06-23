@@ -9,13 +9,16 @@ interface CreateTechnicianData {
 interface UpdateTechnicianData {
   name: string;
   email: string;
+  password?: string;
   availability: string[];
   avatar?: string | null;
 }
 
 // Criar técnico
-export async function createTechnician(data: CreateTechnicianData) {
-  const response = await api.post("/users", {
+export async function createTechnician(
+  data: CreateTechnicianData,
+): Promise<Technician> {
+  const response = await api.post<Technician>("/users", {
     ...data,
     role: "technician",
   });

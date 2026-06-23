@@ -13,6 +13,7 @@ import {
 } from "@/components/ui";
 import { ArrowLeft } from "@/assets/icons";
 
+// Definição dos horários de atendimento
 type ShiftSection = {
   label: string;
   times: string[];
@@ -99,6 +100,7 @@ export default function TechnicianEdit() {
     );
   }, [name, email, selectedAvailability, initialTechnician]);
 
+  // Função para alternar a seleção de um horário.
   function toggleTime(time: string) {
     setSelectedAvailability((prev) =>
       prev.includes(time)
@@ -107,10 +109,12 @@ export default function TechnicianEdit() {
     );
   }
 
+  // Função para voltar à lista de técnicos
   function goBackToTechnicians() {
     navigate("/admin/tecnicos");
   }
 
+  // Função para lidar com o cancelamento da edição do técnico.
   function handleCancel() {
     if (!isDirty) {
       goBackToTechnicians();
@@ -152,6 +156,7 @@ export default function TechnicianEdit() {
     ));
   }
 
+  // Função para lidar com o salvamento do técnico
   async function handleSave() {
     if (!id || !technician) return;
 
@@ -249,7 +254,7 @@ export default function TechnicianEdit() {
       </div>
 
       {/* Conteúdo */}
-      <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[360px_1fr]">
+      <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[360px_1fr] items-start">
         {/* Card: Dados pessoais */}
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
           <div className="mb-6 flex flex-col gap-1">
@@ -277,7 +282,6 @@ export default function TechnicianEdit() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="placeholder:text-text-primary"
             />
 
             <Input
@@ -285,7 +289,6 @@ export default function TechnicianEdit() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="placeholder:text-text-primary"
             />
           </div>
         </section>

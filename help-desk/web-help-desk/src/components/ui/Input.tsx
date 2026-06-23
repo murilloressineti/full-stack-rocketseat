@@ -9,7 +9,7 @@ export const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-gray-300 focus:border-blue-base caret-blue-base",
+        default: "border-gray-200 focus:border-blue-base caret-blue-base",
         error: "border-feedback-danger caret-feedback-danger",
       },
     },
