@@ -95,6 +95,7 @@ export default function AdminTechnicians() {
               email={technician.email}
               avatar={technician.avatar}
               availability={technician.availability}
+              // onEdit é a função que será chamada quando o usuário clicar no botão de editar na linha do técnico. Ela navega para a rota de edição do técnico, passando o ID do técnico e os dados do técnico como estado.
               onEdit={() =>
                 navigate(`/admin/tecnicos/${technician.id}/editar`, {
                   state: { technician },
