@@ -5,7 +5,7 @@ import { Icon, Text } from "../ui";
 import { CircleAlert, CircleCheckBig, CircleHelp, Clock } from "@assets/icons";
 
 export const badgeStatusVariants = cva(
-  "py-1.5 px-2 rounded-full w-fit inline-flex items-center justify-center",
+  "inline-flex items-center justify-center rounded-full h-8 w-8 md:h-auto md:w-fit md:px-2 md:py-1.5",
   {
     variants: {
       variant: {
@@ -45,12 +45,13 @@ export default function BadgeStatus({
 
   return (
     <div className={cn(badgeStatusVariants({ variant, className }))} {...props}>
-      <div className="flex gap-1.5">
+      <div className="flex items-center justify-center gap-1.5">
         <Icon svg={currentIcon}></Icon>
+
         {React.Children.map(children, (child) => {
           if (typeof child === "string") {
             return (
-              <Text as={"span"} size={"xs"} weight={"bold"}>
+              <Text as={"span"} size={"xs"} weight={"bold"} className="hidden md:flex">
                 {child}
               </Text>
             );

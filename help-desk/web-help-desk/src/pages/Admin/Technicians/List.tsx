@@ -6,7 +6,7 @@ import { getTechnicians, deleteTechnician } from "@/services";
 import type { Technician } from "@/types";
 
 import { Button, Icon, Text } from "@/components/ui";
-import TechnicianRow from "./components/TechniciansRow";
+import TechnicianRow from "./components/TechnicianRow";
 import { Plus } from "@/assets/icons";
 
 type TechnicianListItem = {

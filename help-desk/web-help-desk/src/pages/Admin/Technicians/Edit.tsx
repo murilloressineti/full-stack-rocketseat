@@ -221,7 +221,8 @@ export default function AdminTechnicianEdit() {
           <Text
             size="sm"
             weight="bold"
-            className="text-gray-400 group-hover:text-gray-300"
+            textColor={"quaternary"}
+            className="group-hover:text-gray-300"
           >
             Voltar
           </Text>
@@ -262,7 +263,7 @@ export default function AdminTechnicianEdit() {
               Dados pessoais
             </Text>
 
-            <Text className="text-gray-400">
+            <Text textColor={"quaternary"}>
               Defina as informações do perfil de técnico
             </Text>
           </div>
@@ -300,7 +301,7 @@ export default function AdminTechnicianEdit() {
               Horários de atendimento
             </Text>
 
-            <Text className="text-gray-400">
+            <Text textColor={"quaternary"}>
               Selecione os horários de disponibilidade do técnico para
               atendimento
             </Text>
@@ -313,7 +314,8 @@ export default function AdminTechnicianEdit() {
                   as="span"
                   size="xs"
                   weight="bold"
-                  className="uppercase tracking-wide text-gray-400"
+                  textColor={"quaternary"}
+                  className="uppercase tracking-wide"
                 >
                   {section.label}
                 </Text>

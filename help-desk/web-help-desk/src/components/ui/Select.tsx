@@ -48,7 +48,7 @@ export default function Select({
               "uppercase transition-colors duration-300",
               hasError
                 ? "text-feedback-danger"
-                : "text-gray-400 group-focus-within:text-blue-base",
+                : "text-text-quaternary group-focus-within:text-blue-base",
             )}
           >
             {label}

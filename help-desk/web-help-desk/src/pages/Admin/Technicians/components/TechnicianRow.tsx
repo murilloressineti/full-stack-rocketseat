@@ -58,10 +58,11 @@ export default function TechnicianRow({
           )}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex justify-end gap-2">
           <Button variant="secondary" size="xs" onClick={onDelete}>
             <Icon svg={Trash} size="xs" className="fill-feedback-danger" />
           </Button>
+          
           <Button variant="secondary" size="xs" onClick={onEdit}>
             <Icon svg={PenLine} size="xs" />
           </Button>

@@ -17,6 +17,7 @@ export const textVariants = cva("font-sans leading-snug", {
       primary: "text-text-primary",
       secondary: "text-text-secondary",
       tertiary: "text-text-tertiary",
+      quaternary: "text-text-quaternary",
       inverted: "text-text-inverted",
       blueBase: "text-blue-base",
       blueDark: "text-blue-dark",
