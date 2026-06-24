@@ -13,7 +13,7 @@ servicesRoutes.use(ensureAuthenticated);
 servicesRoutes.post(
   "/",
   verifyUserAuthorization(["admin"]),
-  servicesController.create
+  servicesController.create,
 );
 
 // Listar serviços — qualquer usuário logado (ou poderia restringir só admin se quiser)
@@ -23,14 +23,21 @@ servicesRoutes.get("/", servicesController.index);
 servicesRoutes.put(
   "/:id",
   verifyUserAuthorization(["admin"]),
-  servicesController.update
+  servicesController.update,
 );
 
 // Desativar serviço (soft delete) — apenas admin
 servicesRoutes.delete(
   "/:id",
   verifyUserAuthorization(["admin"]),
-  servicesController.deactivate
+  servicesController.deactivate,
+);
+
+// Reativar serviço — apenas admin
+servicesRoutes.patch(
+  "/:id/reactivate",
+  verifyUserAuthorization(["admin"]),
+  servicesController.reactivate,
 );
 
 export { servicesRoutes };

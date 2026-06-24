@@ -1,14 +1,15 @@
 type: collection.insomnia.rest/5.0
+schema_version: "5.1"
 name: Help Desk
 meta:
-  id: wrk_f449ba8015664a8182aad3397feed4ba
-  created: 1759781610578
-  modified: 1759781610578
+  id: wrk_bc24b95e502241cf8d25ca7feb435b84
+  created: 1780586394201
+  modified: 1780586394201
   description: ""
 collection:
   - name: Users
     meta:
-      id: fld_4ec5dcf9b87e44e783686ba596eac215
+      id: fld_f1e18e39a2ce41d0ac02b42cca320227
       created: 1759781651736
       modified: 1759781777912
       sortKey: -1759781651736
@@ -17,9 +18,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Create
         meta:
-          id: req_5124d3b1959b4b198693773e16ba7815
+          id: req_3ea09e33fa124e6da25aeab7424ae3ce
           created: 1759781788321
-          modified: 1760627761237
+          modified: 1782240938664
           isPrivate: false
           description: ""
           sortKey: -1759781788321
@@ -28,8 +29,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name": "Joaquina",
-            	"email": "joaquina@email.com",
+            	"name": "Teste para excluir 3",
+            	"email": "teste3@email.com",
             	"password": "123456",
             	"role": "technician"
             }
@@ -40,7 +41,8 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          disabled: false
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -53,9 +55,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Index
         meta:
-          id: req_7032191c1b4c40dc89235979dc84b219
+          id: req_211585db56014a0886b353660694f33c
           created: 1760539928999
-          modified: 1760548594584
+          modified: 1780590605728
           isPrivate: false
           description: ""
           sortKey: -1760539928999
@@ -65,7 +67,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -76,12 +78,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/0ce79d20-105e-4fa6-b60f-e6139687f3ae"
+          }}/a8df8c66-887b-4eb7-8963-da1a7561b80f"
         name: Update
         meta:
-          id: req_cf7a53e0cd50438aa539748a44df89e7
+          id: req_f38d0cf3d46e41fca34e19a6b762f6d8
           created: 1760541632862
-          modified: 1760548599094
+          modified: 1782166273755
           isPrivate: false
           description: ""
           sortKey: -1760539929099
@@ -95,7 +97,7 @@ collection:
             	"password": "123456",
             	"role": "technician",
               "availability": ["08:00", "09:00", "10:00"],
-              "avatar": "https://exemplo.com/imagem.jpg"
+            	"avatar": null
             }
         headers:
           - name: Content-Type
@@ -104,7 +106,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -115,12 +117,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/68dd3830-9ee5-45e4-8173-38a2c4e5c838"
+          }}/437a490a-fdf5-4526-b634-c043d56b8967"
         name: Delete
         meta:
-          id: req_08e2914fd95f48b2a99b8c505ead26ad
+          id: req_11acd22bac9240c5bed78b3f5bed2370
           created: 1760548829205
-          modified: 1760553383398
+          modified: 1782152372010
           isPrivate: false
           description: ""
           sortKey: -1760548829205
@@ -130,7 +132,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -143,7 +145,7 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}/public"
         name: Public
         meta:
-          id: req_2b246a494a524026bc0f4823b9d34935
+          id: req_5a596282ca8d470cadce5a5d5395d576
           created: 1760550406598
           modified: 1760551175590
           isPrivate: false
@@ -176,7 +178,7 @@ collection:
         RESOURCE: users
   - name: Sessions
     meta:
-      id: fld_c4fa3d98adde48d8bebabb2e6f021233
+      id: fld_206403411d3b4d5d91ca3d5350514279
       created: 1760016889626
       modified: 1760016918441
       sortKey: -1760016889626
@@ -185,9 +187,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Create
         meta:
-          id: req_421206d59238446ba58392c2a7dcc8fe
+          id: req_824cc4f9b4be4c13beafa88da0b1c76e
           created: 1760016892437
-          modified: 1760634430300
+          modified: 1780690254192
           isPrivate: false
           description: ""
           sortKey: -1760016892437
@@ -217,7 +219,7 @@ collection:
         RESOURCE: sessions
   - name: Services
     meta:
-      id: fld_00fc244f8da943178f4d51f84dc66fc4
+      id: fld_f32ee14f889e42f0a0f0b37ca62e9a98
       created: 1760031713797
       modified: 1760031733711
       sortKey: -1760031713797
@@ -226,9 +228,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Create
         meta:
-          id: req_dc1ef7c1b2aa43338087469e56682ae1
+          id: req_ea391064d0be45e2859b903a289ff62c
           created: 1760031738354
-          modified: 1760552179164
+          modified: 1782327397064
           isPrivate: false
           description: ""
           sortKey: -1760031738354
@@ -237,8 +239,8 @@ collection:
           mimeType: application/json
           text: |
             {
-              "name": "Criação",
-            	"description": "Criação",
+              "name": "Criação para reativar",
+            	"description": "Criação para reativar",
               "price": 300
             }
         headers:
@@ -248,7 +250,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -261,9 +263,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Index
         meta:
-          id: req_a3e3960f419c4a1e894cee577b7fd32c
+          id: req_f54c15b9a54c46f19dfda636c9823e66
           created: 1760551942159
-          modified: 1760551993834
+          modified: 1782327222274
           isPrivate: false
           description: ""
           sortKey: -1760031738454
@@ -273,7 +275,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -284,12 +286,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/a43bd341-1df7-451c-b18a-e20032a6c139"
+          }}/68bc9d1f-1fa6-4333-9f8b-38f63fd49d3d"
         name: Update
         meta:
-          id: req_3f14a798c4ba4a79a9ba2a133428a2f7
+          id: req_1d0ce9372d074b60a58077664e375cd1
           created: 1760553004162
-          modified: 1760553112002
+          modified: 1780689718931
           isPrivate: false
           description: ""
           sortKey: -1760553004162
@@ -308,7 +310,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
         settings:
           renderRequestBody: true
@@ -319,12 +321,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/8a897648-4e06-4b89-a20c-c6eaa8d219c9"
+          }}/dbfc137a-a43f-4873-b1d4-35d01fc86ac2"
         name: Delete
         meta:
-          id: req_ed0253f884ff40f19ac494fc5e448575
+          id: req_14e568a5b5a642bc920cdc5b40729f1f
           created: 1760553335125
-          modified: 1760554056444
+          modified: 1782327409241
           isPrivate: false
           description: ""
           sortKey: -1760553335125
@@ -334,8 +336,31 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
+          }}/dbfc137a-a43f-4873-b1d4-35d01fc86ac2/reactivate"
+        name: Reactivate
+        meta:
+          id: req_6faa21e90bf341d5a107f3c20e1cbbb7
+          created: 1782327157059
+          modified: 1782327471347
+          isPrivate: false
+          description: ""
+          sortKey: -1782327157059
+        method: PATCH
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
+            'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -349,7 +374,7 @@ collection:
         RESOURCE: services
   - name: Tickets
     meta:
-      id: fld_bd3a6cd2e5fc457882a39b325fe2a3aa
+      id: fld_dcd6a00435eb423390049d918bb119cc
       created: 1760557781446
       modified: 1760558142743
       sortKey: -1760557781446
@@ -358,9 +383,9 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Create
         meta:
-          id: req_bc385ef1b1ed481091e3d7e371727612
+          id: req_a7d927e82b094d4693c356683e8a3f4d
           created: 1760557805257
-          modified: 1760627802648
+          modified: 1780689823631
           isPrivate: false
           description: ""
           sortKey: -1760557808523
@@ -371,10 +396,10 @@ collection:
             {
               "title": "Chamado da Maria",
               "description": "Chamado da Maria",
-              "technicianId": "597a2902-8a82-4b46-89bd-55dfdecf0d65",
+              "technicianId": "437a490a-fdf5-4526-b634-c043d56b8967",
               "services": [
                 {
-                  "serviceId": "8a897648-4e06-4b89-a20c-c6eaa8d219c9",
+                  "serviceId": "07279b27-a924-4717-8e01-3598b701cb94",
                   "quantity": 1
                 }
               ]
@@ -386,7 +411,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -399,7 +424,7 @@ collection:
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE }}"
         name: Index
         meta:
-          id: req_eb859abedb704dc09dd1999d2ad44dfb
+          id: req_88bb4c2cc75b48ba889ab666903fa612
           created: 1760627431795
           modified: 1760627462366
           isPrivate: false
@@ -411,7 +436,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -422,12 +447,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/4ebe330c-51d9-41f4-bc36-3d94d1554b3c"
+          }}/0dbc8189-4fe4-4121-864c-fc1fa2f695ef"
         name: Update
         meta:
-          id: req_cc8b4b7e2e444502a8366ae6d9794d0e
+          id: req_bddb5dd76bb54eb1b33555c7b3fa8213
           created: 1760627960931
-          modified: 1760628945401
+          modified: 1780689894146
           isPrivate: false
           description: ""
           sortKey: -1760627960931
@@ -445,7 +470,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -456,12 +481,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/4ebe330c-51d9-41f4-bc36-3d94d1554b3c/services"
+          }}/027a606a-0208-4c4a-bef1-069fe1c1e6a9/services"
         name: Create Service
         meta:
-          id: req_93f473308f774c628f864218af927adc
+          id: req_bfcfff19b0214ad494ea36006ca7fe1f
           created: 1760633963475
-          modified: 1760634139800
+          modified: 1780690168634
           isPrivate: false
           description: ""
           sortKey: -1760633963475
@@ -470,7 +495,7 @@ collection:
           mimeType: application/json
           text: |
             {
-              "serviceId": "98ea0cb6-a801-47aa-9c17-01f38b934869",
+              "serviceId": "07279b27-a924-4717-8e01-3598b701cb94",
               "quantity": 1
             }
         headers:
@@ -480,7 +505,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -491,12 +516,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/4ebe330c-51d9-41f4-bc36-3d94d1554b3c"
+          }}/027a606a-0208-4c4a-bef1-069fe1c1e6a9"
         name: Delete
         meta:
-          id: req_67c3926bfbba4ee68ef45992e3722f1f
+          id: req_54c647fc457f4c98b25f484b44aeb1e6
           created: 1760634223592
-          modified: 1760634422808
+          modified: 1780690209882
           isPrivate: false
           description: ""
           sortKey: -1760634223592
@@ -506,7 +531,7 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_421206d59238446ba58392c2a7dcc8fe',
+          token: "{% response 'body', 'req_824cc4f9b4be4c13beafa88da0b1c76e',
             'b64::JC50b2tlbg==::46b', 'always', 60 %}"
         settings:
           renderRequestBody: true
@@ -522,25 +547,36 @@ collection:
 cookieJar:
   name: Default Jar
   meta:
-    id: jar_062bf1b38c17d9ffbc77cbb116340d337388992b
+    id: jar_ead5263d003540fd9b037ef0821e7d92
     created: 1759781610602
     modified: 1759781610602
 environments:
   name: Base Environment
   meta:
-    id: env_062bf1b38c17d9ffbc77cbb116340d337388992b
+    id: env_3bd01acf85fd4702b17f55a7a36223d2
     created: 1759781610596
     modified: 1759781717094
     isPrivate: false
   subEnvironments:
     - name: dev
       meta:
-        id: env_63fd041222804416886a3590d7ea9998
+        id: env_d9667f7f5cff4adaa86e4092221f6a6d
         created: 1759781720899
-        modified: 1759781744113
+        modified: 1780688041828
         isPrivate: false
         sortKey: 1759781720899
       data:
         "":
           BASE_URL: http://localhost:3333
       color: "#00ff00"
+    - name: prod
+      meta:
+        id: env_a69c95b4f99744378ffe81752c198171
+        created: 1780687940003
+        modified: 1780688039461
+        isPrivate: false
+        sortKey: 1780687940003
+      data:
+        "":
+          BASE_URL: https://api-help-desk-deploy.onrender.com
+      color: "#ff0000"

@@ -114,6 +114,34 @@ class ServicesController {
     // Retorna o serviço desativado
     return response.status(200).json(deactivatedService);
   }
+
+  // Reativa um serviço (apenas admin)
+  async reactivate(request: Request, response: Response) {
+    const { id } = request.params;
+    const loggedUser = request.user;
+
+    // Valida se usuário é admin
+    if (!loggedUser || loggedUser.role !== "admin") {
+      throw new AppError("Only admins can reactivate services", 403);
+    }
+
+    // Verifica se o serviço existe
+    const service = await prisma.service.findUnique({ where: { id } });
+
+    // Se não existir, lança um erro
+    if (!service) {
+      throw new AppError("Service not found", 404);
+    }
+
+    // Atualiza o serviço para ficar ativo
+    const reactivatedService = await prisma.service.update({
+      where: { id },
+      data: { active: true },
+    });
+
+    // Retorna o serviço reativado
+    return response.status(200).json(reactivatedService);
+  }
 }
 
 export { ServicesController };

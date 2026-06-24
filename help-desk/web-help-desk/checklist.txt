@@ -62,6 +62,10 @@
   - Meus chamados
     - Listagem dos chamados do cliente
     - Visualizar detalhes do chamado
+  - Perfil
+    - Editar perfil
+    - Upload de avatar
+    - Trocar senha
 
 - Dashboard Técnico:
   - Chamados atribuídos
@@ -76,6 +80,7 @@
     - Editar perfil
     - Upload de avatar
     - Trocar senha
+    - Disponibilidade
 
 - Regras de negócio
   - Redirecionamento por role após login ✅
