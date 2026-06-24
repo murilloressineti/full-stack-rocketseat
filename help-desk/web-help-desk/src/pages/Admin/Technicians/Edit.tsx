@@ -40,7 +40,7 @@ const NIGHT_TIMES = ["19:00", "20:00", "21:00", "22:00", "23:00"];
 // Ordenação dos horários
 const ALL_TIMES = [...MORNING_TIMES, ...AFTERNOON_TIMES, ...NIGHT_TIMES];
 
-export default function TechnicianEdit() {
+export default function AdminTechnicianEdit() {
   const navigate = useNavigate();
   const location = useLocation(); // useLocation para acessar o estado passado na navegação. Esse estado trouxe os dados do técnico selecionado na listagem de técnicos
   const { id } = useParams<{ id: string }>(); // useParams para obter o ID do técnico da URL

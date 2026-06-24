@@ -17,7 +17,7 @@ type TechnicianListItem = {
   availability: string[];
 };
 
-export default function AdminTechnicians() {
+export default function AdminTechniciansList() {
   const [technicians, setTechnicians] = useState<TechnicianListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -116,7 +116,7 @@ export default function AdminTechnicians() {
         <Button
           size={"xs"}
           className="md:py-2.5 md:px-4"
-          onClick={() => navigate(`/admin/tecnicos/criar-tecnico`)}
+          onClick={() => navigate(`/admin/tecnicos/novo`)}
         >
           <Icon svg={Plus}></Icon>
           <Text weight={"bold"} className="hidden md:flex">

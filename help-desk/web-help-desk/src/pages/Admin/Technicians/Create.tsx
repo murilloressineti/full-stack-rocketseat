@@ -31,7 +31,7 @@ const ALL_TIMES = [...MORNING_TIMES, ...AFTERNOON_TIMES, ...NIGHT_TIMES];
 // Estado inicial da disponibilidade do técnico
 const INITIAL_AVAILABILITY: string[] = [];
 
-export default function TechnicianNew() {
+export default function AdminTechnicianCreate() {
   const navigate = useNavigate();
 
   // Estados para armazenar os dados do formulário

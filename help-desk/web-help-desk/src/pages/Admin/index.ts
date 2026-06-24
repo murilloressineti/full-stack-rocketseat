@@ -1,5 +1,13 @@
-export { default as AdminDashboard } from "./Dashboard/AdminDashboard";
-export { default as AdminTechnicians } from "./Technicians/Technicians";
-export { default as TechnicianEdit } from "./Technicians/TechnicianEdit";
-export { default as TechnicianNew } from "./Technicians/TechnicianNew";
+// Client
+export { default as AdminClientsList } from "./Clients/List";
 
+// Services
+export { default as AdminServicesList } from "./Services/List";
+
+// Technicians
+export { default as AdminTechnicianCreate } from "./Technicians/Create";
+export { default as AdminTechnicianEdit } from "./Technicians/Edit";
+export { default as AdminTechniciansList } from "./Technicians/List";
+
+// Tickets
+export { default as AdminTicketsList } from "./Tickets/List";
