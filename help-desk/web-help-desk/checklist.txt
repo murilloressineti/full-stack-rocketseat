@@ -41,18 +41,18 @@
     - Listar técnicos ✅
     - Editar técnico ✅
     - Excluir técnico ✅
-  - CRUD de Serviços
-    - Criar serviço
-    - Listar serviços
-    - Editar serviço
-    - Soft delete de serviço
+  - CRUD de Serviços ✅
+    - Criar serviço ✅
+    - Listar serviços ✅
+    - Editar serviço ✅
+    - Soft delete de serviço ✅
+  - Gestão de Clientes
+    - Listagem geral de clientes
+    - Visualizar detalhes do cliente
   - Gestão de Chamados
     - Listagem geral de chamados
     - Visualizar detalhes do chamado
     - Filtrar chamados por status
-  - Gestão de Clientes
-    - Listagem geral de clientes
-    - Visualizar detalhes do cliente
 
 - Dashboard Cliente
   - Abertura de chamado

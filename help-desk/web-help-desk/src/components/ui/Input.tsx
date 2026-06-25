@@ -25,6 +25,7 @@ interface InputProps
     VariantProps<typeof inputVariants> {
   label?: string;
   error?: string;
+  leftSection?: React.ReactNode;
 }
 
 export default function Input({
@@ -32,6 +33,7 @@ export default function Input({
   error,
   className,
   variant,
+  leftSection,
   ...props
 }: InputProps) {
   const hasError = Boolean(error);
@@ -54,15 +56,24 @@ export default function Input({
         </label>
       )}
 
-      <input
-        className={cn(
-          inputVariants({
-            variant: hasError ? "error" : variant,
-          }),
-          className,
+      <div className="relative">
+        {leftSection && (
+          <div className="absolute left-1 top-1/2 -translate-y-1/2">
+            {leftSection}
+          </div>
         )}
-        {...props}
-      />
+
+        <input
+          className={cn(
+            inputVariants({
+              variant: hasError ? "error" : variant,
+            }),
+            leftSection && "pl-8",
+            className,
+          )}
+          {...props}
+        />
+      </div>
 
       {hasError && (
         <span className="mt-1.5 flex items-center gap-1">

@@ -1,10 +1,14 @@
 import { api } from "./api";
 import type { Service } from "@/types";
 
+interface ServiceFormData {
+  name: string;
+  description?: string;
+  price: number;
+}
+
 // Criar serviço
-export async function createService(
-  data: Omit<Service, "id">,
-): Promise<Service> {
+export async function createService(data: ServiceFormData): Promise<Service> {
   const response = await api.post<Service>("/services", data);
   return response.data;
 }
@@ -23,7 +27,7 @@ export async function getServices(): Promise<Service[]> {
 // Editar serviço
 export async function updateService(
   id: string,
-  data: Partial<Omit<Service, "id">>,
+  data: Partial<ServiceFormData>,
 ): Promise<Service> {
   const response = await api.put<Service>(`/services/${id}`, data);
   return response.data;
