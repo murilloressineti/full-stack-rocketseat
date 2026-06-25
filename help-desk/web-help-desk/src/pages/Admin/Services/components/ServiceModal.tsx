@@ -126,7 +126,7 @@ export default function ServiceModal({
           </button>
         </div>
 
-        <div className="flex flex-col gap-4 pt-5 pb-8 px-6">
+        <div className="flex flex-col gap-4 pt-6 pb-8 px-6">
           <Input
             label="Título"
             type="text"

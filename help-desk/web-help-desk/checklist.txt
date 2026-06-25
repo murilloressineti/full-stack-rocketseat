@@ -46,9 +46,10 @@
     - Listar serviços ✅
     - Editar serviço ✅
     - Soft delete de serviço ✅
-  - Gestão de Clientes
-    - Listagem geral de clientes
-    - Visualizar detalhes do cliente
+  - Gestão de Clientes ✅
+    - Listagem geral de clientes ✅
+    - Editar cliente ✅
+    - Excluir cliente ✅
   - Gestão de Chamados
     - Listagem geral de chamados
     - Visualizar detalhes do chamado
