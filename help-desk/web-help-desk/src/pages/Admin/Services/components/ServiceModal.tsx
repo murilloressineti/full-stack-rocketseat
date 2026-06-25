@@ -126,7 +126,7 @@ export default function ServiceModal({
           </button>
         </div>
 
-        <div className="flex flex-col gap-4 pt-6 pb-8 px-6">
+        <div className="flex flex-col gap-4 px-6 pb-8 pt-6">
           <Input
             label="Título"
             type="text"
@@ -151,7 +151,7 @@ export default function ServiceModal({
           />
         </div>
 
-        <div className="border-t border-gray-200 p-5 px-6">
+        <div className="border-t border-gray-200 py-6 px-6">
           <Button
             className="w-full py-2.5"
             onClick={handleSave}

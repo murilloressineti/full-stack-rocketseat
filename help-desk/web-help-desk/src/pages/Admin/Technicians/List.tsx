@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
-import { getTechnicians, deleteTechnician } from "@/services";
+import { getTechnicians } from "@/services";
 import type { Technician } from "@/types";
 
 import { Button, Icon, Text } from "@/components/ui";
-import TechnicianRow from "./components/TechnicianRow";
+import { TechnicianRow, TechnicianModal } from "./components";
 import { Plus } from "@/assets/icons";
 
 type TechnicianListItem = {
@@ -20,6 +19,8 @@ type TechnicianListItem = {
 export default function AdminTechniciansList() {
   const [technicians, setTechnicians] = useState<TechnicianListItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTechnician, setSelectedTechnician] =
+    useState<TechnicianListItem | null>(null);
 
   const navigate = useNavigate();
 
@@ -48,59 +49,6 @@ export default function AdminTechniciansList() {
 
     loadTechnicians();
   }, []);
-
-  async function handleDeleteTechnician(id: string) {
-    try {
-      await deleteTechnician(id);
-
-      setTechnicians((prev) =>
-        prev.filter((technician) => technician.id !== id),
-      );
-
-      toast.success("Técnico excluído com sucesso!");
-    } catch (error) {
-      console.log("Erro ao excluir técnico", error);
-      toast.error("Não foi possível excluir o técnico.");
-    }
-  }
-
-  function handleConfirmDelete(technician: TechnicianListItem) {
-    toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-col gap-1">
-            <Text weight="bold">Excluir técnico</Text>
-            <Text size="sm" textColor="secondary">
-              Tem certeza que deseja excluir <strong>{technician.name}</strong>?
-              Essa ação não poderá ser desfeita.
-            </Text>
-          </div>
-
-          <div className="flex justify-end gap-2">
-            <Button
-              variant="secondary"
-              size="xs"
-              className="md:py-2.5 md:px-4"
-              onClick={() => toast.dismiss(t)}
-            >
-              Cancelar
-            </Button>
-
-            <Button
-              size="xs"
-              className="md:py-2.5 md:px-4"
-              onClick={async () => {
-                toast.dismiss(t);
-                await handleDeleteTechnician(technician.id);
-              }}
-            >
-              Excluir
-            </Button>
-          </div>
-        </div>
-      </div>
-    ));
-  }
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -155,7 +103,7 @@ export default function AdminTechniciansList() {
                   state: { technician },
                 })
               }
-              onDelete={() => handleConfirmDelete(technician)}
+              onDelete={() => setSelectedTechnician(technician)}
             />
           ))
         ) : (
@@ -164,6 +112,20 @@ export default function AdminTechniciansList() {
           </div>
         )}
       </div>
+
+      {selectedTechnician && (
+        <TechnicianModal
+          technician={selectedTechnician}
+          onClose={() => setSelectedTechnician(null)}
+          onSuccess={(technicianId) => {
+            setTechnicians((prev) =>
+              prev.filter((technician) => technician.id !== technicianId),
+            );
+
+            setSelectedTechnician(null);
+          }}
+        />
+      )}
     </div>
   );
 }
