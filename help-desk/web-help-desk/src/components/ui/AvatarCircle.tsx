@@ -13,6 +13,7 @@ export const avatarCircleVariants = cva(
         blueDark: "bg-blue-dark",
       },
       size: {
+        xs: "h-6 w-6",
         sm: "h-7 w-7",
         md: "h-10 w-10",
         lg: "h-12 w-12",
@@ -69,7 +70,7 @@ export default function AvatarCircle({
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <Text as="span" size={size === "sm" ? "xs" : "sm"} textColor="inverted">
+        <Text as="span" size={size === "sm" || size === "xs" ? "xs" : "sm"} textColor="inverted">
           {getInitials(name)}
         </Text>
       )}

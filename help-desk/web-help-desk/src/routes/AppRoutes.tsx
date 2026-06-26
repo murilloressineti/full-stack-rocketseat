@@ -11,6 +11,7 @@ import {
   AdminTechnicianCreate,
   AdminTechnicianEdit,
   AdminTechniciansList,
+  AdminTicketDetails,
   AdminTicketsList,
 } from "@/pages/Admin";
 
@@ -64,6 +65,7 @@ export default function AppRoutes() {
 
           {/* Tickets */}
           <Route path="chamados" element={<AdminTicketsList />} />
+          <Route path="chamados/:id" element={<AdminTicketDetails />} />
         </Route>
 
         {/* Privadas: Client */}

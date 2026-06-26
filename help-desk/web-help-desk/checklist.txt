@@ -1,38 +1,38 @@
 🏗️ Fase 1: Setup e Infraestrutura
-- Configurar repositório Git/GitHub ✅
-- Instalar Vite + React + TypeScript + Tailwind ✅
-- Configurar tailwind.config.js (paleta de cores do Figma) ✅
-- Configurar axios com interceptors para JWT ✅
+  - Configurar repositório Git/GitHub ✅
+  - Instalar Vite + React + TypeScript + Tailwind ✅
+  - Configurar tailwind.config.js (paleta de cores do Figma) ✅
+  - Configurar axios com interceptors para JWT ✅
 
 🎨 Fase 2: Componentes Base (UI Kit)
-- Componente <Text /> ✅
-- Componente <Icon /> ✅
-- Componente <Button /> ✅
-- Componente <Input /> ✅
-- Componente <Select /> ✅
-- Componente <BadgeStatus /> ✅
-- Componente <BadgeTime /> ✅
-- Componente <NavItem /> ✅
-- Componente <UserMenu /> ✅
-- Componente <Logo /> ✅
+  - Componente <Text /> ✅
+  - Componente <Icon /> ✅
+  - Componente <Button /> ✅
+  - Componente <Input /> ✅
+  - Componente <Select /> ✅
+  - Componente <BadgeStatus /> ✅
+  - Componente <BadgeTime /> ✅
+  - Componente <NavItem /> ✅
+  - Componente <UserMenu /> ✅
+  - Componente <Logo /> ✅
 
 📐 Fase 3: Componentes de Layout
-- Componente <Sidebar /> ✅
-- Componente <MobileHeader /> ✅
-- Componente <AppLayout /> (Decide entre Sidebar e MobileHeader) ✅
+  - Componente <Sidebar /> ✅
+  - Componente <MobileHeader /> ✅
+  - Componente <AppLayout /> (Decide entre Sidebar e MobileHeader) ✅
 
 🔑 Fase 4: Autenticação e Rotas
-- React Router ✅
-- Estrutura de Rotas ✅
-- Página de Login ✅
-- React Hook Form + Zod ✅
-- AuthService ✅
-- AuthContext ✅
-- Persistência de Sessão ✅
-- PrivateRoutes ✅
-- Controle de Roles ✅
-- Página de Cadastro ✅
-- Toasts de autenticação ✅
+  - React Router ✅
+  - Estrutura de Rotas ✅
+  - Página de Login ✅
+  - React Hook Form + Zod ✅
+  - AuthService ✅
+  - AuthContext ✅
+  - Persistência de Sessão ✅
+  - PrivateRoutes ✅
+  - Controle de Roles ✅
+  - Página de Cadastro ✅
+  - Toasts de autenticação ✅
 
 📊 Fase 5: Dashboards e Funcionalidades (Core)
 - Dashboard Admin
@@ -51,9 +51,8 @@
     - Editar cliente ✅
     - Excluir cliente ✅
   - Gestão de Chamados
-    - Listagem geral de chamados
+    - Listagem geral de chamados ✅
     - Visualizar detalhes do chamado
-    - Filtrar chamados por status
 
 - Dashboard Cliente
   - Abertura de chamado
@@ -91,14 +90,14 @@
   - Alteração obrigatória de senha para técnicos recém-criados
 
 📱 Fase 6: Refinamento e Interatividade
-- Implementar Toast notifications (feedback de sucesso/erro)
-- Ajustar estados de loading (Skeletons) em todas as listagens
-- Garantir responsividade (Mobile First - menu hambúrguer no mobile)
-- Revisar integração com todos os endpoints da API
+  - Implementar Toast notifications (feedback de sucesso/erro)
+  - Ajustar estados de loading (Skeletons) em todas as listagens
+  - Garantir responsividade (Mobile First - menu hambúrguer no mobile)
+  - Revisar integração com todos os endpoints da API
 
 🚀 Fase 7: Deploy e Entrega
-- Testar fluxo completo
-- Rodar npm run build e corrigir erros de tipagem/build
-- Deploy do Back-end no Render
-- Deploy do Front-end na Vercel
-- Escrever README
+  - Testar fluxo completo
+  - Rodar npm run build e corrigir erros de tipagem/build
+  - Deploy do Back-end no Render
+  - Deploy do Front-end na Vercel
+  - Escrever README
