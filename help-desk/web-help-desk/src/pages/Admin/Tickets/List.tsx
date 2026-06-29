@@ -31,6 +31,12 @@ export default function AdminTicketsList() {
 
   const navigate = useNavigate();
 
+  const statusOrder = {
+    open: 1,
+    in_progress: 2,
+    closed: 3,
+  };
+
   function formatCurrency(value: string | number) {
     const numberValue = Number(value);
 
@@ -61,8 +67,8 @@ export default function AdminTicketsList() {
     return `${formattedDate} - ${formattedTime}`;
   }
 
-  function formatTicketCode(index: number) {
-    return String(index + 1).padStart(5, "0");
+  function formatTicketCode(id: string) {
+    return `#${id.slice(-5).toUpperCase()}`;
   }
 
   useEffect(() => {
@@ -70,26 +76,41 @@ export default function AdminTicketsList() {
       try {
         const data = await getTickets();
 
-        const formattedTickets: TicketListItem[] = data.map((ticket, index) => {
-          return {
-            id: ticket.id,
-            code: formatTicketCode(index),
-            title: ticket.title,
-            description: ticket.description,
-            serviceName:
-              ticket.services?.map((item) => item.service.name).join(", ") ||
-              "Sem serviço",
-            totalPrice: ticket.totalPrice,
-            clientName: ticket.client.name,
-            clientAvatar: ticket.client.avatar ?? null,
-            technicianName: ticket.technician.name,
-            technicianEmail: ticket.technician.email,
-            technicianAvatar: ticket.technician.avatar ?? null,
-            status: ticket.status,
-            createdAt: formatDateTime(ticket.createdAt),
-            updatedAt: formatDateTime(ticket.updatedAt),
-          };
+        const sortedTickets = [...data].sort((a, b) => {
+          const statusDifference =
+            statusOrder[a.status] - statusOrder[b.status];
+
+          if (statusDifference !== 0) {
+            return statusDifference;
+          }
+
+          return (
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+          );
         });
+
+        const formattedTickets: TicketListItem[] = sortedTickets.map(
+          (ticket) => {
+            return {
+              id: ticket.id,
+              code: formatTicketCode(ticket.id),
+              title: ticket.title,
+              description: ticket.description,
+              serviceName:
+                ticket.services?.map((item) => item.service.name).join(", ") ||
+                "Sem serviço",
+              totalPrice: ticket.totalPrice,
+              clientName: ticket.client.name,
+              clientAvatar: ticket.client.avatar ?? null,
+              technicianName: ticket.technician.name,
+              technicianEmail: ticket.technician.email,
+              technicianAvatar: ticket.technician.avatar ?? null,
+              status: ticket.status,
+              createdAt: formatDateTime(ticket.createdAt),
+              updatedAt: formatDateTime(ticket.updatedAt),
+            };
+          },
+        );
 
         setTickets(formattedTickets);
       } catch (error) {
