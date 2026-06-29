@@ -12,13 +12,16 @@ type TicketListItem = {
   id: string;
   code: string;
   title: string;
+  description?: string | null;
   serviceName: string;
   totalPrice: string | number;
   clientName: string;
   clientAvatar?: string | null;
   technicianName: string;
+  technicianEmail?: string;
   technicianAvatar?: string | null;
   status: Ticket["status"];
+  createdAt: string;
   updatedAt: string;
 };
 
@@ -68,19 +71,22 @@ export default function AdminTicketsList() {
         const data = await getTickets();
 
         const formattedTickets: TicketListItem[] = data.map((ticket, index) => {
-          const mainService = ticket.services?.[0]?.service;
-
           return {
             id: ticket.id,
             code: formatTicketCode(index),
             title: ticket.title,
-            serviceName: mainService?.name ?? "Sem serviço",
+            description: ticket.description,
+            serviceName:
+              ticket.services?.map((item) => item.service.name).join(", ") ||
+              "Sem serviço",
             totalPrice: ticket.totalPrice,
             clientName: ticket.client.name,
             clientAvatar: ticket.client.avatar ?? null,
             technicianName: ticket.technician.name,
+            technicianEmail: ticket.technician.email,
             technicianAvatar: ticket.technician.avatar ?? null,
             status: ticket.status,
+            createdAt: formatDateTime(ticket.createdAt),
             updatedAt: formatDateTime(ticket.updatedAt),
           };
         });

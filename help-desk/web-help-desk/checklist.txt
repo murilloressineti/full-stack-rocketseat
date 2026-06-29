@@ -50,9 +50,9 @@
     - Listagem geral de clientes ✅
     - Editar cliente ✅
     - Excluir cliente ✅
-  - Gestão de Chamados
+  - Gestão de Chamados ✅
     - Listagem geral de chamados ✅
-    - Visualizar detalhes do chamado
+    - Visualizar detalhes do chamado ✅
 
 - Dashboard Cliente
   - Abertura de chamado

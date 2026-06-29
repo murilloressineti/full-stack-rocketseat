@@ -205,7 +205,7 @@ export default function AdminTechnicianEdit() {
   }
 
   return (
-    <div className="flex flex-col gap-4 md:gap-6">
+    <div className="flex flex-col gap-4 md:gap-6 md:px-30">
       {/* Topo */}
       <div className="flex flex-col gap-1">
         <button
@@ -216,13 +216,13 @@ export default function AdminTechnicianEdit() {
           <Icon
             svg={ArrowLeft}
             size="sm"
-            className="fill-gray-400 group-hover:fill-gray-300"
+            className="fill-gray-400 transition-all duration-200 group-hover:fill-gray-300"
           />
           <Text
             size="sm"
             weight="bold"
             textColor={"quaternary"}
-            className="group-hover:text-gray-300"
+            className="group-hover:text-gray-300 transition-all duration-200"
           >
             Voltar
           </Text>
