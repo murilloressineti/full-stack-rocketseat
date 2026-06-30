@@ -24,6 +24,13 @@ export async function getServices(): Promise<Service[]> {
   return response.data;
 }
 
+// Listar serviços ativos
+export async function getActiveServices(): Promise<Service[]> {
+  const response = await api.get<Service[]>("/services");
+
+  return response.data;
+}
+
 // Editar serviço
 export async function updateService(
   id: string,

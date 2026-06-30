@@ -25,33 +25,47 @@ export class TicketsController {
     const bodySchema = z.object({
       title: z.string().min(2),
       description: z.string().optional(),
-      technicianId: z.string().uuid(),
       services: z
         .array(
           z.object({
             serviceId: z.string().uuid(),
             quantity: z.number().min(1).default(1),
-          })
+          }),
         )
         .min(1, "O Chamado deve ter pelo menos um serviço selecionado."),
     });
 
     // Faz o parse (e validação) dos dados de entrada
-    const { title, description, technicianId, services } = bodySchema.parse(
-      request.body
-    );
+    const { title, description, services } = bodySchema.parse(request.body);
 
     // Transação — garante consistência:
     // se algo der errado em qualquer etapa, nada é persistido
     const ticket = await prisma.$transaction(async (tx) => {
-      // 1️⃣ Verifica se o técnico existe e possui papel "technician"
-      const technician = await tx.user.findFirst({
-        where: { id: technicianId, role: "technician" },
+      // 1️⃣ Busca o técnico com menos chamados abertos ou em andamento
+      const technicians = await tx.user.findMany({
+        where: {
+          role: "technician",
+        },
+        include: {
+          ticketsAssigned: {
+            where: {
+              status: {
+                in: ["open", "in_progress"],
+              },
+            },
+          },
+        },
       });
 
-      if (!technician) {
-        throw new AppError("Technician not found", 404);
+      // Se não houver técnicos disponíveis, lança erro 404
+      if (technicians.length === 0) {
+        throw new AppError("No technician available", 404);
       }
+
+      // Ordena os técnicos pelo número de chamados atribuídos e seleciona o primeiro (menos ocupado)
+      const technician = [...technicians].sort(
+        (a, b) => a.ticketsAssigned.length - b.ticketsAssigned.length,
+      )[0];
 
       // 2️⃣ Calcula o preço total e armazena os dados de cada serviço
       let totalPrice = new Decimal(0);
@@ -66,7 +80,7 @@ export class TicketsController {
         if (!service) {
           throw new AppError(
             `Service not found or inactive: ${item.serviceId}`,
-            400
+            400,
           );
         }
 
@@ -88,7 +102,7 @@ export class TicketsController {
         data: {
           title,
           description,
-          technicianId,
+          technicianId: technician.id,
           clientId: loggedUser.id,
           totalPrice,
           services: {
@@ -254,7 +268,7 @@ export class TicketsController {
 
     // Atualiza o total do ticket somando o novo serviço
     const newTotal = new Decimal(ticket.totalPrice).add(
-      new Decimal(service.price).mul(quantity)
+      new Decimal(service.price).mul(quantity),
     );
 
     await prisma.ticket.update({

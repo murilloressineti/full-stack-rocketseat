@@ -35,7 +35,7 @@
   - Toasts de autenticação ✅
 
 📊 Fase 5: Funcionalidades (Core)
-- Admin
+- Admin ✅
   - CRUD de Técnicos ✅
     - Criar técnico ✅
     - Listar técnicos ✅
@@ -55,10 +55,10 @@
     - Visualizar detalhes do chamado ✅
 
 - Cliente
-  - Abertura de chamado
-    - Buscar serviços disponíveis
-    - Buscar técnicos disponíveis
-    - Criar chamado
+  - Abertura de chamado ✅
+    - Buscar serviços disponíveis ✅
+    - Buscar técnicos disponíveis ✅
+    - Criar chamado ✅
   - Meus chamados ✅
     - Listagem dos chamados do cliente ✅
     - Visualizar detalhes do chamado ✅

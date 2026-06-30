@@ -135,7 +135,7 @@ export default function AdminTicketsList() {
       </Text>
 
       <div className="overflow-hidden rounded-xl border border-gray-200">
-        <div className="grid grid-cols-[1fr_2fr_0.8fr] md:grid-cols-[1.1fr_0.6fr_2.4fr_1fr_1.5fr_1.5fr_1.4fr_0.3fr] border-b border-gray-200 px-4 py-4">
+        <div className="grid grid-cols-[1.2fr_2fr_0.8fr] md:grid-cols-[1.1fr_0.6fr_2.4fr_1fr_1.5fr_1.5fr_1.4fr_0.3fr] gap-2 border-b border-gray-200 px-4 py-4">
           <Text weight="bold" textColor="tertiary" className="truncate">
             Atualizado em
           </Text>

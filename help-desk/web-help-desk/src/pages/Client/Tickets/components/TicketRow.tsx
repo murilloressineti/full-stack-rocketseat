@@ -43,7 +43,7 @@ export default function TicketRow({
   return (
     <>
       {/* Desktop */}
-      <div className="hidden md:grid md:grid-cols-[1.1fr_0.6fr_2fr_1.6fr_1fr_1.4fr_1.4fr_0.3fr] items-center border-b border-gray-200 px-4 py-4">
+      <div className="hidden md:grid md:grid-cols-[1.1fr_0.6fr_2fr_1.6fr_1fr_1.4fr_1.4fr_0.3fr] gap-2 items-center border-b border-gray-200 px-4 py-4">
         <Text>{updatedAt}</Text>
 
         <Text weight="bold">{code}</Text>
@@ -76,7 +76,7 @@ export default function TicketRow({
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden grid grid-cols-[1fr_2fr_0.8fr] items-center border-b border-gray-200 px-3 py-4">
+      <div className="md:hidden grid grid-cols-[1.2fr_2fr_0.8fr] gap-2 items-center border-b border-gray-200 px-3 py-4">
         <Text>{updatedAt}</Text>
 
         <div className="flex ml-2 flex-col min-w-0">
@@ -88,7 +88,7 @@ export default function TicketRow({
           </Text>
         </div>
 
-        <div className="flex justify-end gap-6">
+        <div className="flex justify-end gap-4">
           <BadgeStatus variant={statusVariant[status]}>
             {statusLabel[status]}
           </BadgeStatus>

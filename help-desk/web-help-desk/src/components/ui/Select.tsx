@@ -62,6 +62,7 @@ export default function Select({
             selectVariants({
               variant: hasError ? "error" : variant,
             }),
+            props.value ? "text-text-default" : "text-gray-300",
             className,
           )}
           {...props}
