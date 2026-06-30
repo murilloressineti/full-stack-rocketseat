@@ -43,6 +43,10 @@ export default function AdminTechnicianCreate() {
   );
   const [saving, setSaving] = useState(false);
 
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   // UseMemo para evitar recriar o array de seções a cada renderização
   const sections: ShiftSection[] = useMemo(
     () => [
@@ -138,28 +142,42 @@ export default function AdminTechnicianCreate() {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
-    if (!trimmedName || !trimmedEmail || !trimmedPassword) {
-      toast.error("Preencha nome, e-mail e senha.");
-      return;
+    let hasError = false;
+
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
+
+    if (!trimmedName) {
+      setNameError("Informe o nome do técnico.");
+      hasError = true;
     }
 
-    if (trimmedPassword.length < 6) {
-      toast.error("A senha deve ter no mínimo 6 dígitos.");
-      return;
+    if (!trimmedEmail) {
+      setEmailError("Informe o e-mail do técnico.");
+      hasError = true;
     }
+
+    if (!trimmedPassword) {
+      setPasswordError("Informe a senha do técnico.");
+      hasError = true;
+    } else if (trimmedPassword.length < 6) {
+      setPasswordError("A senha deve ter pelo menos 6 caracteres.");
+      hasError = true;
+    }
+
+    if (hasError) return;
 
     const sortedAvailability = sortAvailability(selectedAvailability);
 
     try {
       setSaving(true);
 
-      // 1) cria o técnico
       const createdTechnician = await createTechnician({
         name: trimmedName,
         email: trimmedEmail,
       });
 
-      // 2) atualiza o técnico recém-criado com senha + disponibilidade
       await updateTechnician(createdTechnician.id, {
         name: trimmedName,
         email: trimmedEmail,
@@ -176,7 +194,7 @@ export default function AdminTechnicianCreate() {
         const message = error.response?.data?.message;
 
         if (message === "User with same email already exists") {
-          toast.error("E-mail já cadastrado.");
+          setEmailError("E-mail já cadastrado.");
           return;
         }
       }
@@ -266,6 +284,7 @@ export default function AdminTechnicianCreate() {
               type="text"
               value={name}
               placeholder="Nome completo"
+              error={nameError}
               onChange={(e) => setName(e.target.value)}
             />
 
@@ -274,6 +293,7 @@ export default function AdminTechnicianCreate() {
               type="email"
               value={email}
               placeholder="exemplo@mail.com"
+              error={emailError}
               onChange={(e) => setEmail(e.target.value)}
             />
 
@@ -283,12 +303,15 @@ export default function AdminTechnicianCreate() {
                 type="password"
                 value={password}
                 placeholder="Defina a senha de acesso"
+                error={passwordError}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <Text size="xs" textColor="tertiary" className="italic">
-                Mínimo de 6 dígitos
-              </Text>
+              {!passwordError && (
+                <Text size="xs" textColor="tertiary" className="italic">
+                  Mínimo de 6 dígitos
+                </Text>
+              )}
             </div>
           </div>
         </section>

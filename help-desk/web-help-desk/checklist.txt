@@ -90,6 +90,8 @@
   - Alteração obrigatória de senha para técnicos recém-criados
 
 📱 Fase 6: Refinamento e Interatividade
+  - Revisar nome dos clientes e técnicos com primeira letra do nome maiúscula
+  - Revisar e-mail para apenas letras minúsculas
   - Implementar Toast notifications (feedback de sucesso/erro)
   - Ajustar estados de loading (Skeletons) em todas as listagens
   - Garantir responsividade (Mobile First - menu hambúrguer no mobile)
