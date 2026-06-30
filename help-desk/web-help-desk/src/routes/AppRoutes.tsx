@@ -85,7 +85,7 @@ export default function AppRoutes() {
 
           {/* Tickets */}
           <Route path="chamados" element={<ClientTicketsList />} />
-          <Route path="chamados/detalhes" element={<ClientTicketsDetails />} />
+          <Route path="chamados/:id" element={<ClientTicketsDetails />} />
         </Route>
 
         {/* Privadas: Technician */}

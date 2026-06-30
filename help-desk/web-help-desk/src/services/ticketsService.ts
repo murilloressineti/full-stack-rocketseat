@@ -1,14 +1,14 @@
 import { api } from "./api";
 import type { Ticket, TicketStatus } from "@/types";
 
-// Listar tickets
+// Lista chamados de acordo com a role do usuário
 export async function getTickets(): Promise<Ticket[]> {
   const response = await api.get<Ticket[]>("/tickets");
 
   return response.data;
 }
 
-// Editar ticket
+// Editar chamado
 export async function updateTicketStatus(
   id: string,
   status: TicketStatus,

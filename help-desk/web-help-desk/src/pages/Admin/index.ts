@@ -11,4 +11,4 @@ export { default as AdminTechniciansList } from "./Technicians/List";
 
 // Tickets
 export { default as AdminTicketsList } from "./Tickets/List";
-export { default as AdminTicketDetails } from "./Tickets/AdminTicketDetails";
+export { default as AdminTicketDetails } from "./Tickets/Details";

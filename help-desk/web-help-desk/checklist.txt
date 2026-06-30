@@ -34,8 +34,8 @@
   - Página de Cadastro ✅
   - Toasts de autenticação ✅
 
-📊 Fase 5: Dashboards e Funcionalidades (Core)
-- Dashboard Admin
+📊 Fase 5: Funcionalidades (Core)
+- Admin
   - CRUD de Técnicos ✅
     - Criar técnico ✅
     - Listar técnicos ✅
@@ -54,20 +54,20 @@
     - Listagem geral de chamados ✅
     - Visualizar detalhes do chamado ✅
 
-- Dashboard Cliente
+- Cliente
   - Abertura de chamado
     - Buscar serviços disponíveis
     - Buscar técnicos disponíveis
     - Criar chamado
-  - Meus chamados
-    - Listagem dos chamados do cliente
-    - Visualizar detalhes do chamado
+  - Meus chamados ✅
+    - Listagem dos chamados do cliente ✅
+    - Visualizar detalhes do chamado ✅
   - Perfil
     - Editar perfil
     - Upload de avatar
     - Trocar senha
 
-- Dashboard Técnico:
+- Técnico:
   - Chamados atribuídos
     - Listagem dos chamados recebidos
     - Visualizar detalhes do chamado
