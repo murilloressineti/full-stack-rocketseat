@@ -1,4 +1,5 @@
-import { Logo, NavItem, UserMenu } from "../ui";
+import { Logo, NavItem } from "../ui";
+import { UserMenu } from "@components/features/UserMenu";
 import type { AppUser, UserRole, NavigationItem } from "@/types";
 
 interface SidebarProps {
@@ -45,7 +46,7 @@ export default function Sidebar({
         avatar={user.avatar}
         onProfile={onProfile}
         onLogout={onLogout}
-        placement="top-left"
+        placement="right"
         className="mt-auto py-5 px-4"
       />
     </div>

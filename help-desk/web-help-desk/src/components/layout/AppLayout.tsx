@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { MobileHeader, Sidebar } from "../layout";
+import { ProfileModal } from "../features/UserMenu";
 import {
   BriefcaseBusiness,
   ClipboardList,
@@ -10,7 +12,9 @@ import {
 } from "@assets/icons";
 
 export default function AppLayout() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
+
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -76,6 +80,10 @@ export default function AppLayout() {
     navigate(path);
   }
 
+  function handleProfile() {
+    setIsProfileModalOpen(true);
+  }
+
   function handleLogout() {
     signOut();
     navigate("/");
@@ -91,7 +99,7 @@ export default function AppLayout() {
           user={user}
           items={currentItems}
           onNavigate={handleNavigate}
-          onProfile={() => console.log("Perfil")}
+          onProfile={handleProfile}
           onLogout={handleLogout}
         />
 
@@ -108,7 +116,7 @@ export default function AppLayout() {
           user={user}
           items={currentItems}
           onNavigate={handleNavigate}
-          onProfile={() => console.log("Perfil")}
+          onProfile={handleProfile}
           onLogout={handleLogout}
         />
 
@@ -118,6 +126,16 @@ export default function AppLayout() {
           </div>
         </main>
       </div>
+
+      <ProfileModal
+        open={isProfileModalOpen}
+        user={user}
+        onClose={() => setIsProfileModalOpen(false)}
+        onChangePassword={() => console.log("Abrir modal senha")}
+        onProfileUpdated={(updatedUser) => {
+          updateUser(updatedUser);
+        }}
+      />
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.setItem("token", response.token);
     localStorage.setItem("user", JSON.stringify(response.user));
 
-    return response
+    return response;
   }
 
   function signOut() {
@@ -52,6 +52,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("user");
   }
 
+  function updateUser(updatedUser: AppUser) {
+    setUser(updatedUser);
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -59,6 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         token,
         signIn,
         signOut,
+        updateUser,
         isAuthenticated: !!user,
         loading,
       }}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Icon, Logo, NavItem, UserMenu } from "../ui";
+import { Icon, Logo, NavItem } from "../ui";
+import { UserMenu } from "@components/features/UserMenu";
 import { Menu, X } from "@/assets/icons";
 import type { AppUser, UserRole, NavigationItem } from "@/types";
 

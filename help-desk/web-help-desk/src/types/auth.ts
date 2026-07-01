@@ -10,4 +10,6 @@ export interface AuthContextData {
 
   isAuthenticated: boolean;
   loading: boolean;
+
+  updateUser: (user: AppUser) => void;
 }

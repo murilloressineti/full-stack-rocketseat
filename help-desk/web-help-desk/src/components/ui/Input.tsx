@@ -26,6 +26,7 @@ interface InputProps
   label?: string;
   error?: string;
   leftSection?: React.ReactNode;
+  rightSection?: React.ReactNode;
 }
 
 export default function Input({
@@ -34,6 +35,7 @@ export default function Input({
   className,
   variant,
   leftSection,
+  rightSection,
   ...props
 }: InputProps) {
   const hasError = Boolean(error);
@@ -69,10 +71,17 @@ export default function Input({
               variant: hasError ? "error" : variant,
             }),
             leftSection && "pl-8",
+            rightSection,
             className,
           )}
           {...props}
         />
+
+        {rightSection && (
+          <div className="absolute right-0 top-1/3 -translate-y-1/2">
+            {rightSection}
+          </div>
+        )}
       </div>
 
       {hasError && (

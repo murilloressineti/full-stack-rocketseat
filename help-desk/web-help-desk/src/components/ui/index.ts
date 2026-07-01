@@ -9,4 +9,3 @@ export { default as NavItem } from "./NavItem";
 export { default as Select } from "./Select";
 export { default as Text } from "./Text";
 export { default as Textarea } from "./Textarea";
-export { default as UserMenu } from "./UserMenu";
