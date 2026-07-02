@@ -83,7 +83,7 @@ collection:
         meta:
           id: req_f38d0cf3d46e41fca34e19a6b762f6d8
           created: 1760541632862
-          modified: 1782166273755
+          modified: 1783021627590
           isPrivate: false
           description: ""
           sortKey: -1760539929099
@@ -94,7 +94,8 @@ collection:
             {
               "name": "João",
             	"email": "joao@email.com",
-            	"password": "123456",
+            	"currentPassword": "123456",
+            	"password": "12345678",
             	"role": "technician",
               "availability": ["08:00", "09:00", "10:00"],
             	"avatar": null
@@ -189,7 +190,7 @@ collection:
         meta:
           id: req_824cc4f9b4be4c13beafa88da0b1c76e
           created: 1760016892437
-          modified: 1780690254192
+          modified: 1783021571437
           isPrivate: false
           description: ""
           sortKey: -1760016892437
@@ -230,7 +231,7 @@ collection:
         meta:
           id: req_ea391064d0be45e2859b903a289ff62c
           created: 1760031738354
-          modified: 1782327397064
+          modified: 1782329506951
           isPrivate: false
           description: ""
           sortKey: -1760031738354
@@ -239,9 +240,9 @@ collection:
           mimeType: application/json
           text: |
             {
-              "name": "Criação para reativar",
-            	"description": "Criação para reativar",
-              "price": 300
+              "name": "Suporte de Software",
+            	"description": "Criação para teste",
+              "price": 200
             }
         headers:
           - name: Content-Type
@@ -291,7 +292,7 @@ collection:
         meta:
           id: req_1d0ce9372d074b60a58077664e375cd1
           created: 1760553004162
-          modified: 1780689718931
+          modified: 1783021612099
           isPrivate: false
           description: ""
           sortKey: -1760553004162
@@ -385,7 +386,7 @@ collection:
         meta:
           id: req_a7d927e82b094d4693c356683e8a3f4d
           created: 1760557805257
-          modified: 1780689823631
+          modified: 1782852688111
           isPrivate: false
           description: ""
           sortKey: -1760557808523
@@ -394,12 +395,11 @@ collection:
           mimeType: application/json
           text: |
             {
-              "title": "Chamado da Maria",
-              "description": "Chamado da Maria",
-              "technicianId": "437a490a-fdf5-4526-b634-c043d56b8967",
+              "title": "Formatar HD",
+              "description": "Chamado teste",
               "services": [
                 {
-                  "serviceId": "07279b27-a924-4717-8e01-3598b701cb94",
+                  "serviceId": "d5cb41d5-0210-4919-809e-2872807ddf4d",
                   "quantity": 1
                 }
               ]
@@ -447,12 +447,12 @@ collection:
             store: true
           rebuildPath: true
       - url: "{{ _[''].BASE_URL }}/{{ _[''].RESOURCE
-          }}/0dbc8189-4fe4-4121-864c-fc1fa2f695ef"
+          }}/98b8445f-403c-4c32-8081-2d2b4f23d595"
         name: Update
         meta:
           id: req_bddb5dd76bb54eb1b33555c7b3fa8213
           created: 1760627960931
-          modified: 1780689894146
+          modified: 1782749488666
           isPrivate: false
           description: ""
           sortKey: -1760627960931
@@ -461,7 +461,7 @@ collection:
           mimeType: application/json
           text: |
             {
-              "status": "closed"
+              "status": "open"
             }
         headers:
           - name: Content-Type

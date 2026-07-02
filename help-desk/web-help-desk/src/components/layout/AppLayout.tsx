@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { MobileHeader, Sidebar } from "../layout";
-import { ProfileModal } from "../features/UserMenu";
+import { ProfileModal, ChangePasswordModal } from "../features/UserMenu";
 import {
   BriefcaseBusiness,
   ClipboardList,
@@ -15,6 +15,8 @@ export default function AppLayout() {
   const { user, signOut, updateUser } = useAuth();
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -23,6 +25,9 @@ export default function AppLayout() {
   if (!user) {
     return null;
   }
+
+  const mustChangePassword =
+    user.role === "technician" && user.mustChangePassword;
 
   const adminItems = [
     {
@@ -131,9 +136,25 @@ export default function AppLayout() {
         open={isProfileModalOpen}
         user={user}
         onClose={() => setIsProfileModalOpen(false)}
-        onChangePassword={() => console.log("Abrir modal senha")}
-        onProfileUpdated={(updatedUser) => {
+        onChangePassword={() => {
+          setIsProfileModalOpen(false);
+          setIsChangePasswordModalOpen(true);
+        }}
+        onProfileUpdated={updateUser}
+      />
+
+      <ChangePasswordModal
+        open={mustChangePassword || isChangePasswordModalOpen}
+        userId={user.id}
+        required={mustChangePassword}
+        onClose={() => setIsChangePasswordModalOpen(false)}
+        onBack={() => {
+          setIsChangePasswordModalOpen(false);
+          setIsProfileModalOpen(true);
+        }}
+        onSuccess={(updatedUser) => {
           updateUser(updatedUser);
+          setIsChangePasswordModalOpen(false);
         }}
       />
     </div>

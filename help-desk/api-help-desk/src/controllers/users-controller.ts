@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
 
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
@@ -115,13 +115,22 @@ class UsersController {
       name: z.string().trim().min(2).optional(),
       email: z.string().email().optional(),
       password: z.string().min(6).optional(),
+      currentPassword: z.string().min(6).optional(),
       role: z.enum(["admin", "technician", "client"]).optional(),
       availability: z.array(z.string()).optional(),
-      avatar: z.string().url().optional(),
+      avatar: z.string().url().nullable().optional(),
     });
 
-    const { name, email, password, role, availability, avatar } =
-      bodySchema.parse(request.body);
+    // Fazemos o parse e validação do corpo da requisição
+    const {
+      name,
+      email,
+      password,
+      currentPassword,
+      role,
+      availability,
+      avatar,
+    } = bodySchema.parse(request.body);
 
     // Buscamos o usuário no banco
     const user = await prisma.user.findUnique({ where: { id } });
@@ -156,11 +165,52 @@ class UsersController {
     let hashedPassword: string | undefined = undefined;
     let mustChangePassword = user.mustChangePassword;
 
+    // Se o usuário deseja alterar a senha, verificamos a senha atual
     if (password) {
+      const isChangingOwnPassword = loggedUser?.id === user.id;
+      const isAdminChangingAnotherUserPassword =
+        loggedUser?.role === "admin" && loggedUser.id !== user.id;
+
+      //  Se o usuário está alterando a própria senha, ele deve fornecer a senha atual
+      if (isChangingOwnPassword) {
+        if (!currentPassword) {
+          throw new AppError("Current password is required", 400);
+        }
+
+        // Verifica se a senha atual fornecida corresponde à senha armazenada
+        const passwordMatches = await compare(currentPassword, user.password);
+
+        // Se a senha atual não corresponder, lançamos um erro
+        if (!passwordMatches) {
+          throw new AppError("Current password is incorrect", 400);
+        }
+
+        // Verifica se a nova senha é diferente da atual
+        const isSamePassword = await compare(password, user.password);
+
+        // Se a nova senha for igual à atual, lançamos um erro
+        if (isSamePassword) {
+          throw new AppError(
+            "New password must be different from current password",
+            400,
+          );
+        }
+      }
+
+      // Se o usuário não é admin e não está alterando a própria senha, ele não tem permissão
+      if (!isChangingOwnPassword && !isAdminChangingAnotherUserPassword) {
+        throw new AppError("You are not allowed to change this password", 403);
+      }
+
+      // Criptografa a nova senha antes de salvar no banco
       hashedPassword = await hash(password, 8);
 
-      // Se for técnico com senha provisória, ao alterar a senha definimos mustChangePassword = false
-      if (user.role === "technician" && user.mustChangePassword) {
+      //  Se o usuário é um técnico que estava obrigado a mudar a senha, e ele está mudando a própria senha, então ele não precisa mais mudar a senha obrigatoriamente
+      if (
+        isChangingOwnPassword &&
+        user.role === "technician" &&
+        user.mustChangePassword
+      ) {
         mustChangePassword = false;
       }
     }

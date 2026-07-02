@@ -63,9 +63,9 @@
     - Listagem dos chamados do cliente ✅
     - Visualizar detalhes do chamado ✅
   - Perfil
-    - Editar perfil
+    - Editar perfil ✅
     - Upload de avatar
-    - Trocar senha
+    - Trocar senha ✅
 
 - Técnico:
   - Chamados atribuídos
@@ -77,21 +77,22 @@
     - Adicionar serviços extras
     - Encerrar chamado
   - Perfil
-    - Editar perfil
+    - Editar perfil ✅
     - Upload de avatar
-    - Trocar senha
-    - Disponibilidade
+    - Trocar senha ✅
+    - Disponibilidade ✅
 
 - Regras de negócio
   - Redirecionamento por role após login ✅
   - Bloqueio de acesso por role ✅
   - Logout ✅
   - Persistência de sessão ✅
-  - Alteração obrigatória de senha para técnicos recém-criados
+  - Alteração obrigatória de senha para técnicos recém-criados ✅
 
 📱 Fase 6: Refinamento e Interatividade
   - Revisar nome dos clientes e técnicos com primeira letra do nome maiúscula
   - Revisar e-mail para apenas letras minúsculas
+  - Revisar Dirty nos modais e envio de salvar com o enter
   - Implementar Toast notifications (feedback de sucesso/erro)
   - Ajustar estados de loading (Skeletons) em todas as listagens
   - Garantir responsividade (Mobile First - menu hambúrguer no mobile)

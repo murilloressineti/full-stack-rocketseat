@@ -2,8 +2,10 @@ import { api } from "./api";
 import type { AppUser } from "@/types";
 
 interface UpdateProfileData {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  currentPassword?: string;
   avatar?: string | null;
 }
 

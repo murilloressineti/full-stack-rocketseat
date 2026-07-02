@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import axios from "axios";
 
 import { updateProfile } from "@/services";
+import { validateUserNameAndEmail } from "@/utils/formatUser";
 
 import {
   AvatarCircle,
@@ -23,24 +24,6 @@ interface ProfileModalProps {
   onProfileUpdated?: (user: ProfileUser) => void;
 }
 
-function formatName(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .split(" ")
-    .filter(Boolean)
-    .map((word) => word[0].toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function formatEmail(value: string) {
-  return value.trim().toLowerCase();
-}
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
 export default function ProfileModal({
   user,
   open,
@@ -59,6 +42,9 @@ export default function ProfileModal({
 
   const [saving, setSaving] = useState(false);
 
+  const isDirty =
+    name !== user.name || email !== user.email || avatar !== user.avatar;
+
   useEffect(() => {
     if (!open) return;
 
@@ -69,6 +55,14 @@ export default function ProfileModal({
     setNameError("");
     setEmailError("");
   }, [open, user]);
+
+  useEffect(() => {
+    return () => {
+      if (avatar?.startsWith("blob:")) {
+        URL.revokeObjectURL(avatar);
+      }
+    };
+  }, [avatar]);
 
   if (!open) return null;
 
@@ -96,26 +90,11 @@ export default function ProfileModal({
   }
 
   async function handleSave() {
-    const formattedName = formatName(name);
-    const formattedEmail = formatEmail(email);
+    const { formattedName, formattedEmail, errors, hasError } =
+      validateUserNameAndEmail(name, email);
 
-    let hasError = false;
-
-    setNameError("");
-    setEmailError("");
-
-    if (!formattedName) {
-      setNameError("Informe o nome.");
-      hasError = true;
-    }
-
-    if (!formattedEmail) {
-      setEmailError("Informe o e-mail.");
-      hasError = true;
-    } else if (!isValidEmail(formattedEmail)) {
-      setEmailError("Informe um e-mail válido.");
-      hasError = true;
-    }
+    setNameError(errors.name);
+    setEmailError(errors.email);
 
     if (hasError) return;
 
@@ -153,9 +132,57 @@ export default function ProfileModal({
     }
   }
 
+  function handleClose() {
+    if (!isDirty) {
+      onClose();
+      return;
+    }
+
+    toast.custom((t) => (
+      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 bg-white p-4 shadow-lg">
+        <div className="mb-3 flex flex-col gap-1">
+          <Text weight="bold">Descartar alterações?</Text>
+
+          <Text size="sm" textColor="secondary">
+            Você fez alterações no seu perfil. Se sair agora, perderá tudo o que
+            não foi salvo.
+          </Text>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button
+            variant="secondary"
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => toast.dismiss(t)}
+          >
+            Continuar editando
+          </Button>
+
+          <Button
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => {
+              toast.dismiss(t);
+              onClose();
+            }}
+          >
+            Descartar
+          </Button>
+        </div>
+      </div>
+    ));
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
-      <div className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSave();
+        }}
+        className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg"
+      >
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
           <Text as="h2" size="lg" weight="bold">
             Perfil
@@ -163,7 +190,7 @@ export default function ProfileModal({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="cursor-pointer transition-all duration-200 hover:scale-110"
           >
             <Icon svg={X} className="fill-gray-400" />
@@ -274,15 +301,11 @@ export default function ProfileModal({
         )}
 
         <div className="border-t border-gray-200 px-6 py-6">
-          <Button
-            className="w-full py-2.5"
-            onClick={handleSave}
-            disabled={saving}
-          >
+          <Button type="submit" className="w-full py-2.5" disabled={saving}>
             {saving ? "Salvando..." : "Salvar"}
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
