@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import { hash, compare } from "bcrypt";
+import { cloudinary } from "@/configs/cloudinary";
 
 import { prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
@@ -232,6 +233,61 @@ class UsersController {
     // Removemos o campo senha da resposta
     const { password: _, ...userWithoutPassword } = updatedUser;
 
+    return response.status(200).json(userWithoutPassword);
+  }
+
+  // Atualiza avatar do usuário
+  async updateAvatar(request: Request, response: Response) {
+    const { id } = request.params;
+    const loggedUser = request.user;
+
+    // Buscar o usuário no banco de dados
+    const user = await prisma.user.findUnique({ where: { id } });
+
+    // Se o usuário não existir, lançamos um erro
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    // Apenas admin ou o próprio usuário podem atualizar o avatar
+    const isAdmin = loggedUser?.role === "admin";
+    const isOwner = loggedUser?.id === id;
+
+    // Se não for admin nem dono da conta, lançamos um erro
+    if (!isAdmin && !isOwner) {
+      throw new AppError("You can only update your own avatar", 403);
+    }
+
+    // Verifica se o arquivo de imagem foi enviado
+    if (!request.file) {
+      throw new AppError("Avatar image is required", 400);
+    }
+
+    // Converte a imagem para base64 e faz o upload para o Cloudinary
+    const fileBase64 = request.file.buffer.toString("base64");
+
+    // Faz o upload da imagem para o Cloudinary, especificando a pasta e o nome do arquivo
+    const uploadedImage = await cloudinary.uploader.upload(
+      `data:${request.file.mimetype};base64,${fileBase64}`,
+      {
+        folder: "help-desk/avatars",
+        public_id: `user-${id}`,
+        overwrite: true,
+      },
+    );
+
+    // Atualiza o campo avatar do usuário no banco de dados com a URL da imagem no Cloudinary
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: {
+        avatar: uploadedImage.secure_url,
+      },
+    });
+
+    // Remove a senha do retorno da resposta (por segurança)
+    const { password: _, ...userWithoutPassword } = updatedUser;
+
+    // Retorna o usuário atualizado com status HTTP 200 (OK)
     return response.status(200).json(userWithoutPassword);
   }
 

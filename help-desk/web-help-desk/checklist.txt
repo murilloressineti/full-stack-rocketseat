@@ -90,17 +90,29 @@
   - Alteração obrigatória de senha para técnicos recém-criados ✅
 
 📱 Fase 6: Refinamento e Interatividade
-  - Revisar nome dos clientes e técnicos com primeira letra do nome maiúscula
-  - Revisar e-mail para apenas letras minúsculas
-  - Revisar Dirty nos modais e envio de salvar com o enter
-  - Implementar Toast notifications (feedback de sucesso/erro)
+  - Refatoração Global de Formulários
+    - Tela de Login e Cadastro de Cliente (Register):
+      - Revisar e-mail para salvar/enviar apenas em letras minúsculas
+      - Permitir envio do formulário ao pressionar
+    - Modais de Técnico (Cadastro e Edição):
+      - Revisar nome para salvar com a primeira letra maiúscula
+      - Revisar e-mail para apenas letras minúsculas
+    - Modais de Cliente (Edição)
+      - Revisar nome para salvar com a primeira letra maiúscula
+      - Revisar e-mail para apenas letras minúsculas
+      - Revisar estado isDirty no modal
+      - Garantir salvamento ao pressionar Enter
+    - Modais de Serviço (Cadastro e Edição):
+      - Revisar estado isDirty no modal
+      - Garantir salvamento ao pressionar Enter
+
   - Ajustar estados de loading (Skeletons) em todas as listagens
-  - Garantir responsividade (Mobile First - menu hambúrguer no mobile)
   - Revisar integração com todos os endpoints da API
+  - Revisão geral do projeto e refatoração
 
 🚀 Fase 7: Deploy e Entrega
   - Testar fluxo completo
   - Rodar npm run build e corrigir erros de tipagem/build
-  - Deploy do Back-end no Render
+  - Deploy do Back-end no Render ✅
   - Deploy do Front-end na Vercel
   - Escrever README
