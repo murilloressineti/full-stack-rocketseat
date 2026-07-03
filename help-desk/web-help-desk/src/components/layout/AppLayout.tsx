@@ -114,7 +114,7 @@ export default function AppLayout() {
       </div>
 
       {/* Desktop */}
-      <div className="hidden md:flex">
+      <div className="hidden md:flex h-screen overflow-hidden">
         <Sidebar
           role={user?.role}
           activePath={location.pathname}
@@ -125,8 +125,8 @@ export default function AppLayout() {
           onLogout={handleLogout}
         />
 
-        <main className="flex-1 pt-3">
-          <div className="bg-bg-light px-12 pb-12 pt-13 rounded-tl-3xl h-full">
+        <main className="flex-1 overflow-y-auto pt-3">
+          <div className="min-h-full bg-bg-light px-12 pb-12 pt-13 rounded-tl-3xl">
             <Outlet />
           </div>
         </main>

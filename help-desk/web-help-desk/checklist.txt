@@ -69,7 +69,7 @@
 
 - Técnico:
   - Chamados atribuídos
-    - Listagem dos chamados recebidos
+    - Listagem dos chamados recebidos ✅
     - Visualizar detalhes do chamado
   - Atendimento
     - Iniciar atendimento
@@ -106,7 +106,6 @@
       - Revisar estado isDirty no modal
       - Garantir salvamento ao pressionar Enter
 
-  - Revisar cor dos botões nos modais
   - Ajustar estados de loading (Skeletons) em todas as listagens
   - Revisar integração com todos os endpoints da API
   - Revisar features dos componentes

@@ -79,7 +79,12 @@ export default function UserMenu({
         <AvatarCircle name={name} avatar={avatar} />
 
         <div className="hidden md:flex flex-col gap-1 items-start">
-          <Text as="span" size="sm" textColor={"inverted"} className="text-start truncate w-30">
+          <Text
+            as="span"
+            size="sm"
+            textColor={"inverted"}
+            className="text-start truncate w-30"
+          >
             {name}
           </Text>
 
@@ -93,7 +98,7 @@ export default function UserMenu({
           </Text>
         </div>
       </button>
-      \
+
       <div
         className={cn(
           "absolute z-50 rounded-lg bg-gray-500 py-5 px-4 shadow-lg md:w-50",
@@ -138,7 +143,6 @@ export default function UserMenu({
           </button>
         </div>
       </div>
-      \
     </div>
   );
 }

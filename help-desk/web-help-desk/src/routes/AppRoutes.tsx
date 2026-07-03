@@ -18,14 +18,12 @@ import {
 // Client
 import {
   ClientNewTicketCreate,
-  ClientProfile,
   ClientTicketsDetails,
   ClientTicketsList,
 } from "@/pages/Client";
 
 // Technician
 import {
-  TechnicianProfile,
   TechnicianTicketDetails,
   TechnicianTicketsList,
 } from "@/pages/Technician";

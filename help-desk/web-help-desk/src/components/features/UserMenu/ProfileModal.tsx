@@ -263,8 +263,8 @@ export default function ProfileModal({
                 </Button>
               </div>
 
-              <Text size="xxs" textColor="tertiary" className="italic">
-                Arquivos até 2 MB
+              <Text size="xxs" textColor="tertiary" className="normal-case italic">
+                Imagem de até 2 MB
               </Text>
             </div>
           </div>
