@@ -64,7 +64,7 @@
     - Visualizar detalhes do chamado ✅
   - Perfil
     - Editar perfil ✅
-    - Upload de avatar
+    - Upload de avatar ✅
     - Trocar senha ✅
 
 - Técnico:
@@ -78,7 +78,7 @@
     - Encerrar chamado
   - Perfil
     - Editar perfil ✅
-    - Upload de avatar
+    - Upload de avatar ✅
     - Trocar senha ✅
     - Disponibilidade ✅
 
@@ -106,8 +106,10 @@
       - Revisar estado isDirty no modal
       - Garantir salvamento ao pressionar Enter
 
+  - Revisar cor dos botões nos modais
   - Ajustar estados de loading (Skeletons) em todas as listagens
   - Revisar integração com todos os endpoints da API
+  - Revisar features dos componentes
   - Revisão geral do projeto e refatoração
 
 🚀 Fase 7: Deploy e Entrega

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
 
-import { updateProfile } from "@/services";
+import { updateAvatar, updateProfile } from "@/services";
 import { validateUserNameAndEmail } from "@/utils/formatUser";
 
 import {
@@ -36,6 +36,7 @@ export default function ProfileModal({
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [avatar, setAvatar] = useState<string | null | undefined>(user.avatar);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -43,7 +44,10 @@ export default function ProfileModal({
   const [saving, setSaving] = useState(false);
 
   const isDirty =
-    name !== user.name || email !== user.email || avatar !== user.avatar;
+    name !== user.name ||
+    email !== user.email ||
+    avatar !== user.avatar ||
+    avatarFile !== null;
 
   useEffect(() => {
     if (!open) return;
@@ -51,6 +55,7 @@ export default function ProfileModal({
     setName(user.name);
     setEmail(user.email);
     setAvatar(user.avatar);
+    setAvatarFile(null);
 
     setNameError("");
     setEmailError("");
@@ -71,6 +76,18 @@ export default function ProfileModal({
 
     if (!file) return;
 
+    const MAX_FILE_SIZE = 2 * 1024 * 1024;
+
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("A imagem deve ter no máximo 2 MB.");
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+
+      return;
+    }
+
     if (!file.type.startsWith("image/")) {
       toast.error("Selecione uma imagem válida.");
       return;
@@ -79,10 +96,12 @@ export default function ProfileModal({
     const previewUrl = URL.createObjectURL(file);
 
     setAvatar(previewUrl);
+    setAvatarFile(file);
   }
 
   function handleRemoveImage() {
     setAvatar(null);
+    setAvatarFile(null);
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -104,12 +123,16 @@ export default function ProfileModal({
       const updatedUser = await updateProfile(user.id, {
         name: formattedName,
         email: formattedEmail,
-        avatar: avatar?.startsWith("blob:") ? (user.avatar ?? null) : avatar,
+        avatar: avatar === null ? null : user.avatar,
       });
 
+      const finalUser = avatarFile
+        ? await updateAvatar(user.id, avatarFile)
+        : updatedUser;
+
       onProfileUpdated?.({
-        ...updatedUser,
-        role: updatedUser.role,
+        ...finalUser,
+        role: finalUser.role,
       });
 
       toast.success("Perfil atualizado com sucesso!");
@@ -206,35 +229,43 @@ export default function ProfileModal({
               variant="blueDark"
             />
 
-            <div className="flex gap-2">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleSelectImage}
-              />
+            <div className="flex flex-col gap-0.5">
+              <div className="flex gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleSelectImage}
+                />
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="xs"
+                  className="py-2"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Icon svg={Upload} size="xs" />
+                  Nova imagem
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="xs"
+                  className="py-2"
+                  onClick={handleRemoveImage}
+                >
+                  <Icon
+                    svg={Trash}
+                    size="xs"
+                    className="fill-feedback-danger"
+                  />
+                </Button>
+              </div>
 
-              <Button
-                type="button"
-                variant="secondary"
-                size="xs"
-                className="py-2"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <Icon svg={Upload} size="xs" />
-                Nova imagem
-              </Button>
-
-              <Button
-                type="button"
-                variant="secondary"
-                size="xs"
-                className="py-2"
-                onClick={handleRemoveImage}
-              >
-                <Icon svg={Trash} size="xs" className="fill-feedback-danger" />
-              </Button>
+              <Text size="xxs" textColor="tertiary" className="italic">
+                Arquivos até 2 MB
+              </Text>
             </div>
           </div>
 

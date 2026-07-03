@@ -18,3 +18,21 @@ export async function updateProfile(
 
   return response.data;
 }
+
+// Atualizar avatar do usuário
+export async function updateAvatar(
+  id: string,
+  file: File,
+): Promise<AppUser> {
+  const formData = new FormData();
+
+  formData.append("avatar", file);
+
+  const response = await api.patch<AppUser>(`/users/${id}/avatar`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return response.data;
+}
