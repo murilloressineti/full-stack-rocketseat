@@ -147,6 +147,7 @@ export class TicketsController {
       tickets = await prisma.ticket.findMany({
         where: { technicianId: loggedUser.id },
         include: {
+          technician: true,
           client: true,
           services: { include: { service: true } },
         },

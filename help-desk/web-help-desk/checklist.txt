@@ -70,12 +70,12 @@
 - Técnico:
   - Chamados atribuídos
     - Listagem dos chamados recebidos ✅
-    - Visualizar detalhes do chamado
+    - Visualizar detalhes do chamado ✅
   - Atendimento
-    - Iniciar atendimento
-    - Alterar status para "Em atendimento"
+    - Iniciar atendimento ✅
+    - Alterar status para "Em atendimento" ✅
     - Adicionar serviços extras
-    - Encerrar chamado
+    - Encerrar chamado ✅
   - Perfil
     - Editar perfil ✅
     - Upload de avatar ✅

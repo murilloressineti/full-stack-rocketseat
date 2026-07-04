@@ -6,6 +6,8 @@ interface TicketSectionProps {
   title: string;
   status: "open" | "in_progress" | "closed";
   tickets: TechnicianTicketCardData[];
+  onDetails: (ticket: TechnicianTicketCardData) => void;
+  onQuickAction: (ticket: TechnicianTicketCardData) => void;
 }
 
 const statusVariant = {
@@ -18,6 +20,8 @@ export default function TicketSection({
   title,
   status,
   tickets,
+  onDetails,
+  onQuickAction,
 }: TicketSectionProps) {
   return (
     <section className="flex flex-col gap-4">
@@ -33,7 +37,12 @@ export default function TicketSection({
       {tickets.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
           {tickets.map((ticket) => (
-            <TicketCard key={ticket.id} ticket={ticket} />
+            <TicketCard
+              key={ticket.id}
+              ticket={ticket}
+              onDetails={() => onDetails(ticket)}
+              onQuickAction={() => onQuickAction(ticket)}
+            />
           ))}
         </div>
       ) : (

@@ -12,13 +12,20 @@ interface CreateTicketData {
 
 export type TechnicianTicketCardData = {
   id: string;
+  code: string;
   title: string;
+  description?: string | null;
   serviceName: string;
-  updatedAt: string;
   totalPrice: string | number;
   clientName: string;
   clientAvatar?: string | null;
+  technicianName: string;
+  technicianEmail?: string;
+  technicianAvatar?: string | null;
   status: TicketStatus;
+  createdAt: string;
+  updatedAt: string;
+  services?: Ticket["services"];
 };
 
 // Criar chamado
@@ -42,15 +49,22 @@ export async function getTechnicianTicketCards(): Promise<
 
   return response.data.map((ticket) => ({
     id: ticket.id,
+    code: ticket.id,
     title: ticket.title ?? "Sem título",
+    description: ticket.description,
     serviceName:
       ticket.services?.map((item) => item.service.name).join(", ") ||
       "Sem serviço",
-    updatedAt: ticket.updatedAt,
     totalPrice: ticket.totalPrice,
     clientName: ticket.client?.name ?? "Cliente não informado",
     clientAvatar: ticket.client?.avatar ?? null,
+    technicianName: ticket.technician?.name ?? "Técnico não informado",
+    technicianEmail: ticket.technician?.email,
+    technicianAvatar: ticket.technician?.avatar ?? null,
     status: ticket.status,
+    createdAt: ticket.createdAt,
+    updatedAt: ticket.updatedAt,
+    services: ticket.services,
   }));
 }
 

@@ -184,7 +184,7 @@ export default function AdminTicketDetails() {
           {statusActions[resolvedStatus].map((action) => (
             <Button
               key={action.value}
-              variant="secondary"
+              variant="primary"
               className="py-2.5"
               onClick={() => handleUpdateStatus(action.value)}
               disabled={updatingStatus}

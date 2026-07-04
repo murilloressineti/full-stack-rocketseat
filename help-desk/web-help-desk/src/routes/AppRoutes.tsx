@@ -100,10 +100,7 @@ export default function AppRoutes() {
 
           {/* Tickets */}
           <Route path="chamados" element={<TechnicianTicketsList />} />
-          <Route
-            path="chamados/detalhes"
-            element={<TechnicianTicketDetails />}
-          />
+          <Route path="chamados/:id" element={<TechnicianTicketDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
