@@ -1,11 +1,21 @@
 import { useState } from "react";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { updateTicketStatus } from "@/services";
+import {
+  addTicketService,
+  getActiveServices,
+  updateTicketStatus,
+  deleteTicketService,
+} from "@/services";
+import type { Service } from "@/types";
 
 import { AvatarCircle, BadgeStatus, Button, Icon, Text } from "@/components/ui";
-import { ArrowLeft, CircleCheck, Clock, Plus, Trash } from "@/assets/icons";
+import { ArrowLeft, CircleCheck, Clock, Plus } from "@/assets/icons";
+
+import AdditionalServiceItem from "./components/AdditionalServiceItem";
+import AdditionalServiceModal from "./components/AdditionalServiceModal";
 
 type TicketStatus = "open" | "in_progress" | "closed";
 
@@ -106,20 +116,39 @@ export default function TechnicianTicketDetails() {
     ticket?.status,
   );
   const [currentUpdatedAt, setCurrentUpdatedAt] = useState(
-  ticket?.updatedAt ? formatDateTime(ticket.updatedAt) : undefined,
-);
+    ticket?.updatedAt ? formatDateTime(ticket.updatedAt) : undefined,
+  );
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
+  const [isAdditionalServiceModalOpen, setIsAdditionalServiceModalOpen] =
+    useState(false);
+
+  const [savingService, setSavingService] = useState(false);
+
+  const [currentTicket, setCurrentTicket] = useState(ticket);
+  const [availableServices, setAvailableServices] = useState<Service[]>([]);
+  const [loadingServices, setLoadingServices] = useState(false);
+
   async function handleUpdateStatus(status: TicketStatus) {
-    if (!ticket) return;
+    if (!currentTicket) return;
 
     try {
       setUpdatingStatus(true);
 
-      const updatedTicket = await updateTicketStatus(ticket.id, status);
+      const updatedTicket = await updateTicketStatus(currentTicket.id, status);
 
       setCurrentStatus(updatedTicket.status);
       setCurrentUpdatedAt(formatDateTime(updatedTicket.updatedAt));
+
+      setCurrentTicket((prev) =>
+        prev
+          ? {
+              ...prev,
+              status: updatedTicket.status,
+              updatedAt: updatedTicket.updatedAt,
+            }
+          : prev,
+      );
 
       toast.success("Status do chamado atualizado com sucesso!");
     } catch (error) {
@@ -130,15 +159,98 @@ export default function TechnicianTicketDetails() {
     }
   }
 
-  function handleOpenAdditionalServiceModal() {
-    toast.info("Modal de serviço adicional será criado no próximo passo.");
+  async function handleOpenAdditionalServiceModal() {
+    try {
+      setLoadingServices(true);
+
+      const services = await getActiveServices();
+
+      setAvailableServices(services);
+      setIsAdditionalServiceModalOpen(true);
+    } catch (error) {
+      console.error("Erro ao carregar serviços:", error);
+      toast.error("Não foi possível carregar os serviços.");
+    } finally {
+      setLoadingServices(false);
+    }
   }
 
-  function handleDeleteAdditionalService() {
-    toast.info("Exclusão de serviço adicional será criada depois.");
+  async function handleSaveAdditionalService(serviceId: string) {
+    if (!currentTicket) return;
+
+    try {
+      setSavingService(true);
+
+      const updatedTicket = await addTicketService(currentTicket.id, {
+        serviceId,
+        quantity: 1,
+      });
+
+      updateCurrentTicket(updatedTicket);
+
+      toast.success("Serviço adicionado com sucesso!");
+      setIsAdditionalServiceModalOpen(false);
+    } catch (error) {
+      console.error(error);
+
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message;
+
+        if (message === "Service already added to this ticket") {
+          toast.error("Este serviço já foi adicionado ao chamado.");
+          return;
+        }
+      }
+
+      toast.error("Não foi possível adicionar o serviço.");
+    } finally {
+      setSavingService(false);
+    }
   }
 
-  if (!ticket) {
+  function updateCurrentTicket(ticket: {
+    totalPrice: string | number;
+    updatedAt: string;
+    services: TicketDetailsData["services"];
+  }) {
+    setCurrentTicket((prev) =>
+      prev
+        ? {
+            ...prev,
+            totalPrice: ticket.totalPrice,
+            updatedAt: ticket.updatedAt,
+            services: ticket.services,
+          }
+        : prev,
+    );
+
+    setCurrentUpdatedAt(formatDateTime(ticket.updatedAt));
+  }
+
+  async function handleDeleteAdditionalService(ticketServiceId: string) {
+    if (!currentTicket) return;
+
+    try {
+      setSavingService(true);
+
+      const updatedTicket = await deleteTicketService(
+        currentTicket.id,
+        ticketServiceId,
+      );
+
+      updateCurrentTicket(updatedTicket);
+
+      toast.success("Serviço removido com sucesso!");
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Não foi possível remover o serviço.");
+    } finally {
+      setSavingService(false);
+    }
+  }
+
+  if (!currentTicket) {
     return (
       <div className="flex min-h-75 flex-col items-center justify-center gap-3">
         <Text textColor="secondary">
@@ -155,9 +267,9 @@ export default function TechnicianTicketDetails() {
     );
   }
 
-  const resolvedStatus = currentStatus ?? ticket.status;
-  const baseService = ticket.services?.[0];
-  const additionalServices = ticket.services?.slice(1) ?? [];
+  const resolvedStatus = currentStatus ?? currentTicket.status;
+  const baseService = currentTicket.services?.[0];
+  const additionalServices = currentTicket.services?.slice(1) ?? [];
 
   const additionalTotal = additionalServices.reduce((total, item) => {
     return total + Number(item.priceAtTime) * item.quantity;
@@ -218,11 +330,11 @@ export default function TechnicianTicketDetails() {
             <div className="mb-5 flex items-start justify-between">
               <div className="flex flex-col gap-2">
                 <Text textColor="quaternary" weight="bold">
-                  {formatTicketCode(ticket.code)}
+                  {formatTicketCode(currentTicket.code)}
                 </Text>
 
                 <Text as="h2" size="md" weight="bold">
-                  {ticket.title}
+                  {currentTicket.title}
                 </Text>
               </div>
 
@@ -237,7 +349,7 @@ export default function TechnicianTicketDetails() {
                   Descrição
                 </Text>
 
-                <Text>{ticket.description || "Sem descrição."}</Text>
+                <Text>{currentTicket.description || "Sem descrição."}</Text>
               </div>
 
               <div>
@@ -247,7 +359,7 @@ export default function TechnicianTicketDetails() {
 
                 <Text>
                   {baseService?.service.name ??
-                    ticket.serviceName ??
+                    currentTicket.serviceName ??
                     "Sem serviço"}
                 </Text>
               </div>
@@ -258,7 +370,7 @@ export default function TechnicianTicketDetails() {
                     Criado em
                   </Text>
 
-                  <Text>{formatDateTime(ticket.createdAt)}</Text>
+                  <Text>{formatDateTime(currentTicket.createdAt)}</Text>
                 </div>
 
                 <div>
@@ -267,7 +379,8 @@ export default function TechnicianTicketDetails() {
                   </Text>
 
                   <Text>
-                    {currentUpdatedAt ?? formatDateTime(ticket.updatedAt)}
+                    {currentUpdatedAt ??
+                      formatDateTime(currentTicket.updatedAt)}
                   </Text>
                 </div>
               </div>
@@ -279,13 +392,13 @@ export default function TechnicianTicketDetails() {
 
                 <div className="mt-2 flex items-center gap-2">
                   <AvatarCircle
-                    name={ticket.clientName}
-                    avatar={ticket.clientAvatar}
+                    name={currentTicket.clientName}
+                    avatar={currentTicket.clientAvatar}
                     size="xs"
                     variant="blueDark"
                   />
 
-                  <Text>{ticket.clientName}</Text>
+                  <Text>{currentTicket.clientName}</Text>
                 </div>
               </div>
             </div>
@@ -301,7 +414,7 @@ export default function TechnicianTicketDetails() {
                 size="xs"
                 className="py-2.5"
                 onClick={handleOpenAdditionalServiceModal}
-                disabled={resolvedStatus === "closed"}
+                disabled={resolvedStatus === "closed" || loadingServices}
               >
                 <Icon svg={Plus} size="xs" />
               </Button>
@@ -310,29 +423,13 @@ export default function TechnicianTicketDetails() {
             {additionalServices.length > 0 ? (
               <div className="flex flex-col">
                 {additionalServices.map((item) => (
-                  <div
+                  <AdditionalServiceItem
                     key={item.id}
-                    className="flex items-center justify-between border-b border-gray-200 py-3 last:border-b-0"
-                  >
-                    <Text weight="bold">{item.service.name}</Text>
-
-                    <div className="flex items-center gap-4">
-                      <Text>{formatCurrency(item.priceAtTime)}</Text>
-
-                      <Button
-                        variant="secondary"
-                        size="xs"
-                        onClick={handleDeleteAdditionalService}
-                        disabled={resolvedStatus === "closed"}
-                      >
-                        <Icon
-                          svg={Trash}
-                          size="xs"
-                          className="fill-feedback-danger"
-                        />
-                      </Button>
-                    </div>
-                  </div>
+                    name={item.service.name}
+                    price={formatCurrency(item.priceAtTime)}
+                    disabled={resolvedStatus === "closed" || loadingServices}
+                    onDelete={() => handleDeleteAdditionalService(item.id)}
+                  ></AdditionalServiceItem>
                 ))}
               </div>
             ) : (
@@ -351,18 +448,18 @@ export default function TechnicianTicketDetails() {
 
             <div className="mt-3 flex items-center gap-2">
               <AvatarCircle
-                name={ticket.technicianName}
-                avatar={ticket.technicianAvatar}
+                name={currentTicket.technicianName}
+                avatar={currentTicket.technicianAvatar}
                 size="md"
                 variant="blueDark"
               />
 
               <div>
-                <Text>{ticket.technicianName}</Text>
+                <Text>{currentTicket.technicianName}</Text>
 
-                {ticket.technicianEmail && (
+                {currentTicket.technicianEmail && (
                   <Text size="sm" textColor="quaternary">
-                    {ticket.technicianEmail}
+                    {currentTicket.technicianEmail}
                   </Text>
                 )}
               </div>
@@ -389,16 +486,26 @@ export default function TechnicianTicketDetails() {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <Text weight="bold">Total</Text>
-                <Text weight="bold" >
-                  {formatCurrency(
-                    baseService?.priceAtTime ?? ticket.totalPrice,
-                  )}
+                <Text weight="bold">
+                  {formatCurrency(currentTicket.totalPrice)}
                 </Text>
               </div>
             </div>
           </div>
         </aside>
       </div>
+
+      <AdditionalServiceModal
+        open={isAdditionalServiceModalOpen}
+        services={availableServices.map((service) => ({
+          id: service.id,
+          name: service.name,
+          price: Number(service.price),
+        }))}
+        saving={savingService}
+        onClose={() => setIsAdditionalServiceModalOpen(false)}
+        onSave={handleSaveAdditionalService}
+      />
     </div>
   );
 }

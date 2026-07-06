@@ -74,7 +74,7 @@
   - Atendimento
     - Iniciar atendimento ✅
     - Alterar status para "Em atendimento" ✅
-    - Adicionar serviços extras
+    - Adicionar serviços extras ✅
     - Encerrar chamado ✅
   - Perfil
     - Editar perfil ✅

@@ -9,7 +9,7 @@ export const selectVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-gray-300 focus:border-blue-base",
+        default: "border-gray-200 focus:border-blue-base",
         error: "border-feedback-danger",
       },
     },

@@ -13,7 +13,7 @@ ticketsRoutes.use(ensureAuthenticated);
 ticketsRoutes.post(
   "/",
   verifyUserAuthorization(["client"]),
-  ticketsController.create
+  ticketsController.create,
 );
 
 // Listar chamados — admin, técnico ou cliente (controlado no controller)
@@ -24,6 +24,12 @@ ticketsRoutes.put("/:id", ticketsController.update);
 
 // Adicionar serviço ao chamado — apenas técnico responsável
 ticketsRoutes.post("/:id/services", ticketsController.addService);
+
+// Remover serviço adicional do chamado — apenas técnico responsável
+ticketsRoutes.delete(
+  "/:id/services/:ticketServiceId",
+  ticketsController.removeService,
+);
 
 // Excluir chamado — admin ou cliente dono do chamado
 ticketsRoutes.delete("/:id", ticketsController.delete);

@@ -28,6 +28,11 @@ export type TechnicianTicketCardData = {
   services?: Ticket["services"];
 };
 
+interface AddTicketServiceData {
+  serviceId: string;
+  quantity: number;
+}
+
 // Criar chamado
 export async function createTicket(data: CreateTicketData): Promise<Ticket> {
   const response = await api.post<Ticket>("/tickets", data);
@@ -76,6 +81,31 @@ export async function updateTicketStatus(
   const response = await api.put<Ticket>(`/tickets/${id}`, {
     status,
   });
+
+  return response.data;
+}
+
+// Adicionar serviço adicional a um chamado
+export async function addTicketService(
+  ticketId: string,
+  data: AddTicketServiceData,
+): Promise<Ticket> {
+  const response = await api.post<Ticket>(
+    `/tickets/${ticketId}/services`,
+    data,
+  );
+
+  return response.data;
+}
+
+// Remover serviço adicional de um chamado
+export async function deleteTicketService(
+  ticketId: string,
+  ticketServiceId: string,
+) {
+  const response = await api.delete(
+    `/tickets/${ticketId}/services/${ticketServiceId}`,
+  );
 
   return response.data;
 }

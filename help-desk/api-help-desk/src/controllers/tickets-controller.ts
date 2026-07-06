@@ -216,6 +216,7 @@ export class TicketsController {
   }
 
   // Técnico adiciona novos serviços a um chamado
+  // Técnico adiciona novos serviços a um chamado
   async addService(request: Request, response: Response) {
     const { id } = request.params;
     const loggedUser = request.user;
@@ -236,48 +237,167 @@ export class TicketsController {
 
     const { serviceId, quantity } = bodySchema.parse(request.body);
 
-    // Busca o chamado
-    const ticket = await prisma.ticket.findUnique({
-      where: { id },
-      include: { services: true },
+    // Transação para garantir consistência
+    const updatedTicket = await prisma.$transaction(async (tx) => {
+      // Verifica se o ticket existe e se o técnico logado é o responsável
+      const ticket = await tx.ticket.findUnique({
+        where: { id },
+        include: { services: true },
+      });
+
+      if (!ticket) {
+        throw new AppError("Ticket not found", 404);
+      }
+
+      if (ticket.technicianId !== loggedUser.id) {
+        throw new AppError("You are not assigned to this ticket", 403);
+      }
+
+      if (ticket.status === "closed") {
+        throw new AppError("Cannot add services to a closed ticket", 400);
+      }
+
+      // Verifica se o serviço existe e está ativo
+      const service = await tx.service.findFirst({
+        where: { id: serviceId, active: true },
+      });
+
+      if (!service) {
+        throw new AppError("Service not found or inactive", 404);
+      }
+
+      // Verifica se o serviço já foi adicionado ao ticket
+      const serviceAlreadyAdded = ticket.services.some(
+        (item) => item.serviceId === serviceId,
+      );
+
+      if (serviceAlreadyAdded) {
+        throw new AppError("Service already added to this ticket", 400);
+      }
+
+      // Adiciona o serviço ao ticket
+      await tx.ticketService.create({
+        data: {
+          ticketId: id,
+          serviceId,
+          priceAtTime: service.price,
+          quantity,
+          addedById: loggedUser.id,
+        },
+      });
+
+      // Atualiza o preço total do ticket
+      const newTotal = new Decimal(ticket.totalPrice).add(
+        new Decimal(service.price).mul(quantity),
+      );
+
+      // Atualiza o ticket com o novo total e retorna o ticket atualizado
+      const ticketUpdated = await tx.ticket.update({
+        where: { id },
+        data: {
+          totalPrice: newTotal,
+        },
+        include: {
+          technician: true,
+          client: true,
+          services: {
+            include: {
+              service: true,
+            },
+          },
+        },
+      });
+
+      return ticketUpdated;
     });
 
-    if (!ticket) throw new AppError("Ticket not found", 404);
+    return response.status(201).json(updatedTicket);
+  }
 
-    // Garante que o técnico só edite seus próprios chamados
-    if (ticket.technicianId !== loggedUser.id) {
-      throw new AppError("You are not assigned to this ticket", 403);
+  // Técnico remove um serviço adicional de um chamado
+  async removeService(request: Request, response: Response) {
+    const { id, ticketServiceId } = request.params;
+    const loggedUser = request.user;
+
+    if (!loggedUser) {
+      throw new AppError("Authentication required", 401);
     }
 
-    // Busca o serviço e garante que está ativo
-    const service = await prisma.service.findFirst({
-      where: { id: serviceId, active: true },
+    if (loggedUser.role !== "technician") {
+      throw new AppError("Only technicians can remove services", 403);
+    }
+
+    // Transação para garantir consistência
+    const updatedTicket = await prisma.$transaction(async (tx) => {
+      // Verifica se o ticket existe, se o técnico logado é o responsável e se o ticket não está fechado
+      const ticket = await tx.ticket.findUnique({
+        where: { id },
+        include: {
+          services: true,
+        },
+      });
+
+      if (!ticket) {
+        throw new AppError("Ticket not found", 404);
+      }
+
+      if (ticket.technicianId !== loggedUser.id) {
+        throw new AppError("You are not assigned to this ticket", 403);
+      }
+
+      if (ticket.status === "closed") {
+        throw new AppError("Cannot remove services from a closed ticket", 400);
+      }
+
+      // Verifica se o serviço existe e pertence ao ticket
+      const ticketService = await tx.ticketService.findUnique({
+        where: { id: ticketServiceId },
+      });
+
+      if (!ticketService || ticketService.ticketId !== id) {
+        throw new AppError("Ticket service not found", 404);
+      }
+ 
+      // Verifica se o serviço a ser removido é o serviço base (o primeiro serviço adicionado ao ticket)
+      const isBaseService = ticket.services[0]?.id === ticketServiceId;
+
+      if (isBaseService) {
+        throw new AppError("Cannot remove base service", 400);
+      }
+
+      await tx.ticketService.delete({
+        where: { id: ticketServiceId },
+      });
+
+      // Atualiza o preço total do ticket subtraindo o valor do serviço removido
+      const removedValue = new Decimal(ticketService.priceAtTime).mul(
+        ticketService.quantity,
+      );
+
+      // Atualiza o preço total do ticket
+      const newTotal = new Decimal(ticket.totalPrice).sub(removedValue);
+
+      // Atualiza o ticket com o novo total e retorna o ticket atualizado
+      const ticketUpdated = await tx.ticket.update({
+        where: { id },
+        data: {
+          totalPrice: newTotal,
+        },
+        include: {
+          technician: true,
+          client: true,
+          services: {
+            include: {
+              service: true,
+            },
+          },
+        },
+      });
+
+      return ticketUpdated;
     });
 
-    if (!service) throw new AppError("Service not found or inactive", 404);
-
-    // Cria o registro TicketService
-    const addedService = await prisma.ticketService.create({
-      data: {
-        ticketId: id,
-        serviceId,
-        priceAtTime: service.price,
-        quantity,
-        addedById: loggedUser.id,
-      },
-    });
-
-    // Atualiza o total do ticket somando o novo serviço
-    const newTotal = new Decimal(ticket.totalPrice).add(
-      new Decimal(service.price).mul(quantity),
-    );
-
-    await prisma.ticket.update({
-      where: { id },
-      data: { totalPrice: newTotal },
-    });
-
-    return response.status(201).json(addedService);
+    return response.status(200).json(updatedTicket);
   }
 
   // Excluir chamado (Admin ou dono do ticket)
