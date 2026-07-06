@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { updateTicketStatus } from "@/services";
+import { getTicketById, updateTicketStatus } from "@/services";
 
 import { AvatarCircle, BadgeStatus, Button, Icon, Text } from "@/components/ui";
 import { ArrowLeft, CircleCheck, CircleHelp, Clock } from "@/assets/icons";
@@ -80,31 +80,105 @@ function formatCurrency(value: string | number) {
   }).format(numberValue);
 }
 
+function formatDateTime(value: string) {
+  const currentDate = new Date(value);
+
+  const formattedDate = currentDate.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+
+  const formattedTime = currentDate.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return `${formattedDate} - ${formattedTime}`;
+}
+
+function mapTicketToDetails(ticket: any): TicketDetailsData {
+  return {
+    id: ticket.id,
+    code: `#${ticket.id.slice(-5).toUpperCase()}`,
+    title: ticket.title ?? "Sem título",
+    description: ticket.description,
+    serviceName:
+      ticket.services?.map((item: any) => item.service.name).join(", ") ||
+      "Sem serviço",
+    totalPrice: ticket.totalPrice,
+    clientName: ticket.client.name,
+    clientAvatar: ticket.client.avatar ?? null,
+    technicianName: ticket.technician.name,
+    technicianEmail: ticket.technician.email,
+    technicianAvatar: ticket.technician.avatar ?? null,
+    status: ticket.status,
+    createdAt: ticket.createdAt,
+    updatedAt: ticket.updatedAt,
+    services: ticket.services,
+  };
+}
+
 export default function AdminTicketDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const state = location.state as LocationState | null;
-  const ticket = state?.ticket;
+  const initialTicket = state?.ticket;
 
+  const [currentTicket, setCurrentTicket] = useState<
+    TicketDetailsData | undefined
+  >(initialTicket);
+
+  const [loading, setLoading] = useState(true);
   const [currentStatus, setCurrentStatus] = useState<TicketStatus | undefined>(
-    ticket?.status,
+    initialTicket?.status,
+  );
+  const [currentUpdatedAt, setCurrentUpdatedAt] = useState<string | undefined>(
+    initialTicket?.updatedAt
+      ? formatDateTime(initialTicket.updatedAt)
+      : undefined,
   );
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
-  const [currentUpdatedAt, setCurrentUpdatedAt] = useState(ticket?.updatedAt);
+  useEffect(() => {
+    async function loadTicket() {
+      if (!initialTicket?.id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await getTicketById(initialTicket.id);
+        const formattedTicket = mapTicketToDetails(data);
+
+        setCurrentTicket(formattedTicket);
+        setCurrentStatus(formattedTicket.status);
+        setCurrentUpdatedAt(formatDateTime(formattedTicket.updatedAt));
+      } catch (error) {
+        console.error("Erro ao carregar chamado:", error);
+        toast.error("Não foi possível carregar o chamado atualizado.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTicket();
+  }, [initialTicket?.id]);
 
   async function handleUpdateStatus(status: TicketStatus) {
-    if (!ticket) return;
+    if (!currentTicket) return;
 
     try {
       setUpdatingStatus(true);
 
-      const updatedTicket = await updateTicketStatus(ticket.id, status);
+      const updatedTicket = await updateTicketStatus(currentTicket.id, status);
+      const refreshedTicket = await getTicketById(updatedTicket.id);
+      const formattedTicket = mapTicketToDetails(refreshedTicket);
 
-      setCurrentStatus(updatedTicket.status);
-
-      setCurrentUpdatedAt(formatDateTime(updatedTicket.updatedAt));
+      setCurrentTicket(formattedTicket);
+      setCurrentStatus(formattedTicket.status);
+      setCurrentUpdatedAt(formatDateTime(formattedTicket.updatedAt));
 
       toast.success("Status do chamado atualizado com sucesso!");
     } catch (error) {
@@ -115,24 +189,15 @@ export default function AdminTicketDetails() {
     }
   }
 
-  function formatDateTime(value: string) {
-    const currentDate = new Date(value);
-
-    const formattedDate = currentDate.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-    });
-
-    const formattedTime = currentDate.toLocaleTimeString("pt-BR", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    return `${formattedDate} - ${formattedTime}`;
+  if (loading) {
+    return (
+      <div className="flex min-h-75 items-center justify-center">
+        <Text>Carregando chamado...</Text>
+      </div>
+    );
   }
 
-  if (!ticket) {
+  if (!currentTicket) {
     return (
       <div className="flex min-h-75 flex-col items-center justify-center gap-3">
         <Text textColor="secondary">
@@ -146,13 +211,12 @@ export default function AdminTicketDetails() {
     );
   }
 
-  const resolvedStatus = currentStatus ?? ticket.status;
-  const baseService = ticket.services?.[0];
-  const additionalServices = ticket.services?.slice(1) ?? [];
+  const resolvedStatus = currentStatus ?? currentTicket.status;
+  const baseService = currentTicket.services?.[0];
+  const additionalServices = currentTicket.services?.slice(1) ?? [];
 
   return (
     <div className="flex flex-col gap-4 md:gap-6 md:px-30">
-      {/* Topo */}
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-1">
           <button
@@ -196,17 +260,16 @@ export default function AdminTicketDetails() {
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[1fr_360px] xl:items-start">
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
           <div className="mb-5 flex items-start justify-between">
             <div className="flex flex-col gap-2">
-              <Text textColor="quaternary" weight={"bold"}>
-                {ticket.code}
+              <Text textColor="quaternary" weight="bold">
+                {currentTicket.code}
               </Text>
 
               <Text as="h2" size="md" weight="bold">
-                {ticket.title}
+                {currentTicket.title}
               </Text>
             </div>
 
@@ -221,7 +284,7 @@ export default function AdminTicketDetails() {
                 Descrição
               </Text>
 
-              <Text>{ticket.description || "Sem descrição."}</Text>
+              <Text>{currentTicket.description || "Sem descrição."}</Text>
             </div>
 
             <div>
@@ -231,7 +294,7 @@ export default function AdminTicketDetails() {
 
               <Text>
                 {baseService?.service.name ??
-                  ticket.serviceName ??
+                  currentTicket.serviceName ??
                   "Sem serviço"}
               </Text>
             </div>
@@ -242,7 +305,7 @@ export default function AdminTicketDetails() {
                   Criado em
                 </Text>
 
-                <Text>{ticket.createdAt}</Text>
+                <Text>{formatDateTime(currentTicket.createdAt)}</Text>
               </div>
 
               <div>
@@ -250,7 +313,9 @@ export default function AdminTicketDetails() {
                   Atualizado em
                 </Text>
 
-                <Text>{currentUpdatedAt ?? ticket.updatedAt}</Text>
+                <Text>
+                  {currentUpdatedAt ?? formatDateTime(currentTicket.updatedAt)}
+                </Text>
               </div>
             </div>
 
@@ -261,13 +326,13 @@ export default function AdminTicketDetails() {
 
               <div className="mt-2 flex items-center gap-2">
                 <AvatarCircle
-                  name={ticket.clientName}
-                  avatar={ticket.clientAvatar}
+                  name={currentTicket.clientName}
+                  avatar={currentTicket.clientAvatar}
                   size="xs"
                   variant="blueDark"
                 />
 
-                <Text>{ticket.clientName}</Text>
+                <Text>{currentTicket.clientName}</Text>
               </div>
             </div>
           </div>
@@ -281,17 +346,18 @@ export default function AdminTicketDetails() {
 
             <div className="mt-3 flex items-center gap-2">
               <AvatarCircle
-                name={ticket.technicianName}
-                avatar={ticket.technicianAvatar}
+                name={currentTicket.technicianName}
+                avatar={currentTicket.technicianAvatar}
                 size="md"
                 variant="blueDark"
               />
 
               <div>
-                <Text>{ticket.technicianName}</Text>
-                {ticket.technicianEmail && (
+                <Text>{currentTicket.technicianName}</Text>
+
+                {currentTicket.technicianEmail && (
                   <Text size="sm" textColor="quaternary">
-                    {ticket.technicianEmail}
+                    {currentTicket.technicianEmail}
                   </Text>
                 )}
               </div>
@@ -306,7 +372,7 @@ export default function AdminTicketDetails() {
 
               <div className="flex justify-between">
                 <Text>Preço base</Text>
-                <Text>{formatCurrency(ticket.totalPrice)}</Text>
+                <Text>{formatCurrency(baseService?.priceAtTime ?? 0)}</Text>
               </div>
             </div>
 
@@ -318,8 +384,14 @@ export default function AdminTicketDetails() {
               {additionalServices.length > 0 ? (
                 additionalServices.map((item) => (
                   <div key={item.id} className="flex justify-between">
-                    <Text>{item.service.name}</Text>
-                    <Text>{formatCurrency(item.priceAtTime)}</Text>
+                    <Text>
+                      {item.service.name}
+                      {item.quantity > 1 && ` (${item.quantity}x)`}
+                    </Text>
+
+                    <Text>
+                      {formatCurrency(Number(item.priceAtTime) * item.quantity)}
+                    </Text>
                   </div>
                 ))
               ) : (
@@ -330,7 +402,9 @@ export default function AdminTicketDetails() {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <Text weight="bold">Total</Text>
-                <Text weight="bold">{formatCurrency(ticket.totalPrice)}</Text>
+                <Text weight="bold">
+                  {formatCurrency(currentTicket.totalPrice)}
+                </Text>
               </div>
             </div>
           </div>

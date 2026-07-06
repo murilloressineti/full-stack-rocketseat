@@ -19,6 +19,9 @@ ticketsRoutes.post(
 // Listar chamados — admin, técnico ou cliente (controlado no controller)
 ticketsRoutes.get("/", ticketsController.index);
 
+// Visualizar detalhes de um chamado específico — admin, técnico ou cliente (controlado no controller)
+ticketsRoutes.get("/:id", ticketsController.show);
+
 // Atualizar chamado — admin ou técnico responsável
 ticketsRoutes.put("/:id", ticketsController.update);
 

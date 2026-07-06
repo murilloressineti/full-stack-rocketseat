@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+
+import { getTicketById } from "@/services";
 
 import { AvatarCircle, BadgeStatus, Button, Icon, Text } from "@/components/ui";
 import { ArrowLeft } from "@/assets/icons";
@@ -59,14 +63,88 @@ function formatCurrency(value: string | number) {
   }).format(numberValue);
 }
 
+function formatDateTime(value: string) {
+  const currentDate = new Date(value);
+
+  const formattedDate = currentDate.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+
+  const formattedTime = currentDate.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return `${formattedDate} - ${formattedTime}`;
+}
+
+function mapTicketToDetails(ticket: any): TicketDetailsData {
+  return {
+    id: ticket.id,
+    code: `#${ticket.id.slice(-5).toUpperCase()}`,
+    title: ticket.title ?? "Sem título",
+    description: ticket.description,
+    serviceName:
+      ticket.services?.map((item: any) => item.service.name).join(", ") ||
+      "Sem serviço",
+    totalPrice: ticket.totalPrice,
+    technicianName: ticket.technician.name,
+    technicianEmail: ticket.technician.email,
+    technicianAvatar: ticket.technician.avatar ?? null,
+    status: ticket.status,
+    createdAt: ticket.createdAt,
+    updatedAt: ticket.updatedAt,
+    services: ticket.services,
+  };
+}
+
 export default function ClientTicketDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const state = location.state as LocationState | null;
-  const ticket = state?.ticket;
+  const initialTicket = state?.ticket;
 
-  if (!ticket) {
+  const [currentTicket, setCurrentTicket] = useState<
+    TicketDetailsData | undefined
+  >(initialTicket);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadTicket() {
+      if (!initialTicket?.id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await getTicketById(initialTicket.id);
+        const formattedTicket = mapTicketToDetails(data);
+
+        setCurrentTicket(formattedTicket);
+      } catch (error) {
+        console.error("Erro ao carregar chamado:", error);
+        toast.error("Não foi possível carregar o chamado atualizado.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTicket();
+  }, [initialTicket?.id]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-75 items-center justify-center">
+        <Text>Carregando chamado...</Text>
+      </div>
+    );
+  }
+
+  if (!currentTicket) {
     return (
       <div className="flex min-h-75 flex-col items-center justify-center gap-3">
         <Text textColor="secondary">
@@ -83,8 +161,8 @@ export default function ClientTicketDetails() {
     );
   }
 
-  const baseService = ticket.services?.[0];
-  const additionalServices = ticket.services?.slice(1) ?? [];
+  const baseService = currentTicket.services?.[0];
+  const additionalServices = currentTicket.services?.slice(1) ?? [];
 
   return (
     <div className="flex flex-col gap-4 md:gap-6 md:px-30">
@@ -119,16 +197,16 @@ export default function ClientTicketDetails() {
           <div className="mb-5 flex items-start justify-between">
             <div className="flex flex-col gap-2">
               <Text textColor="quaternary" weight="bold">
-                {ticket.code}
+                {currentTicket.code}
               </Text>
 
               <Text as="h2" size="md" weight="bold">
-                {ticket.title}
+                {currentTicket.title}
               </Text>
             </div>
 
-            <BadgeStatus variant={statusVariant[ticket.status]}>
-              {statusLabel[ticket.status]}
+            <BadgeStatus variant={statusVariant[currentTicket.status]}>
+              {statusLabel[currentTicket.status]}
             </BadgeStatus>
           </div>
 
@@ -138,7 +216,7 @@ export default function ClientTicketDetails() {
                 Descrição
               </Text>
 
-              <Text>{ticket.description || "Sem descrição."}</Text>
+              <Text>{currentTicket.description || "Sem descrição."}</Text>
             </div>
 
             <div>
@@ -148,7 +226,7 @@ export default function ClientTicketDetails() {
 
               <Text>
                 {baseService?.service.name ??
-                  ticket.serviceName ??
+                  currentTicket.serviceName ??
                   "Sem serviço"}
               </Text>
             </div>
@@ -159,7 +237,7 @@ export default function ClientTicketDetails() {
                   Criado em
                 </Text>
 
-                <Text>{ticket.createdAt}</Text>
+                <Text>{formatDateTime(currentTicket.createdAt)}</Text>
               </div>
 
               <div>
@@ -167,7 +245,7 @@ export default function ClientTicketDetails() {
                   Atualizado em
                 </Text>
 
-                <Text>{ticket.updatedAt}</Text>
+                <Text>{formatDateTime(currentTicket.updatedAt)}</Text>
               </div>
             </div>
           </div>
@@ -181,18 +259,18 @@ export default function ClientTicketDetails() {
 
             <div className="mt-3 flex items-center gap-2">
               <AvatarCircle
-                name={ticket.technicianName}
-                avatar={ticket.technicianAvatar}
+                name={currentTicket.technicianName}
+                avatar={currentTicket.technicianAvatar}
                 size="md"
                 variant="blueDark"
               />
 
               <div>
-                <Text>{ticket.technicianName}</Text>
+                <Text>{currentTicket.technicianName}</Text>
 
-                {ticket.technicianEmail && (
+                {currentTicket.technicianEmail && (
                   <Text size="sm" textColor="quaternary">
-                    {ticket.technicianEmail}
+                    {currentTicket.technicianEmail}
                   </Text>
                 )}
               </div>
@@ -207,11 +285,7 @@ export default function ClientTicketDetails() {
 
               <div className="flex justify-between">
                 <Text>Preço base</Text>
-                <Text>
-                  {formatCurrency(
-                    baseService?.priceAtTime ?? ticket.totalPrice,
-                  )}
-                </Text>
+                <Text>{formatCurrency(baseService?.priceAtTime ?? 0)}</Text>
               </div>
             </div>
 
@@ -223,8 +297,14 @@ export default function ClientTicketDetails() {
               {additionalServices.length > 0 ? (
                 additionalServices.map((item) => (
                   <div key={item.id} className="flex justify-between">
-                    <Text>{item.service.name}</Text>
-                    <Text>{formatCurrency(item.priceAtTime)}</Text>
+                    <Text>
+                      {item.service.name}
+                      {item.quantity > 1 && ` (${item.quantity}x)`}
+                    </Text>
+
+                    <Text>
+                      {formatCurrency(Number(item.priceAtTime) * item.quantity)}
+                    </Text>
                   </div>
                 ))
               ) : (
@@ -235,7 +315,9 @@ export default function ClientTicketDetails() {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <Text weight="bold">Total</Text>
-                <Text weight="bold">{formatCurrency(ticket.totalPrice)}</Text>
+                <Text weight="bold">
+                  {formatCurrency(currentTicket.totalPrice)}
+                </Text>
               </div>
             </div>
           </div>

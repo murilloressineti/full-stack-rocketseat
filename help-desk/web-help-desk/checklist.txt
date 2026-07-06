@@ -54,7 +54,7 @@
     - Listagem geral de chamados ✅
     - Visualizar detalhes do chamado ✅
 
-- Cliente
+- Cliente ✅
   - Abertura de chamado ✅
     - Buscar serviços disponíveis ✅
     - Buscar técnicos disponíveis ✅
@@ -62,16 +62,16 @@
   - Meus chamados ✅
     - Listagem dos chamados do cliente ✅
     - Visualizar detalhes do chamado ✅
-  - Perfil
+  - Perfil ✅
     - Editar perfil ✅
     - Upload de avatar ✅
     - Trocar senha ✅
 
-- Técnico:
-  - Chamados atribuídos
+- Técnico: ✅
+  - Chamados atribuídos ✅
     - Listagem dos chamados recebidos ✅
     - Visualizar detalhes do chamado ✅
-  - Atendimento
+  - Atendimento ✅
     - Iniciar atendimento ✅
     - Alterar status para "Em atendimento" ✅
     - Adicionar serviços extras ✅
@@ -82,7 +82,7 @@
     - Trocar senha ✅
     - Disponibilidade ✅
 
-- Regras de negócio
+- Regras de negócio ✅
   - Redirecionamento por role após login ✅
   - Bloqueio de acesso por role ✅
   - Logout ✅

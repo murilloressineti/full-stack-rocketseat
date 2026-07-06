@@ -167,6 +167,45 @@ export class TicketsController {
     return response.json(tickets);
   }
 
+  // Visualizar detalhes de um chamado específico (Admin, Técnico ou Cliente)
+  async show(request: Request, response: Response) {
+    const { id } = request.params;
+    const loggedUser = request.user;
+
+    if (!loggedUser) {
+      throw new AppError("Authentication required", 401);
+    }
+
+    const ticket = await prisma.ticket.findUnique({
+      where: { id },
+      include: {
+        technician: true,
+        client: true,
+        services: {
+          include: {
+            service: true,
+          },
+        },
+      },
+    });
+
+    if (!ticket) {
+      throw new AppError("Ticket not found", 404);
+    }
+
+    const isAdmin = loggedUser.role === "admin";
+    const isClientOwner =
+      loggedUser.role === "client" && loggedUser.id === ticket.clientId;
+    const isTechnicianOwner =
+      loggedUser.role === "technician" && loggedUser.id === ticket.technicianId;
+
+    if (!isAdmin && !isClientOwner && !isTechnicianOwner) {
+      throw new AppError("You are not allowed to view this ticket", 403);
+    }
+
+    return response.json(ticket);
+  }
+
   // Atualizar status ou informações do ticket
   async update(request: Request, response: Response) {
     const { id } = request.params;
@@ -215,7 +254,6 @@ export class TicketsController {
     return response.json(updatedTicket);
   }
 
-  // Técnico adiciona novos serviços a um chamado
   // Técnico adiciona novos serviços a um chamado
   async addService(request: Request, response: Response) {
     const { id } = request.params;
@@ -357,7 +395,7 @@ export class TicketsController {
       if (!ticketService || ticketService.ticketId !== id) {
         throw new AppError("Ticket service not found", 404);
       }
- 
+
       // Verifica se o serviço a ser removido é o serviço base (o primeiro serviço adicionado ao ticket)
       const isBaseService = ticket.services[0]?.id === ticketServiceId;
 

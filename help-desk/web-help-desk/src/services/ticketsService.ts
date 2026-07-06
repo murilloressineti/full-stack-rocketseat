@@ -109,3 +109,9 @@ export async function deleteTicketService(
 
   return response.data;
 }
+
+export async function getTicketById(id: string): Promise<Ticket> {
+  const response = await api.get<Ticket>(`/tickets/${id}`);
+
+  return response.data;
+}
