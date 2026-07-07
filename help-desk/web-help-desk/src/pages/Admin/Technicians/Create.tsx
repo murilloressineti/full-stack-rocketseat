@@ -3,30 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 
+import { validateUserNameAndEmail } from "@/utils/formatUser";
+import {
+  AvailabilitySelector,
+  ALL_TIMES,
+} from "@/components/features/schedule";
 import { createTechnician, updateTechnician } from "@/services";
 
-import {
-  AvatarCircle,
-  BadgeTime,
-  Button,
-  Icon,
-  Input,
-  Text,
-} from "@/components/ui";
+import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
 import { ArrowLeft } from "@/assets/icons";
-
-// Definição dos horários de atendimento
-type ShiftSection = {
-  label: string;
-  times: string[];
-};
-
-const MORNING_TIMES = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00"];
-const AFTERNOON_TIMES = ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
-const NIGHT_TIMES = ["19:00", "20:00", "21:00", "22:00", "23:00"];
-
-// Ordenação dos horários
-const ALL_TIMES = [...MORNING_TIMES, ...AFTERNOON_TIMES, ...NIGHT_TIMES];
 
 // Estado inicial da disponibilidade do técnico
 const INITIAL_AVAILABILITY: string[] = [];
@@ -47,29 +32,10 @@ export default function AdminTechnicianCreate() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // UseMemo para evitar recriar o array de seções a cada renderização
-  const sections: ShiftSection[] = useMemo(
-    () => [
-      { label: "MANHÃ", times: MORNING_TIMES },
-      { label: "TARDE", times: AFTERNOON_TIMES },
-      { label: "NOITE", times: NIGHT_TIMES },
-    ],
-    [],
-  );
-
   // Função para ordenar os horários selecionados
   function sortAvailability(times: string[]) {
     return [...times].sort(
       (a, b) => ALL_TIMES.indexOf(a) - ALL_TIMES.indexOf(b),
-    );
-  }
-
-  // Função para alternar a seleção de um horário
-  function toggleTime(time: string) {
-    setSelectedAvailability((prev) =>
-      prev.includes(time)
-        ? prev.filter((item) => item !== time)
-        : [...prev, time],
     );
   }
 
@@ -138,35 +104,38 @@ export default function AdminTechnicianCreate() {
 
   // Função para lidar com o salvamento do técnico
   async function handleSave() {
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
+    const { formattedName, formattedEmail, errors, hasError } =
+      validateUserNameAndEmail(name, email);
+
     const trimmedPassword = password.trim();
 
-    let hasError = false;
+    let hasPasswordError = false;
 
     setNameError("");
     setEmailError("");
     setPasswordError("");
 
-    if (!trimmedName) {
+    if (errors.name) {
       setNameError("Informe o nome do técnico.");
-      hasError = true;
     }
 
-    if (!trimmedEmail) {
-      setEmailError("Informe o e-mail do técnico.");
-      hasError = true;
+    if (errors.email) {
+      setEmailError(
+        errors.email === "Informe o e-mail."
+          ? "Informe o e-mail do técnico."
+          : errors.email,
+      );
     }
 
     if (!trimmedPassword) {
       setPasswordError("Informe a senha do técnico.");
-      hasError = true;
+      hasPasswordError = true;
     } else if (trimmedPassword.length < 6) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
-      hasError = true;
+      hasPasswordError = true;
     }
 
-    if (hasError) return;
+    if (hasError || hasPasswordError) return;
 
     const sortedAvailability = sortAvailability(selectedAvailability);
 
@@ -174,13 +143,13 @@ export default function AdminTechnicianCreate() {
       setSaving(true);
 
       const createdTechnician = await createTechnician({
-        name: trimmedName,
-        email: trimmedEmail,
+        name: formattedName,
+        email: formattedEmail,
       });
 
       await updateTechnician(createdTechnician.id, {
-        name: trimmedName,
-        email: trimmedEmail,
+        name: formattedName,
+        email: formattedEmail,
         password: trimmedPassword,
         availability: sortedAvailability,
       });
@@ -330,41 +299,10 @@ export default function AdminTechnicianCreate() {
           </div>
 
           <div className="flex flex-col gap-5">
-            {sections.map((section) => (
-              <div key={section.label} className="flex flex-col gap-2">
-                <Text
-                  as="span"
-                  size="xs"
-                  weight="bold"
-                  textColor={"quaternary"}
-                  className="uppercase tracking-wide"
-                >
-                  {section.label}
-                </Text>
-
-                <div className="flex flex-wrap gap-2">
-                  {section.times.map((time) => {
-                    const isSelected = selectedAvailability.includes(time);
-
-                    return (
-                      <button
-                        key={time}
-                        type="button"
-                        onClick={() => toggleTime(time)}
-                        className="cursor-pointer"
-                      >
-                        <BadgeTime
-                          variant={isSelected ? "selected" : "available"}
-                          className="justify-center"
-                        >
-                          {time}
-                        </BadgeTime>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+            <AvailabilitySelector
+              value={selectedAvailability}
+              onChange={setSelectedAvailability}
+            />
           </div>
         </section>
       </div>

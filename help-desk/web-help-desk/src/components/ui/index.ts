@@ -7,5 +7,6 @@ export { default as Input } from "./Input";
 export { default as Logo } from "./Logo";
 export { default as NavItem } from "./NavItem";
 export { default as Select } from "./Select";
+export { default as Skeleton } from "./Skeleton";
 export { default as Text } from "./Text";
 export { default as Textarea } from "./Textarea";

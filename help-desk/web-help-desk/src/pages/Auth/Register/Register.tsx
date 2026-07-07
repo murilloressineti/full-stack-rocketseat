@@ -8,6 +8,8 @@ import { toast } from "sonner";
 import { registerSchema, type RegisterFormData } from "@/schemas/auth/";
 import { registerUser } from "@/services/authService";
 
+import { validateUserNameAndEmail } from "@/utils/formatUser";
+
 import { Background } from "@/assets/images";
 import { Button, Input, Logo, Text } from "@/components/ui";
 
@@ -21,8 +23,21 @@ export default function Register() {
   const navigate = useNavigate();
 
   async function onSubmit(data: RegisterFormData) {
+    const { formattedName, formattedEmail, errors, hasError } =
+      validateUserNameAndEmail(data.name, data.email);
+
+    if (hasError) {
+      if (errors.name) toast.error(errors.name);
+      if (errors.email) toast.error(errors.email);
+      return;
+    }
+
     try {
-      await registerUser(data);
+      await registerUser({
+        ...data,
+        name: formattedName,
+        email: formattedEmail,
+      });
 
       toast.success("Conta criada com sucesso!");
 

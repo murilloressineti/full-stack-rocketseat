@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getTechnicians } from "@/services";
 import type { Technician } from "@/types";
 
-import { Button, Icon, Text } from "@/components/ui";
+import { Button, Icon, Skeleton, Text } from "@/components/ui";
 import { TechnicianRow, TechnicianModal } from "./components";
 import { Plus } from "@/assets/icons";
 
@@ -51,7 +51,7 @@ export default function AdminTechniciansList() {
   }, []);
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return <Skeleton />;
   }
 
   return (

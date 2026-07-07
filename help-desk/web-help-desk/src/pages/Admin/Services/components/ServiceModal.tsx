@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { createService, updateService } from "@/services";
@@ -55,6 +55,20 @@ export default function ServiceModal({
     return Number(cleanValue);
   }
 
+  const isDirty = useMemo(() => {
+    const currentName = name.trim();
+    const currentPrice = parsePrice(price);
+
+    if (!service) {
+      return currentName !== "" || price.trim() !== "";
+    }
+
+    const initialName = service.name.trim();
+    const initialPrice = parsePrice(String(service.price));
+
+    return currentName !== initialName || currentPrice !== initialPrice;
+  }, [name, price, service]);
+
   async function handleSave() {
     const trimmedName = name.trim();
     const numberPrice = parsePrice(price);
@@ -109,9 +123,61 @@ export default function ServiceModal({
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (saving || !isDirty) return;
+
+    handleSave();
+  }
+
+  function handleClose() {
+    if (!isDirty) {
+      onClose();
+      return;
+    }
+
+    toast.custom((t) => (
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
+        <div className="mb-3 flex flex-col gap-1">
+          <Text weight="bold">Descartar alterações?</Text>
+          <Text size="sm" textColor="secondary">
+            Você fez alterações neste serviço. Se fechar agora, perderá tudo o
+            que não foi salvo.
+          </Text>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button
+            variant="secondary"
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => toast.dismiss(t)}
+          >
+            Continuar editando
+          </Button>
+
+          <Button
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => {
+              toast.dismiss(t);
+              onClose();
+            }}
+          >
+            Descartar
+          </Button>
+        </div>
+      </div>
+    ));
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
-      <div className="w-full max-w-md rounded-xl bg-bg-light shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md rounded-xl bg-bg-light shadow-lg"
+      >
         <div className="flex items-center justify-between border-b border-gray-200 py-5 px-6">
           <Text as="h2" size="md" weight="bold">
             {service ? "Editar serviço" : "Cadastro de serviço"}
@@ -119,7 +185,7 @@ export default function ServiceModal({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="cursor-pointer transition-all duration-200 hover:scale-110"
           >
             <Icon svg={X} className="fill-gray-400" />
@@ -153,14 +219,14 @@ export default function ServiceModal({
 
         <div className="border-t border-gray-200 py-6 px-6">
           <Button
+            type="submit"
             className="w-full py-2.5"
-            onClick={handleSave}
-            disabled={saving}
+            disabled={saving || !isDirty}
           >
             {saving ? "Salvando..." : "Salvar"}
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

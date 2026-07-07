@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { getTickets } from "@/services";
 import type { Ticket } from "@/types";
 
-import { Text } from "@/components/ui";
+import { Skeleton, Text } from "@/components/ui";
 import TicketRow from "./components/TicketRow";
 
 type TicketListItem = {
@@ -125,7 +125,7 @@ export default function AdminTicketsList() {
   }, []);
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return <Skeleton />;
   }
 
   return (

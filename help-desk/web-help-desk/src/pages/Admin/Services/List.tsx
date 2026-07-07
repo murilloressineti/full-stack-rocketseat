@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { deactivateService, getServices, reactivateService } from "@/services";
 import type { Service } from "@/types";
 
-import { Button, Icon, Text } from "@/components/ui";
+import { Button, Icon, Skeleton, Text } from "@/components/ui";
 import { Plus } from "@/assets/icons";
 import { ServiceRow, ServiceModal } from "./components";
 
@@ -108,7 +108,7 @@ export default function AdminServicesList() {
   }
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return <Skeleton />;
   }
 
   return (

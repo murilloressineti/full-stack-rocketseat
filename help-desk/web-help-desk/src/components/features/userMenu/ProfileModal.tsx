@@ -44,8 +44,8 @@ export default function ProfileModal({
   const [saving, setSaving] = useState(false);
 
   const isDirty =
-    name !== user.name ||
-    email !== user.email ||
+    name.trim() !== user.name.trim() ||
+    email.trim().toLowerCase() !== user.email.trim().toLowerCase() ||
     avatar !== user.avatar ||
     avatarFile !== null;
 
@@ -162,7 +162,7 @@ export default function ProfileModal({
     }
 
     toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 bg-white p-4 shadow-lg">
+      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
 
@@ -202,6 +202,9 @@ export default function ProfileModal({
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          if (saving || !isDirty) return;
+
           handleSave();
         }}
         className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg"
@@ -263,7 +266,11 @@ export default function ProfileModal({
                 </Button>
               </div>
 
-              <Text size="xxs" textColor="tertiary" className="normal-case italic">
+              <Text
+                size="xxs"
+                textColor="tertiary"
+                className="normal-case italic"
+              >
                 Imagem de até 2 MB
               </Text>
             </div>
@@ -332,7 +339,11 @@ export default function ProfileModal({
         )}
 
         <div className="border-t border-gray-200 px-6 py-6">
-          <Button type="submit" className="w-full py-2.5" disabled={saving}>
+          <Button
+            type="submit"
+            className="w-full py-2.5"
+            disabled={saving || !isDirty}
+          >
             {saving ? "Salvando..." : "Salvar"}
           </Button>
         </div>

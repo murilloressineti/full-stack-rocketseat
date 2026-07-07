@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { deleteClient, updateClient } from "@/services";
+import { validateUserNameAndEmail } from "@/utils/formatUser";
 import type { Client } from "@/types";
 
 import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
@@ -30,7 +31,16 @@ export default function ClientModal({
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
 
+  const isDirty = useMemo(() => {
+    return (
+      name.trim() !== client.name.trim() ||
+      email.trim().toLowerCase() !== client.email.trim().toLowerCase()
+    );
+  }, [name, email, client]);
+
   async function handleSave() {
+    if (saving) return;
+
     if (isDeleting) {
       try {
         setSaving(true);
@@ -49,22 +59,22 @@ export default function ClientModal({
       return;
     }
 
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
-
-    let hasError = false;
+    const { formattedName, formattedEmail, errors, hasError } =
+      validateUserNameAndEmail(name, email);
 
     setNameError("");
     setEmailError("");
 
-    if (!trimmedName) {
+    if (errors.name) {
       setNameError("Informe o nome do cliente.");
-      hasError = true;
     }
 
-    if (!trimmedEmail) {
-      setEmailError("Informe o e-mail do cliente.");
-      hasError = true;
+    if (errors.email) {
+      setEmailError(
+        errors.email === "Informe o e-mail."
+          ? "Informe o e-mail do cliente."
+          : errors.email,
+      );
     }
 
     if (hasError) return;
@@ -73,8 +83,8 @@ export default function ClientModal({
       setSaving(true);
 
       const updatedClient = await updateClient(client.id, {
-        name: trimmedName,
-        email: trimmedEmail,
+        name: formattedName,
+        email: formattedEmail,
       });
 
       toast.success("Cliente atualizado com sucesso!");
@@ -87,9 +97,62 @@ export default function ClientModal({
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!isEditing || saving || !isDirty) return;
+
+    handleSave();
+  }
+
+  function handleClose() {
+    if (!isEditing || !isDirty) {
+      onClose();
+      return;
+    }
+
+    toast.custom((t) => (
+      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 p-4 shadow-lg">
+        <div className="mb-3 flex flex-col gap-1">
+          <Text weight="bold">Descartar alterações?</Text>
+          <Text size="sm" textColor="secondary">
+            Você fez alterações neste cliente. Se fechar agora, perderá tudo o
+            que não foi salvo.
+          </Text>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button
+            variant="secondary"
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => toast.dismiss(t)}
+          >
+            Continuar editando
+          </Button>
+
+          <Button
+            size="xs"
+            className="md:px-4 md:py-2.5"
+            onClick={() => {
+              toast.dismiss(t);
+              onClose();
+            }}
+          >
+            Descartar
+          </Button>
+        </div>
+      </div>
+    ));
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
-      <div className="w-full max-w-md rounded-xl bg-bg-light shadow-lg">
+      <form
+        id="client-edit-form"
+        onSubmit={handleSubmit}
+        className="w-full max-w-md rounded-xl bg-bg-light shadow-lg"
+      >
         <div className="flex items-center justify-between border-b border-gray-200 py-5 px-6">
           <Text as="h2" size="md" weight="bold">
             {isDeleting ? "Excluir cliente" : "Editar cliente"}
@@ -97,7 +160,7 @@ export default function ClientModal({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="cursor-pointer transition-all duration-200 hover:scale-110"
           >
             <Icon svg={X} className="fill-gray-400" />
@@ -152,7 +215,7 @@ export default function ClientModal({
               <Button
                 variant="secondary"
                 className="w-full py-2.5"
-                onClick={onClose}
+                onClick={handleClose}
                 disabled={saving}
               >
                 Cancelar
@@ -160,9 +223,11 @@ export default function ClientModal({
             )}
 
             <Button
+              type={isEditing ? "submit" : "button"}
+              form={isEditing ? "client-edit-form" : undefined}
               className="w-full py-2.5"
-              onClick={handleSave}
-              disabled={saving}
+              onClick={isDeleting ? handleSave : undefined}
+              disabled={saving || (isEditing && !isDirty)}
             >
               {saving
                 ? isDeleting
@@ -174,7 +239,7 @@ export default function ClientModal({
             </Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

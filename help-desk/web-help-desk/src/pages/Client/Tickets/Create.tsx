@@ -8,7 +8,7 @@ import { z } from "zod";
 import { createTicket, getActiveServices } from "@/services";
 import type { Service } from "@/types";
 
-import { Button, Input, Select, Text, Textarea } from "@/components/ui";
+import { Button, Input, Select, Skeleton, Text, Textarea } from "@/components/ui";
 
 const createTicketSchema = z.object({
   title: z.string().trim().min(1, "Informe o título do chamado."),
@@ -99,9 +99,9 @@ export default function ClientNewTicketCreate() {
     }
   }
 
-  if (loading) {
-    return <p>Carregando...</p>;
-  }
+    if (loading) {
+      return <Skeleton />;
+    }
 
   return (
     <form

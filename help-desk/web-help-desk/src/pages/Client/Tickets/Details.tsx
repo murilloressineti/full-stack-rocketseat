@@ -4,7 +4,14 @@ import { toast } from "sonner";
 
 import { getTicketById } from "@/services";
 
-import { AvatarCircle, BadgeStatus, Button, Icon, Text } from "@/components/ui";
+import {
+  AvatarCircle,
+  BadgeStatus,
+  Button,
+  Icon,
+  Skeleton,
+  Text,
+} from "@/components/ui";
 import { ArrowLeft } from "@/assets/icons";
 
 type TicketStatus = "open" | "in_progress" | "closed";
@@ -137,11 +144,7 @@ export default function ClientTicketDetails() {
   }, [initialTicket?.id]);
 
   if (loading) {
-    return (
-      <div className="flex min-h-75 items-center justify-center">
-        <Text>Carregando chamado...</Text>
-      </div>
-    );
+    return <Skeleton />;
   }
 
   if (!currentTicket) {

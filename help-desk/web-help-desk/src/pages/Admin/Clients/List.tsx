@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { getClients } from "@/services";
 import type { Client } from "@/types";
 
-import { Text } from "@/components/ui";
+import { Text, Skeleton } from "@/components/ui";
 import { ClientRow, ClientModal } from "./components";
 
 type ClientListItem = {
@@ -50,7 +50,7 @@ export default function AdminClientsList() {
   }, []);
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return <Skeleton />;
   }
 
   return (

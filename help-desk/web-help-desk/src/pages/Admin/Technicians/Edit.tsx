@@ -2,22 +2,15 @@ import { useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { updateTechnician } from "@/services";
 import { toast } from "sonner";
-
 import {
-  AvatarCircle,
-  BadgeTime,
-  Button,
-  Icon,
-  Input,
-  Text,
-} from "@/components/ui";
-import { ArrowLeft } from "@/assets/icons";
+  AvailabilitySelector,
+  ALL_TIMES,
+} from "@/components/features/schedule";
 
-// Definição dos horários de atendimento
-type ShiftSection = {
-  label: string;
-  times: string[];
-};
+import { validateUserNameAndEmail } from "@/utils/formatUser";
+
+import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
+import { ArrowLeft } from "@/assets/icons";
 
 // Esse type é o "pacote de dados" que a tela espera receber quando sai da listagem de técnicos e entra na edição
 type TechnicianNavigationData = {
@@ -32,13 +25,6 @@ type TechnicianNavigationData = {
 type LocationState = {
   technician?: TechnicianNavigationData;
 };
-
-const MORNING_TIMES = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00"];
-const AFTERNOON_TIMES = ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
-const NIGHT_TIMES = ["19:00", "20:00", "21:00", "22:00", "23:00"];
-
-// Ordenação dos horários
-const ALL_TIMES = [...MORNING_TIMES, ...AFTERNOON_TIMES, ...NIGHT_TIMES];
 
 export default function AdminTechnicianEdit() {
   const navigate = useNavigate();
@@ -56,16 +42,6 @@ export default function AdminTechnicianEdit() {
   );
 
   const [saving, setSaving] = useState(false);
-
-  // UseMemo para evitar recriar o array de seções a cada renderização
-  const sections: ShiftSection[] = useMemo(
-    () => [
-      { label: "MANHÃ", times: MORNING_TIMES },
-      { label: "TARDE", times: AFTERNOON_TIMES },
-      { label: "NOITE", times: NIGHT_TIMES },
-    ],
-    [],
-  );
 
   // Função para ordenar os horários de disponibilidade do técnico. Ela cria uma cópia do array de horários e ordena com base na ordem definida em ALL_TIMES
   function sortAvailability(times: string[]) {
@@ -93,21 +69,13 @@ export default function AdminTechnicianEdit() {
     );
 
     return (
-      name.trim() !== initialTechnician.name ||
-      email.trim() !== initialTechnician.email ||
+      name.trim() !== initialTechnician.name.trim() ||
+      email.trim().toLowerCase() !==
+        initialTechnician.email.trim().toLowerCase() ||
       JSON.stringify(normalizedCurrentAvailability) !==
         JSON.stringify(normalizedInitialAvailability)
     );
   }, [name, email, selectedAvailability, initialTechnician]);
-
-  // Função para alternar a seleção de um horário.
-  function toggleTime(time: string) {
-    setSelectedAvailability((prev) =>
-      prev.includes(time)
-        ? prev.filter((item) => item !== time)
-        : [...prev, time],
-    );
-  }
 
   // Função para voltar à lista de técnicos
   function goBackToTechnicians() {
@@ -160,11 +128,11 @@ export default function AdminTechnicianEdit() {
   async function handleSave() {
     if (!id || !technician) return;
 
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
+    const { formattedName, formattedEmail, hasError } =
+      validateUserNameAndEmail(name, email);
 
-    if (!trimmedName || !trimmedEmail) {
-      toast.error("Preencha nome e e-mail.");
+    if (hasError) {
+      toast.error("Preencha nome e e-mail corretamente.");
       return;
     }
 
@@ -174,8 +142,8 @@ export default function AdminTechnicianEdit() {
       setSaving(true);
 
       await updateTechnician(id, {
-        name: trimmedName,
-        email: trimmedEmail,
+        name: formattedName,
+        email: formattedEmail,
         availability: sortedAvailability,
       });
 
@@ -308,41 +276,10 @@ export default function AdminTechnicianEdit() {
           </div>
 
           <div className="flex flex-col gap-5">
-            {sections.map((section) => (
-              <div key={section.label} className="flex flex-col gap-2">
-                <Text
-                  as="span"
-                  size="xs"
-                  weight="bold"
-                  textColor={"quaternary"}
-                  className="uppercase tracking-wide"
-                >
-                  {section.label}
-                </Text>
-
-                <div className="flex flex-wrap gap-2">
-                  {section.times.map((time) => {
-                    const isSelected = selectedAvailability.includes(time);
-
-                    return (
-                      <button
-                        key={time}
-                        type="button"
-                        onClick={() => toggleTime(time)}
-                        className="cursor-pointer"
-                      >
-                        <BadgeTime
-                          variant={isSelected ? "selected" : "available"}
-                          className="justify-center"
-                        >
-                          {time}
-                        </BadgeTime>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+            <AvailabilitySelector
+              value={selectedAvailability}
+              onChange={setSelectedAvailability}
+            />
           </div>
         </section>
       </div>

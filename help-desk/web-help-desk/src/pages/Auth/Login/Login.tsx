@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { formatEmail } from "@/utils/formatUser";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
@@ -25,7 +27,7 @@ export default function Login() {
 
   async function onSubmit(data: LoginFormData) {
     try {
-      const response = await signIn(data.email, data.password);
+      const response = await signIn(formatEmail(data.email), data.password);
 
       toast.success("Login realizado com sucesso!");
 

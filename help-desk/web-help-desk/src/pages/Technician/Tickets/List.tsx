@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { Text } from "@/components/ui";
+import { Skeleton, Text } from "@/components/ui";
 import { getTechnicianTicketCards, updateTicketStatus } from "@/services";
 import type { TechnicianTicketCardData } from "@/services";
 import type { TicketStatus } from "@/types";
@@ -39,9 +39,9 @@ export default function TechnicianTicketsList() {
 
   const closedTickets = tickets.filter((ticket) => ticket.status === "closed");
 
-  if (loading) {
-    return <p>Carregando...</p>;
-  }
+    if (loading) {
+      return <Skeleton />;
+    }
 
   function handleDetails(ticket: TechnicianTicketCardData) {
     navigate(`/tecnico/chamados/${ticket.id}`, {
