@@ -31,5 +31,5 @@
       "@ui/*": ["./src/components/ui/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/components/features/.userMenu"]
 }
