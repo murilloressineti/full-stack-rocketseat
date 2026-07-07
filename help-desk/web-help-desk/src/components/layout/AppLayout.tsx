@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { MobileHeader, Sidebar } from "../layout";
-import { ProfileModal, ChangePasswordModal } from "../features/.userMenu";
+import { ProfileModal, ChangePasswordModal } from "../features/userMenu";
 import {
   BriefcaseBusiness,
   ClipboardList,
