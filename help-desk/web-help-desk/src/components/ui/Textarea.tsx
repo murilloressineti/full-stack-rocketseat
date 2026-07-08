@@ -1,11 +1,15 @@
 import React from "react";
-import { type VariantProps } from "class-variance-authority";
+
+import type { VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
-import { CircleAlert } from "@assets/icons";
+
+import Icon from "./Icon";
+import Text from "./Text";
 
 import { inputVariants } from "./Input";
+
+import { CircleAlert } from "@/assets/icons";
 
 interface TextareaProps
   extends

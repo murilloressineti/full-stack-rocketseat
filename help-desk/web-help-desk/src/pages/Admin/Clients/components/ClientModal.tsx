@@ -1,11 +1,15 @@
 import { useMemo, useState } from "react";
+
 import { toast } from "sonner";
 
 import { deleteClient, updateClient } from "@/services";
+
 import { validateUserNameAndEmail } from "@/utils/formatUser";
+
 import type { Client } from "@/types";
 
 import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
+
 import { X } from "@/assets/icons";
 
 interface ClientModalProps {
@@ -38,27 +42,23 @@ export default function ClientModal({
     );
   }, [name, email, client]);
 
-  async function handleSave() {
-    if (saving) return;
+  async function handleDelete() {
+    try {
+      setSaving(true);
 
-    if (isDeleting) {
-      try {
-        setSaving(true);
+      await deleteClient(client.id);
 
-        await deleteClient(client.id);
-
-        toast.success("Cliente excluído com sucesso!");
-        onSuccess();
-      } catch (error) {
-        console.error("Erro ao excluir cliente:", error);
-        toast.error("Não foi possível excluir o cliente.");
-      } finally {
-        setSaving(false);
-      }
-
-      return;
+      toast.success("Cliente excluído com sucesso!");
+      onSuccess();
+    } catch (error) {
+      console.error("Erro ao excluir cliente:", error);
+      toast.error("Não foi possível excluir o cliente.");
+    } finally {
+      setSaving(false);
     }
+  }
 
+  async function handleUpdate() {
     const { formattedName, formattedEmail, errors, hasError } =
       validateUserNameAndEmail(name, email);
 
@@ -97,6 +97,17 @@ export default function ClientModal({
     }
   }
 
+  async function handleSave() {
+    if (saving) return;
+
+    if (isDeleting) {
+      await handleDelete();
+      return;
+    }
+
+    await handleUpdate();
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -112,9 +123,10 @@ export default function ClientModal({
     }
 
     toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 p-4 shadow-lg">
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
+
           <Text size="sm" textColor="secondary">
             Você fez alterações neste cliente. Se fechar agora, perderá tudo o
             que não foi salvo.
@@ -153,7 +165,7 @@ export default function ClientModal({
         onSubmit={handleSubmit}
         className="w-full max-w-md rounded-xl bg-bg-light shadow-lg"
       >
-        <div className="flex items-center justify-between border-b border-gray-200 py-5 px-6">
+        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
           <Text as="h2" size="md" weight="bold">
             {isDeleting ? "Excluir cliente" : "Editar cliente"}
           </Text>
@@ -179,7 +191,7 @@ export default function ClientModal({
             </Text>
           </div>
         ) : (
-          <div className="flex flex-col gap-4 px-6 pb-8 pt-6">
+          <div className="flex flex-col gap-4 px-6 pt-6 pb-8">
             <div className="mb-1">
               <AvatarCircle
                 name={name}
@@ -195,7 +207,7 @@ export default function ClientModal({
               value={name}
               placeholder="Nome do cliente"
               error={nameError}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
 
             <Input
@@ -204,7 +216,7 @@ export default function ClientModal({
               value={email}
               placeholder="exemplo@mail.com"
               error={emailError}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
         )}
@@ -213,6 +225,7 @@ export default function ClientModal({
           <div className="flex gap-2">
             {isDeleting && (
               <Button
+                type="button"
                 variant="secondary"
                 className="w-full py-2.5"
                 onClick={handleClose}

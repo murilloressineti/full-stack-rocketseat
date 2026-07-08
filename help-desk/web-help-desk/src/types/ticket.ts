@@ -1,3 +1,5 @@
+import type { Service } from "./service";
+
 export type TicketStatus = "open" | "in_progress" | "closed";
 
 export interface TicketUser {
@@ -11,15 +13,12 @@ export interface TicketServiceItem {
   id: string;
   ticketId: string;
   serviceId: string;
-  priceAtTime: string | number;
+
   quantity: number;
-  service: {
-    id: string;
-    name: string;
-    description?: string | null;
-    price: string | number;
-    active: boolean;
-  };
+
+  priceAtTime: string | number;
+
+  service: Service;
 }
 
 export interface Ticket {

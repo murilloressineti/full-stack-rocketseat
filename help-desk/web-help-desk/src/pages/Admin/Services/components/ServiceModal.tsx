@@ -1,10 +1,13 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
+
 import { toast } from "sonner";
 
 import { createService, updateService } from "@/services";
+
 import type { Service } from "@/types";
 
 import { Button, Icon, Input, Text } from "@/components/ui";
+
 import { X } from "@/assets/icons";
 
 interface ServiceModalProps {
@@ -18,6 +21,26 @@ interface ServiceModalProps {
   onSuccess: (service: Service) => void;
 }
 
+function parsePrice(value: string) {
+  const cleanValue = value.replace("R$", "").replace(/\s/g, "").trim();
+
+  if (cleanValue.includes(",")) {
+    return Number(cleanValue.replace(/\./g, "").replace(",", "."));
+  }
+
+  return Number(cleanValue);
+}
+
+function formatPriceForInput(value: string | number) {
+  const numberValue = parsePrice(String(value));
+
+  if (Number.isNaN(numberValue)) {
+    return "";
+  }
+
+  return numberValue.toFixed(2).replace(".", ",");
+}
+
 export default function ServiceModal({
   service,
   onClose,
@@ -26,34 +49,14 @@ export default function ServiceModal({
   const isEditing = Boolean(service);
 
   const [name, setName] = useState(service?.name ?? "");
-  const [saving, setSaving] = useState(false);
-
-  const [nameError, setNameError] = useState("");
-  const [priceError, setPriceError] = useState("");
-
-  function formatPriceForInput(value: string | number) {
-    const numberValue = parsePrice(String(value));
-
-    if (Number.isNaN(numberValue)) {
-      return "";
-    }
-
-    return numberValue.toFixed(2).replace(".", ",");
-  }
-
   const [price, setPrice] = useState(
     service ? formatPriceForInput(service.price) : "",
   );
 
-  function parsePrice(value: string) {
-    const cleanValue = value.replace("R$", "").replace(/\s/g, "").trim();
+  const [saving, setSaving] = useState(false);
 
-    if (cleanValue.includes(",")) {
-      return Number(cleanValue.replace(/\./g, "").replace(",", "."));
-    }
-
-    return Number(cleanValue);
-  }
+  const [nameError, setNameError] = useState("");
+  const [priceError, setPriceError] = useState("");
 
   const isDirty = useMemo(() => {
     const currentName = name.trim();
@@ -70,6 +73,8 @@ export default function ServiceModal({
   }, [name, price, service]);
 
   async function handleSave() {
+    if (saving) return;
+
     const trimmedName = name.trim();
     const numberPrice = parsePrice(price);
 
@@ -123,7 +128,7 @@ export default function ServiceModal({
     }
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (saving || !isDirty) return;
@@ -141,6 +146,7 @@ export default function ServiceModal({
       <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
+
           <Text size="sm" textColor="secondary">
             Você fez alterações neste serviço. Se fechar agora, perderá tudo o
             que não foi salvo.
@@ -178,9 +184,9 @@ export default function ServiceModal({
         onSubmit={handleSubmit}
         className="w-full max-w-md rounded-xl bg-bg-light shadow-lg"
       >
-        <div className="flex items-center justify-between border-b border-gray-200 py-5 px-6">
+        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
           <Text as="h2" size="md" weight="bold">
-            {service ? "Editar serviço" : "Cadastro de serviço"}
+            {isEditing ? "Editar serviço" : "Cadastro de serviço"}
           </Text>
 
           <button
@@ -192,14 +198,14 @@ export default function ServiceModal({
           </button>
         </div>
 
-        <div className="flex flex-col gap-4 px-6 pb-8 pt-6">
+        <div className="flex flex-col gap-4 px-6 pt-6 pb-8">
           <Input
             label="Título"
             type="text"
             value={name}
             placeholder="Nome do serviço"
             error={nameError}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(event) => setName(event.target.value)}
           />
 
           <Input
@@ -208,7 +214,7 @@ export default function ServiceModal({
             value={price}
             placeholder="0,00"
             error={priceError}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(event) => setPrice(event.target.value)}
             leftSection={
               <Text as="span" size="md" textColor="primary">
                 R$
@@ -217,7 +223,7 @@ export default function ServiceModal({
           />
         </div>
 
-        <div className="border-t border-gray-200 py-6 px-6">
+        <div className="border-t border-gray-200 px-6 py-6">
           <Button
             type="submit"
             className="w-full py-2.5"

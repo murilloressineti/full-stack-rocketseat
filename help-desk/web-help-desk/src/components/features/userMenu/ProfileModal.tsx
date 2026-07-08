@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
+
 import axios from "axios";
+import { toast } from "sonner";
 
 import { updateAvatar, updateProfile } from "@/services";
+
 import { validateUserNameAndEmail } from "@/utils/formatUser";
+
+import type { UserMenuProfile } from "./types";
 
 import {
   AvatarCircle,
@@ -13,16 +17,18 @@ import {
   Input,
   Text,
 } from "@/components/ui";
+
 import { Trash, Upload, X } from "@/assets/icons";
-import type { ProfileUser } from "./types";
 
 interface ProfileModalProps {
-  user: ProfileUser;
+  user: UserMenuProfile;
   open: boolean;
   onClose: () => void;
   onChangePassword: () => void;
-  onProfileUpdated?: (user: ProfileUser) => void;
+  onProfileUpdated?: (user: UserMenuProfile) => void;
 }
+
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
 export default function ProfileModal({
   user,
@@ -75,8 +81,6 @@ export default function ProfileModal({
     const file = event.target.files?.[0];
 
     if (!file) return;
-
-    const MAX_FILE_SIZE = 2 * 1024 * 1024;
 
     if (file.size > MAX_FILE_SIZE) {
       toast.error("A imagem deve ter no máximo 2 MB.");
@@ -155,6 +159,14 @@ export default function ProfileModal({
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (saving || !isDirty) return;
+
+    handleSave();
+  }
+
   function handleClose() {
     if (!isDirty) {
       onClose();
@@ -162,7 +174,7 @@ export default function ProfileModal({
     }
 
     toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl bg-bg-light border border-gray-200 p-4 shadow-lg">
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
 
@@ -197,16 +209,19 @@ export default function ProfileModal({
     ));
   }
 
+  function handleChangePassword() {
+    if (isDirty) {
+      handleClose();
+      return;
+    }
+
+    onChangePassword();
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          if (saving || !isDirty) return;
-
-          handleSave();
-        }}
+        onSubmit={handleSubmit}
         className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg"
       >
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
@@ -241,6 +256,7 @@ export default function ProfileModal({
                   className="hidden"
                   onChange={handleSelectImage}
                 />
+
                 <Button
                   type="button"
                   variant="secondary"
@@ -251,6 +267,7 @@ export default function ProfileModal({
                   <Icon svg={Upload} size="xs" />
                   Nova imagem
                 </Button>
+
                 <Button
                   type="button"
                   variant="secondary"
@@ -303,7 +320,7 @@ export default function ProfileModal({
                   variant="secondary"
                   size="xs"
                   className="py-2"
-                  onClick={onChangePassword}
+                  onClick={handleChangePassword}
                 >
                   Alterar
                 </Button>

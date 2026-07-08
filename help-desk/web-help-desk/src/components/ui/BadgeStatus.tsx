@@ -1,11 +1,16 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
-import { CircleAlert, CircleCheckBig, CircleHelp, Clock } from "@assets/icons";
+
+import Icon from "./Icon";
+import Text from "./Text";
+
+import { CircleAlert, CircleCheckBig, CircleHelp, Clock } from "@/assets/icons";
 
 export const badgeStatusVariants = cva(
-  "inline-flex items-center justify-center rounded-full h-8 w-8 md:h-auto md:w-fit md:px-2 md:py-1.5",
+  "inline-flex h-8 w-8 items-center justify-center rounded-full md:h-auto md:w-fit md:px-2 md:py-1.5",
   {
     variants: {
       variant: {
@@ -46,16 +51,22 @@ export default function BadgeStatus({
   return (
     <div className={cn(badgeStatusVariants({ variant, className }))} {...props}>
       <div className="flex items-center justify-center gap-1.5">
-        <Icon svg={currentIcon}></Icon>
+        <Icon svg={currentIcon} />
 
         {React.Children.map(children, (child) => {
           if (typeof child === "string") {
             return (
-              <Text as={"span"} size={"xs"} weight={"bold"} className="hidden md:flex">
+              <Text
+                as="span"
+                size="xs"
+                weight="bold"
+                className="hidden md:flex"
+              >
                 {child}
               </Text>
             );
           }
+
           return child;
         })}
       </div>

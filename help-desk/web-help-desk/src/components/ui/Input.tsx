@@ -1,15 +1,20 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
-import { CircleAlert } from "@assets/icons";
+
+import Icon from "./Icon";
+import Text from "./Text";
+
+import { CircleAlert } from "@/assets/icons";
 
 export const inputVariants = cva(
-  "w-full border-b border-gray-200 bg-transparent px-1 py-2 outline-none transition-all duration-300 placeholder:text-gray-300",
+  "w-full border-b bg-transparent px-1 py-2 outline-none transition-all duration-300 placeholder:text-gray-300",
   {
     variants: {
       variant: {
-        default: "border-gray-200 focus:border-blue-base caret-blue-base",
+        default: "border-gray-200 caret-blue-base focus:border-blue-base",
         error: "border-feedback-danger caret-feedback-danger",
       },
     },
@@ -71,7 +76,7 @@ export default function Input({
               variant: hasError ? "error" : variant,
             }),
             leftSection && "pl-8",
-            rightSection,
+            rightSection && "pr-20",
             className,
           )}
           {...props}

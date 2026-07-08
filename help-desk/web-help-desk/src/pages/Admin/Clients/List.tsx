@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+
 import { toast } from "sonner";
 
 import { getClients } from "@/services";
+
 import type { Client } from "@/types";
 
-import { Text, Skeleton } from "@/components/ui";
-import { ClientRow, ClientModal } from "./components";
+import { ClientModal, ClientRow } from "./components";
+import { Skeleton, Text } from "@/components/ui";
 
 type ClientListItem = {
   id: string;
@@ -27,15 +29,13 @@ export default function AdminClientsList() {
       try {
         const data = await getClients();
 
-        const formattedClients: ClientListItem[] = data.map(
-          (client: Client) => ({
-            id: client.id,
-            name: client.name,
-            email: client.email,
-            avatar: client.avatar ?? null,
-            role: "client",
-          }),
-        );
+        const formattedClients: ClientListItem[] = data.map((client) => ({
+          id: client.id,
+          name: client.name,
+          email: client.email,
+          avatar: client.avatar ?? null,
+          role: "client",
+        }));
 
         setClients(formattedClients);
       } catch (error) {
@@ -48,6 +48,29 @@ export default function AdminClientsList() {
 
     loadClients();
   }, []);
+
+  function handleCloseModal() {
+    setSelectedClient(undefined);
+    setModalMode(undefined);
+  }
+
+  function handleClientSuccess(updatedClient?: Client) {
+    if (modalMode === "delete") {
+      setClients((prev) =>
+        prev.filter((client) => client.id !== selectedClient?.id),
+      );
+    }
+
+    if (modalMode === "edit" && updatedClient) {
+      setClients((prev) =>
+        prev.map((client) =>
+          client.id === updatedClient.id ? updatedClient : client,
+        ),
+      );
+    }
+
+    handleCloseModal();
+  }
 
   if (loading) {
     return <Skeleton />;
@@ -103,28 +126,8 @@ export default function AdminClientsList() {
         <ClientModal
           mode={modalMode}
           client={selectedClient}
-          onClose={() => {
-            setSelectedClient(undefined);
-            setModalMode(undefined);
-          }}
-          onSuccess={(updatedClient) => {
-            if (modalMode === "delete") {
-              setClients((prev) =>
-                prev.filter((client) => client.id !== selectedClient.id),
-              );
-            }
-
-            if (modalMode === "edit" && updatedClient) {
-              setClients((prev) =>
-                prev.map((client) =>
-                  client.id === updatedClient.id ? updatedClient : client,
-                ),
-              );
-            }
-
-            setSelectedClient(undefined);
-            setModalMode(undefined);
-          }}
+          onClose={handleCloseModal}
+          onSuccess={handleClientSuccess}
         />
       )}
     </div>

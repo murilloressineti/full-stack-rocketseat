@@ -1,25 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { useEffect, useRef, useState } from "react";
+import type { HTMLAttributes } from "react";
+
+import { cva } from "class-variance-authority";
+
+import { CircleUser, LogOut } from "@/assets/icons";
+import { AvatarCircle, Icon, Text } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { AvatarCircle, Icon, Text } from "../../ui";
-import { CircleUser, LogOut } from "@assets/icons";
 
 export const userMenuTriggerVariants = cva(
   "bg-bg-default flex items-center gap-3 transition-all duration-300 cursor-pointer",
-  {
-    variants: {
-      open: {
-        true: "",
-        false: "",
-      },
-    },
-  },
 );
 
-interface UserMenuProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof userMenuTriggerVariants> {
+interface UserMenuProps extends HTMLAttributes<HTMLDivElement> {
   name: string;
   email: string;
   avatar?: string | null;
@@ -43,6 +35,11 @@ export default function UserMenu({
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const dropdownPosition = {
+    "top-right": "top-full right-0 mt-2",
+    right: "left-full bottom-2 ml-2",
+  };
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -62,28 +59,29 @@ export default function UserMenu({
     onProfile?.();
   }
 
-  const dropdownPosition = {
-    "top-right": "top-full right-0 mt-2",
-    right: "left-full bottom-2 ml-2",
-  };
+  function handleLogout() {
+    setIsOpen(false);
+    onLogout?.();
+  }
 
   return (
     <div className={cn("relative", className)} ref={menuRef} {...props}>
       <button
+        type="button"
         className={cn(
-          userMenuTriggerVariants({ open: isOpen }),
+          userMenuTriggerVariants(),
           "group rounded-full transition-colors duration-300 hover:bg-gray-500 md:py-1 md:pr-3",
         )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <AvatarCircle name={name} avatar={avatar} />
 
-        <div className="hidden md:flex flex-col gap-1 items-start">
+        <div className="hidden flex-col items-start gap-1 md:flex">
           <Text
             as="span"
             size="sm"
-            textColor={"inverted"}
-            className="text-start truncate w-30"
+            textColor="inverted"
+            className="w-30 truncate text-start"
           >
             {name}
           </Text>
@@ -91,8 +89,8 @@ export default function UserMenu({
           <Text
             as="span"
             size="xs"
-            textColor={"tertiary"}
-            className="text-start truncate w-30"
+            textColor="tertiary"
+            className="w-30 truncate text-start"
           >
             {email}
           </Text>
@@ -101,7 +99,7 @@ export default function UserMenu({
 
       <div
         className={cn(
-          "absolute z-50 rounded-lg bg-gray-500 py-5 px-4 shadow-lg md:w-50",
+          "absolute z-50 rounded-lg bg-gray-500 px-4 py-5 shadow-lg md:w-50",
           "origin-bottom-left transition-all duration-200 ease-out",
           isOpen
             ? "visible scale-100 opacity-100 pointer-events-auto"
@@ -112,7 +110,7 @@ export default function UserMenu({
         <Text
           size="xs"
           weight="bold"
-          textColor={"tertiary"}
+          textColor="tertiary"
           className="mb-4 uppercase"
         >
           Opções
@@ -120,24 +118,25 @@ export default function UserMenu({
 
         <div className="flex flex-col">
           <button
+            type="button"
             onClick={handleProfile}
-            className="
-                flex items-center gap-2 rounded-md p-2 transition-all duration-300 fill-gray-100 hover:bg-gray-600 cursor-pointer"
+            className="flex cursor-pointer items-center gap-2 rounded-md fill-gray-100 p-2 transition-all duration-300 hover:bg-gray-600"
           >
-            <Icon svg={CircleUser} size={"md"} />
+            <Icon svg={CircleUser} size="md" />
 
-            <Text size={"md"} weight={"bold"} textColor={"inverted"}>
+            <Text size="md" weight="bold" textColor="inverted">
               Perfil
             </Text>
           </button>
 
           <button
-            onClick={onLogout}
-            className="flex items-center gap-2 rounded-md p-2 transition-all duration-300 text-feedback-danger fill-feedback-danger hover:bg-gray-600 cursor-pointer"
+            type="button"
+            onClick={handleLogout}
+            className="flex cursor-pointer items-center gap-2 rounded-md fill-feedback-danger p-2 text-feedback-danger transition-all duration-300 hover:bg-gray-600"
           >
-            <Icon svg={LogOut} size={"md"} />
+            <Icon svg={LogOut} size="md" />
 
-            <Text size={"md"} weight={"bold"}>
+            <Text size="md" weight="bold">
               Sair
             </Text>
           </button>

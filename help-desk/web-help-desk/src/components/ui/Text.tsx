@@ -1,5 +1,7 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 
 export const textVariants = cva("font-sans leading-snug", {
@@ -33,15 +35,17 @@ export const textVariants = cva("font-sans leading-snug", {
     },
   },
   defaultVariants: {
-    textColor: "default",
     size: "sm",
+    textColor: "default",
     weight: "regular",
   },
 });
 
 interface TextProps
   extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof textVariants> {
-  as?: React.ElementType; // Torna o componente flexível para renderizar como qualquer elemento HTML ou componente React (ex: as={Link}, as="h1", etc.)
+  // Permite renderizar o componente como qualquer elemento HTML
+  // Ex.: <Text as="h1"> ou <Text as="span">
+  as?: React.ElementType;
 }
 
 export default function Text({
@@ -55,7 +59,14 @@ export default function Text({
 }: TextProps) {
   return (
     <Component
-      className={cn(textVariants({ size, textColor, weight }), className)}
+      className={cn(
+        textVariants({
+          size,
+          textColor,
+          weight,
+        }),
+        className,
+      )}
       {...props}
     >
       {children}

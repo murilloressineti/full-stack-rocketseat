@@ -1,4 +1,5 @@
 import { api } from "./api";
+
 import type { Ticket, TicketStatus } from "@/types";
 
 interface CreateTicketData {
@@ -8,6 +9,11 @@ interface CreateTicketData {
     serviceId: string;
     quantity: number;
   }[];
+}
+
+interface AddTicketServiceData {
+  serviceId: string;
+  quantity: number;
 }
 
 export type TechnicianTicketCardData = {
@@ -28,14 +34,10 @@ export type TechnicianTicketCardData = {
   services?: Ticket["services"];
 };
 
-interface AddTicketServiceData {
-  serviceId: string;
-  quantity: number;
-}
-
 // Criar chamado
 export async function createTicket(data: CreateTicketData): Promise<Ticket> {
   const response = await api.post<Ticket>("/tickets", data);
+
   return response.data;
 }
 

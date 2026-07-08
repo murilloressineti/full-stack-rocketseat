@@ -163,13 +163,18 @@ export default function ChangePasswordModal({
     }
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (saving || !isDirty) return;
+
+    handleSave();
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
+        onSubmit={handleSubmit}
         className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg"
       >
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
@@ -229,7 +234,11 @@ export default function ChangePasswordModal({
         </div>
 
         <div className="border-t border-gray-200 px-6 py-6">
-          <Button type="submit" className="w-full py-2.5" disabled={saving}>
+          <Button
+            type="submit"
+            className="w-full py-2.5"
+            disabled={saving || !isDirty}
+          >
             {saving ? "Salvando..." : "Salvar"}
           </Button>
         </div>

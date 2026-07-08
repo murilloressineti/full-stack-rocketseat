@@ -1,6 +1,6 @@
 import { api } from "./api";
-import type { UserRole } from "@/types";
-import type { RegisterData, RegisterResponse } from "@/types";
+
+import type { RegisterData, RegisterResponse, UserRole } from "@/types";
 
 export interface LoginRequest {
   email: string;
@@ -11,8 +11,8 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
+  avatar?: string | null;
   role: UserRole;
-  avatar?: string;
 }
 
 export interface LoginResponse {
@@ -21,7 +21,7 @@ export interface LoginResponse {
 }
 
 export async function login(data: LoginRequest): Promise<LoginResponse> {
-  const response = await api.post("/sessions", data);
+  const response = await api.post<LoginResponse>("/sessions", data);
 
   return response.data;
 }
@@ -29,7 +29,7 @@ export async function login(data: LoginRequest): Promise<LoginResponse> {
 export async function registerUser(
   data: RegisterData,
 ): Promise<RegisterResponse> {
-  const response = await api.post("/users/public", data);
+  const response = await api.post<RegisterResponse>("/users/public", data);
 
   return response.data;
 }

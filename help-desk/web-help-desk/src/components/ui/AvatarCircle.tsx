@@ -1,10 +1,13 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
-import { Text } from "../ui";
+
+import Text from "./Text";
 
 export const avatarCircleVariants = cva(
-  "flex items-center justify-center rounded-full transition-all duration-300 overflow-hidden",
+  "flex items-center justify-center overflow-hidden rounded-full transition-all duration-300",
   {
     variants: {
       variant: {
@@ -42,6 +45,7 @@ export default function AvatarCircle({
   className,
   ...props
 }: AvatarCircleProps) {
+  // Retorna as iniciais do nome para exibição quando não houver avatar
   function getInitials(name: string) {
     if (!name) return "?";
 
@@ -52,6 +56,9 @@ export default function AvatarCircle({
       .join("")
       .toUpperCase();
   }
+
+  const textSize = size === "xs" || size === "sm" ? "xs" : "sm";
+
   return (
     <div
       className={cn(
@@ -63,14 +70,14 @@ export default function AvatarCircle({
       )}
       {...props}
     >
-      {avatar ?.trim() ? (
+      {avatar?.trim() ? (
         <img
           src={avatar}
           alt={name}
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <Text as="span" size={size === "sm" || size === "xs" ? "xs" : "sm"} textColor="inverted">
+        <Text as="span" size={textSize} textColor="inverted">
           {getInitials(name)}
         </Text>
       )}

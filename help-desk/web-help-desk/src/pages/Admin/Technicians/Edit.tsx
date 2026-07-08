@@ -1,18 +1,21 @@
 import { useMemo, useState } from "react";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { updateTechnician } from "@/services";
 import { toast } from "sonner";
+
+import { updateTechnician } from "@/services";
+
+import { validateUserNameAndEmail } from "@/utils/formatUser";
+
 import {
   AvailabilitySelector,
   ALL_TIMES,
 } from "@/components/features/schedule";
 
-import { validateUserNameAndEmail } from "@/utils/formatUser";
-
 import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
+
 import { ArrowLeft } from "@/assets/icons";
 
-// Esse type é o "pacote de dados" que a tela espera receber quando sai da listagem de técnicos e entra na edição
 type TechnicianNavigationData = {
   id: string;
   name: string;
@@ -21,17 +24,19 @@ type TechnicianNavigationData = {
   availability: string[];
 };
 
-// Esse type define a estrutura do location.state
 type LocationState = {
   technician?: TechnicianNavigationData;
 };
 
+function sortAvailability(times: string[]) {
+  return [...times].sort((a, b) => ALL_TIMES.indexOf(a) - ALL_TIMES.indexOf(b));
+}
+
 export default function AdminTechnicianEdit() {
   const navigate = useNavigate();
-  const location = useLocation(); // useLocation para acessar o estado passado na navegação. Esse estado trouxe os dados do técnico selecionado na listagem de técnicos
-  const { id } = useParams<{ id: string }>(); // useParams para obter o ID do técnico da URL
+  const location = useLocation();
+  const { id } = useParams<{ id: string }>();
 
-  // Acessando o estado passado na navegação. Esse estado trouxe os dados do técnico selecionado na listagem de técnicos
   const state = location.state as LocationState | null;
   const technician = state?.technician;
 
@@ -43,14 +48,6 @@ export default function AdminTechnicianEdit() {
 
   const [saving, setSaving] = useState(false);
 
-  // Função para ordenar os horários de disponibilidade do técnico. Ela cria uma cópia do array de horários e ordena com base na ordem definida em ALL_TIMES
-  function sortAvailability(times: string[]) {
-    return [...times].sort(
-      (a, b) => ALL_TIMES.indexOf(a) - ALL_TIMES.indexOf(b),
-    );
-  }
-
-  // UseMemo para evitar recriar o objeto initialTechnician a cada renderização. Espécie de Snapshot dos dados iniciais do técnico, para comparar com os dados atuais e saber se houve alterações
   const initialTechnician = useMemo(
     () => ({
       name: technician?.name ?? "",
@@ -60,7 +57,6 @@ export default function AdminTechnicianEdit() {
     [technician],
   );
 
-  // UseMemo para verificar se houve alterações nos dados do técnico. Compara os dados atuais com os dados iniciais e retorna true se houver alterações, false caso contrário
   const isDirty = useMemo(() => {
     const normalizedCurrentAvailability =
       sortAvailability(selectedAvailability);
@@ -77,12 +73,10 @@ export default function AdminTechnicianEdit() {
     );
   }, [name, email, selectedAvailability, initialTechnician]);
 
-  // Função para voltar à lista de técnicos
   function goBackToTechnicians() {
     navigate("/admin/tecnicos");
   }
 
-  // Função para lidar com o cancelamento da edição do técnico.
   function handleCancel() {
     if (!isDirty) {
       goBackToTechnicians();
@@ -90,9 +84,10 @@ export default function AdminTechnicianEdit() {
     }
 
     toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
+
           <Text size="sm" textColor="secondary">
             Você fez alterações neste técnico. Se sair agora, perderá tudo o que
             não foi salvo.
@@ -103,7 +98,7 @@ export default function AdminTechnicianEdit() {
           <Button
             variant="secondary"
             size="xs"
-            className="md:py-2.5 md:px-4"
+            className="md:px-4 md:py-2.5"
             onClick={() => toast.dismiss(t)}
           >
             Continuar editando
@@ -111,7 +106,7 @@ export default function AdminTechnicianEdit() {
 
           <Button
             size="xs"
-            className="md:py-2.5 md:px-4"
+            className="md:px-4 md:py-2.5"
             onClick={() => {
               toast.dismiss(t);
               goBackToTechnicians();
@@ -124,9 +119,8 @@ export default function AdminTechnicianEdit() {
     ));
   }
 
-  // Função para lidar com o salvamento do técnico
   async function handleSave() {
-    if (!id || !technician) return;
+    if (!id || !technician || saving) return;
 
     const { formattedName, formattedEmail, hasError } =
       validateUserNameAndEmail(name, email);
@@ -148,7 +142,7 @@ export default function AdminTechnicianEdit() {
       });
 
       toast.success("Técnico atualizado com sucesso!");
-      navigate("/admin/tecnicos");
+      goBackToTechnicians();
     } catch (error) {
       console.error("Erro ao atualizar técnico:", error);
       toast.error("Não foi possível salvar as alterações.");
@@ -157,7 +151,6 @@ export default function AdminTechnicianEdit() {
     }
   }
 
-  // fallback: usuário entrou direto na rota sem vir da listagem
   if (!technician) {
     return (
       <div className="flex min-h-75 flex-col items-center justify-center gap-3">
@@ -165,7 +158,7 @@ export default function AdminTechnicianEdit() {
           Não foi possível carregar os dados do técnico.
         </Text>
 
-        <Button variant="secondary" onClick={() => navigate("/admin/tecnicos")}>
+        <Button variant="secondary" onClick={goBackToTechnicians}>
           Voltar para técnicos
         </Button>
       </div>
@@ -174,23 +167,23 @@ export default function AdminTechnicianEdit() {
 
   return (
     <div className="flex flex-col gap-4 md:gap-6 md:px-30">
-      {/* Topo */}
       <div className="flex flex-col gap-1">
         <button
           type="button"
           onClick={handleCancel}
-          className="flex items-center gap-2 transition-all duration-200 cursor-pointer group"
+          className="group flex cursor-pointer items-center gap-2 transition-all duration-200"
         >
           <Icon
             svg={ArrowLeft}
             size="sm"
             className="fill-gray-400 transition-all duration-200 group-hover:fill-gray-300"
           />
+
           <Text
             size="sm"
             weight="bold"
-            textColor={"quaternary"}
-            className="group-hover:text-gray-300 transition-all duration-200"
+            textColor="quaternary"
+            className="transition-all duration-200 group-hover:text-gray-300"
           >
             Voltar
           </Text>
@@ -222,16 +215,14 @@ export default function AdminTechnicianEdit() {
         </div>
       </div>
 
-      {/* Conteúdo */}
-      <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[360px_1fr] items-start">
-        {/* Card: Dados pessoais */}
+      <div className="grid grid-cols-1 items-start gap-4 md:gap-6 xl:grid-cols-[360px_1fr]">
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
           <div className="mb-6 flex flex-col gap-1">
             <Text as="h2" size="lg" weight="bold">
               Dados pessoais
             </Text>
 
-            <Text textColor={"quaternary"}>
+            <Text textColor="quaternary">
               Defina as informações do perfil de técnico
             </Text>
           </div>
@@ -250,37 +241,34 @@ export default function AdminTechnicianEdit() {
               label="Nome"
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
 
             <Input
               label="E-mail"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
         </section>
 
-        {/* Card: Horários */}
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
-          <div className="mb-5 md:mb-6 flex flex-col gap-1">
+          <div className="mb-5 flex flex-col gap-1 md:mb-6">
             <Text as="h2" size="lg" weight="bold">
               Horários de atendimento
             </Text>
 
-            <Text textColor={"quaternary"}>
+            <Text textColor="quaternary">
               Selecione os horários de disponibilidade do técnico para
               atendimento
             </Text>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <AvailabilitySelector
-              value={selectedAvailability}
-              onChange={setSelectedAvailability}
-            />
-          </div>
+          <AvailabilitySelector
+            value={selectedAvailability}
+            onChange={setSelectedAvailability}
+          />
         </section>
       </div>
     </div>

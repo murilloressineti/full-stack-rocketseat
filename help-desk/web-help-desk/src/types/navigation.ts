@@ -1,5 +1,7 @@
+import type { SVGProps, FC } from "react";
+
 export interface NavigationItem {
   label: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   href: string;
+  icon: FC<SVGProps<SVGSVGElement>>;
 }

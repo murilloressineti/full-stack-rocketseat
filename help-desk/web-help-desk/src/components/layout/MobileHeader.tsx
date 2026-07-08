@@ -1,9 +1,13 @@
 import { useState } from "react";
+
 import { cn } from "@/lib/utils";
-import { Icon, Logo, NavItem } from "../ui";
-import { UserMenu } from "@components/features/UserMenu";
+
+import type { AppUser, NavigationItem, UserRole } from "@/types";
+
+import { UserMenu } from "@/components/features/userMenu";
+import { Icon, Logo, NavItem } from "@/components/ui";
+
 import { Menu, X } from "@/assets/icons";
-import type { AppUser, UserRole, NavigationItem } from "@/types";
 
 interface MobileHeaderProps {
   role: UserRole;
@@ -13,7 +17,6 @@ interface MobileHeaderProps {
   activePath: string;
 
   onNavigate?: (path: string) => void;
-
   onProfile?: () => void;
   onLogout: () => void;
 }
@@ -30,12 +33,12 @@ export default function MobileHeader({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-bg-default w-full">
+    <header className="w-full bg-bg-default">
       <div className="flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-4">
           <button
             type="button"
-            className="w-10 h-10 bg-gray-500 rounded-md cursor-pointer flex items-center justify-center"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-gray-500"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             <Icon
@@ -56,6 +59,7 @@ export default function MobileHeader({
               )}
             />
           </button>
+
           <Logo role={role} />
         </div>
 
@@ -69,6 +73,7 @@ export default function MobileHeader({
         />
       </div>
 
+      {/* Navegação */}
       {isOpen && (
         <nav className="flex flex-col gap-2 border-t border-gray-500 p-4">
           {items.map((item) => (

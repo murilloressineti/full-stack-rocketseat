@@ -1,7 +1,12 @@
+import React from "react";
+
 import { cn } from "@/lib/utils";
+
 import type { UserRole } from "@/types";
-import { Text } from "../ui";
-import { LogoLight, LogoDark } from "@assets/images";
+
+import Text from "./Text";
+
+import { LogoDark, LogoLight } from "@/assets/images";
 
 interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   role?: UserRole;
@@ -21,18 +26,15 @@ export default function Logo({
   ...props
 }: LogoProps) {
   const logoSrc = variant === "default" ? LogoLight : LogoDark;
+  const titleColor = variant === "full" ? "blueDark" : "inverted";
+  const titleSize = variant === "full" ? "xl" : "lg";
 
   return (
     <div className={cn("flex items-center gap-3", className)} {...props}>
       <img src={logoSrc} alt="HelpDesk" className="h-10 w-10" />
 
       <div className="flex flex-col gap-1">
-        <Text
-          as="span"
-          size={variant === "full" ? "xl" : "lg"}
-          weight="bold"
-          textColor={variant === "full" ? "blueDark" : "inverted"}
-        >
+        <Text as="span" size={titleSize} weight="bold" textColor={titleColor}>
           HelpDesk
         </Text>
 
@@ -41,8 +43,8 @@ export default function Logo({
             as="span"
             size="xs"
             weight="bold"
-            className="uppercase tracking-wider"
             textColor="blueLight"
+            className="uppercase tracking-wider"
           >
             {roleLabels[role]}
           </Text>

@@ -1,45 +1,43 @@
 import { useMemo, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 
+import { createTechnician, updateTechnician } from "@/services";
+
 import { validateUserNameAndEmail } from "@/utils/formatUser";
+
 import {
   AvailabilitySelector,
   ALL_TIMES,
 } from "@/components/features/schedule";
-import { createTechnician, updateTechnician } from "@/services";
-
 import { AvatarCircle, Button, Icon, Input, Text } from "@/components/ui";
+
 import { ArrowLeft } from "@/assets/icons";
 
-// Estado inicial da disponibilidade do técnico
 const INITIAL_AVAILABILITY: string[] = [];
+
+function sortAvailability(times: string[]) {
+  return [...times].sort((a, b) => ALL_TIMES.indexOf(a) - ALL_TIMES.indexOf(b));
+}
 
 export default function AdminTechnicianCreate() {
   const navigate = useNavigate();
 
-  // Estados para armazenar os dados do formulário
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>(
     [],
   );
+
   const [saving, setSaving] = useState(false);
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // Função para ordenar os horários selecionados
-  function sortAvailability(times: string[]) {
-    return [...times].sort(
-      (a, b) => ALL_TIMES.indexOf(a) - ALL_TIMES.indexOf(b),
-    );
-  }
-
-  // UseMemo para verificar se houve alterações nos campos do formulário
   const isDirty = useMemo(() => {
     const normalizedCurrentAvailability =
       sortAvailability(selectedAvailability);
@@ -55,12 +53,10 @@ export default function AdminTechnicianCreate() {
     );
   }, [name, email, password, selectedAvailability]);
 
-  // Função para voltar à lista de técnicos
   function goBackToTechnicians() {
     navigate("/admin/tecnicos");
   }
 
-  // Função para lidar com o cancelamento do cadastro
   function handleCancel() {
     if (!isDirty) {
       goBackToTechnicians();
@@ -68,9 +64,10 @@ export default function AdminTechnicianCreate() {
     }
 
     toast.custom((t) => (
-      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-bg-light p-4 shadow-lg">
         <div className="mb-3 flex flex-col gap-1">
           <Text weight="bold">Descartar alterações?</Text>
+
           <Text size="sm" textColor="secondary">
             Você começou a cadastrar um técnico. Se sair agora, perderá tudo o
             que não foi salvo.
@@ -102,8 +99,9 @@ export default function AdminTechnicianCreate() {
     ));
   }
 
-  // Função para lidar com o salvamento do técnico
   async function handleSave() {
+    if (saving) return;
+
     const { formattedName, formattedEmail, errors, hasError } =
       validateUserNameAndEmail(name, email);
 
@@ -155,7 +153,7 @@ export default function AdminTechnicianCreate() {
       });
 
       toast.success("Técnico criado com sucesso!");
-      navigate("/admin/tecnicos");
+      goBackToTechnicians();
     } catch (error) {
       console.error("Erro ao criar técnico:", error);
 
@@ -176,18 +174,18 @@ export default function AdminTechnicianCreate() {
 
   return (
     <div className="flex flex-col gap-4 md:gap-6">
-      {/* Topo */}
       <div className="flex flex-col gap-1">
         <button
           type="button"
           onClick={handleCancel}
-          className="flex items-center gap-2 transition-all duration-200 cursor-pointer group"
+          className="group flex cursor-pointer items-center gap-2 transition-all duration-200"
         >
           <Icon
             svg={ArrowLeft}
             size="sm"
             className="fill-gray-400 group-hover:fill-gray-300"
           />
+
           <Text
             size="sm"
             weight="bold"
@@ -224,9 +222,7 @@ export default function AdminTechnicianCreate() {
         </div>
       </div>
 
-      {/* Conteúdo */}
-      <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[360px_1fr] items-start">
-        {/* Card: Dados pessoais */}
+      <div className="grid grid-cols-1 items-start gap-4 md:gap-6 xl:grid-cols-[360px_1fr]">
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
           <div className="mb-6 flex flex-col gap-1">
             <Text as="h2" size="lg" weight="bold">
@@ -254,7 +250,7 @@ export default function AdminTechnicianCreate() {
               value={name}
               placeholder="Nome completo"
               error={nameError}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
 
             <Input
@@ -263,7 +259,7 @@ export default function AdminTechnicianCreate() {
               value={email}
               placeholder="exemplo@mail.com"
               error={emailError}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             />
 
             <div className="flex flex-col gap-1">
@@ -273,7 +269,7 @@ export default function AdminTechnicianCreate() {
                 value={password}
                 placeholder="Defina a senha de acesso"
                 error={passwordError}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
               />
 
               {!passwordError && (
@@ -285,25 +281,22 @@ export default function AdminTechnicianCreate() {
           </div>
         </section>
 
-        {/* Card: Horários */}
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
           <div className="mb-5 flex flex-col gap-1 md:mb-6">
             <Text as="h2" size="lg" weight="bold">
               Horários de atendimento
             </Text>
 
-            <Text textColor={"quaternary"}>
+            <Text textColor="quaternary">
               Selecione os horários de disponibilidade do técnico para
               atendimento
             </Text>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <AvailabilitySelector
-              value={selectedAvailability}
-              onChange={setSelectedAvailability}
-            />
-          </div>
+          <AvailabilitySelector
+            value={selectedAvailability}
+            onChange={setSelectedAvailability}
+          />
         </section>
       </div>
     </div>

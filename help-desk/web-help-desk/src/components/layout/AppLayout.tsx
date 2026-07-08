@@ -1,15 +1,72 @@
 import { useState } from "react";
+
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useLocation, Outlet } from "react-router-dom";
-import { MobileHeader, Sidebar } from "../layout";
-import { ProfileModal, ChangePasswordModal } from "../features/userMenu";
+
+import {
+  ChangePasswordModal,
+  ProfileModal,
+} from "@/components/features/userMenu";
+import { MobileHeader, Sidebar } from "@/components/layout";
+
 import {
   BriefcaseBusiness,
   ClipboardList,
   Plus,
   Users,
   Wrench,
-} from "@assets/icons";
+} from "@/assets/icons";
+
+const adminItems = [
+  {
+    label: "Chamados",
+    icon: ClipboardList,
+    href: "/admin/chamados",
+  },
+  {
+    label: "Técnicos",
+    icon: Users,
+    href: "/admin/tecnicos",
+  },
+  {
+    label: "Clientes",
+    icon: BriefcaseBusiness,
+    href: "/admin/clientes",
+  },
+  {
+    label: "Serviços",
+    icon: Wrench,
+    href: "/admin/servicos",
+  },
+];
+
+const technicianItems = [
+  {
+    label: "Meus chamados",
+    icon: ClipboardList,
+    href: "/tecnico/chamados",
+  },
+];
+
+const clientItems = [
+  {
+    label: "Meus chamados",
+    icon: ClipboardList,
+    href: "/cliente/chamados",
+  },
+  {
+    label: "Criar chamado",
+    icon: Plus,
+    href: "/cliente/novo-chamado",
+  },
+];
+
+const navigationItems = {
+  admin: adminItems,
+  technician: technicianItems,
+  client: clientItems,
+};
 
 export default function AppLayout() {
   const { user, signOut, updateUser } = useAuth();
@@ -19,7 +76,6 @@ export default function AppLayout() {
     useState(false);
 
   const navigate = useNavigate();
-
   const location = useLocation();
 
   if (!user) {
@@ -29,57 +85,7 @@ export default function AppLayout() {
   const mustChangePassword =
     user.role === "technician" && user.mustChangePassword;
 
-  const adminItems = [
-    {
-      label: "Chamados",
-      icon: ClipboardList,
-      href: "/admin/chamados",
-    },
-    {
-      label: "Técnicos",
-      icon: Users,
-      href: "/admin/tecnicos",
-    },
-    {
-      label: "Clientes",
-      icon: BriefcaseBusiness,
-      href: "/admin/clientes",
-    },
-    {
-      label: "Serviços",
-      icon: Wrench,
-      href: "/admin/servicos",
-    },
-  ];
-
-  const technicianItems = [
-    {
-      label: "Meus chamados",
-      icon: ClipboardList,
-      href: "/tecnico/chamados",
-    },
-  ];
-
-  const clientItems = [
-    {
-      label: "Meus chamados",
-      icon: ClipboardList,
-      href: "/cliente/chamados",
-    },
-    {
-      label: "Criar chamado",
-      icon: Plus,
-      href: "/cliente/novo-chamado",
-    },
-  ];
-
-  const navigationItems = {
-    admin: adminItems,
-    technician: technicianItems,
-    client: clientItems,
-  };
-
-  const currentItems = navigationItems[user?.role];
+  const currentItems = navigationItems[user.role];
 
   function handleNavigate(path: string) {
     navigate(path);
@@ -97,9 +103,9 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen bg-bg-default">
       {/* Mobile */}
-      <div className="md:hidden flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col md:hidden">
         <MobileHeader
-          role={user?.role}
+          role={user.role}
           activePath={location.pathname}
           user={user}
           items={currentItems}
@@ -108,15 +114,15 @@ export default function AppLayout() {
           onLogout={handleLogout}
         />
 
-        <main className="flex-1 bg-bg-light px-6 pb-6 pt-7 rounded-t-3xl h-full">
+        <main className="h-full flex-1 rounded-t-3xl bg-bg-light px-6 pb-6 pt-7">
           <Outlet />
         </main>
       </div>
 
       {/* Desktop */}
-      <div className="hidden md:flex h-screen overflow-hidden">
+      <div className="hidden h-screen overflow-hidden md:flex">
         <Sidebar
-          role={user?.role}
+          role={user.role}
           activePath={location.pathname}
           user={user}
           items={currentItems}
@@ -126,7 +132,7 @@ export default function AppLayout() {
         />
 
         <main className="flex-1 overflow-y-auto pt-3">
-          <div className="min-h-full bg-bg-light px-12 pb-12 pt-13 rounded-tl-3xl">
+          <div className="min-h-full rounded-tl-3xl bg-bg-light px-12 pb-12 pt-13">
             <Outlet />
           </div>
         </main>

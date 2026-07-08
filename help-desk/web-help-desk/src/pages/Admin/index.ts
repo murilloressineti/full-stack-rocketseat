@@ -1,4 +1,4 @@
-// Client
+// Clients
 export { default as AdminClientsList } from "./Clients/List";
 
 // Services

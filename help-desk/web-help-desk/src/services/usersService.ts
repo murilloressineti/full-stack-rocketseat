@@ -1,4 +1,5 @@
 import { api } from "./api";
+
 import type { AppUser } from "@/types";
 
 interface UpdateProfileData {

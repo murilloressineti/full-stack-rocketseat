@@ -16,6 +16,7 @@ export { default as LogOut } from "./log-out.svg?react";
 export { default as Menu } from "./menu.svg?react";
 export { default as PenLine } from "./pen-line.svg?react";
 export { default as Plus } from "./plus.svg?react";
+export { default as Spinner } from "./spinner.svg?react";
 export { default as Trash } from "./trash.svg?react";
 export { default as Upload } from "./upload.svg?react";
 export { default as Users } from "./users.svg?react";

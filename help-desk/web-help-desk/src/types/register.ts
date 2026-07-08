@@ -1,4 +1,4 @@
-import type { AppUser } from "@/types";
+import type { AppUser } from "./user";
 
 export interface RegisterData {
   name: string;

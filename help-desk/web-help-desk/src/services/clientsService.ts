@@ -1,4 +1,5 @@
 import { api } from "./api";
+
 import type { Client } from "@/types";
 
 // Listar Clientes
@@ -14,6 +15,7 @@ export async function updateClient(
   data: { name: string; email: string },
 ): Promise<Client> {
   const response = await api.put<Client>(`/users/${id}`, data);
+  
   return response.data;
 }
 

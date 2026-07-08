@@ -1,6 +1,6 @@
 import type { UserRole } from "@/types";
 
-export interface ProfileUser {
+export interface UserMenuProfile {
   id: string;
   name: string;
   email: string;

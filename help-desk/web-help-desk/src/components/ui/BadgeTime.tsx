@@ -1,19 +1,25 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
-import { X } from "@assets/icons";
+
+import Icon from "./Icon";
+import Text from "./Text";
+
+import { X } from "@/assets/icons";
 
 export const badgeTimeVariants = cva(
-  "p-1.5 px-2 rounded-full w-fit inline-flex items-center justify-center transition-colors",
+  "inline-flex w-fit items-center justify-center rounded-full px-2 py-1.5 transition-colors",
   {
     variants: {
       variant: {
         available:
-          "bg-transparent border border-gray-300 text-gray-500 hover:bg-gray-200 cursor-pointer active:scale-95",
+          "cursor-pointer border border-gray-300 bg-transparent text-gray-500 hover:bg-gray-200 active:scale-95",
         selected:
-          "bg-blue-base text-text-inverted fill-text-inverted cursor-pointer active:scale-95",
-        disabled: "bg-transparent border border-gray-200 text-gray-300 pointer-events-none",
+          "cursor-pointer bg-blue-base fill-text-inverted text-text-inverted active:scale-95",
+        disabled:
+          "pointer-events-none border border-gray-200 bg-transparent text-gray-300",
       },
     },
     defaultVariants: {
@@ -46,7 +52,7 @@ export default function BadgeTime({
         {variant === "selected" && (
           <Icon
             svg={X}
-            className=" transition-transform duration-200 group-hover:scale-110"
+            className="transition-transform duration-200 group-hover:scale-110"
           />
         )}
       </div>

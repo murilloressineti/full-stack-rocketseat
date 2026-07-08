@@ -1,4 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+import { AppLayout } from "@/components/layout";
+
 import PrivateRoute from "./PrivateRoutes";
 
 // Auth
@@ -28,17 +31,15 @@ import {
   TechnicianTicketsList,
 } from "@/pages/Technician";
 
-import { AppLayout } from "@/components/layout";
-
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Públicas: Auth */}
+        {/* Rotas públicas */}
         <Route path="/" element={<Login />} />
         <Route path="/cadastro" element={<Register />} />
 
-        {/* Privadas: Admin */}
+        {/* Área do administrador */}
         <Route
           path="/admin"
           element={
@@ -47,26 +48,25 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         >
-          {/* redireciona /admin -> /admin/chamados */}
           <Route index element={<Navigate to="chamados" replace />} />
 
-          {/* Clients */}
-          <Route path="clientes" element={<AdminClientsList />} />
-
-          {/* Services */}
-          <Route path="servicos" element={<AdminServicesList />} />
-
-          {/* Technicians */}
-          <Route path="tecnicos" element={<AdminTechniciansList />} />
-          <Route path="tecnicos/:id/editar" element={<AdminTechnicianEdit />} />
-          <Route path="tecnicos/novo" element={<AdminTechnicianCreate />} />
-
-          {/* Tickets */}
+          {/* Chamados */}
           <Route path="chamados" element={<AdminTicketsList />} />
           <Route path="chamados/:id" element={<AdminTicketDetails />} />
+
+          {/* Técnicos */}
+          <Route path="tecnicos" element={<AdminTechniciansList />} />
+          <Route path="tecnicos/novo" element={<AdminTechnicianCreate />} />
+          <Route path="tecnicos/:id/editar" element={<AdminTechnicianEdit />} />
+
+          {/* Clientes */}
+          <Route path="clientes" element={<AdminClientsList />} />
+
+          {/* Serviços */}
+          <Route path="servicos" element={<AdminServicesList />} />
         </Route>
 
-        {/* Privadas: Client */}
+        {/* Área do cliente */}
         <Route
           path="/cliente"
           element={
@@ -75,18 +75,17 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         >
-          {/* redireciona /cliente -> /admin/chamados */}
           <Route index element={<Navigate to="chamados" replace />} />
 
-          {/* New Ticket */}
-          <Route path="novo-chamado" element={<ClientNewTicketCreate />} />
-
-          {/* Tickets */}
+          {/* Chamados */}
           <Route path="chamados" element={<ClientTicketsList />} />
           <Route path="chamados/:id" element={<ClientTicketsDetails />} />
+
+          {/* Novo chamado */}
+          <Route path="novo-chamado" element={<ClientNewTicketCreate />} />
         </Route>
 
-        {/* Privadas: Technician */}
+        {/* Área do técnico */}
         <Route
           path="/tecnico"
           element={
@@ -95,10 +94,9 @@ export default function AppRoutes() {
             </PrivateRoute>
           }
         >
-          {/* redireciona /tecnico -> /tecnico/chamados */}
           <Route index element={<Navigate to="chamados" replace />} />
 
-          {/* Tickets */}
+          {/* Chamados */}
           <Route path="chamados" element={<TechnicianTicketsList />} />
           <Route path="chamados/:id" element={<TechnicianTicketDetails />} />
         </Route>

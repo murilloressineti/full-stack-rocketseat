@@ -1,6 +1,7 @@
-import TimeSlot from "./TimeSlot";
 import { Text } from "@/components/ui";
+
 import { SCHEDULE_SECTIONS } from "./constants";
+import TimeSlot from "./TimeSlot";
 
 interface AvailabilitySelectorProps {
   value: string[];

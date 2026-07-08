@@ -1,6 +1,7 @@
-import { Logo, NavItem } from "../ui";
-import { UserMenu } from "@components/features/UserMenu";
-import type { AppUser, UserRole, NavigationItem } from "@/types";
+import type { AppUser, NavigationItem, UserRole } from "@/types";
+
+import { UserMenu } from "@/components/features/userMenu";
+import { Logo, NavItem } from "@/components/ui";
 
 interface SidebarProps {
   role: UserRole;
@@ -10,7 +11,6 @@ interface SidebarProps {
   activePath: string;
 
   onNavigate?: (path: string) => void;
-
   onProfile?: () => void;
   onLogout: () => void;
 }
@@ -25,10 +25,10 @@ export default function Sidebar({
   onLogout,
 }: SidebarProps) {
   return (
-    <div className="bg-bg-default flex h-screen shrink-0 flex-col w-50 ">
+    <div className="flex h-screen w-50 shrink-0 flex-col bg-bg-default">
       <Logo role={role} className="pt-9 pb-6 px-4" />
 
-      <nav className="pt-5 flex flex-col gap-2 h-full border-t border-b border-gray-500 px-4">
+      <nav className="flex h-full flex-col gap-2 border-y border-gray-500 px-4 pt-5">
         {items.map((item) => (
           <NavItem
             key={item.href}

@@ -1,11 +1,16 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
-import { Icon, Text } from "../ui";
-import { CircleAlert, ChevronDown } from "@assets/icons";
+
+import Icon from "./Icon";
+import Text from "./Text";
+
+import { ChevronDown, CircleAlert } from "@/assets/icons";
 
 export const selectVariants = cva(
-  "w-full appearance-none border-b border-gray-200 bg-transparent px-1 py-2 outline-none transition-all duration-300",
+  "w-full appearance-none border-b bg-transparent px-1 py-2 outline-none transition-all duration-300",
   {
     variants: {
       variant: {
@@ -36,6 +41,7 @@ export default function Select({
   ...props
 }: SelectProps) {
   const hasError = Boolean(error);
+  const hasValue = Boolean(props.value);
 
   return (
     <div className="group flex w-full flex-col">
@@ -43,7 +49,7 @@ export default function Select({
         <label>
           <Text
             size="xs"
-            weight={"bold"}
+            weight="bold"
             className={cn(
               "uppercase transition-colors duration-300",
               hasError
@@ -62,7 +68,7 @@ export default function Select({
             selectVariants({
               variant: hasError ? "error" : variant,
             }),
-            props.value ? "text-text-default" : "text-gray-300",
+            hasValue ? "text-text-default" : "text-gray-300",
             className,
           )}
           {...props}

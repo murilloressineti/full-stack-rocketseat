@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+
 import { toast } from "sonner";
 
 import { deactivateService, getServices, reactivateService } from "@/services";
+
 import type { Service } from "@/types";
 
+import { ServiceModal, ServiceRow } from "./components";
 import { Button, Icon, Skeleton, Text } from "@/components/ui";
+
 import { Plus } from "@/assets/icons";
-import { ServiceRow, ServiceModal } from "./components";
 
 type ServiceListItem = {
   id: string;
@@ -14,6 +17,44 @@ type ServiceListItem = {
   price: number | string;
   active: boolean;
 };
+
+function parseCurrencyValue(value: string | number) {
+  if (typeof value === "number") {
+    return value;
+  }
+
+  const cleanValue = value.replace("R$", "").replace(/\s/g, "").trim();
+
+  // Formato brasileiro: 1.999,90 ou 99,90
+  if (cleanValue.includes(",")) {
+    return Number(cleanValue.replace(/\./g, "").replace(",", "."));
+  }
+
+  // Formato da API: 99.90
+  return Number(cleanValue);
+}
+
+function formatCurrency(value: string | number) {
+  const numberValue = parseCurrencyValue(value);
+
+  if (Number.isNaN(numberValue)) {
+    return "R$ 0,00";
+  }
+
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(numberValue);
+}
+
+function formatServiceListItem(service: Service): ServiceListItem {
+  return {
+    id: service.id,
+    name: service.name,
+    price: service.price,
+    active: service.active,
+  };
+}
 
 export default function AdminServicesList() {
   const [services, setServices] = useState<ServiceListItem[]>([]);
@@ -24,50 +65,12 @@ export default function AdminServicesList() {
     ServiceListItem | undefined
   >();
 
-  function parseCurrencyValue(value: string | number) {
-    if (typeof value === "number") {
-      return value;
-    }
-
-    const cleanValue = value.replace("R$", "").replace(/\s/g, "").trim();
-
-    // Formato brasileiro: 1.999,90 ou 99,90
-    if (cleanValue.includes(",")) {
-      return Number(cleanValue.replace(/\./g, "").replace(",", "."));
-    }
-
-    // Formato da API: 99.90
-    return Number(cleanValue);
-  }
-
-  function formatCurrency(value: string | number) {
-    const numberValue = parseCurrencyValue(value);
-
-    if (Number.isNaN(numberValue)) {
-      return "R$ 0,00";
-    }
-
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(numberValue);
-  }
-
   useEffect(() => {
     async function loadServices() {
       try {
         const data = await getServices();
 
-        const formattedServices: ServiceListItem[] = data.map(
-          (service: Service) => ({
-            id: service.id,
-            name: service.name,
-            price: service.price,
-            active: service.active,
-          }),
-        );
-
-        setServices(formattedServices);
+        setServices(data.map(formatServiceListItem));
       } catch (error) {
         console.error("Erro ao carregar serviços:", error);
         toast.error("Não foi possível carregar os serviços.");
@@ -78,6 +81,39 @@ export default function AdminServicesList() {
 
     loadServices();
   }, []);
+
+  function handleOpenCreateModal() {
+    setSelectedService(undefined);
+    setIsServiceModalOpen(true);
+  }
+
+  function handleOpenEditModal(service: ServiceListItem) {
+    setSelectedService(service);
+    setIsServiceModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsServiceModalOpen(false);
+    setSelectedService(undefined);
+  }
+
+  function handleServiceSuccess(savedService: Service) {
+    setServices((prev) => {
+      const serviceExists = prev.some((item) => item.id === savedService.id);
+
+      if (serviceExists) {
+        return prev.map((item) =>
+          item.id === savedService.id
+            ? formatServiceListItem(savedService)
+            : item,
+        );
+      }
+
+      return [...prev, formatServiceListItem(savedService)];
+    });
+
+    handleCloseModal();
+  }
 
   async function handleToggleServiceStatus(service: ServiceListItem) {
     try {
@@ -120,13 +156,11 @@ export default function AdminServicesList() {
 
         <Button
           size="xs"
-          className="md:py-2.5 md:px-4"
-          onClick={() => {
-            setSelectedService(undefined);
-            setIsServiceModalOpen(true);
-          }}
+          className="md:px-4 md:py-2.5"
+          onClick={handleOpenCreateModal}
         >
           <Icon svg={Plus} />
+
           <Text weight="bold" className="hidden md:flex">
             Novo
           </Text>
@@ -134,7 +168,7 @@ export default function AdminServicesList() {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200">
-        <div className="grid grid-cols-[1.3fr_1.3fr_0.8fr_1fr] md:grid-cols-[3fr_1.3fr_1fr_1fr] border-b border-gray-200 px-4 py-4">
+        <div className="grid grid-cols-[1.3fr_1.3fr_0.8fr_1fr] border-b border-gray-200 px-4 py-4 md:grid-cols-[3fr_1.3fr_1fr_1fr]">
           <Text weight="bold" textColor="tertiary">
             Título
           </Text>
@@ -146,10 +180,10 @@ export default function AdminServicesList() {
           <Text weight="bold" textColor="tertiary">
             Status
           </Text>
+
           <div />
         </div>
 
-        {/* Lista */}
         {services.length > 0 ? (
           services.map((service) => (
             <ServiceRow
@@ -158,10 +192,7 @@ export default function AdminServicesList() {
               price={formatCurrency(service.price)}
               active={service.active}
               onToggleStatus={() => handleToggleServiceStatus(service)}
-              onEdit={() => {
-                setSelectedService(service);
-                setIsServiceModalOpen(true);
-              }}
+              onEdit={() => handleOpenEditModal(service)}
             />
           ))
         ) : (
@@ -174,40 +205,8 @@ export default function AdminServicesList() {
       {isServiceModalOpen && (
         <ServiceModal
           service={selectedService}
-          onClose={() => setIsServiceModalOpen(false)}
-          onSuccess={(savedService) => {
-            setServices((prev) => {
-              const serviceExists = prev.some(
-                (item) => item.id === savedService.id,
-              );
-
-              if (serviceExists) {
-                return prev.map((item) =>
-                  item.id === savedService.id
-                    ? {
-                        id: savedService.id,
-                        name: savedService.name,
-                        price: savedService.price,
-                        active: savedService.active,
-                      }
-                    : item,
-                );
-              }
-
-              return [
-                ...prev,
-                {
-                  id: savedService.id,
-                  name: savedService.name,
-                  price: savedService.price,
-                  active: savedService.active,
-                },
-              ];
-            });
-
-            setIsServiceModalOpen(false);
-            setSelectedService(undefined);
-          }}
+          onClose={handleCloseModal}
+          onSuccess={handleServiceSuccess}
         />
       )}
     </div>

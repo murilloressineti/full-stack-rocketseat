@@ -1,20 +1,25 @@
 import React from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 
 export const iconVariants = cva(
-  "transition-all duration-300 ease-in-out shrink-0",
+  "shrink-0 transition-all duration-300 ease-in-out",
   {
     variants: {
       animate: {
         none: "",
+        spin: "animate-spin",
+        pulse: "animate-pulse",
+        bounce: "animate-bounce",
       },
       size: {
-        xxs: "w-2 h-2",
-        xs: "w-3.5 h-3.5",
-        sm: "w-4 h-4",
-        md: "w-5 h-5",
-        lg: "w-8 h-8",
+        xxs: "h-2 w-2",
+        xs: "h-3.5 w-3.5",
+        sm: "h-4 w-4",
+        md: "h-5 w-5",
+        lg: "h-8 w-8",
       },
     },
     defaultVariants: {

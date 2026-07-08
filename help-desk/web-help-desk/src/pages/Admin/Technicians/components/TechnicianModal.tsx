@@ -1,9 +1,11 @@
 import { useState } from "react";
+
 import { toast } from "sonner";
 
 import { deleteTechnician } from "@/services";
 
 import { Button, Icon, Text } from "@/components/ui";
+
 import { X } from "@/assets/icons";
 
 interface TechnicianModalProps {
@@ -23,6 +25,8 @@ export default function TechnicianModal({
   const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
+    if (deleting) return;
+
     try {
       setDeleting(true);
 
@@ -55,7 +59,7 @@ export default function TechnicianModal({
           </button>
         </div>
 
-        <div className="flex flex-col gap-4 px-6 pb-8 pt-6">
+        <div className="flex flex-col gap-4 px-6 pt-6 pb-8">
           <Text size="md">
             Deseja realmente excluir <strong>{technician.name}</strong>?
           </Text>
@@ -69,6 +73,7 @@ export default function TechnicianModal({
         <div className="border-t border-gray-200 px-6 py-6">
           <div className="grid grid-cols-2 gap-2">
             <Button
+              type="button"
               variant="secondary"
               className="w-full py-2.5"
               onClick={onClose}
@@ -78,6 +83,7 @@ export default function TechnicianModal({
             </Button>
 
             <Button
+              type="button"
               className="w-full py-2.5"
               onClick={handleDelete}
               disabled={deleting}

@@ -1,11 +1,13 @@
 import {
   createContext,
   useContext,
-  useState,
   useEffect,
+  useState,
   type ReactNode,
 } from "react";
+
 import { login } from "@/services/authService";
+
 import type { AppUser, AuthContextData } from "@/types";
 
 interface AuthProviderProps {
@@ -14,12 +16,12 @@ interface AuthProviderProps {
 
 const AuthContext = createContext({} as AuthContextData);
 
-// Com o contexto, podemos acessar o usuário e o token em qualquer componente da aplicação, sem precisar passar props manualmente. O contexto também fornece funções para fazer login e logout, além de um estado de carregamento para indicar quando a autenticação está sendo verificada.
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AppUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Recupera a sessão salva no navegador ao carregar a aplicação.
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
@@ -62,11 +64,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         user,
         token,
+        loading,
+        isAuthenticated: Boolean(user),
         signIn,
         signOut,
         updateUser,
-        isAuthenticated: !!user,
-        loading,
       }}
     >
       {children}

@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, type ElementType } from "react";
+
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 import { getTicketById, updateTicketStatus } from "@/services";
 
-import { AvatarCircle, BadgeStatus, Button, Icon, Skeleton, Text } from "@/components/ui";
-import { ArrowLeft, CircleCheck, CircleHelp, Clock } from "@/assets/icons";
+import type { Ticket, TicketStatus } from "@/types";
 
-type TicketStatus = "open" | "in_progress" | "closed";
+import {
+  AvatarCircle,
+  BadgeStatus,
+  Button,
+  Icon,
+  Skeleton,
+  Text,
+} from "@/components/ui";
+
+import { ArrowLeft, CircleCheck, CircleHelp, Clock } from "@/assets/icons";
 
 type TicketDetailsData = {
   id: string;
@@ -24,20 +33,17 @@ type TicketDetailsData = {
   status: TicketStatus;
   createdAt: string;
   updatedAt: string;
-  services?: {
-    id: string;
-    priceAtTime: string | number;
-    quantity: number;
-    service: {
-      id: string;
-      name: string;
-      price: string | number;
-    };
-  }[];
+  services?: Ticket["services"];
 };
 
 type LocationState = {
   ticket?: TicketDetailsData;
+};
+
+type StatusAction = {
+  label: string;
+  value: TicketStatus;
+  icon: ElementType;
 };
 
 const statusLabel: Record<TicketStatus, string> = {
@@ -52,7 +58,7 @@ const statusVariant: Record<TicketStatus, "open" | "progress" | "done"> = {
   closed: "done",
 };
 
-const statusActions = {
+const statusActions: Record<TicketStatus, StatusAction[]> = {
   open: [
     { label: "Em atendimento", value: "in_progress", icon: Clock },
     { label: "Encerrado", value: "closed", icon: CircleCheck },
@@ -65,7 +71,7 @@ const statusActions = {
     { label: "Aberto", value: "open", icon: CircleHelp },
     { label: "Em atendimento", value: "in_progress", icon: Clock },
   ],
-} as const;
+};
 
 function formatCurrency(value: string | number) {
   const numberValue = Number(value);
@@ -83,6 +89,10 @@ function formatCurrency(value: string | number) {
 function formatDateTime(value: string) {
   const currentDate = new Date(value);
 
+  if (Number.isNaN(currentDate.getTime())) {
+    return value;
+  }
+
   const formattedDate = currentDate.toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
@@ -97,14 +107,18 @@ function formatDateTime(value: string) {
   return `${formattedDate} - ${formattedTime}`;
 }
 
-function mapTicketToDetails(ticket: any): TicketDetailsData {
+function formatTicketCode(id: string) {
+  return `#${id.slice(-5).toUpperCase()}`;
+}
+
+function mapTicketToDetails(ticket: Ticket): TicketDetailsData {
   return {
     id: ticket.id,
-    code: `#${ticket.id.slice(-5).toUpperCase()}`,
+    code: formatTicketCode(ticket.id),
     title: ticket.title ?? "Sem título",
     description: ticket.description,
     serviceName:
-      ticket.services?.map((item: any) => item.service.name).join(", ") ||
+      ticket.services?.map((item) => item.service.name).join(", ") ||
       "Sem serviço",
     totalPrice: ticket.totalPrice,
     clientName: ticket.client.name,
@@ -122,39 +136,29 @@ function mapTicketToDetails(ticket: any): TicketDetailsData {
 export default function AdminTicketDetails() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { id } = useParams<{ id: string }>();
 
   const state = location.state as LocationState | null;
   const initialTicket = state?.ticket;
+  const ticketId = id ?? initialTicket?.id;
 
   const [currentTicket, setCurrentTicket] = useState<
     TicketDetailsData | undefined
   >(initialTicket);
-
   const [loading, setLoading] = useState(true);
-  const [currentStatus, setCurrentStatus] = useState<TicketStatus | undefined>(
-    initialTicket?.status,
-  );
-  const [currentUpdatedAt, setCurrentUpdatedAt] = useState<string | undefined>(
-    initialTicket?.updatedAt
-      ? formatDateTime(initialTicket.updatedAt)
-      : undefined,
-  );
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
   useEffect(() => {
     async function loadTicket() {
-      if (!initialTicket?.id) {
+      if (!ticketId) {
         setLoading(false);
         return;
       }
 
       try {
-        const data = await getTicketById(initialTicket.id);
-        const formattedTicket = mapTicketToDetails(data);
+        const data = await getTicketById(ticketId);
 
-        setCurrentTicket(formattedTicket);
-        setCurrentStatus(formattedTicket.status);
-        setCurrentUpdatedAt(formatDateTime(formattedTicket.updatedAt));
+        setCurrentTicket(mapTicketToDetails(data));
       } catch (error) {
         console.error("Erro ao carregar chamado:", error);
         toast.error("Não foi possível carregar o chamado atualizado.");
@@ -164,21 +168,22 @@ export default function AdminTicketDetails() {
     }
 
     loadTicket();
-  }, [initialTicket?.id]);
+  }, [ticketId]);
+
+  function goBackToTickets() {
+    navigate("/admin/chamados");
+  }
 
   async function handleUpdateStatus(status: TicketStatus) {
-    if (!currentTicket) return;
+    if (!currentTicket || updatingStatus) return;
 
     try {
       setUpdatingStatus(true);
 
       const updatedTicket = await updateTicketStatus(currentTicket.id, status);
       const refreshedTicket = await getTicketById(updatedTicket.id);
-      const formattedTicket = mapTicketToDetails(refreshedTicket);
 
-      setCurrentTicket(formattedTicket);
-      setCurrentStatus(formattedTicket.status);
-      setCurrentUpdatedAt(formatDateTime(formattedTicket.updatedAt));
+      setCurrentTicket(mapTicketToDetails(refreshedTicket));
 
       toast.success("Status do chamado atualizado com sucesso!");
     } catch (error) {
@@ -190,8 +195,8 @@ export default function AdminTicketDetails() {
   }
 
   if (loading) {
-      return <Skeleton />;
-    }
+    return <Skeleton />;
+  }
 
   if (!currentTicket) {
     return (
@@ -200,14 +205,13 @@ export default function AdminTicketDetails() {
           Não foi possível carregar os dados do chamado.
         </Text>
 
-        <Button variant="secondary" onClick={() => navigate("/admin/chamados")}>
+        <Button variant="secondary" onClick={goBackToTickets}>
           Voltar para chamados
         </Button>
       </div>
     );
   }
 
-  const resolvedStatus = currentStatus ?? currentTicket.status;
   const baseService = currentTicket.services?.[0];
   const additionalServices = currentTicket.services?.slice(1) ?? [];
 
@@ -217,19 +221,19 @@ export default function AdminTicketDetails() {
         <div className="flex flex-col gap-1">
           <button
             type="button"
-            onClick={() => navigate("/admin/chamados")}
-            className="flex items-center gap-2 transition-all duration-200 cursor-pointer group"
+            onClick={goBackToTickets}
+            className="group flex cursor-pointer items-center gap-2 transition-all duration-200"
           >
             <Icon
               svg={ArrowLeft}
               size="sm"
-              className="fill-gray-400 group-hover:fill-gray-300 transition-all duration-200"
+              className="fill-gray-400 transition-all duration-200 group-hover:fill-gray-300"
             />
 
             <Text
               size="sm"
               weight="bold"
-              className="text-gray-400 group-hover:text-gray-300 transition-all duration-200"
+              className="text-gray-400 transition-all duration-200 group-hover:text-gray-300"
             >
               Voltar
             </Text>
@@ -241,7 +245,7 @@ export default function AdminTicketDetails() {
         </div>
 
         <div className="grid grid-cols-2 gap-2 md:flex">
-          {statusActions[resolvedStatus].map((action) => (
+          {statusActions[currentTicket.status].map((action) => (
             <Button
               key={action.value}
               variant="primary"
@@ -269,8 +273,8 @@ export default function AdminTicketDetails() {
               </Text>
             </div>
 
-            <BadgeStatus variant={statusVariant[resolvedStatus]}>
-              {statusLabel[resolvedStatus]}
+            <BadgeStatus variant={statusVariant[currentTicket.status]}>
+              {statusLabel[currentTicket.status]}
             </BadgeStatus>
           </div>
 
@@ -309,9 +313,7 @@ export default function AdminTicketDetails() {
                   Atualizado em
                 </Text>
 
-                <Text>
-                  {currentUpdatedAt ?? formatDateTime(currentTicket.updatedAt)}
-                </Text>
+                <Text>{formatDateTime(currentTicket.updatedAt)}</Text>
               </div>
             </div>
 
@@ -398,6 +400,7 @@ export default function AdminTicketDetails() {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <Text weight="bold">Total</Text>
+
                 <Text weight="bold">
                   {formatCurrency(currentTicket.totalPrice)}
                 </Text>

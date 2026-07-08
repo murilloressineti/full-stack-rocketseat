@@ -1,4 +1,5 @@
 import { api } from "./api";
+
 import type { Technician } from "@/types";
 
 interface CreateTechnicianData {
@@ -39,6 +40,7 @@ export async function updateTechnician(
   data: UpdateTechnicianData,
 ): Promise<Technician> {
   const response = await api.put<Technician>(`/users/${id}`, data);
+  
   return response.data;
 }
 
