@@ -101,9 +101,9 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-bg-default">
+    <div className="min-h-dvh bg-bg-light md:bg-bg-default">
       {/* Mobile */}
-      <div className="flex min-h-screen flex-col md:hidden">
+      <div className="flex min-h-dvh flex-col md:hidden">
         <MobileHeader
           role={user.role}
           activePath={location.pathname}
@@ -114,7 +114,7 @@ export default function AppLayout() {
           onLogout={handleLogout}
         />
 
-        <main className="h-full flex-1 rounded-t-3xl bg-bg-light px-6 pb-6 pt-7">
+        <main className="flex-1 rounded-t-3xl bg-bg-light px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-7">
           <Outlet />
         </main>
       </div>

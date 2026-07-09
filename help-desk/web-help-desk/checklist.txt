@@ -113,7 +113,7 @@
 
 🚀 Fase 7: Deploy e Entrega
   - Testar fluxo completo ✅
-  - Rodar npm run build e corrigir erros de tipagem/build
+  - Rodar npm run build e corrigir erros de tipagem/build ✅
   - Deploy do Back-end no Render ✅
-  - Deploy do Front-end na Vercel
-  - Escrever README
+  - Deploy do Front-end na Vercel ✅
+  - Escrever README API e WEB

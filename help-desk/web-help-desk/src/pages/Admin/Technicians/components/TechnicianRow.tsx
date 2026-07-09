@@ -100,7 +100,7 @@ export default function TechnicianRow({
           </div>
 
           <div className="flex flex-wrap gap-1">
-            <AvailabilityBadges availability={availability} limit={2} />
+            <AvailabilityBadges availability={availability} limit={1} />
           </div>
 
           <div className="flex justify-end gap-2">{actionButtons}</div>
