@@ -1,14 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { createTicket, getActiveServices } from "@/services";
+
 import type { Service } from "@/types";
 
-import { Button, Input, Select, Skeleton, Text, Textarea } from "@/components/ui";
+import {
+  Button,
+  Input,
+  Select,
+  Skeleton,
+  Text,
+  Textarea,
+} from "@/components/ui";
 
 const createTicketSchema = z.object({
   title: z.string().trim().min(1, "Informe o título do chamado."),
@@ -17,6 +26,19 @@ const createTicketSchema = z.object({
 });
 
 type CreateTicketFormData = z.infer<typeof createTicketSchema>;
+
+function formatCurrency(value: string | number) {
+  const numberValue = Number(value);
+
+  if (Number.isNaN(numberValue)) {
+    return "R$ 0,00";
+  }
+
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(numberValue);
+}
 
 export default function ClientNewTicketCreate() {
   const navigate = useNavigate();
@@ -45,23 +67,11 @@ export default function ClientNewTicketCreate() {
     return services.find((service) => service.id === selectedServiceId);
   }, [services, selectedServiceId]);
 
-  function formatCurrency(value: string | number) {
-    const numberValue = Number(value);
-
-    if (Number.isNaN(numberValue)) {
-      return "R$ 0,00";
-    }
-
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(numberValue);
-  }
-
   useEffect(() => {
     async function loadServices() {
       try {
         const data = await getActiveServices();
+
         setServices(data);
       } catch (error) {
         console.error("Erro ao carregar serviços:", error);
@@ -75,6 +85,8 @@ export default function ClientNewTicketCreate() {
   }, []);
 
   async function handleCreateTicket(data: CreateTicketFormData) {
+    if (saving) return;
+
     try {
       setSaving(true);
 
@@ -99,9 +111,9 @@ export default function ClientNewTicketCreate() {
     }
   }
 
-    if (loading) {
-      return <Skeleton />;
-    }
+  if (loading) {
+    return <Skeleton />;
+  }
 
   return (
     <form
@@ -114,7 +126,7 @@ export default function ClientNewTicketCreate() {
 
       <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[1fr_360px] xl:items-start">
         <section className="rounded-xl border border-gray-200 p-5 md:p-6">
-          <div className="mb-5 md:mb-6 flex flex-col gap-1">
+          <div className="mb-5 flex flex-col gap-1 md:mb-6">
             <Text as="h2" size="lg" weight="bold">
               Informações
             </Text>
@@ -191,8 +203,8 @@ export default function ClientNewTicketCreate() {
             </Text>
 
             <Button
-              className="w-full py-2.5"
               type="submit"
+              className="w-full py-2.5"
               disabled={saving || !selectedService}
             >
               {saving ? "Criando..." : "Criar chamado"}

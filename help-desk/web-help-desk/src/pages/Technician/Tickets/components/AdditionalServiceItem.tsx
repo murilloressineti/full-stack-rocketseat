@@ -1,4 +1,5 @@
 import { Button, Icon, Text } from "@/components/ui";
+
 import { Trash } from "@/assets/icons";
 
 interface AdditionalServiceItemProps {
@@ -15,14 +16,17 @@ export default function AdditionalServiceItem({
   onDelete,
 }: AdditionalServiceItemProps) {
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 py-3 last:border-b-0">
-      <Text weight="bold">{name}</Text>
+    <article className="flex items-center justify-between border-b border-gray-200 py-3 last:border-b-0">
+      <div className="min-w-0">
+        <Text weight="bold" className="truncate">
+          {name}
+        </Text>
+      </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex shrink-0 items-center gap-4">
         <Text>{price}</Text>
 
         <Button
-          type="button"
           variant="secondary"
           size="xs"
           disabled={disabled}
@@ -31,6 +35,6 @@ export default function AdditionalServiceItem({
           <Icon svg={Trash} size="xs" className="fill-feedback-danger" />
         </Button>
       </div>
-    </div>
+    </article>
   );
 }

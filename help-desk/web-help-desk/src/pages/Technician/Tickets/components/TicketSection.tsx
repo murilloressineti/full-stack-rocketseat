@@ -1,20 +1,23 @@
-import { BadgeStatus, Text } from "@/components/ui";
-import TicketCard from "./TicketCard";
 import type { TechnicianTicketCardData } from "@/services";
+
+import type { TicketStatus } from "@/types";
+
+import TicketCard from "./TicketCard";
+import { BadgeStatus, Text } from "@/components/ui";
 
 interface TicketSectionProps {
   title: string;
-  status: "open" | "in_progress" | "closed";
+  status: TicketStatus;
   tickets: TechnicianTicketCardData[];
   onDetails: (ticket: TechnicianTicketCardData) => void;
   onQuickAction: (ticket: TechnicianTicketCardData) => void;
 }
 
-const statusVariant = {
+const statusVariant: Record<TicketStatus, "open" | "progress" | "done"> = {
   open: "open",
   in_progress: "progress",
   closed: "done",
-} as const;
+};
 
 export default function TicketSection({
   title,
@@ -23,18 +26,20 @@ export default function TicketSection({
   onDetails,
   onQuickAction,
 }: TicketSectionProps) {
+  const hasTickets = tickets.length > 0;
+
   return (
     <section className="flex flex-col gap-4">
       <BadgeStatus
         variant={statusVariant[status]}
-        className="w-fit flex h-auto px-2 py-1.5"
+        className="flex h-auto w-fit px-2 py-1.5"
       >
-        <Text as={"span"} size={"xs"} weight={"bold"}>
+        <Text as="span" size="xs" weight="bold">
           {title}
         </Text>
       </BadgeStatus>
 
-      {tickets.length > 0 ? (
+      {hasTickets ? (
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
           {tickets.map((ticket) => (
             <TicketCard

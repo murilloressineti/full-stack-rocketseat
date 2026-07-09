@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import { toast } from "sonner";
 
 import { getTicketById } from "@/services";
+
+import type { Ticket, TicketStatus } from "@/types";
 
 import {
   AvatarCircle,
@@ -12,9 +16,8 @@ import {
   Skeleton,
   Text,
 } from "@/components/ui";
-import { ArrowLeft } from "@/assets/icons";
 
-type TicketStatus = "open" | "in_progress" | "closed";
+import { ArrowLeft } from "@/assets/icons";
 
 type TicketDetailsData = {
   id: string;
@@ -29,16 +32,7 @@ type TicketDetailsData = {
   status: TicketStatus;
   createdAt: string;
   updatedAt: string;
-  services?: {
-    id: string;
-    priceAtTime: string | number;
-    quantity: number;
-    service: {
-      id: string;
-      name: string;
-      price: string | number;
-    };
-  }[];
+  services?: Ticket["services"];
 };
 
 type LocationState = {
@@ -73,6 +67,10 @@ function formatCurrency(value: string | number) {
 function formatDateTime(value: string) {
   const currentDate = new Date(value);
 
+  if (Number.isNaN(currentDate.getTime())) {
+    return value;
+  }
+
   const formattedDate = currentDate.toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
@@ -87,14 +85,18 @@ function formatDateTime(value: string) {
   return `${formattedDate} - ${formattedTime}`;
 }
 
-function mapTicketToDetails(ticket: any): TicketDetailsData {
+function formatTicketCode(id: string) {
+  return `#${id.slice(-5).toUpperCase()}`;
+}
+
+function mapTicketToDetails(ticket: Ticket): TicketDetailsData {
   return {
     id: ticket.id,
-    code: `#${ticket.id.slice(-5).toUpperCase()}`,
+    code: formatTicketCode(ticket.id),
     title: ticket.title ?? "Sem título",
     description: ticket.description,
     serviceName:
-      ticket.services?.map((item: any) => item.service.name).join(", ") ||
+      ticket.services?.map((item) => item.service.name).join(", ") ||
       "Sem serviço",
     totalPrice: ticket.totalPrice,
     technicianName: ticket.technician.name,
@@ -110,28 +112,28 @@ function mapTicketToDetails(ticket: any): TicketDetailsData {
 export default function ClientTicketDetails() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { id } = useParams<{ id: string }>();
 
   const state = location.state as LocationState | null;
   const initialTicket = state?.ticket;
+  const ticketId = id ?? initialTicket?.id;
 
   const [currentTicket, setCurrentTicket] = useState<
     TicketDetailsData | undefined
   >(initialTicket);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadTicket() {
-      if (!initialTicket?.id) {
+      if (!ticketId) {
         setLoading(false);
         return;
       }
 
       try {
-        const data = await getTicketById(initialTicket.id);
-        const formattedTicket = mapTicketToDetails(data);
+        const data = await getTicketById(ticketId);
 
-        setCurrentTicket(formattedTicket);
+        setCurrentTicket(mapTicketToDetails(data));
       } catch (error) {
         console.error("Erro ao carregar chamado:", error);
         toast.error("Não foi possível carregar o chamado atualizado.");
@@ -141,7 +143,11 @@ export default function ClientTicketDetails() {
     }
 
     loadTicket();
-  }, [initialTicket?.id]);
+  }, [ticketId]);
+
+  function goBackToTickets() {
+    navigate("/cliente/chamados");
+  }
 
   if (loading) {
     return <Skeleton />;
@@ -154,10 +160,7 @@ export default function ClientTicketDetails() {
           Não foi possível carregar os dados do chamado.
         </Text>
 
-        <Button
-          variant="secondary"
-          onClick={() => navigate("/cliente/chamados")}
-        >
+        <Button variant="secondary" onClick={goBackToTickets}>
           Voltar para chamados
         </Button>
       </div>
@@ -172,19 +175,19 @@ export default function ClientTicketDetails() {
       <div className="flex flex-col gap-1">
         <button
           type="button"
-          onClick={() => navigate("/cliente/chamados")}
-          className="flex items-center gap-2 transition-all duration-200 cursor-pointer group"
+          onClick={goBackToTickets}
+          className="group flex cursor-pointer items-center gap-2 transition-all duration-200"
         >
           <Icon
             svg={ArrowLeft}
             size="sm"
-            className="fill-gray-400 group-hover:fill-gray-300 transition-all duration-200"
+            className="fill-gray-400 transition-all duration-200 group-hover:fill-gray-300"
           />
 
           <Text
             size="sm"
             weight="bold"
-            className="text-gray-400 group-hover:text-gray-300 transition-all duration-200"
+            className="text-gray-400 transition-all duration-200 group-hover:text-gray-300"
           >
             Voltar
           </Text>
@@ -318,6 +321,7 @@ export default function ClientTicketDetails() {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
                 <Text weight="bold">Total</Text>
+
                 <Text weight="bold">
                   {formatCurrency(currentTicket.totalPrice)}
                 </Text>

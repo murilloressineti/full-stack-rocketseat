@@ -109,7 +109,7 @@
   - Revisar features dos componentes ✅
   - Ajustar estados de loading (Skeletons) em todas as listagens ✅
   - Revisar integração com todos os endpoints da API ✅
-  - Revisão geral do projeto e refatoração (Auth, Client, Technician)
+  - Revisão geral do projeto e refatoração ✅
 
 🚀 Fase 7: Deploy e Entrega
   - Testar fluxo completo ✅

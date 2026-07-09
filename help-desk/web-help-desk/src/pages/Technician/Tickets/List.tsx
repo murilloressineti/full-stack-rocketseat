@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { Skeleton, Text } from "@/components/ui";
-import { getTechnicianTicketCards, updateTicketStatus } from "@/services";
-import type { TechnicianTicketCardData } from "@/services";
+import {
+  getTechnicianTicketCards,
+  updateTicketStatus,
+  type TechnicianTicketCardData,
+} from "@/services";
+
 import type { TicketStatus } from "@/types";
 
+import { Skeleton, Text } from "@/components/ui";
 import TicketSection from "./components/TicketSection";
 
 export default function TechnicianTicketsList() {
@@ -15,10 +20,26 @@ export default function TechnicianTicketsList() {
 
   const navigate = useNavigate();
 
+  const openTickets = useMemo(
+    () => tickets.filter((ticket) => ticket.status === "open"),
+    [tickets],
+  );
+
+  const inProgressTickets = useMemo(
+    () => tickets.filter((ticket) => ticket.status === "in_progress"),
+    [tickets],
+  );
+
+  const closedTickets = useMemo(
+    () => tickets.filter((ticket) => ticket.status === "closed"),
+    [tickets],
+  );
+
   useEffect(() => {
     async function loadTickets() {
       try {
         const data = await getTechnicianTicketCards();
+
         setTickets(data);
       } catch (error) {
         console.error("Erro ao carregar chamados:", error);
@@ -30,18 +51,6 @@ export default function TechnicianTicketsList() {
 
     loadTickets();
   }, []);
-
-  const openTickets = tickets.filter((ticket) => ticket.status === "open");
-
-  const inProgressTickets = tickets.filter(
-    (ticket) => ticket.status === "in_progress",
-  );
-
-  const closedTickets = tickets.filter((ticket) => ticket.status === "closed");
-
-    if (loading) {
-      return <Skeleton />;
-    }
 
   function handleDetails(ticket: TechnicianTicketCardData) {
     navigate(`/tecnico/chamados/${ticket.id}`, {
@@ -78,6 +87,10 @@ export default function TechnicianTicketsList() {
       console.error("Erro ao atualizar chamado:", error);
       toast.error("Não foi possível atualizar o chamado.");
     }
+  }
+
+  if (loading) {
+    return <Skeleton />;
   }
 
   return (

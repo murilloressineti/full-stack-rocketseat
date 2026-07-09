@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 import { Button, Icon, Input, Select, Text } from "@/components/ui";
+
 import { X } from "@/assets/icons";
 
 interface ServiceOption {
@@ -12,9 +13,7 @@ interface ServiceOption {
 interface AdditionalServiceModalProps {
   open: boolean;
   services: ServiceOption[];
-
   saving?: boolean;
-
   onClose: () => void;
   onSave: (serviceId: string) => void;
 }
@@ -35,18 +34,20 @@ export default function AdditionalServiceModal({
 }: AdditionalServiceModalProps) {
   const [selectedServiceId, setSelectedServiceId] = useState("");
 
+  const selectedService = useMemo(() => {
+    return services.find((service) => service.id === selectedServiceId);
+  }, [services, selectedServiceId]);
+
   useEffect(() => {
     if (!open) {
       setSelectedServiceId("");
     }
   }, [open]);
 
-  const selectedService = useMemo(() => {
-    return services.find((service) => service.id === selectedServiceId);
-  }, [selectedServiceId, services]);
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-  function handleSave() {
-    if (!selectedServiceId) return;
+    if (!selectedServiceId || saving) return;
 
     onSave(selectedServiceId);
   }
@@ -56,10 +57,7 @@ export default function AdditionalServiceModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-default/50 px-4">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
+        onSubmit={handleSubmit}
         className="w-full max-w-lg rounded-xl bg-bg-light shadow-lg"
       >
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
@@ -80,9 +78,7 @@ export default function AdditionalServiceModal({
           <Select
             label="Descrição"
             value={selectedServiceId}
-            onChange={(event) => {
-              setSelectedServiceId(event.target.value);
-            }}
+            onChange={(event) => setSelectedServiceId(event.target.value)}
           >
             <option value="">Selecione um serviço</option>
 
