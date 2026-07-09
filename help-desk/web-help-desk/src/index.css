@@ -39,9 +39,24 @@
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background-color: var(--color-bg-light);
+  }
+
+  @supports (min-height: 100dvh) {
+    html,
+    body,
+    #root {
+      min-height: 100dvh;
+    }
+  }
+
   body {
+    margin: 0;
     @apply antialiased;
     -webkit-font-smoothing: antialiased;
-
   }
 }
