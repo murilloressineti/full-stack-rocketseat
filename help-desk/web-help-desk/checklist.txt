@@ -116,4 +116,4 @@
   - Rodar npm run build e corrigir erros de tipagem/build ✅
   - Deploy do Back-end no Render ✅
   - Deploy do Front-end na Vercel ✅
-  - Escrever README API e WEB
+  - Escrever README API e WEB ✅

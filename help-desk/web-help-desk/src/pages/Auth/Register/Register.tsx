@@ -97,7 +97,7 @@ export default function Register() {
             <Input
               label="E-mail"
               type="email"
-              placeholder="exemplo@mail.com"
+              placeholder="Digite seu e-mail"
               {...register("email")}
               error={errors.email?.message}
             />
